@@ -1,15 +1,13 @@
 {
-  "name": "server-pimped",
-  "version": "1.1.0",
-  "description": "Basis Server Pimped V1.1",
+  "name": "server",
+  "version": "0.1",
+  "description": "Basis Server",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "loadData":"node loadData.js",
-    "removeData":"node removeData.js",
     "lint": "eslint . --ext .js"
   },
-  "author": "RB",
+  "author": "MB",
   "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0",
@@ -17,7 +15,6 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "helmet": "^4.3.1",
-    "mongoose": "^5.12.13",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
