@@ -2,11 +2,11 @@ require('./db/connect');
 require('./model/dogs');
 require('colors');
 const { Dog } = require('./model/schemas');
-const dogs = require('./dogs.json');
+//const dogs = require('./dogs.json');
 
 (async () => {
   try {
-    await Dog.create(dogs);
+    //await Dog.create(dogs); Send objects to the database
     console.log('Data loaded');
   } catch (error) {
     console.error(`Error ====> ${error.message.red}`);

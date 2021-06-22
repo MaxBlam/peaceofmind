@@ -1,12 +1,11 @@
-
 require('./db/connect');
-require('./model/dogs');
+//require('./model/dogs');
 require('colors');
-const { Dog } = require('./model/schemas');
+//const { Dog } = require('./model/schemas');
 
 (async () => {
   try {
-    await Dog.deleteMany({});
+    //await Dog.deleteMany({}); Remove all columns from the database
     console.log('Data removed');
   } catch (error) {
     console.error(`Error ====> ${error.message.red}`);

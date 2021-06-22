@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+/* 
 const dog = new Schema({
   name: String,
   born: Date,
@@ -7,3 +8,4 @@ const dog = new Schema({
 const Dog = model('dog', dog);
 
 module.exports = { Dog };
+*/
