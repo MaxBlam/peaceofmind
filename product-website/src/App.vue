@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <router-link to="/about">TEst</router-link>
     <v-main>
       <router-view/>
     </v-main>
