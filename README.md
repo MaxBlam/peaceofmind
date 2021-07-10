@@ -1,1 +1,1 @@
-# diplomathesis
+# Piece of Mind
