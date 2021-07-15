@@ -13,17 +13,13 @@
     <!-- Start of The Team -->
     <section class="p-5 bg-light">
       <div class="container">
-        <div class="row justify-content-center text-center section-intro">
-          <div class="col-12 col-md-9 col-lg-8">
-            <h1
-              class="display-4 aos-init aos-animate"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              The Team
-            </h1>
-          </div>
-        </div>
+        <h1
+          class="display-4 aos-init aos-animate text-center"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          The Team
+        </h1>
 
         <div
           class="row d-flex justify-content-around feature-list feature-list-sm"
@@ -81,27 +77,121 @@
     <!-- Start of The Problem -->
     <section
       class="container-fluid d-flex justify-content-center align-content-center flex-column align-items-center text-light p-5"
-      style="backdrop-filter: blur(10px);"
     >
-      <h1 class="display-4 text-shadow">The Problem</h1>
-      <p class="text-shadow text-center">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Vestibulum morbi
-        blandit cursus risus. Ultrices sagittis orci a scelerisque purus semper
-        eget. Tristique senectus et netus et malesuada. Suscipit adipiscing
-        bibendum est ultricies integer. Nisl tincidunt eget nullam non nisi est
-        sit. Convallis tellus id interdum velit laoreet. Egestas integer eget
-        aliquet nibh praesent tristique magna. Faucibus pulvinar elementum
-        integer enim neque. Neque laoreet suspendisse interdum consectetur
-        libero id. Tincidunt dui ut ornare lectus sit amet est placerat. Dolor
-        morbi non arcu risus quis varius. Neque egestas congue quisque egestas
-        diam. Eu turpis egestas pretium aenean pharetra. Mauris rhoncus aenean
-        vel elit scelerisque mauris pellentesque pulvinar pellentesque. Massa
-        sapien faucibus et molestie ac feugiat sed lectus. Eu facilisis sed odio
-        morbi quis commodo odio.
-      </p>
+      <div class="container text-center">
+        <h1 class="display-4">The Problem</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum
+          morbi blandit cursus risus. Ultrices sagittis orci a scelerisque purus
+          semper eget. Tristique senectus et netus et malesuada. Suscipit
+          adipiscing bibendum est ultricies integer. Nisl tincidunt eget nullam
+          non nisi est sit. Convallis tellus id interdum velit laoreet. Egestas
+          integer eget aliquet nibh praesent tristique magna. Faucibus pulvinar
+          elementum integer enim neque. Neque laoreet suspendisse interdum
+          consectetur libero id. Tincidunt dui ut ornare lectus sit amet est
+          placerat. Dolor morbi non arcu risus quis varius. Neque egestas congue
+          quisque egestas diam. Eu turpis egestas pretium aenean pharetra.
+          Mauris rhoncus aenean vel elit scelerisque mauris pellentesque
+          pulvinar pellentesque. Massa sapien faucibus et molestie ac feugiat
+          sed lectus. Eu facilisis sed odio morbi quis commodo odio.
+        </p>
+      </div>
     </section>
     <!-- End of The Problem -->
+    <!-- Start of The Solution -->
+    <div
+      class="
+        container-fluid
+        bg-light p-5
+      "
+    >
+      <div
+        class="container d-flex
+        flex-wrap
+        justify-content-around
+        align-items-center 
+        align-content-center"
+      >
+        <img
+          class="img-fluid rounded shadow col-12 col-md-5"
+          src="../assets/ph.jpg"
+        />
+
+        <div class="text-dark col-12 col-md-5">
+          <h1 class="display-4">The Solution</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum
+          morbi blandit cursus risus. Ultrices sagittis orci a scelerisque purus
+          semper eget. Tristique senectus et netus et malesuada. Suscipit
+          adipiscing bibendum est ultricies integer. Nisl tincidunt eget nullam
+          non nisi est sit. <br />
+            <span class="blockquote-footer">
+              Slogan
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- End of The Solution -->
+    <!-- Start of Benefits -->
+    <section class="container-fluid text-light p-5">
+      <div
+        class="container text-center d-flex justify-content-evenly align-content-center flex-column align-items-center"
+      >
+        <h1 class="display-4">Make Peace of Mind yours</h1>
+        <div
+          class="container d-flex justify-content-evenly align-content-center flex-column flex-md-row align-items-center"
+        >
+          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+        </div>
+        <div
+          class="container d-flex justify-content-evenly align-content-center flex-column flex-md-row align-items-center "
+        >
+          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+        </div>
+      </div>
+    </section>
+    <!-- End of Benefits -->
+    <!-- Start of The Project -->
+    <div
+      class="
+        container-fluid
+        bg-light p-5
+      "
+    >
+      <div
+        class="container d-flex
+        flex-wrap
+        justify-content-around
+        align-items-center 
+        align-content-center"
+      >
+        <div class="text-dark col-12 col-md-5">
+          <h1 class="display-4">Peace of Mind</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum
+          morbi blandit cursus risus. Ultrices sagittis orci a scelerisque purus
+          semper eget. Tristique senectus et netus et malesuada. Suscipit
+          adipiscing bibendum est ultricies integer. Nisl tincidunt eget nullam
+          non nisi est sit.
+          </p>
+          <a href="" class="btn btn-outline-primary">Try it!</a>
+          <a href="" class="btn btn-outline-primary ms-2">Github</a>
+        </div>
+        <img
+          class="img-fluid rounded shadow col-12 col-md-5"
+          src="../assets/ph.jpg"
+        />
+      </div>
+    </div>
+    <!-- End of The Project -->
   </div>
 </template>
 
