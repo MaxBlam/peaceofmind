@@ -1,15 +1,17 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg bg-light container-fluid shadow-sm fixed-top">
+    <nav
+      class="navbar navbar-expand-lg bg-light container-fluid shadow-sm fixed-top"
+    >
       <ul
-        class="collapse navbar-collapse navbar-nav mb-2 mb-lg-0 d-flex flex-row justify-content-center"
+        class="collapse navbar-collapse navbar-nav  d-flex flex-row justify-content-center"
       >
         <li class="nav-item">
           <a class="navbar-brand" href="#">
             <img src="./assets/logo.png" alt="" width="30" />
           </a>
         </li>
-        <li class="nav-item ms-auto" @click="setActive('Home')">
+        <li class="nav-item ms-auto px-2" @click="setActive('Home')">
           <router-link
             to="/"
             class="nav-link text-dark"
@@ -17,7 +19,7 @@
             >Home</router-link
           >
         </li>
-        <li class="nav-item" @click="setActive('About')">
+        <li class="nav-item px-2" @click="setActive('About')">
           <router-link
             to="/about"
             class="nav-link text-dark"
@@ -25,10 +27,11 @@
             >About</router-link
           >
         </li>
-        <li class="nav-item me-auto">
+        <li class="nav-item me-auto px-2">
           <a
             class="nav-link text-dark"
             href="https://github.com/MaxBlam/pieceofmind"
+            target="_blank"
             >Github</a
           >
         </li>

@@ -7,7 +7,7 @@
     >
       <h1 class="display-2 text-shadow">Introduction</h1>
       <p class="text-shadow">Work in progress!</p>
-      <a class="btn btn-light" href="">Try it!</a>
+      <a class="btn btn-light" href="" target="_blank">Try it!</a>
     </div>
     <!-- End of Introduction -->
     <!-- Start of The Team -->
@@ -183,8 +183,8 @@
             malesuada. Suscipit adipiscing bibendum est ultricies integer. Nisl
             tincidunt eget nullam non nisi est sit.
           </p>
-          <a href="" class="btn btn-outline-primary mb-4">Try it!</a>
-          <a href="" class="btn btn-outline-primary ms-2 mb-4">Github</a>
+          <a href="" target="_blank" class="btn btn-outline-primary mb-4">Try it!</a>
+          <a href="https://github.com/MaxBlam/pieceofmind" target="_blank" class="btn btn-outline-primary ms-2 mb-4">Github</a>
         </div>
         <img
           class="img-fluid rounded shadow col-12 col-md-5"
