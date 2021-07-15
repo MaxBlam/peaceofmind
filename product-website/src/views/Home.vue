@@ -143,18 +143,18 @@
       >
         <h1 class="display-4">Make Peace of Mind yours</h1>
         <div
-          class="container d-flex justify-content-evenly align-content-center flex-column flex-md-row align-items-center"
+          class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center"
         >
-          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
-          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
-          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
         </div>
         <div
-          class="container d-flex justify-content-evenly align-content-center flex-column flex-md-row align-items-center "
+          class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center "
         >
-          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
-          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
-          <img src="../assets/maxpb.jpg" class="rounded shadow-lg mt-4" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
         </div>
       </div>
     </section>
