@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg bg-light container-fluid shadow-sm">
+    <nav class="navbar navbar-expand-lg bg-light container-fluid shadow-sm fixed-top">
       <ul
         class="collapse navbar-collapse navbar-nav mb-2 mb-lg-0 d-flex flex-row justify-content-center"
       >
