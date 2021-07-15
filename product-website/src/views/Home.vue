@@ -141,7 +141,7 @@
       <div
         class="container text-center d-flex justify-content-evenly align-content-center flex-column align-items-center"
       >
-        <h1 class="display-4">Make Peace of Mind yours</h1>
+        <h1 class="display-4">Find your Peace of Mind</h1>
         <div
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center"
         >
