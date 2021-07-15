@@ -17,6 +17,7 @@
           class="display-4 aos-init aos-animate text-center"
           data-aos="fade-up"
           data-aos-delay="100"
+          id="team"
         >
           The Team
         </h1>
@@ -29,7 +30,7 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Ahmed Hasanovic</h5>
               <p class="card-text">
-                "Do tomorrow, what you can do tomorrow"
+                Backend
               </p>
               <a
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
@@ -44,7 +45,7 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Maximilian Blam</h5>
               <p class="card-text">
-                "Never underestimate your goals."
+                Frontend & Database
               </p>
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
@@ -60,7 +61,7 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Moritz Miedler</h5>
               <p class="card-text">
-                "Bruh? Bitte sein Sie mein bruh 🥺"
+                Marketing & Design
               </p>
               <a
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
@@ -119,14 +120,14 @@
         />
 
         <div class="text-dark col-12 col-md-5">
-          <h1 class="display-4">The Solution</h1>
+          <h1 class="display-4 mt-2">The Solution</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum
-          morbi blandit cursus risus. Ultrices sagittis orci a scelerisque purus
-          semper eget. Tristique senectus et netus et malesuada. Suscipit
-          adipiscing bibendum est ultricies integer. Nisl tincidunt eget nullam
-          non nisi est sit. <br />
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Vestibulum morbi blandit cursus risus. Ultrices sagittis orci a
+            scelerisque purus semper eget. Tristique senectus et netus et
+            malesuada. Suscipit adipiscing bibendum est ultricies integer. Nisl
+            tincidunt eget nullam non nisi est sit. <br />
             <span class="blockquote-footer">
               Slogan
             </span>
@@ -176,14 +177,14 @@
           <h1 class="display-4">Peace of Mind</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum
-          morbi blandit cursus risus. Ultrices sagittis orci a scelerisque purus
-          semper eget. Tristique senectus et netus et malesuada. Suscipit
-          adipiscing bibendum est ultricies integer. Nisl tincidunt eget nullam
-          non nisi est sit.
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Vestibulum morbi blandit cursus risus. Ultrices sagittis orci a
+            scelerisque purus semper eget. Tristique senectus et netus et
+            malesuada. Suscipit adipiscing bibendum est ultricies integer. Nisl
+            tincidunt eget nullam non nisi est sit.
           </p>
-          <a href="" class="btn btn-outline-primary">Try it!</a>
-          <a href="" class="btn btn-outline-primary ms-2">Github</a>
+          <a href="" class="btn btn-outline-primary mb-4">Try it!</a>
+          <a href="" class="btn btn-outline-primary ms-2 mb-4">Github</a>
         </div>
         <img
           class="img-fluid rounded shadow col-12 col-md-5"
@@ -222,6 +223,16 @@ export default {
 #homebg {
   background-image: url('../assets/bgph.png');
   background-position: center;
+  background-attachment: fixed;
   background-size: cover;
+}
+html {
+  scroll-behavior: smooth;
+}
+:target:before {
+  content: '';
+  display: block;
+  height: 100px;
+  margin: -100px 0 0;
 }
 </style>

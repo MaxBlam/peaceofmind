@@ -33,7 +33,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="#">Contact</a>
+          <a class="nav-link text-dark" href="#team">Contact</a>
         </li>
       </ul>
       <button
