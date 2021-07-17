@@ -7,7 +7,7 @@
     >
       <h1 class="display-2 text-shadow">Introduction</h1>
       <p class="text-shadow">Work in progress!</p>
-      <a class="btn btn-light" href="" target="_blank">Try it!</a>
+      <a class="btn btn-light" href="" target="_blank" data-aos="fade-up" data-aos-duration="1000">Try it!</a>
     </div>
     <!-- End of Introduction -->
     <!-- Start of The Team -->
@@ -23,7 +23,7 @@
         <div
           class="row d-flex justify-content-around feature-list feature-list-sm"
         >
-          <div class="card p-0 mt-4" style="width: 18rem">
+          <div class="card p-0 mt-4" style="width: 18rem" data-aos="fade-up" data-aos-duration="1000">
             <img src="../assets/ahmedpb.jpg" class="card-img-top" alt="..." />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Ahmed Hasanovic</h5>
@@ -38,7 +38,7 @@
               >
             </div>
           </div>
-          <div class="card p-0 mt-4" style="width: 18rem">
+          <div class="card p-0 mt-4" style="width: 18rem" data-aos="fade-up" data-aos-duration="1000">
             <img src="../assets/maxpb.jpg" class="card-img-top" alt="..." />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Maximilian Blam</h5>
@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div class="card p-0 mt-4" style="width: 18rem">
+          <div class="card p-0 mt-4" style="width: 18rem" data-aos="fade-up" data-aos-duration="1000">
             <img src="../assets/moritzpb.jpg" class="card-img-top" alt="..." />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Moritz Miedler</h5>
@@ -75,11 +75,11 @@
     <!-- End of The Team -->
     <!-- Start of The Problem -->
     <section
-      class="container-fluid d-flex justify-content-center align-content-center flex-column align-items-center text-light p-5"
+      class="container-fluid d-flex justify-content-center align-content-center flex-column align-items-center text-light p-5" 
     >
       <div class="container text-center">
         <h1 class="display-4">The Problem</h1>
-        <p>
+        <p data-aos="fade-up" data-aos-duration="1000">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum
           morbi blandit cursus risus. Ultrices sagittis orci a scelerisque purus
@@ -110,7 +110,7 @@
         flex-wrap
         justify-content-around
         align-items-center 
-        align-content-center"
+        align-content-center" data-aos="fade-up" data-aos-duration="1000"
       >
         <img
           class="img-fluid rounded shadow col-12 col-md-5"
@@ -143,16 +143,16 @@
         <div
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center"
         >
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
         </div>
         <div
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center "
         >
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" />
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
+          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
         </div>
       </div>
     </section>
@@ -169,7 +169,7 @@
         flex-wrap
         justify-content-around
         align-items-center 
-        align-content-center"
+        align-content-center" data-aos="fade-up"  data-aos-duration="1000"
       >
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4">Peace of Mind</h1>
@@ -200,7 +200,6 @@
 
 export default {
   name: 'Home',
-  
   /*components: {
     HelloWorld
   }*/
