@@ -14,9 +14,7 @@
     <section class="p-5 bg-light">
       <div class="container">
         <h1
-          class="display-4 aos-init aos-animate text-center"
-          data-aos="fade-up"
-          data-aos-delay="100"
+          class="display-4 text-center"
           id="team"
         >
           The Team
@@ -35,7 +33,7 @@
               <a
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
                 target="_blank"
-                class="btn btn-outline-primary d-block mt-auto"
+                class="btn btn-light d-block mt-auto"
                 >View LinkedIn Profile</a
               >
             </div>
@@ -50,7 +48,7 @@
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
                 target="_blank"
-                class="btn btn-outline-primary d-block mt-auto"
+                class="btn btn-light d-block mt-auto"
                 >View LinkedIn Profile</a
               >
             </div>
@@ -66,7 +64,7 @@
               <a
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
                 target="_blank"
-                class="btn btn-outline-primary d-block mt-auto"
+                class="btn btn-light d-block mt-auto"
                 >View LinkedIn Profile</a
               >
             </div>
@@ -202,6 +200,7 @@
 
 export default {
   name: 'Home',
+  
   /*components: {
     HelloWorld
   }*/
@@ -234,5 +233,8 @@ html {
   display: block;
   height: 100px;
   margin: -100px 0 0;
+}
+.btn-light:hover{
+  background-color:transparent;
 }
 </style>
