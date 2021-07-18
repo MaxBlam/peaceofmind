@@ -7,23 +7,32 @@
     >
       <h1 class="display-2 text-shadow">Introduction</h1>
       <p class="text-shadow">Work in progress!</p>
-      <a class="btn btn-light" href="" target="_blank" data-aos="fade-up" data-aos-duration="1000">Try it!</a>
+      <a
+        class="btn btn-light transition-sm"
+        href=""
+        target="_blank"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        >Try it!</a
+      >
     </div>
     <!-- End of Introduction -->
     <!-- Start of The Team -->
     <section class="p-5 bg-light">
       <div class="container">
-        <h1
-          class="display-4 text-center"
-          id="team"
-        >
+        <h1 class="display-4 text-center" id="team">
           The Team
         </h1>
 
         <div
           class="row d-flex justify-content-around feature-list feature-list-sm"
         >
-          <div class="card p-0 mt-4" style="width: 18rem" data-aos="fade-up" data-aos-duration="1000">
+          <div
+            class="card p-0 mt-4 shadow-sm no-border"
+            style="width: 18rem"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             <img src="../assets/ahmedpb.jpg" class="card-img-top" alt="..." />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Ahmed Hasanovic</h5>
@@ -33,12 +42,17 @@
               <a
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
                 target="_blank"
-                class="btn btn-light d-block mt-auto"
+                class="btn btn-light d-block mt-auto transition-sm"
                 >View LinkedIn Profile</a
               >
             </div>
           </div>
-          <div class="card p-0 mt-4" style="width: 18rem" data-aos="fade-up" data-aos-duration="1000">
+          <div
+            class="card p-0 mt-4 shadow-sm no-border"
+            style="width: 18rem"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             <img src="../assets/maxpb.jpg" class="card-img-top" alt="..." />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Maximilian Blam</h5>
@@ -48,13 +62,18 @@
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
                 target="_blank"
-                class="btn btn-light d-block mt-auto"
+                class="btn btn-light d-block mt-auto transition-sm"
                 >View LinkedIn Profile</a
               >
             </div>
           </div>
 
-          <div class="card p-0 mt-4" style="width: 18rem" data-aos="fade-up" data-aos-duration="1000">
+          <div
+            class="card p-0 mt-4 shadow-sm no-border"
+            style="width: 18rem"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             <img src="../assets/moritzpb.jpg" class="card-img-top" alt="..." />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Moritz Miedler</h5>
@@ -64,7 +83,7 @@
               <a
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
                 target="_blank"
-                class="btn btn-light d-block mt-auto"
+                class="btn btn-light d-block mt-auto transition-sm"
                 >View LinkedIn Profile</a
               >
             </div>
@@ -75,7 +94,7 @@
     <!-- End of The Team -->
     <!-- Start of The Problem -->
     <section
-      class="container-fluid d-flex justify-content-center align-content-center flex-column align-items-center text-light p-5" 
+      class="container-fluid d-flex justify-content-center align-content-center flex-column align-items-center text-light p-5"
     >
       <div class="container text-center">
         <h1 class="display-4">The Problem</h1>
@@ -110,7 +129,9 @@
         flex-wrap
         justify-content-around
         align-items-center 
-        align-content-center" data-aos="fade-up" data-aos-duration="1000"
+        align-content-center"
+        data-aos="fade-left"
+        data-aos-duration="1000"
       >
         <img
           class="img-fluid rounded shadow col-12 col-md-5"
@@ -143,16 +164,46 @@
         <div
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center"
         >
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
+          <img
+            src="../assets/maxpb.jpg"
+            class="rounded-3 shadow-lg m-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          />
+          <img
+            src="../assets/maxpb.jpg"
+            class="rounded-3 shadow-lg m-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          />
+          <img
+            src="../assets/maxpb.jpg"
+            class="rounded-3 shadow-lg m-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          />
         </div>
         <div
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center "
         >
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
-          <img src="../assets/maxpb.jpg" class="rounded-3 shadow-lg m-2" data-aos="fade-up" data-aos-duration="1000"/>
+          <img
+            src="../assets/maxpb.jpg"
+            class="rounded-3 shadow-lg m-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          />
+          <img
+            src="../assets/maxpb.jpg"
+            class="rounded-3 shadow-lg m-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          />
+          <img
+            src="../assets/maxpb.jpg"
+            class="rounded-3 shadow-lg m-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          />
         </div>
       </div>
     </section>
@@ -161,7 +212,7 @@
     <div
       class="
         container-fluid
-        bg-light p-5
+        bg-light p-5 
       "
     >
       <div
@@ -169,7 +220,9 @@
         flex-wrap
         justify-content-around
         align-items-center 
-        align-content-center" data-aos="fade-up"  data-aos-duration="1000"
+        align-content-center"
+        data-aos="fade-right"
+        data-aos-duration="1000"
       >
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4">Peace of Mind</h1>
@@ -181,8 +234,18 @@
             malesuada. Suscipit adipiscing bibendum est ultricies integer. Nisl
             tincidunt eget nullam non nisi est sit.
           </p>
-          <a href="" target="_blank" class="btn btn-outline-primary mb-4">Try it!</a>
-          <a href="https://github.com/MaxBlam/pieceofmind" target="_blank" class="btn btn-outline-primary ms-2 mb-4">Github</a>
+          <a
+            href=""
+            target="_blank"
+            class="btn btn-outline-primary mb-4 transition-sm"
+            >Try it!</a
+          >
+          <a
+            href="https://github.com/MaxBlam/peaceofmind"
+            target="_blank"
+            class="btn btn-outline-primary ms-2 mb-4 transition-sm"
+            >Github</a
+          >
         </div>
         <img
           class="img-fluid rounded shadow col-12 col-md-5"
@@ -191,6 +254,111 @@
       </div>
     </div>
     <!-- End of The Project -->
+    <!-- Start of FAQ -->
+    <div class="container-fluid bg-light p-5">
+      <div class="container">
+        <h1 class="display-4">Frequently asked Questions</h1>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Accordion Item #1
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <strong>This is the first item's accordion body.</strong> It is
+                shown by default, until the collapse plugin adds the appropriate
+                classes that we use to style each element. These classes control
+                the overall appearance, as well as the showing and hiding via
+                CSS transitions. You can modify any of this with custom CSS or
+                overriding our default variables. It's also worth noting that
+                just about any HTML can go within the
+                <code>.accordion-body</code>, though the transition does limit
+                overflow.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Accordion Item #2
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <strong>This is the second item's accordion body.</strong> It is
+                hidden by default, until the collapse plugin adds the
+                appropriate classes that we use to style each element. These
+                classes control the overall appearance, as well as the showing
+                and hiding via CSS transitions. You can modify any of this with
+                custom CSS or overriding our default variables. It's also worth
+                noting that just about any HTML can go within the
+                <code>.accordion-body</code>, though the transition does limit
+                overflow.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Accordion Item #3
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <strong>This is the third item's accordion body.</strong> It is
+                hidden by default, until the collapse plugin adds the
+                appropriate classes that we use to style each element. These
+                classes control the overall appearance, as well as the showing
+                and hiding via CSS transitions. You can modify any of this with
+                custom CSS or overriding our default variables. It's also worth
+                noting that just about any HTML can go within the
+                <code>.accordion-body</code>, though the transition does limit
+                overflow.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of FAQ -->
   </div>
 </template>
 
@@ -233,7 +401,16 @@ html {
   height: 100px;
   margin: -100px 0 0;
 }
-.btn-light:hover{
-  background-color:transparent;
+.btn-light:hover {
+  background-color: transparent;
+}
+.transition-sm {
+  transition: 0.5s !important;
+}
+.no-border {
+  border: 0px;
+}
+h1 {
+  font-family: 'Jost', sans-serif;
 }
 </style>

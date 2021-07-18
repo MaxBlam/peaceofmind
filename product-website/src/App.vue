@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav
-      class="navbar navbar-expand-lg bg-light container-fluid shadow-sm fixed-top"
+      class="navbar navbar-expand bg-light container-fluid shadow-sm fixed-top"
     >
       <ul
         class="collapse navbar-collapse navbar-nav  d-flex flex-row justify-content-center"
@@ -30,7 +30,7 @@
         <li class="nav-item me-auto px-2">
           <a
             class="nav-link text-dark"
-            href="https://github.com/MaxBlam/pieceofmind"
+            href="https://github.com/MaxBlam/peaceofmind"
             target="_blank"
             >Github</a
           >
@@ -76,3 +76,8 @@ export default {
   },
 };
 </script>
+<style>
+p{
+  font-family: 'Abel', sans-serif;
+}
+</style>
