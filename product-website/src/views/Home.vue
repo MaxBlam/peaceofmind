@@ -387,7 +387,7 @@ export default {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 #homebg {
-  background-image: url('../assets/bgph.png');
+  background: linear-gradient(180deg, rgba(53,55,89,1) 0%, rgba(78,57,114,1) 31%, rgba(141,69,136,1) 54%, rgba(114,79,163,1) 90%, rgba(71,54,93,1) 100%);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
