@@ -4,7 +4,7 @@
       class="navbar navbar-expand bg-light container-fluid shadow-sm fixed-top"
     >
       <ul
-        class="collapse navbar-collapse navbar-nav  d-flex flex-row justify-content-center"
+        class="navbar-collapse navbar-nav  d-flex flex-row justify-content-center"
       >
         <li class="nav-item">
           <a class="navbar-brand" href="#">
@@ -39,24 +39,7 @@
           <a class="nav-link text-dark" href="#team">Contact</a>
         </li>
       </ul>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarToggleExternalContent"
-        aria-controls="navbarToggleExternalContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
     </nav>
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-dark p-4">
-        <h5 class="text-white h4">Collapsed content</h5>
-        <span class="text-muted">Toggleable via the navbar brand.</span>
-      </div>
-    </div>
     <router-view />
   </div>
 </template>

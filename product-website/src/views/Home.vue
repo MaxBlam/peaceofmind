@@ -284,38 +284,6 @@
         <h1 class="display-4">Frequently asked Questions</h1>
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-              <button
-                class="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                Accordion Item #1
-              </button>
-            </h2>
-            <div
-              id="collapseOne"
-              class="accordion-collapse collapse show"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
-            >
-              <div class="accordion-body">
-                <strong>This is the first item's accordion body.</strong> It is
-                shown by default, until the collapse plugin adds the appropriate
-                classes that we use to style each element. These classes control
-                the overall appearance, as well as the showing and hiding via
-                CSS transitions. You can modify any of this with custom CSS or
-                overriding our default variables. It's also worth noting that
-                just about any HTML can go within the
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
               <button
                 class="accordion-button collapsed"
@@ -411,7 +379,7 @@ export default {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 #homebg {
-  background: linear-gradient(90deg, rgba(232,128,178,1) 0%, rgba(124,145,208,1) 31%, rgba(124,145,208,1) 74%, rgba(144,48,255,1) 100%);
+  background: linear-gradient(0deg, rgba(0,103,185,1) 0%, rgba(62,0,133,1) 100%);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
@@ -426,13 +394,13 @@ html {
   margin: -100px 0 0;
 }
 .btn-light:hover {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 .transition-sm {
   transition: 0.5s !important;
 }
 .no-border {
-  border: 0px;
+  border: 0px !important;
 }
 h1 {
   font-family: 'Jost', sans-serif;
