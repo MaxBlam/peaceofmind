@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "aos": "^2.3.4",
+    "bootstrap": "^5.0.2",
     "core-js": "^3.6.5",
     "rellax": "^1.12.1",
     "vue": "^2.6.11",

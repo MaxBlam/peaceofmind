@@ -39,6 +39,14 @@
               <p class="card-text">
                 Backend
               </p>
+              <p>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+              </p>
               <a
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
                 target="_blank"
@@ -58,6 +66,14 @@
               <h5 class="card-title">Maximilian Blam</h5>
               <p class="card-text">
                 Frontend & Database
+              </p>
+              <p>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
@@ -79,6 +95,14 @@
               <h5 class="card-title">Moritz Miedler</h5>
               <p class="card-text">
                 Marketing & Design
+              </p>
+              <p>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Primary</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
@@ -121,7 +145,7 @@
     <div
       class="
         container-fluid
-        bg-light p-5
+        bg-light p-5 overflow-hidden
       "
     >
       <div
@@ -387,7 +411,7 @@ export default {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 #homebg {
-  background: linear-gradient(180deg, rgba(53,55,89,1) 0%, rgba(78,57,114,1) 31%, rgba(141,69,136,1) 54%, rgba(114,79,163,1) 90%, rgba(71,54,93,1) 100%);
+  background: linear-gradient(90deg, rgba(232,128,178,1) 0%, rgba(124,145,208,1) 31%, rgba(124,145,208,1) 74%, rgba(144,48,255,1) 100%);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
