@@ -3,10 +3,12 @@
     <a class="fixed-nav p-5" href="#" type="button">
       <svg viewBox="0 0 320 512" class="fixed-nav" href="#">
         <path
-          d="M177 256l136 135.63a23.78 23.78 0 0 1 0 33.8L290.36 448a23.94 23.94 0 0 1-33.89 0l-96.37-96.16L63.73 448a23.94 23.94 0 0 1-33.89 0L7.05 425.53a23.78 23.78 0 0 1 0-33.8L143 256.12a23.94 23.94 0 0 1 34-.1z" style="fill:rgba(200,200,200,0.5)"
+          d="M177 256l136 135.63a23.78 23.78 0 0 1 0 33.8L290.36 448a23.94 23.94 0 0 1-33.89 0l-96.37-96.16L63.73 448a23.94 23.94 0 0 1-33.89 0L7.05 425.53a23.78 23.78 0 0 1 0-33.8L143 256.12a23.94 23.94 0 0 1 34-.1z"
+          style="fill:rgba(200,200,200,0.5)"
         ></path>
         <path
-          d="M177 64.11l136 135.55a23.77 23.77 0 0 1 0 33.79L290.26 256a23.94 23.94 0 0 1-33.89 0L160 159.89l-96.47 96a23.94 23.94 0 0 1-33.89 0L7.05 233.35a23.77 23.77 0 0 1 0-33.79L143 64a24 24 0 0 1 34 .11z" style="fill:rgba(200,200,200,1)"
+          d="M177 64.11l136 135.55a23.77 23.77 0 0 1 0 33.79L290.26 256a23.94 23.94 0 0 1-33.89 0L160 159.89l-96.47 96a23.94 23.94 0 0 1-33.89 0L7.05 233.35a23.77 23.77 0 0 1 0-33.79L143 64a24 24 0 0 1 34 .11z"
+          style="fill:rgba(200,200,200,1)"
         ></path>
       </svg>
     </a>
@@ -49,12 +51,9 @@
                 Backend
               </p>
               <p>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">APIs</span>
+                <span class="badge bg-primary me-1">Data Manipulation</span>
+                <span class="badge bg-primary me-1">Formatting</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
@@ -77,12 +76,9 @@
                 Frontend & Database
               </p>
               <p>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Webdesign</span>
+                <span class="badge bg-primary me-1">OCR</span>
+                <span class="badge bg-primary me-1">PWA</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
@@ -106,12 +102,9 @@
                 Marketing & Design
               </p>
               <p>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
-                <span class="badge bg-primary me-1">Primary</span>
+                <span class="badge bg-primary me-1">Corporate Branding</span>
+                <span class="badge bg-primary me-1">Social Media Managing</span>
+                <span class="badge bg-primary me-1">Graphics</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
@@ -189,44 +182,51 @@
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center"
         >
           <img
-            src="../assets/maxpb.jpg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
             class="rounded-3 shadow-lg m-2"
             data-aos="fade-up"
             data-aos-duration="1000"
+            width="256px"
           />
           <img
-            src="../assets/maxpb.jpg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
             class="rounded-3 shadow-lg m-2"
             data-aos="fade-up"
             data-aos-duration="1000"
+            width="256px"
           />
           <img
-            src="../assets/maxpb.jpg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
             class="rounded-3 shadow-lg m-2"
             data-aos="fade-up"
             data-aos-duration="1000"
+            width="256px"
           />
+
         </div>
         <div
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center "
         >
           <img
-            src="../assets/maxpb.jpg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
             class="rounded-3 shadow-lg m-2"
             data-aos="fade-up"
             data-aos-duration="1000"
+            width="256px"
           />
           <img
-            src="../assets/maxpb.jpg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
             class="rounded-3 shadow-lg m-2"
             data-aos="fade-up"
             data-aos-duration="1000"
+            width="256px"
           />
           <img
-            src="../assets/maxpb.jpg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
             class="rounded-3 shadow-lg m-2"
             data-aos="fade-up"
             data-aos-duration="1000"
+            width="256px"
           />
         </div>
       </div>
@@ -283,7 +283,7 @@
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                Accordion Item #2
+                Question 1
               </button>
             </h2>
             <div
@@ -312,7 +312,7 @@
                 aria-expanded="false"
                 aria-controls="collapseThree"
               >
-                Accordion Item #3
+                Question 2
               </button>
             </h2>
             <div

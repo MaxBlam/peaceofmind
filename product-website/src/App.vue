@@ -59,6 +59,6 @@ html::-webkit-scrollbar-thumb {
 }
 html {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 103, 185, 1) rgb(240,240,240);
+  scrollbar-color: rgba(0, 103, 185, 1) rgb(250,250,250);
 }
 </style>
