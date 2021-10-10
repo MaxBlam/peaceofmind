@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const path = require('path');
+const cors = require('cors');
 const routes = require('./routes');
 require('./db/connect');
 require('colors');
@@ -11,7 +12,9 @@ require('dotenv').config();
 const app = express();
 
 app.use(morgan('dev'));
+app.use(cors());
 
+console.log(process.env.DATABASE_URL);
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(helmet());
 
@@ -25,3 +28,4 @@ app.use(errorHandler);
 const PORT = process.env.PORT ?? 5000;
 
 app.listen(PORT);
+console.log(`Listening to PORT: ${PORT}`);
