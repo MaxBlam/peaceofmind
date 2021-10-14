@@ -3,3 +3,4 @@ FAQ Section anpassen
 Texte und Bilder füllen
 About / Impressum Page schreiben
 Produkt und Product-website verbinden
+Links für Contact funktionieren nicht auf About
