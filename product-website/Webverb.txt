@@ -7,3 +7,4 @@ Links für Contact funktionieren nicht auf About
 Text unter den Badges
 Bilder heller
 The Team vielleicht wie in Dominiks Style (padding, weiß, halbdurchsichtig,...)
+Logo einfügen
