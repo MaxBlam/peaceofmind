@@ -8,7 +8,24 @@
       <span v-else style="background-color: green; color: white">Please Log in</span>
     </button>
 
-    <h1 v-if="response != ''">{{ response }}</h1>
+    <table>
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>MIME</th>
+        <th>Kind</th>
+        <th>Go To</th>
+      </thead>
+      <tbody>
+        <tr v-for="(file, id) in filterFiles" :key="id">
+          <td>{{ file.id }}</td>
+          <td>{{ file.name }}</td>
+          <td>{{ file.mimeType }}</td>
+          <td>{{ file.kind }}</td>
+          <td><button @click="openPage(file.id)">Go</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -19,10 +36,18 @@ export default {
     return {
       test: 'TEST 123',
       token: '',
-      response: '',
+      response: [],
     };
   },
+  computed: {
+    filterFiles() {
+      return this.response.filter((el) => el.mimeType == 'application/vnd.google-apps.document');
+    },
+  },
   methods: {
+    openPage(id) {
+      window.open(`https://docs.google.com/document/d/${id}`);
+    },
     async getTest() {
       const res = await axios({
         url: 'http://localhost:3000/welcome',
@@ -32,18 +57,22 @@ export default {
     },
     async login() {
       const googleUser = await this.$gAuth.signIn();
-      if (!googleUser) return;
-      this.token = googleUser.getAuthResponse().id_token;
-
+      // if (!googleUser) return;
+      // this.token = googleUser.getAuthResponse().id_token;
+      const goaRes = await googleUser.grantOfflineAccess({
+        scope: 'https://www.googleapis.com/auth/drive.metadata',
+      });
+      console.log(goaRes);
+      console.log('++++++++++++++++++');
       const res = await axios({
         url: 'http://localhost:3000/login',
         method: 'POST',
         'Content-Type': 'application/json',
         data: {
-          token: this.token,
+          code: goaRes.code,
         },
       });
-
+      console.log(res.data);
       this.response = res.data;
     },
   },
