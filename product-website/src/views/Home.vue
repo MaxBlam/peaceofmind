@@ -154,7 +154,7 @@
       >
         <img
           class="img-fluid rounded shadow col-12 col-md-5"
-          src="../../public/img/ph.jpg"
+          src="../assets/ph.jpg"
         />
 
         <div class="text-dark col-12 col-md-5">
@@ -294,7 +294,7 @@
         </div>
         <img
           class="img-fluid rounded shadow col-12 col-md-5"
-          src="../../public/img/ph.jpg"
+          src="../assets/ph.jpg"
         />
       </div>
     </div>
@@ -377,7 +377,7 @@
 
 <style>
 #parallax {
-  background-image: url('../../public/img/ph.jpg');
+  background-image: url('../assets/ph.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
