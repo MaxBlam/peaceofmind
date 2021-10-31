@@ -105,7 +105,9 @@
               </p>
               <p>
                 <span class="badge bg-primary me-1">Corporate Branding</span>
-                <span class="badge bg-primary me-1">Social Media Managing</span>
+                <span class="badge bg-primary me-1"
+                  >Social Media Management</span
+                >
                 <span class="badge bg-primary me-1">Graphics</span>
               </p>
               <a
@@ -127,20 +129,9 @@
       <div class="container text-center">
         <h1 class="display-4">The Problem</h1>
         <p data-aos="fade-up" data-aos-duration="1000">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum
-          morbi blandit cursus risus. Ultrices sagittis orci a scelerisque purus
-          semper eget. Tristique senectus et netus et malesuada. Suscipit
-          adipiscing bibendum est ultricies integer. Nisl tincidunt eget nullam
-          non nisi est sit. Convallis tellus id interdum velit laoreet. Egestas
-          integer eget aliquet nibh praesent tristique magna. Faucibus pulvinar
-          elementum integer enim neque. Neque laoreet suspendisse interdum
-          consectetur libero id. Tincidunt dui ut ornare lectus sit amet est
-          placerat. Dolor morbi non arcu risus quis varius. Neque egestas congue
-          quisque egestas diam. Eu turpis egestas pretium aenean pharetra.
-          Mauris rhoncus aenean vel elit scelerisque mauris pellentesque
-          pulvinar pellentesque. Massa sapien faucibus et molestie ac feugiat
-          sed lectus. Eu facilisis sed odio morbi quis commodo odio.
+          You probably know the feeling. You just wrote down some important
+          notes onto a piece of paper, but you have related notes on your pc or
+          tablet. What do you do now? Rewrite all the notes on your pc?
         </p>
       </div>
     </section>
@@ -169,14 +160,12 @@
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4 mt-2">The Solution</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Vestibulum morbi blandit cursus risus. Ultrices sagittis orci a
-            scelerisque purus semper eget. Tristique senectus et netus et
-            malesuada. Suscipit adipiscing bibendum est ultricies integer. Nisl
-            tincidunt eget nullam non nisi est sit. <br />
+            You want your notes to be organized into timelines and folders? You
+            want to simply scan your handwritten notes and add them to your pc
+            written notes? PieceOfMind is the solution! No more unorganized
+            notes lying around on your desktop or your table! <br />
             <span class="blockquote-footer">
-              Slogan
+              Find your inner peace
             </span>
           </p>
         </div>
@@ -192,52 +181,76 @@
         <div
           class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center"
         >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
+          <div
             class="rounded-3 shadow-lg m-2"
+            style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
-            width="256px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
+          >
+            <img src="../assets/badge_pc.png" width="100%" />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+            </div>
+          </div>
+          <div
             class="rounded-3 shadow-lg m-2"
+            style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
-            width="256px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
+          >
+            <img src="../assets/badge_leaning.png" width="100%" />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+            </div>
+          </div>
+          <div
             class="rounded-3 shadow-lg m-2"
+            style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
-            width="256px"
-          />
+          >
+            <img src="../assets/badge_mobile.png" width="100%" />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+            </div>
+          </div>
         </div>
         <div
-          class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center "
+          class="container d-flex justify-content-center align-content-center flex-column flex-md-row align-items-center"
         >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
+          <div
             class="rounded-3 shadow-lg m-2"
+            style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
-            width="256px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
+          >
+            <img src="../assets/badge_timeline.png" width="100%" />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+            </div>
+          </div>
+          <div
             class="rounded-3 shadow-lg m-2"
+            style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
-            width="256px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/425px-Missing_avatar.svg.png"
+          >
+            <img src="../assets/badge_easy.png" width="100%" />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+            </div>
+          </div>
+          <div
             class="rounded-3 shadow-lg m-2"
+            style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
-            width="256px"
-          />
+          >
+            <img src="../assets/badge_safe.png" width="100%" />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -261,12 +274,10 @@
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4">Peace of Mind</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Vestibulum morbi blandit cursus risus. Ultrices sagittis orci a
-            scelerisque purus semper eget. Tristique senectus et netus et
-            malesuada. Suscipit adipiscing bibendum est ultricies integer. Nisl
-            tincidunt eget nullam non nisi est sit.
+            PieceOfMind is an Web App available on mobile and pc to make your
+            life easier. Just scan your handwritten notes and add them to a
+            folder or subject. Keeping your notes organized has never been
+            easier.
           </p>
           <a
             href=""
@@ -363,18 +374,6 @@
     <!-- End of FAQ -->
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'Home',
-  /*components: {
-    HelloWorld
-  }*/
-};
-</script>
 
 <style>
 #parallax {
