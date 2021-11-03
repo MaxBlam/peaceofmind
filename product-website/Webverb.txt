@@ -6,3 +6,4 @@ Produkt und Product-website verbinden
 Bilder heller
 The Team vielleicht wie in Dominiks Style (padding, weiß, halbdurchsichtig,...)
 Datei Größen
+Meta Tags
