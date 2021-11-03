@@ -6,6 +6,7 @@ import Rellax from 'rellax';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css';
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
 AOS.init();
 new Rellax('.rellax', {
