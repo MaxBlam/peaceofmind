@@ -1,7 +1,8 @@
 Parallax fertigstellen
-FAQ Section anpassen
+FAQ Section schreiben
 Bilder füllen
 Impressum Page schreiben
 Produkt und Product-website verbinden
 Bilder heller
 The Team vielleicht wie in Dominiks Style (padding, weiß, halbdurchsichtig,...)
+Datei Größen
