@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand bg-light container-fluid shadow-sm fixed-top">
       <ul class="navbar-collapse navbar-nav d-flex flex-row justify-content-center">
         <li class="nav-item">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/#">
             <img src="./assets/logo.svg" alt="" width="50" />
           </a>
         </li>
@@ -23,7 +23,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="#team">Contact</a>
+          <a class="nav-link text-dark" href="/#contact">Contact</a>
         </li>
       </ul>
     </nav>

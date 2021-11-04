@@ -8,23 +8,17 @@
     <div
       class="container-fluid d-flex justify-content-center align-content-center flex-column align-items-center text-light"
       id="parallax"
+      data-aos="fade-up"
+      data-aos-duration="1000"
     >
       <h1 class="display-2 text-shadow text-center">Find your Inner Peace</h1>
       <p class="text-shadow"><i class="fas fa-chevron-down"></i></p>
-      <a
-        class="btn btn-light transition-sm"
-        href=""
-        target="_blank"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-        >Try it!</a
-      >
     </div>
     <!-- End of Introduction -->
     <!-- Start of The Team -->
     <section class="p-5 bg-light">
       <div class="container">
-        <h1 class="display-4 text-center" id="team">
+        <h1 class="display-4 text-center">
           The Team
         </h1>
 
@@ -32,14 +26,14 @@
           class="row d-flex justify-content-around feature-list feature-list-sm"
         >
           <div
-            class="card p-3 mt-4 shadow-sm no-border"
+            class="card p-3 mt-4 shadow-sm no-border rounded-4"
             style="width: 18rem;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
             <img
               src="../assets/ahmedpb.jpg"
-              class="card-img-top rounded-3"
+              class="card-img-top rounded-4"
               alt="..."
             />
             <div class="card-body d-flex flex-column">
@@ -61,14 +55,14 @@
             </div>
           </div>
           <div
-            class="card p-3 mt-4 shadow-sm no-border"
+            class="card p-3 mt-4 shadow-sm no-border rounded-4"
             style="width: 18rem;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
             <img
               src="../assets/maxpb.jpg"
-              class="card-img-top rounded-3"
+              class="card-img-top rounded-4"
               alt="..."
             />
             <div class="card-body d-flex flex-column">
@@ -77,9 +71,8 @@
                 Frontend & Database
               </p>
               <p>
-                <span class="badge bg-primary me-1">Webdesign</span>
-                <span class="badge bg-primary me-1">OCR</span>
-                <span class="badge bg-primary me-1">PWA</span>
+                <span class="badge bg-primary me-1">Website</span>
+                <span class="badge bg-primary me-1">Progressive Web App</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
@@ -91,14 +84,14 @@
           </div>
 
           <div
-            class="card p-3 mt-4 shadow-sm no-border"
+            class="card p-3 mt-4 shadow-sm no-border rounded-4"
             style="width: 18rem"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
             <img
               src="../assets/moritzpb.jpg"
-              class="card-img-top rounded-3"
+              class="card-img-top rounded-4"
               alt="..."
             />
             <div class="card-body d-flex flex-column">
@@ -156,8 +149,8 @@
         data-aos-duration="1000"
       >
         <img
-          class="img-fluid rounded shadow col-12 col-md-5"
-          src="../assets/ph.jpg"
+          class="rounded-4 col-12 col-md-5"
+          src="../assets/logo.svg"
         />
 
         <div class="text-dark col-12 col-md-5">
@@ -185,46 +178,34 @@
           class="container d-flex justify-content-center align-content-stretch  flex-column flex-md-row align-items-stretch"
         >
           <div
-            class="rounded-3 shadow-lg m-2"
+            class="rounded-4 shadow-lg m-2 overflow-hidden"
             style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img
-              src="../assets/badge_pc.png"
-              width="100%"
-              class="rounded-top"
-            />
+            <img src="../assets/badge_pc.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Easy Access</h5>
             </div>
           </div>
           <div
-            class="rounded-3 shadow-lg m-2"
+            class="rounded-4 shadow-lg m-2 overflow-hidden"
             style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img
-              src="../assets/badge_leaning.png"
-              width="100%"
-              class="rounded-top"
-            />
+            <img src="../assets/badge_leaning.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Organized with Colorful Folders</h5>
             </div>
           </div>
           <div
-            class="rounded-3 shadow-lg m-2"
+            class="rounded-4 shadow-lg m-2 overflow-hidden"
             style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img
-              src="../assets/badge_mobile.png"
-              width="100%"
-              class="rounded-top"
-            />
+            <img src="../assets/badge_mobile.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">View Everywhere</h5>
             </div>
@@ -234,46 +215,34 @@
           class="container d-flex justify-content-center align-content-stretch  flex-column flex-md-row align-items-stretch"
         >
           <div
-            class="rounded-3 shadow-lg m-2"
+            class="rounded-4 shadow-lg m-2 overflow-hidden"
             style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img
-              src="../assets/badge_timeline.png"
-              width="100%"
-              class="rounded-top"
-            />
+            <img src="../assets/badge_timeline.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Better Organization with Timelines</h5>
             </div>
           </div>
           <div
-            class="rounded-3 shadow-lg m-2"
+            class="rounded-4 shadow-lg m-2 overflow-hidden"
             style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img
-              src="../assets/badge_easy.png"
-              width="100%"
-              class="rounded-top"
-            />
+            <img src="../assets/badge_easy.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Think about your New Freetime</h5>
             </div>
           </div>
           <div
-            class="rounded-3 shadow-lg m-2"
+            class="rounded-4 shadow-lg m-2 overflow-hidden"
             style="width:256px;"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img
-              src="../assets/badge_safe.png"
-              width="100%"
-              class="rounded-top"
-            />
+            <img src="../assets/badge_safe.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Uses Google for Optimal Security</h5>
             </div>
@@ -320,7 +289,7 @@
           >
         </div>
         <img
-          class="img-fluid rounded shadow col-12 col-md-5"
+          class="img-fluid rounded-4 shadow col-12 col-md-5"
           src="../assets/ph.jpg"
         />
       </div>
@@ -329,7 +298,7 @@
     <!-- Start of FAQ -->
     <!-- <div class="container-fluid bg-light p-5">
       <div class="container">
-        <h1 class="display-4">Frequently asked Questions</h1>
+        <h1 class="display-5 mt-5 mb-3" id="faq">Frequently asked Questions</h1>
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
@@ -397,8 +366,88 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>  -->
     <!-- End of FAQ -->
+    <!-- Start of Contact -->
+    <section class="container-fluid text-light p-5">
+      <div
+        class="container d-flex justify-content-evenly align-content-center flex-column align-items-center"
+      >
+        <h1 class="display-5 text-center" id="contact">
+          Still Questions? Contact us
+        </h1>
+        <form class="p-4">
+          <div class="row">
+            <div>
+              <div class="d-inline-block col-12 col-md-6 mb-2 px-2">
+                <label class="form-label">Email address <span>*</span></label
+                ><input
+                  type="email"
+                  placeholder="example@email.com"
+                  name="user_email"
+                  required="required"
+                  class="form-control"
+                />
+              </div>
+              <div class="d-inline-block col-12 col-md-6 mb-2 px-2">
+                <label class="form-label">Name</label
+                ><input
+                  type="text"
+                  placeholder="First name, Last name"
+                  name="user_name"
+                  class="form-control"
+                />
+              </div>
+              <div class="d-inline-block col-12 mb-2 px-2">
+                <label class="form-label">Subject <span>*</span></label
+                ><input
+                  type="text"
+                  placeholder="..."
+                  name="user_subject"
+                  required="required"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-12 mb-3 px-2">
+                <label class="form-label">Message <span>*</span></label
+                ><textarea
+                  rows="7"
+                  placeholder="..."
+                  name="message"
+                  required="required"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-light mx-2">
+                Confirm
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- End of Contact -->
+    <!-- Start of Footer -->
+    <div class="container-fluid bg-light">
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item">
+            <router-link to="/imprint" class="nav-link px-2 text-muted">Imprint</router-link>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.instagram.com/pieceofmind_htlww/" class="nav-link px-2 text-muted">Instagram</a>
+          </li>
+          <li class="nav-item">
+            <a href="#faq" class="nav-link px-2 text-muted">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/MaxBlam/peaceofmind" class="nav-link px-2 text-muted">Github</a>
+          </li>
+        </ul>
+        <p class="text-center text-muted">© 2021 Piece of Mind</p>
+      </footer>
+    </div>
+    <!-- End of Footer -->
   </div>
 </template>
 
@@ -450,5 +499,8 @@ h1 {
 }
 #arrow {
   width: 6vh;
+}
+.rounded-4 {
+  border-radius: 0.8rem !important;
 }
 </style>
