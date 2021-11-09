@@ -30,9 +30,7 @@
         >https://www.pieceofmind.at/imprint</a
       >
     </p>
-    <h2 id="eu-streitschlichtung">
-      EU-Streitschlichtung
-    </h2>
+    <h2 id="eu-streitschlichtung">EU-Streitschlichtung</h2>
     <p>
       Gemäß Verordnung über Online-Streitbeilegung in Verbraucherangelegenheiten
       (ODR-Verordnung) möchten wir Sie über die Online-Streitbeilegungsplattform
@@ -76,9 +74,7 @@
       wir Sie uns umgehend zu kontaktieren, damit wir die rechtswidrigen Inhalte
       entfernen können. Sie finden die Kontaktdaten im Impressum.
     </p>
-    <h2 id="haftung-links-webseite">
-      Haftung für Links auf dieser Webseite
-    </h2>
+    <h2 id="haftung-links-webseite">Haftung für Links auf dieser Webseite</h2>
     <p>
       Unsere Webseite enthält Links zu anderen Webseiten für deren Inhalt wir
       nicht verantwortlich sind. Haftung für verlinkte Websites besteht für uns
@@ -90,9 +86,7 @@
       Wenn Ihnen rechtswidrige Links auf unserer Website auffallen, bitte wir
       Sie uns zu kontaktieren. Sie finden die Kontaktdaten im Impressum.
     </p>
-    <h2 id="urheberrechtshinweis">
-      Urheberrechtshinweis
-    </h2>
+    <h2 id="urheberrechtshinweis">Urheberrechtshinweis</h2>
     <p>
       Alle Inhalte dieser Webseite (Bilder, Fotos, Texte, Videos) unterliegen
       dem Urheberrecht. Bitte fragen Sie uns bevor Sie die Inhalte dieser
@@ -115,7 +109,7 @@
       <li>Moritz Miedler</li>
     </ul>
     <p>Alle Texte sind urheberrechtlich geschützt.</p>
-    <p style="margin-top:15px">
+    <p style="margin-top: 15px">
       Quelle: Erstellt mit dem
       <a
         href="https://www.adsimple.at/impressum-generator/"
@@ -171,9 +165,7 @@
         >
       </li>
     </ul>
-    <h2 id="einleitung-ueberblick">
-      Einleitung und Überblick
-    </h2>
+    <h2 id="einleitung-ueberblick">Einleitung und Überblick</h2>
     <p>
       Wir haben diese Datenschutzerklärung (Fassung 04.11.2021-111870266)
       verfasst, um Ihnen gemäß der Vorgaben der
@@ -226,15 +218,9 @@
       Datenschutzerklärung umfasst:
     </p>
     <ul>
-      <li>
-        alle Onlineauftritte (Websites, Onlineshops), die wir betreiben
-      </li>
-      <li>
-        Social Media Auftritte und E-Mail-Kommunikation
-      </li>
-      <li>
-        mobile Apps für Smartphones und andere Geräte
-      </li>
+      <li>alle Onlineauftritte (Websites, Onlineshops), die wir betreiben</li>
+      <li>Social Media Auftritte und E-Mail-Kommunikation</li>
+      <li>mobile Apps für Smartphones und andere Geräte</li>
     </ul>
     <p>
       <strong>Kurz gesagt:</strong> Die Datenschutzerklärung gilt für alle
@@ -318,9 +304,7 @@
       Sofern weitere regionale oder nationale Gesetze zur Anwendung kommen,
       informieren wir Sie in den folgenden Abschnitten darüber.
     </p>
-    <h2 id="kontaktdaten-verantwortliche">
-      Kontaktdaten des Verantwortlichen
-    </h2>
+    <h2 id="kontaktdaten-verantwortliche">Kontaktdaten des Verantwortlichen</h2>
     <p>
       Sollten Sie Fragen zum Datenschutz haben, finden Sie nachfolgend die
       Kontaktdaten der verantwortlichen Person bzw. Stelle:<br />
@@ -330,7 +314,8 @@
       >
       <br />
       Vertretungsberechtigt: <br />
-      E-Mail: <a href="mailto:pieceofmind@htlwienwest.at">pieceofmind@htlwienwest.at</a>
+      E-Mail:
+      <a href="mailto:pieceofmind@htlwienwest.at">pieceofmind@htlwienwest.at</a>
       <br />
       Impressum:
       <a href="https://www.pieceofmind.at/imprint"
@@ -356,9 +341,7 @@
       Über die konkrete Dauer der jeweiligen Datenverarbeitung informieren wir
       Sie weiter unten, sofern wir weitere Informationen dazu haben.
     </p>
-    <h2 id="rechte-dsgvo">
-      Rechte laut Datenschutz-Grundverordnung
-    </h2>
+    <h2 id="rechte-dsgvo">Rechte laut Datenschutz-Grundverordnung</h2>
     <p>
       Laut Artikel 13 DSGVO stehen Ihnen die folgenden Rechte zu, damit es zu
       einer fairen und transparenten Verarbeitung von Daten kommt:
@@ -369,9 +352,7 @@
         von Ihnen verarbeiten. Sollte das zutreffen, haben Sie Recht darauf eine
         Kopie der Daten zu erhalten und die folgenden Informationen zu erfahren:
         <ul>
-          <li>
-            zu welchem Zweck wir die Verarbeitung durchführen;
-          </li>
+          <li>zu welchem Zweck wir die Verarbeitung durchführen;</li>
           <li>
             die Kategorien, also die Arten von Daten, die verarbeitet werden;
           </li>
@@ -379,9 +360,7 @@
             wer diese Daten erhält und wenn die Daten an Drittländer übermittelt
             werden, wie die Sicherheit garantiert werden kann;
           </li>
-          <li>
-            wie lange die Daten gespeichert werden;
-          </li>
+          <li>wie lange die Daten gespeichert werden;</li>
           <li>
             das Bestehen des Rechts auf Berichtigung, Löschung oder
             Einschränkung der Verarbeitung und dem Widerspruchsrecht gegen die
@@ -475,9 +454,7 @@
       wenden. Für unser Unternehmen ist die folgende lokale Datenschutzbehörde
       zuständig:
     </p>
-    <h2 id="oesterreich-datenschutzbehoerde">
-      Österreich Datenschutzbehörde
-    </h2>
+    <h2 id="oesterreich-datenschutzbehoerde">Österreich Datenschutzbehörde</h2>
     <p>
       <strong>Leiterin: </strong>Mag. Dr. Andrea Jelinek<strong>
         <br />
@@ -500,9 +477,7 @@
         >https://www.dsb.gv.at/</a
       >
     </p>
-    <h2 id="sicherheit-datenverarbeitung">
-      Sicherheit der Datenverarbeitung
-    </h2>
+    <h2 id="sicherheit-datenverarbeitung">Sicherheit der Datenverarbeitung</h2>
     <p>
       Um personenbezogene Daten zu schützen, haben wir sowohl technische als
       auch organisatorische Maßnahmen umgesetzt. Wo es uns möglich ist,
@@ -518,9 +493,7 @@
       Maßnahmen setzt. Im Folgenden gehen wir, falls erforderlich, noch auf
       konkrete Maßnahmen ein.
     </p>
-    <h2 id="tls-verschluesselung-https">
-      TLS-Verschlüsselung mit https
-    </h2>
+    <h2 id="tls-verschluesselung-https">TLS-Verschlüsselung mit https</h2>
     <p>
       TLS, Verschlüsselung und https klingen sehr technisch und sind es auch.
       Wir verwenden HTTPS (das Hypertext Transfer Protocol Secure steht für
@@ -619,17 +592,11 @@
         width="100%"
       />
     </p>
-    <h3>
-      Warum verarbeiten wir personenbezogene Daten?
-    </h3>
+    <h3>Warum verarbeiten wir personenbezogene Daten?</h3>
     <p>Die Zwecke der Datenverarbeitung sind:</p>
     <ol>
-      <li>
-        Professionelles Hosting der Website und Absicherung des Betriebs
-      </li>
-      <li>
-        zur Aufrechterhaltung der Betriebs- und IT-Sicherheit
-      </li>
+      <li>Professionelles Hosting der Website und Absicherung des Betriebs</li>
+      <li>zur Aufrechterhaltung der Betriebs- und IT-Sicherheit</li>
       <li>
         Anonyme Auswertung des Zugriffsverhaltens zur Verbesserung unseres
         Angebots und ggf. zur Strafverfolgung bzw. Verfolgung von Ansprüchen
@@ -646,12 +613,8 @@
         die komplette Internetadresse (URL) der aufgerufenen Webseite (z. B.
         https://www.beispielwebsite.de/beispielunterseite.html?tid=111870266)
       </li>
-      <li>
-        Browser und Browserversion (z. B. Chrome 87)
-      </li>
-      <li>
-        das verwendete Betriebssystem (z. B. Windows 10)
-      </li>
+      <li>Browser und Browserversion (z. B. Chrome 87)</li>
+      <li>das verwendete Betriebssystem (z. B. Windows 10)</li>
       <li>
         die Adresse (URL) der zuvor besuchten Seite (Referrer URL) (z. B.
         https://www.beispielquellsite.de/vondabinichgekommen.html/)
@@ -661,9 +624,7 @@
         wird (z. B. COMPUTERNAME und 194.23.43.121)
       </li>
       <li>Datum und Uhrzeit</li>
-      <li>
-        in Dateien, den sogenannten Webserver-Logfiles
-      </li>
+      <li>in Dateien, den sogenannten Webserver-Logfiles</li>
     </ul>
     <h3>Wie lange werden Daten gespeichert?</h3>
     <p>
@@ -744,9 +705,7 @@
       für User aus dem Ausland, da hier die Seite von einem Server in der Nähe
       ausgeliefert werden kann.
     </p>
-    <h3>
-      Welche Daten werden durch BootstrapCDN verarbeitet?
-    </h3>
+    <h3>Welche Daten werden durch BootstrapCDN verarbeitet?</h3>
     <p>
       BootstrapCDN funktioniert so, dass sogenannte JavaScript-Bibliotheken an
       Ihren Browser ausgeliefert werden. Lädt nun Ihr Browser eine Datei vom
@@ -765,9 +724,7 @@
       wird ausdrücklich darauf hingewiesen, dass das Unternehmen keine Cookies
       oder andere Tracking-Services verwendet.
     </p>
-    <h3>
-      Wie lange und wo werden die Daten gespeichert?
-    </h3>
+    <h3>Wie lange und wo werden die Daten gespeichert?</h3>
     <p>
       BootstrapCDN hat Server in verschiedenen Ländern verteilt und Ihre Daten
       können auch außerhalb des Europäischen Wirtschaftsraums gespeichert
@@ -830,10 +787,9 @@
         >https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net.</a
       >
     </p>
-    
-    
+
     <p>Alle Texte sind urheberrechtlich geschützt.</p>
-    <p style="margin-top:15px">
+    <p style="margin-top: 15px">
       Quelle: Erstellt mit dem
       <a
         href="https://www.adsimple.at/datenschutz-generator/"
