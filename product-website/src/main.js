@@ -1,12 +1,25 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import vuetify from './plugins/vuetify'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import AOS from 'aos';
+import Rellax from 'rellax';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'aos/dist/aos.css';
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
-Vue.config.productionTip = false
+AOS.init();
+new Rellax('.rellax', {
+  speed: -2,
+  center: false,
+  wrapper: null,
+  round: true,
+  vertical: true,
+  horizontal: false,
+});
+Vue.config.productionTip = false;
 
 new Vue({
   router,
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount('#app');
