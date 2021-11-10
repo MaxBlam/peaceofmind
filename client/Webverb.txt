@@ -7,3 +7,4 @@ Meta Tags
 The Problem größer machen
 Website Icon
 Contact Form Funktionsfähig machen
+.htaccess erstellen
