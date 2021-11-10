@@ -20,7 +20,7 @@
       data-aos-duration="1000"
     >
       <h1 class="display-2 text-shadow text-center">Find your Inner Peace</h1>
-      <p class="text-shadow"><i class="fas fa-chevron-down"></i></p>
+      <i class="fas fa-chevron-down" id="scrollindi"></i>
     </div>
     <!-- End of Introduction -->
     <!-- Start of The Team -->
@@ -486,7 +486,7 @@
 
 <style>
 #parallax {
-  background-image: url("../assets/ph.jpg");
+  background-image: url('../assets/ph.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -506,7 +506,7 @@ html {
   scroll-behavior: smooth;
 }
 :target:before {
-  content: "";
+  content: '';
   display: block;
   height: 100px;
   margin: -100px 0 0;
@@ -521,7 +521,7 @@ html {
   border: 0px !important;
 }
 h1 {
-  font-family: "Jost", sans-serif;
+  font-family: 'Jost', sans-serif;
 }
 .fixed-nav {
   position: fixed;
@@ -535,5 +535,9 @@ h1 {
 }
 .rounded-4 {
   border-radius: 0.8rem !important;
+}
+#scrollindi {
+  position: absolute;
+  bottom: 10px;
 }
 </style>
