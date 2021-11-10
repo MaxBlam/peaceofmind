@@ -1,4 +1,10 @@
 {
+  "name":"Piece Of Mind",
+  "short_name":"PieceOfMind",
+  "theme_color":"#66467C",
+  "start_url":"/",
+  "display":"standalone",
+  "background_color":"#66467C",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

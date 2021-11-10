@@ -1,5 +1,9 @@
 <template>
-  <div></div>
+  <div class="container d-flex justify-content-evenly align-items-center align-self-stretch">
+    <div>
+
+    </div>
+  </div>
 </template>
 
 <script>
