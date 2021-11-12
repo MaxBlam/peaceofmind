@@ -4,10 +4,9 @@
       container-fluid
       d-flex
       justify-content-start
+      align-content-center
       flex-wrap
-      align-items-start
-    "
-    style="min-height: 100vh"
+    " style="height:100vh"
   >
     <Folder v-for="i in 12" :key="i" />
   </div>
