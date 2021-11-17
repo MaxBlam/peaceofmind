@@ -11,7 +11,7 @@
       >
         <li class="nav-item">
           <a class="navbar-brand" href="/#">
-            <img src="../assets/logo.svg" alt="" width="50" />
+            <img src="@/assets/logo.svg" alt="" width="50" />
           </a>
         </li>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-about">
     <a class="fixed-nav m-1" href="#" type="button">
-      <img src="../assets/arrow.svg" id="arrow" alt="" />
+      <img src="@/assets/arrow.svg" id="arrow" alt="" />
     </a>
 
     <!-- Start of Introduction -->
@@ -38,7 +38,7 @@
             data-aos-duration="1000"
           >
             <img
-              src="../assets/ahmedpb.jpg"
+              src="@/assets/ahmedpb.jpg"
               class="card-img-top rounded-4"
               alt="..."
             />
@@ -65,7 +65,7 @@
             data-aos-duration="1000"
           >
             <img
-              src="../assets/maxpb.jpg"
+              src="@/assets/maxpb.jpg"
               class="card-img-top rounded-4"
               alt="..."
             />
@@ -93,7 +93,7 @@
             data-aos-duration="1000"
           >
             <img
-              src="../assets/moritzpb.jpg"
+              src="@/assets/moritzpb.jpg"
               class="card-img-top rounded-4"
               alt="..."
             />
@@ -153,7 +153,7 @@
         data-aos="fade-left"
         data-aos-duration="1000"
       >
-        <img class="rounded-4 col-12 col-md-5" src="../assets/logo.svg" />
+        <img class="rounded-4 col-12 col-md-5" src="@/assets/logo.svg" />
 
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4 mt-2">The Solution</h1>
@@ -198,7 +198,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="../assets/badge_pc.png" width="100%" />
+            <img src="@/assets/badge_pc.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Easy Access</h5>
             </div>
@@ -209,7 +209,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="../assets/badge_leaning.png" width="100%" />
+            <img src="@/assets/badge_leaning.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Organized with Colorful Folders</h5>
             </div>
@@ -220,7 +220,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="../assets/badge_mobile.png" width="100%" />
+            <img src="@/assets/badge_mobile.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">View Everywhere</h5>
             </div>
@@ -242,7 +242,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="../assets/badge_timeline.png" width="100%" />
+            <img src="@/assets/badge_timeline.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Better Organization with Timelines</h5>
             </div>
@@ -253,7 +253,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="../assets/badge_easy.png" width="100%" />
+            <img src="@/assets/badge_easy.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Think about your New Freetime</h5>
             </div>
@@ -264,7 +264,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="../assets/badge_safe.png" width="100%" />
+            <img src="@/assets/badge_safe.png" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Uses Google for Optimal Security</h5>
             </div>
@@ -308,7 +308,7 @@
         </div>
         <img
           class="img-fluid rounded-4 shadow col-12 col-md-5"
-          src="../assets/ph.jpg"
+          src="@/assets/ph.jpg"
         />
       </div>
     </div>
