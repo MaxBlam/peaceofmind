@@ -1,5 +1,5 @@
 <template>
-    <div style="height:200px" class="bg-dark m-3 col-2">
+    <div style="height:300px;width:27vw" class="bg-dark m-3 rounded-3">
         
     </div>
 </template>
