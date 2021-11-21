@@ -27,12 +27,12 @@ export default {
   },
   data: () => {
     return {
-      folders: 12,
+      folders: 13,
     };
   },
   computed: {
     spacer: function () {
-      return Number.parseInt(this.folders / 3);
+      return Number.parseInt(this.folders % 3+2);
     },
   },
 };
