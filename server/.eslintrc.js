@@ -14,5 +14,7 @@ module.exports = {
     'no-console': 0,
     'implicit-arrow-linebreak': 0,
     'function-paren-newline': 0,
+    'max-len': 0,
+    'no-restricted-syntax': 0,
   },
 };
