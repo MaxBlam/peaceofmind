@@ -1,22 +1,25 @@
 <template>
   <div id="app">
     <NavBar />
-    <router-view/>
+    <router-view />
+    <Footer/>
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
+import NavBar from '@/components/NavBar.vue';
+import Footer from '@/components/Footer.vue';
 export default {
   components: {
     NavBar,
+    Footer,
   },
 };
 </script>
 
 <style>
 p {
-  font-family: "Abel", sans-serif;
+  font-family: 'Abel', sans-serif;
 }
 html::-webkit-scrollbar {
   width: 6px;
