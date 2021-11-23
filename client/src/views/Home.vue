@@ -12,27 +12,48 @@
         flex-wrap
       "
     >
-      <Folder v-for="i in 12" :key="i" />
-      <div class="m-3 d-flex justify-content-center align-items-center" style="height:200px;width:27vw"><i class="fas fa-folder-plus display-3"></i></div>
-      <div class="m-3" style="width:27vw" v-for="s in spacer" :key="s"></div>
+      <Folder v-for="i in folders" :key="i" to="/" />
+      <div
+        class="m-3 d-flex justify-content-center align-items-center"
+        style="align-self: stretch; width: 27vw"
+        @click="newFolder"
+      >
+        <i class="fas fa-folder-plus display-3"></i>
+      </div>
+      <div class="m-3" style="width: 27vw" v-for="s in spacer" :key="s"></div>
     </div>
   </div>
 </template>
 
 <script>
 import Folder from '@/components/Folder.vue';
+import axios from 'axios';
 export default {
   components: {
     Folder,
   },
   data: () => {
     return {
-      folders: 13,
+      folders: 12,
     };
+  },
+  methods: {
+    newFolder() {
+      this.$prompt('Enter new folder name').then((text) => this.addFolder(text));
+    },
+    async addFolder(text) {
+      {
+        console.log(text);
+        await axios({
+          url: '',
+          method: 'POST',
+        });
+      }
+    },
   },
   computed: {
     spacer: function () {
-      return Number.parseInt(this.folders % 3+2);
+      return Number.parseInt((this.folders % 3) + 2);
     },
   },
 };
