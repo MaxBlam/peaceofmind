@@ -15,12 +15,12 @@
       <Folder v-for="i in folders" :key="i" to="/" />
       <div
         class="m-3 d-flex justify-content-center align-items-center"
-        style="align-self: stretch; width: 27vw"
+        style="align-self: stretch; width: 27rem"
         @click="newFolder"
       >
         <i class="fas fa-folder-plus display-3"></i>
       </div>
-      <div class="m-3" style="width: 27vw" v-for="s in spacer" :key="s"></div>
+      <div class="m-3" style="width: 27rem" v-for="s in spacer" :key="s"></div>
     </div>
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     spacer: function () {
-      return Number.parseInt((this.folders % 3) + 2);
+      return Number.parseInt((this.folders % 3) + 5);
     },
   },
 };
