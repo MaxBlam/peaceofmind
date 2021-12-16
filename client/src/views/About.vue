@@ -46,9 +46,9 @@
               <h5 class="card-title">Ahmed Hasanovic</h5>
               <p class="card-text">Backend</p>
               <p>
-                <span class="badge bg-about me-1">APIs</span>
-                <span class="badge bg-about me-1">Data Manipulation</span>
-                <span class="badge bg-about me-1">Formatting</span>
+                <span class="badge bg-identity me-1">APIs</span>
+                <span class="badge bg-identity me-1">Data Manipulation</span>
+                <span class="badge bg-identity me-1">Formatting</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
@@ -73,9 +73,9 @@
               <h5 class="card-title">Maximilian Blam</h5>
               <p class="card-text">Frontend & Database</p>
               <p>
-                <span class="badge bg-about me-1">Website</span>
-                <span class="badge bg-about me-1">Progressive Web App</span>
-                <span class="badge bg-about me-1">PostgreSQL Database</span>
+                <span class="badge bg-identity me-1">Website</span>
+                <span class="badge bg-identity me-1">Progressive Web App</span>
+                <span class="badge bg-identity me-1">PostgreSQL Database</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
@@ -101,9 +101,9 @@
               <h5 class="card-title">Moritz Miedler</h5>
               <p class="card-text">Marketing & Design</p>
               <p>
-                <span class="badge bg-about me-1">Corporate Branding</span>
-                <span class="badge bg-about me-1">Social Media Management</span>
-                <span class="badge bg-about me-1">Graphics</span>
+                <span class="badge bg-identity me-1">Corporate Branding</span>
+                <span class="badge bg-identity me-1">Social Media Management</span>
+                <span class="badge bg-identity me-1">Graphics</span>
               </p>
               <a
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
@@ -294,15 +294,15 @@
             folder or subject. Keeping your notes organized has never been
             easier.
           </p>
-          <a target="_blank" class="btn btn-outline-primary mb-4 transition-sm"
-            ><router-link to="/" style="text-decoration: none">
+          <a
+            ><router-link to="/" style="text-decoration: none" class="btn bg-identity text-light mb-4 transition-sm">
               Try it!
             </router-link></a
           >
           <a
             href="https://github.com/MaxBlam/peaceofmind"
             target="_blank"
-            class="btn btn-outline-primary ms-2 mb-4 transition-sm"
+            class="btn bg-identity text-light ms-2 mb-4 transition-sm"
             >Github</a
           >
         </div>
