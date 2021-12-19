@@ -11,6 +11,7 @@ const gauthOption = {
 import AOS from "aos";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.min.js';
 import "aos/dist/aos.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import VueSimpleAlert from 'vue-simple-alert';

@@ -13,21 +13,27 @@
       <div
         class="m-3 d-flex justify-content-center align-items-center"
         style="align-self: stretch; width: 27rem"
-        
       >
-        <i class="fas fa-folder-plus display-3"></i>
+        <i
+          class="fas fa-folder-plus display-3"
+          data-bs-toggle="modal"
+          data-bs-target="#createFolder"
+        ></i>
       </div>
       <div class="m-3" style="width: 27rem" v-for="s in spacer" :key="s"></div>
     </div>
+    <CreateFolder id="createFolder"/>
   </div>
 </template>
 
 <script>
 import Folder from '@/components/Folder.vue';
+import CreateFolder from '@/components/CreateFolder.vue';
 import axios from 'axios';
 export default {
   components: {
     Folder,
+    CreateFolder,
   },
   data: () => {
     return {
@@ -89,7 +95,7 @@ export default {
       });
       alert('Done', res);
     },
-    async deleteTab() {
+    /*async deleteTab() {
       const res = await axios({
         method: 'Delete',
         url: 'http://localhost:3000/note',
@@ -112,7 +118,7 @@ export default {
         },
       });
       alert('Done', res);
-    },
+    },*/
     async createFolder() {
       const res = await axios({
         method: 'POST',
