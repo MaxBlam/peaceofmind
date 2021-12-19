@@ -9,18 +9,11 @@
       p-4
       border
       rounded
+      text-center
     "
   >
-    <legend>Login</legend>
-    <div class="mb-3">
-      <label class="form-label">Email address</label>
-      <input type="email" class="form-control" placeholder="name@example.com" />
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Password</label>
-      <input type="email" class="form-control" />
-    </div>
-    <button class="btn bg-identity text-light" @click="login()">Login</button>
+    <legend class="mb-3">Login</legend>
+    <button class="btn bg-identity text-light" @click="login()"> Sign In with Google</button>
   </fieldset>
 </template>
 
@@ -45,7 +38,6 @@ export default {
         if (res.data.code !== 401)
           localStorage.setItem('userHash', res.data.data);
         else alert(res.data.data);
-        console.log("test")
         this.$router.push('/');
       } catch (error) {
         console.error(error);

@@ -13,7 +13,7 @@
       <div
         class="m-3 d-flex justify-content-center align-items-center"
         style="align-self: stretch; width: 27rem"
-        @click="newFolder"
+        
       >
         <i class="fas fa-folder-plus display-3"></i>
       </div>
@@ -31,7 +31,7 @@ export default {
   },
   data: () => {
     return {
-      folders: 12,
+      folders: [],
       response: [],
       isLoggedIn: false,
       noteName: '',
@@ -48,11 +48,6 @@ export default {
     this.isLoggedInF();
   },
   methods: {
-    newFolder() {
-      this.$prompt('Enter new folder name').then((text) =>
-        this.createFolder(text)
-      );
-    },
     isLoggedInF() {
       const code = localStorage.getItem('userHash');
       if (code) this.isLoggedIn = true;
@@ -70,7 +65,7 @@ export default {
         url: 'http://localhost:3000/folder/' + localStorage.getItem('userHash'),
         method: 'GET',
       });
-      this.response = res.data.data.files;
+      this.folders = res.data.data.files;
     },
     async logout() {
       await axios({
