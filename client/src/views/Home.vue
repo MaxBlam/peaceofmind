@@ -1,28 +1,16 @@
 <template>
   <div>
-    <div
-      class="
-        container-fluid
-        d-flex
-        justify-content-center
-        align-content-center
-        flex-wrap
-      "
-    >
+    <div class="container-fluid d-flex justify-content-center align-content-center flex-wrap">
       <Folder v-for="i in folders" :key="i" to="/" />
       <div
         class="m-3 d-flex justify-content-center align-items-center"
         style="align-self: stretch; width: 27rem"
       >
-        <i
-          class="fas fa-folder-plus display-3"
-          data-bs-toggle="modal"
-          data-bs-target="#createFolder"
-        ></i>
+        <i class="fas fa-folder-plus display-3" data-bs-toggle="modal" data-bs-target="#createFolder"></i>
       </div>
       <div class="m-3" style="width: 27rem" v-for="s in spacer" :key="s"></div>
     </div>
-    <CreateFolder id="createFolder"/>
+    <CreateFolder id="createFolder" />
   </div>
 </template>
 
