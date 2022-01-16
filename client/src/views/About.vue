@@ -489,9 +489,7 @@ html {
 .no-border {
   border: 0px !important;
 }
-h1 {
-  font-family: 'Jost', sans-serif;
-}
+
 .fixed-nav {
   position: fixed;
   bottom: 3vh;

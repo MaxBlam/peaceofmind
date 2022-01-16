@@ -24,6 +24,9 @@ export default {
 p {
   font-family: 'Abel', sans-serif;
 }
+h1 {
+  font-family: 'Jost', sans-serif;
+}
 html::-webkit-scrollbar {
   width: 6px;
 }
@@ -35,4 +38,5 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgb(48, 11, 90) rgb(250, 250, 250);
 }
+
 </style>
