@@ -20,7 +20,7 @@
       data-aos-duration="1000"
     >
       <h1 class="display-2 text-shadow text-center">Find your Inner Peace</h1>
-      <i class="fas fa-chevron-down" id="scrollindi"></i>
+      <i class="bi bi-caret-down-fill h3" id="scrollindi"></i>
     </div>
     <!-- End of Introduction -->
     <!-- Start of The Team -->

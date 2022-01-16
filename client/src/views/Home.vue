@@ -15,14 +15,14 @@
         style="align-self: stretch; width: 27rem"
       >
         <i
-          class="fas fa-folder-plus display-3"
+          class="bi bi-folder-plus display-5"
           data-bs-toggle="modal"
           data-bs-target="#createFolder"
         ></i>
       </div>
       <div class="m-3" style="width: 27rem" v-for="s in spacer" :key="s"></div>
     </div>
-    <CreateFolder id="createFolder" />
+    <CreateFolder id="createFolder" /><!-- Modal ohne Jquery -->
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
   },
   data: () => {
     return {
-      folders: [],
+      folders: 12,
       response: [],
       isLoggedIn: false,
       noteName: '',

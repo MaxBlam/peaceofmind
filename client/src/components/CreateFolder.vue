@@ -1,12 +1,10 @@
 <template>
   <div
-    class="modal-dialog modal-dialog-centered"
-    id="createFolder"
-    aria-hidden="true"
+    class="modal-dialog modal-dialog-centered fade"
   >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title">New Folder</h5>
         <button
           type="button"
           class="btn-close"
@@ -16,27 +14,48 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Email address</label
-          >
+          <label class="form-label">Subject</label>
           <input
-            type="email"
+            type="text"
             class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
+            placeholder="Chemistry"
+            v-model="folderName"
           />
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label"
-            >Example textarea</label
-          >
-          <textarea
+          <label class="form-label">Teacher</label>
+          <input
+            type="text"
             class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
+            placeholder="Mr Bobert Raumgartner"
+            v-model="teacher"
+          />
         </div>
+        <div class="mb-3">
+          <label class="form-label">Grade</label>
+          <select class="form-select" v-model="grade">
+            <option selected value=""></option>
+            <option value="1" v-for="(o, i) of 6" :key="i">
+              {{ o }}
+            </option>
+          </select>
+        </div>
+        <button type="button" class="btn bg-identity text-light">
+          Add Folder
+        </button>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    grade: '',
+    teacher: '',
+    folderName: '',
+  }),
+};
+</script>
+
+<style lang="scss" scoped></style>

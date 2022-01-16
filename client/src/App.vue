@@ -38,5 +38,8 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgb(48, 11, 90) rgb(250, 250, 250);
 }
+.bg-identity {
+  background-color: #b46cc0 !important;
+}
 
 </style>

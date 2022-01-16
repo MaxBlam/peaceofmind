@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <img src="@/assets/folder.svg" class="text-primary" style="width:15%" alt="" />
         <h5 class="me-auto card-title d-inline">Card title</h5>
-        <i class="fas fa-plus"></i>
+        <i class="bi bi-plus h3"></i>
       </div>
       <div class="d-lg-none">
         <h6 class="card-subtitle mb-2 text-muted">Card subtitles</h6>

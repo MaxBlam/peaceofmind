@@ -22,7 +22,7 @@
           data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar"
         >
-          <i class="fas fa-bars" style="color: rgb(48, 11, 90)"></i>
+          <i class="bi bi-list h3" style="color: rgb(48, 11, 90)"></i>
         </button>
       </ul>
     </nav>
@@ -40,7 +40,7 @@
           data-bs-dismiss="offcanvas"
           aria-label="Close"
         >
-          <i class="fas fa-times"></i>
+          <i class="bi bi-x-lg"></i>
         </button>
       </div>
       <div class="offcanvas-body">
