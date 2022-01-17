@@ -1,9 +1,11 @@
 <template>
-  <div class="modal-back modal modal-dialog-centered">
+  <div
+    class="modal-back modal modal-dialog-centered"
+  >
     <div class="modal-content container">
       <div class="modal-header">
         <h5 class="modal-title">New Folder</h5>
-        <button type="button" class="btn" @click="$emit('closeModal')">
+        <button type="button" class="btn" @click.stop="$emit('closeModal')">
           <i class="bi bi-x-lg"></i>
         </button>
       </div>
