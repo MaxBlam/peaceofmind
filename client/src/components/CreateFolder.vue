@@ -1,16 +1,11 @@
 <template>
-  <div
-    class="modal-dialog modal-dialog-centered fade"
-  >
-    <div class="modal-content">
+  <div class="modal-back modal modal-dialog-centered">
+    <div class="modal-content container">
       <div class="modal-header">
         <h5 class="modal-title">New Folder</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn" @click="$emit('closeModal')">
+          <i class="bi bi-x-lg"></i>
+        </button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
@@ -35,12 +30,16 @@
           <label class="form-label">Grade</label>
           <select class="form-select" v-model="grade">
             <option selected value=""></option>
-            <option value="1" v-for="(o, i) of 6" :key="i">
+            <option :value="o" v-for="(o, i) of 6" :key="i">
               {{ o }}
             </option>
           </select>
         </div>
-        <button type="button" class="btn bg-identity text-light">
+        <button
+          type="button"
+          class="btn bg-identity text-light"
+          @click="$emit('createFolder', folder)"
+        >
           Add Folder
         </button>
       </div>
@@ -55,7 +54,16 @@ export default {
     teacher: '',
     folderName: '',
   }),
+  computed: {
+    folder: function () {
+      return {
+        grade: this.grade,
+        teacher: this.teacher,
+        folderName: this.folderName,
+      };
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -1,12 +1,14 @@
 <template>
   <div class="container-fluid">
-    <TimeLine/>
-    <h1 class="my-4">Documents</h1>
-    <Document
-      v-for="(document, i) of documents"
-      :key="i"
-      :document="document"
-    />
+    <TimeLine />
+    <div class="container">
+      <h1 class="my-4">Documents</h1>
+      <Document
+        v-for="(document, i) of documents"
+        :key="i"
+        :document="document"
+      />
+    </div>
   </div>
 </template>
 
@@ -16,7 +18,7 @@ import TimeLine from '@/components/TimeLine.vue';
 export default {
   components: {
     Document,
-    TimeLine
+    TimeLine,
   },
   props: {
     id: Number,

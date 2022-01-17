@@ -33,7 +33,7 @@
       aria-labelledby="offcanvasNavbarLabel"
     >
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h5>
+        <h5 class="offcanvas-title">Navigation</h5>
         <button
           type="button"
           class="btn text-reset navbar-toggler"

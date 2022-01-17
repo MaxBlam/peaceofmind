@@ -9,20 +9,28 @@
         flex-wrap
       "
     >
-      <Folder v-for="i in folders" :key="i" to="/" />
+      <Folder
+        v-for="folder in folders"
+        :key="folder.id"
+        :to="`/folder/${folder.id}`"
+      />
       <div
         class="m-3 d-flex justify-content-center align-items-center"
         style="align-self: stretch; width: 27rem"
       >
-        <i
-          class="bi bi-folder-plus display-5"
-          data-bs-toggle="modal"
-          data-bs-target="#createFolder"
-        ></i>
+        <i class="bi bi-folder-plus display-5" @click="openFolderModal"></i>
       </div>
-      <div class="m-3" style="width: 27rem" v-for="s in spacer" :key="s"></div>
+      <div
+        class="m-3"
+        style="width: 27rem"
+        v-for="(spacer, i) in spacer"
+        :key="i"
+      ></div>
     </div>
-    <CreateFolder id="createFolder" /><!-- Modal ohne Jquery -->
+    <CreateFolder
+      id="createFolder"
+      @createFolder="createFolder"
+    />
   </div>
 </template>
 
@@ -133,6 +141,7 @@ export default {
       });
       alert('Done', res);
     },
+    openFolderModal() {},
   },
   computed: {
     spacer: function () {
@@ -141,3 +150,18 @@ export default {
   },
 };
 </script>
+
+<style>
+/* The Modal (background) */
+.modal-back {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  transition: 1s;
+}
+</style>
