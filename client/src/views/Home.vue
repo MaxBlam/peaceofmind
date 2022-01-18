@@ -17,8 +17,9 @@
       <div
         class="m-3 d-flex justify-content-center align-items-center"
         style="align-self: stretch; width: 27rem"
+        data-micromodal-trigger="createFolder"
       >
-        <i class="bi bi-folder-plus display-5" @click="openFolderModal"></i>
+        <i class="bi bi-folder-plus display-5"></i>
       </div>
       <div
         class="m-3"
@@ -29,6 +30,7 @@
     </div>
     <CreateFolder
       id="createFolder"
+      aria-hidden="true"
       @createFolder="createFolder"
     />
   </div>
@@ -152,16 +154,11 @@ export default {
 </script>
 
 <style>
-/* The Modal (background) */
-.modal-back {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  transition: 1s;
+.modal {
+  display: none;
+}
+
+.modal.is-open {
+  display: block;
 }
 </style>

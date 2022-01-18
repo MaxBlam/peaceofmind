@@ -10,21 +10,20 @@ const gauthOption = {
   prompt: 'select_account',
 };
 import AOS from 'aos';
+import MicroModal from 'micromodal';
 import 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'aos/dist/aos.css';
-import VueSimpleAlert from 'vue-simple-alert';
 
-Vue.use(VueSimpleAlert);
-
+MicroModal.init({ debugMode: true });
 AOS.init();
 Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount('#app');
 
 Vue.use(GAuth, gauthOption);
