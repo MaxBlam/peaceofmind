@@ -13,6 +13,8 @@
         v-for="folder in folders"
         :key="folder.id"
         :to="`/folder/${folder.id}`"
+        :folder="folder"
+        @createDocument="createDocument"
       />
       <div
         class="m-3 d-flex justify-content-center align-items-center"
@@ -33,19 +35,27 @@
       aria-hidden="true"
       @createFolder="createFolder"
     />
+    <CreateDocument
+      id="createDocument"
+      aria-hidden="true"
+      @createDocument="createDocument"
+    />
   </div>
 </template>
 
 <script>
 import Folder from '@/components/Folder.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
+import CreateDocument from '@/components/CreateDocument.vue';
 import axios from 'axios';
+import MicroModal from 'micromodal';
 export default {
   components: {
     Folder,
     CreateFolder,
+    CreateDocument,
   },
-  
+
   data: () => {
     return {
       folders: 12,
@@ -144,7 +154,10 @@ export default {
       });
       alert('Done', res);
     },
-    openFolderModal() {},
+    async createDocument(folder) {
+      console.log(folder);
+      MicroModal.show('createDocument'); // [1]
+    },
   },
   computed: {
     spacer: function () {
@@ -154,12 +167,4 @@ export default {
 };
 </script>
 
-<style>
-.modal {
-  display: none;
-}
-
-.modal.is-open {
-  display: block;
-}
-</style>
+<style></style>

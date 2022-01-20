@@ -1,5 +1,5 @@
 <template>
-  <div class="modal micromodal-slide">
+  <div class="modal">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div class="modal-content container" role="dialog" aria-modal="true">
         <div class="modal-header">

@@ -56,15 +56,22 @@ html {
   justify-content: center;
   align-items: center;
 }
+.modal {
+  display: none;
+}
 
-.micromodal-slide[aria-hidden='false'] .modal__container {
+.modal.is-open {
+  display: block;
+}
+
+.modal[aria-hidden='false'] .modal__container {
   animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
-.micromodal-slide[aria-hidden='true'] .modal__container {
+.modal[aria-hidden='true'] .modal__container {
   animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
-.micromodal-slide .modal__container,
-.micromodal-slide .modal__overlay {
+.modal .modal__container,
+.modal .modal__overlay {
   will-change: transform;
 }
 
