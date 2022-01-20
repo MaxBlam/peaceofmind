@@ -45,6 +45,7 @@ export default {
     Folder,
     CreateFolder,
   },
+  
   data: () => {
     return {
       folders: 12,

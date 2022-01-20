@@ -1,6 +1,6 @@
 <template>
-  <div class="modal">
-    <div tabindex="-1" data-micromodal-close>
+  <div class="modal micromodal-slide">
+    <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div class="modal-content container" role="dialog" aria-modal="true">
         <div class="modal-header">
           <h5 class="modal-title">New Folder</h5>
