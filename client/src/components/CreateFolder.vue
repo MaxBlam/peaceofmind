@@ -43,6 +43,7 @@
           </div>
           <button
             type="button"
+            data-micromodal-close
             class="btn bg-identity text-light"
             @click="$emit('createFolder', folder)"
           >

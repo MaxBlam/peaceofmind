@@ -14,11 +14,11 @@
         :key="folder.id"
         :to="`/folder/${folder.id}`"
         :folder="folder"
-        @createDocument="createDocument"
+        @openNoteModal="openNoteModal"
       />
       <div
         class="m-3 d-flex justify-content-center align-items-center"
-        style="align-self: stretch; width: 27rem"
+        style="align-self: stretch; width: 27rem; cursor: pointer"
         data-micromodal-trigger="createFolder"
       >
         <i class="bi bi-folder-plus display-5"></i>
@@ -35,30 +35,48 @@
       aria-hidden="true"
       @createFolder="createFolder"
     />
-    <CreateDocument
-      id="createDocument"
-      aria-hidden="true"
-      @createDocument="createDocument"
-    />
+    <CreateNote id="createNote" aria-hidden="true" @createNote="createNote" />
   </div>
 </template>
 
 <script>
 import Folder from '@/components/Folder.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
-import CreateDocument from '@/components/CreateDocument.vue';
+import CreateNote from '@/components/CreateNote.vue';
 import axios from 'axios';
 import MicroModal from 'micromodal';
 export default {
   components: {
     Folder,
     CreateFolder,
-    CreateDocument,
+    CreateNote,
   },
 
   data: () => {
     return {
-      folders: 12,
+      folders: [
+        {
+          id: 1,
+          name: 'Chemistry',
+          teacher: 'Mr Robert Baumgartner',
+          grade: 2,
+          desc: 'lorem ipsum',
+        },
+        {
+          id: 2,
+          name: 'Maths',
+          teacher: 'Mr Ich',
+          grade: 1,
+          desc: 'lorem ipsum',
+        },
+        {
+          id: 3,
+          name: 'SEW',
+          teacher: 'Mr Robert Baumgartner',
+          grade: 2,
+          desc: 'lorem ipsum',
+        },
+      ],
       response: [],
       isLoggedIn: false,
       noteName: '',
@@ -154,14 +172,14 @@ export default {
       });
       alert('Done', res);
     },
-    async createDocument(folder) {
-      console.log(folder);
-      MicroModal.show('createDocument'); // [1]
+    openNoteModal(folder) {
+      console.log(folder.id);
+      MicroModal.show('createNote'); // [1]
     },
   },
   computed: {
     spacer: function () {
-      return Number.parseInt((this.folders % 3) + 5);
+      return Number.parseInt((this.folders.length % 3) + 5);
     },
   },
 };

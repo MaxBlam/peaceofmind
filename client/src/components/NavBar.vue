@@ -9,11 +9,9 @@
           justify-content-center
         "
       >
-        <li class="nav-item">
-          <a class="navbar-brand" href="/#">
-            <img src="@/assets/logo.svg" alt="" width="50" />
-          </a>
-        </li>
+        <a class="navbar-brand nav-item" href="/#">
+          <img src="@/assets/logo.svg" alt="" width="50" />
+        </a>
 
         <button
           class="navbar-toggler ms-auto"

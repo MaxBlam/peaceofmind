@@ -5,22 +5,28 @@
         <img
           src="@/assets/folder.svg"
           class="text-primary"
-          style="width: 15%"
+          style="width: 15%; cursor: pointer"
           alt=""
+          @click="$router.push(`/folder/${folder.id}`)"
         />
-        <h5 class="ms-2 me-auto card-title d-inline">Card title</h5>
-        <i class="bi bi-plus h3" @click="createDocument"></i>
+        <h5
+          class="ms-2 me-auto card-title d-inline"
+          @click="$router.push(`/folder/${folder.id}`)"
+          style="cursor: pointer"
+        >
+          {{ folder.name }}
+        </h5>
+        <i
+          class="bi bi-plus h3"
+          style="cursor: pointer"
+          @click="openNoteModal"
+        ></i>
       </div>
-      <div class="d-lg-none">
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitles</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitles</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitles</h6>
-      </div>
+      <h6 class="card-subtitle mb-2 text-muted">Teacher: {{ folder.teacher }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Grade: {{ folder.grade }}</h6>
       <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+        {{folder.desc}}
       </p>
-      {{ folder }}
     </div>
   </div>
 </template>
@@ -29,13 +35,13 @@
 export default {
   props: {
     folder: {
-      type: Number,
+      type: Object,
       default: () => ({}),
     },
   },
   methods: {
-    createDocument() {
-      this.$emit('createDocument', this.folder);
+    openNoteModal() {
+      this.$emit('openNoteModal', this.folder);
     },
   },
 };

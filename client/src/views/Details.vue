@@ -2,29 +2,25 @@
   <div class="container-fluid">
     <TimeLine />
     <div class="container">
-      <h1 class="my-4">Documents</h1>
-      <Document
-        v-for="(document, i) of documents"
-        :key="i"
-        :document="document"
-      />
+      <h1 class="my-4">Notes</h1>
+      <Note v-for="(note, i) of notes" :key="i" :note="note" />
     </div>
   </div>
 </template>
 
 <script>
-import Document from '@/components/Document.vue';
+import Note from '@/components/Note.vue';
 import TimeLine from '@/components/TimeLine.vue';
 export default {
   components: {
-    Document,
+    Note,
     TimeLine,
   },
   props: {
     id: Number,
   },
   data: () => ({
-    documents: [{ name: 'App.vue' }, { name: 'test.vue' }],
+    notes: [{ name: 'App.vue' }, { name: 'test.vue' }],
   }),
 };
 </script>
