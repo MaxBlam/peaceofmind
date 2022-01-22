@@ -102,7 +102,9 @@
               <p class="card-text">Marketing & Design</p>
               <p>
                 <span class="badge bg-identity me-1">Corporate Branding</span>
-                <span class="badge bg-identity me-1">Social Media Management</span>
+                <span class="badge bg-identity me-1"
+                  >Social Media Management</span
+                >
                 <span class="badge bg-identity me-1">Graphics</span>
               </p>
               <a
@@ -128,6 +130,7 @@
         align-items-center
         text-light
         p-5
+        my-5
       "
     >
       <div class="container text-center">
@@ -295,7 +298,11 @@
             easier.
           </p>
           <a
-            ><router-link to="/" style="text-decoration: none" class="btn bg-identity text-light mb-4 transition-sm">
+            ><router-link
+              to="/"
+              style="text-decoration: none"
+              class="btn bg-identity text-light mb-4 transition-sm"
+            >
               Try it!
             </router-link></a
           >
@@ -314,10 +321,35 @@
     </div>
     <!-- End of The Project -->
     <!-- Start of FAQ -->
-    <!-- <div class="container-fluid bg-light p-5">
+    <div class="container-fluid bg-light p-5">
       <div class="container">
         <h1 class="display-5 mt-5 mb-3" id="faq">Frequently asked Questions</h1>
-        <div class="accordion" id="accordionExample">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="false"
+                aria-controls="collapseOne"
+              >
+                What is PieceOfMind?
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingOne"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                PieceOfMind helps you store your digital and handwritten notes
+                online, easily and securely.
+              </div>
+            </div>
+          </div>
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
               <button
@@ -328,25 +360,18 @@
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                Question 1
+                Is PieceOfMind free to use?
               </button>
             </h2>
             <div
               id="collapseTwo"
               class="accordion-collapse collapse"
               aria-labelledby="headingTwo"
-              data-bs-parent="#accordionExample"
+              data-bs-parent="#faqAccordion"
             >
               <div class="accordion-body">
-                <strong>This is the second item's accordion body.</strong> It is
-                hidden by default, until the collapse plugin adds the
-                appropriate classes that we use to style each element. These
-                classes control the overall appearance, as well as the showing
-                and hiding via CSS transitions. You can modify any of this with
-                custom CSS or overriding our default variables. It's also worth
-                noting that just about any HTML can go within the
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
+                PieceOfMind is available without hidden costs and completely
+                free from advertisements!
               </div>
             </div>
           </div>
@@ -360,31 +385,24 @@
                 aria-expanded="false"
                 aria-controls="collapseThree"
               >
-                Question 2
+                How did you come up with your idea?
               </button>
             </h2>
             <div
               id="collapseThree"
               class="accordion-collapse collapse"
               aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample"
+              data-bs-parent="#faqAccordion"
             >
               <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is
-                hidden by default, until the collapse plugin adds the
-                appropriate classes that we use to style each element. These
-                classes control the overall appearance, as well as the showing
-                and hiding via CSS transitions. You can modify any of this with
-                custom CSS or overriding our default variables. It's also worth
-                noting that just about any HTML can go within the
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
+                We know what it's like to have to manage a lot of analog and
+                digital notes. That's why we wanted a simple and smart solution.
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>  -->
+    </div>
     <!-- End of FAQ -->
     <!-- Start of Contact -->
     <section class="container-fluid text-light p-5">
@@ -401,57 +419,58 @@
         <h1 class="display-5 text-center" id="contact">
           Still Questions? Contact us
         </h1>
-        <form class="p-4">
-          <div class="row">
-            <div>
-              <div class="d-inline-block col-12 col-md-6 mb-2 px-2">
-                <label class="form-label">Email address <span>*</span></label
-                ><input
-                  type="email"
-                  placeholder="example@email.com"
-                  name="user_email"
-                  required="required"
-                  class="form-control"
-                />
-              </div>
-              <div class="d-inline-block col-12 col-md-6 mb-2 px-2">
-                <label class="form-label">Name</label
-                ><input
-                  type="text"
-                  placeholder="First name, Last name"
-                  name="user_name"
-                  class="form-control"
-                />
-              </div>
-              <div class="d-inline-block col-12 mb-2 px-2">
-                <label class="form-label">Subject <span>*</span></label
-                ><input
-                  type="text"
-                  placeholder="..."
-                  name="user_subject"
-                  required="required"
-                  class="form-control"
-                />
-              </div>
-              <div class="col-12 mb-3 px-2">
-                <label class="form-label">Message <span>*</span></label
-                ><textarea
-                  rows="7"
-                  placeholder="..."
-                  name="message"
-                  required="required"
-                  class="form-control"
-                ></textarea>
-              </div>
-              <button type="submit" class="btn btn-light mx-2">Confirm</button>
-            </div>
-          </div>
-        </form>
+
+        <div class="d-inline-block col-12 mb-2">
+          <label class="form-label">Subject <span>*</span></label
+          ><input
+            type="text"
+            placeholder="..."
+            name="user_subject"
+            v-model="subject"
+            required="required"
+            class="form-control"
+          />
+        </div>
+        <div class="col-12 mb-3">
+          <label class="form-label">Message <span>*</span></label
+          ><textarea
+            rows="7"
+            placeholder="..."
+            name="message"
+            v-model="message"
+            required="required"
+            class="form-control"
+          ></textarea>
+        </div>
+        <button
+          type="button"
+          class="btn btn-outline-light me-auto"
+          :disabled="subject == '' || message == ''"
+          @click="sendMail"
+        >
+          Send!
+        </button>
       </div>
     </section>
     <!-- End of Contact -->
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    subject: '',
+    message: '',
+  }),
+  methods: {
+    sendMail() {
+      window.open(
+        `mailto:pieceofmind@htlwienwest.at?subject=${this.subject}&body=${this.message}`
+      );
+    },
+  },
+};
+</script>
 
 <style>
 #parallax {

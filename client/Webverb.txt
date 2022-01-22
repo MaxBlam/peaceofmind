@@ -1,14 +1,7 @@
 About:
 Parallax fertigstellen
-FAQ Section schreiben
 Bilder füllen
 Teambilder besser
 Datei Größen
 Meta Tags
 The Problem größer machen
-Website Icon
-Contact Form Funktionsfähig machen
-.htaccess erstellen
-
-Home:
-Modals fixen // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2
