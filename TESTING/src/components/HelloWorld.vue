@@ -7,7 +7,9 @@
       <button class="btn bg-identity text-light p-2" @click="logout()">Logout</button>
     </div>
 
-    <div></div>
+    <div>
+      
+    </div>
   </div>
 </template>
 
@@ -64,6 +66,9 @@ export default {
       });
       localStorage.clear();
       this.loggedIn = false;
+    },
+    async welcome() {
+      await axios({ url: 'http://localhost:3000/welcome' });
     },
   },
 };
