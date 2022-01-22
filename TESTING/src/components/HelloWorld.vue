@@ -8,7 +8,7 @@
     </div>
 
     <div>
-      
+      <button class="btn bg-identity text-light p-2" @click="welcome()">Welcome!</button>
     </div>
   </div>
 </template>
@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       loggedIn: false,
+      tests: [],
     };
   },
   methods: {
@@ -67,8 +68,14 @@ export default {
       localStorage.clear();
       this.loggedIn = false;
     },
-    async welcome() {
-      await axios({ url: 'http://localhost:3000/welcome' });
+    async alltests() {
+      const res = await axios({ url: 'http://localhost:3000/welcome', method: 'get' });
+      const test1res = 'Willkommen beim Piece of Mind!';
+      if (res.data == test1res) {
+        this.tests.push({ id: '1', outcome: true });
+      } else {
+        this.tests.push({ id: '1', outcome: false });
+      }
     },
   },
 };
