@@ -35,34 +35,32 @@ const login = asyncHandler(async (req, res) => {
     client.setCredentials(r.tokens);
     const rootId = await createRootFolder();
     const resultt = await model.createUser(userHash, rootId);
-    res.status(201).json(resultt);
-  } else {
-    const userDataDB = await model.getUser(UserData.getPayload().sub);
+  }
+  const userDataDB = await model.getUser(UserData.getPayload().sub);
 
-    if (userDataDB.length > 0) {
-      const sessions = await model.getUserSessions();
-      // Find if Users already has a session
-      const userSessionObject = [];
-      for (const session of sessions) {
-        const sessObject = session.sess;
-        if (sessObject.userHash === UserData.getPayload().sub) userSessionObject.push(session);
-      }
-      //
-      if (userSessionObject !== []) {
-        userSessionObject.forEach((el) => model.deleteUserSession(el.sid));
-      }
-      client.setCredentials(r.tokens);
-      req.session.userHash = UserData.getPayload().sub;
-      res.status(200).json({
-        code: 200,
-        data: UserData.getPayload().sub,
-      });
-    } else {
-      res.status(200).json({
-        code: 500,
-        data: 'Login Failed',
-      });
+  if (userDataDB.length > 0) {
+    const sessions = await model.getUserSessions();
+    // Find if Users already has a session
+    const userSessionObject = [];
+    for (const session of sessions) {
+      const sessObject = session.sess;
+      if (sessObject.userHash === UserData.getPayload().sub) userSessionObject.push(session);
     }
+    //
+    if (userSessionObject !== []) {
+      userSessionObject.forEach((el) => model.deleteUserSession(el.sid));
+    }
+    client.setCredentials(r.tokens);
+    req.session.userHash = UserData.getPayload().sub;
+    res.status(200).json({
+      code: 200,
+      data: UserData.getPayload().sub,
+    });
+  } else {
+    res.status(200).json({
+      code: 500,
+      data: 'Login Failed',
+    });
   }
 });
 
