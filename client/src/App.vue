@@ -1,22 +1,19 @@
 <template>
   <div id="app">
-    <NavBar />
-    <nav class="navbar container" style="height: 60px; margin: 0.5rem">
-      Margin Control
-    </nav>
-    <router-view />
-    <Footer />
+    <HelloWorld />
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue';
-import Footer from '@/components/Footer.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
+// import NavBar from '@/components/NavBar.vue';
+// import Footer from '@/components/Footer.vue';
 import MicroModal from 'micromodal';
 export default {
   components: {
-    NavBar,
-    Footer,
+    HelloWorld,
+    // NavBar,
+    // Footer,
   },
   mounted() {
     MicroModal.init({ debugMode: true });

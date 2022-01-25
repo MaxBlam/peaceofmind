@@ -25,31 +25,44 @@ const login = asyncHandler(async (req, res) => {
   const r = await client.getToken(userCode);
 
   const UserData = await client.verifyIdToken({ idToken: r.tokens.id_token, audience: keys.web.client_id });
-  const userDataDB = await model.getUser(UserData.getPayload().sub);
+  const userHash = UserData.getPayload().sub;
 
-  if (userDataDB.length > 0) {
-    const sessions = await model.getUserSessions();
-    // Find if Users already has a session
-    const userSessionObject = [];
-    for (const session of sessions) {
-      const sessObject = session.sess;
-      if (sessObject.userHash === UserData.getPayload().sub) userSessionObject.push(session);
-    }
-    //
-    if (userSessionObject !== []) {
-      userSessionObject.forEach((el) => model.deleteUserSession(el.sid));
-    }
+  const result = await model.getUser(userHash);
+
+  console.log(result);
+
+  if (result.length === 0) {
     client.setCredentials(r.tokens);
-    req.session.userHash = UserData.getPayload().sub;
-    res.status(200).json({
-      code: 200,
-      data: UserData.getPayload().sub,
-    });
+    const rootId = await createRootFolder();
+    const resultt = await model.createUser(userHash, rootId);
+    res.status(201).json(resultt);
   } else {
-    res.status(200).json({
-      code: 401,
-      data: 'You dont have an account, please register',
-    });
+    const userDataDB = await model.getUser(UserData.getPayload().sub);
+
+    if (userDataDB.length > 0) {
+      const sessions = await model.getUserSessions();
+      // Find if Users already has a session
+      const userSessionObject = [];
+      for (const session of sessions) {
+        const sessObject = session.sess;
+        if (sessObject.userHash === UserData.getPayload().sub) userSessionObject.push(session);
+      }
+      //
+      if (userSessionObject !== []) {
+        userSessionObject.forEach((el) => model.deleteUserSession(el.sid));
+      }
+      client.setCredentials(r.tokens);
+      req.session.userHash = UserData.getPayload().sub;
+      res.status(200).json({
+        code: 200,
+        data: UserData.getPayload().sub,
+      });
+    } else {
+      res.status(200).json({
+        code: 500,
+        data: 'Login Failed',
+      });
+    }
   }
 });
 

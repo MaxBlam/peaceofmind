@@ -77,21 +77,6 @@ export default {
       else alert(res.data.data);
       this.isLoggedInF();
     },
-    async register() {
-      const googleUser = await this.$gAuth.signIn();
-      const goaRes = await googleUser.grantOfflineAccess({
-        scope: 'https://www.googleapis.com/auth/drive.file',
-      });
-      const res = await axios({
-        url: 'http://localhost:3000/register',
-        method: 'POST',
-        'Content-Type': 'application/json',
-        data: {
-          code: goaRes.code,
-        },
-      });
-      if (res.data.code === 401) alert(res.data.data);
-    },
     isLoggedInF() {
       const code = localStorage.getItem('userHash');
       if (code) this.isLoggedIn = true;
