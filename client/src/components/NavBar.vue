@@ -71,7 +71,7 @@
           <li class="nav-item px-2">
             <a
               class="nav-link text-dark"
-              href="https://www.instagram.com/pieceofmind_htlww/"
+              href="https://www.instagram.com/pieceofmind.at/"
               >Instagram</a
             >
           </li>

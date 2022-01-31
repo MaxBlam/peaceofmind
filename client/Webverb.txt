@@ -1,8 +1,3 @@
 About:
-Parallax fertigstellen
 Bilder füllen
-Teambilder besser
-Datei Größen
-Meta Tags
-The Problem größer machen
 Navbar Modal fixen

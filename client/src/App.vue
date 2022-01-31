@@ -1,25 +1,24 @@
 <template>
   <div id="app">
-    <!-- <NavBar />
+    <NavBar />
     <nav class="navbar container" style="height: 60px; margin: 0.5rem">
       Margin Control
     </nav>
     <router-view />
-    <Footer /> -->
-    <HelloWorld />
+    <Footer />
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
-// import NavBar from '@/components/NavBar.vue';
-// import Footer from '@/components/Footer.vue';
+// import HelloWorld from '@/components/HelloWorld.vue';
+import NavBar from '@/components/NavBar.vue';
+import Footer from '@/components/Footer.vue';
 import MicroModal from 'micromodal';
 export default {
   components: {
-    HelloWorld,
-    // NavBar,
-    // Footer,
+    // HelloWorld,
+    NavBar,
+    Footer,
   },
   mounted() {
     MicroModal.init({ debugMode: true });
@@ -65,34 +64,5 @@ html {
 
 .modal.is-open {
   display: block;
-}
-
-.modal[aria-hidden='false'] .modal__container {
-  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-.modal[aria-hidden='true'] .modal__container {
-  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-.modal .modal__container,
-.modal .modal__overlay {
-  will-change: transform;
-}
-
-@keyframes mmslideIn {
-  from {
-    transform: translateY(15%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes mmslideOut {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-10%);
-  }
 }
 </style>

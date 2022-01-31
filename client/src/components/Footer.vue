@@ -8,7 +8,7 @@
           </li>
           <li class="nav-item">
             <a
-              href="https://www.instagram.com/pieceofmind_htlww/" target="_blank"
+              href="https://www.instagram.com/pieceofmind.at/" target="_blank"
               class="nav-link px-2 text-muted"
               >Instagram</a
             >
