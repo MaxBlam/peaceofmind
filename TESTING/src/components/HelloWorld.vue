@@ -70,50 +70,57 @@ export default {
     },
     async alltests() {
       const res1 = await axios({ url: 'http://localhost:3000/welcome', method: 'get' });
-      const test1res = 'Willkommen beim Piece of Mind!';
-      if (res1.data == test1res) {
-        this.tests.push({ id: '1', outcome: true });
-        console.log(`Test 1 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`);
-      } else {
-        this.tests.push({ id: '1', outcome: false });
-        console.log(
-          `Test 1 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`,
-        );
-      }
+      console.log(`Testergebnis 1: ${res1.data}`);
+      // const test1res = 'Willkommen beim Piece of Mind!';
+      // if (res1.data == test1res) {
+      //   this.tests.push({ id: '1', outcome: true });
+      //   console.log(`Test 1 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`);
+      // } else {
+      //   this.tests.push({ id: '1', outcome: false });
+      //   console.log(
+      //     `Test 1 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`,
+      //   );
+      // }
 
       const res2 = await axios({ url: 'http://localhost:3000/testdrive', method: 'get' });
-      const test2res = [
-        {
-          id: '1BfHK_zg_ojeqHuvMctur29lGSkqkJhIg',
-          name: 'Ordner 4',
-          mimeType: 'application/vnd.google-apps.folder',
-        },
-        {
-          id: '18jkkhMGc3CvO_cg7PjdoLCDNYmF-miXw',
-          name: 'Ordner 3',
-          mimeType: 'application/vnd.google-apps.folder',
-        },
-        {
-          id: '15fnUR09fxNoXy4i7FYK9Xy69TROxyOSE',
-          name: 'Ordner 2',
-          mimeType: 'application/vnd.google-apps.folder',
-        },
-        {
-          id: '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo',
-          name: 'Ordner 1',
-          mimeType: 'application/vnd.google-apps.folder',
-        },
-      ];
-      if (res2.data.driveRes.data.files == test2res) {
-        this.tests.push({ id: '2', outcome: true });
+      console.log(`Testergebnis 2: ${JSON.stringify(res2.data.driveRes.data.files)}`);
+      // const test2res = [
+      //   {
+      //     id: '1BfHK_zg_ojeqHuvMctur29lGSkqkJhIg',
+      //     name: 'Ordner 4',
+      //     mimeType: 'application/vnd.google-apps.folder',
+      //   },
+      //   {
+      //     id: '18jkkhMGc3CvO_cg7PjdoLCDNYmF-miXw',
+      //     name: 'Ordner 3',
+      //     mimeType: 'application/vnd.google-apps.folder',
+      //   },
+      //   {
+      //     id: '15fnUR09fxNoXy4i7FYK9Xy69TROxyOSE',
+      //     name: 'Ordner 2',
+      //     mimeType: 'application/vnd.google-apps.folder',
+      //   },
+      //   {
+      //     id: '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo',
+      //     name: 'Ordner 1',
+      //     mimeType: 'application/vnd.google-apps.folder',
+      //   },
+      // ];
 
-        console.log(`Test 2 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`);
-      } else {
-        this.tests.push({ id: '2', outcome: false });
-        console.log(
-          `Test 2 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`,
-        );
-      }
+      // if (res2.data.driveRes.data.files == test2res) {
+      //   this.tests.push({ id: '2', outcome: true });
+
+      //   console.log(`Test 2 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`);
+      // } else {
+      //   this.tests.push({ id: '2', outcome: false });
+      //   console.log(
+      //     `Test 2 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`,
+      //   );
+      // }
+
+      const res3 = await axios({ url: 'http://localhost:3000/note', method: 'post', data: '' });
+      // const test3res = '';
+      console.log(res3.data);
     },
   },
 };
