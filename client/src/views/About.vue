@@ -210,7 +210,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_pc.png" width="100%" />
+            <img src="@/assets/badge_pc.avif" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Easy Access</h5>
             </div>
@@ -221,7 +221,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_leaning.png" width="100%" />
+            <img src="@/assets/badge_leaning.avif" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Organized with Colorful Folders</h5>
             </div>
@@ -232,7 +232,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_mobile.png" width="100%" />
+            <img src="@/assets/badge_mobile.avif" width="100%" />
             <div class="card-body">
               <h5 class="card-title">View Everywhere</h5>
             </div>
@@ -254,7 +254,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_timeline.png" width="100%" />
+            <img src="@/assets/badge_timeline.avif" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Better Organization with Timelines</h5>
             </div>
@@ -265,7 +265,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_easy.png" width="100%" />
+            <img src="@/assets/badge_easy.avif" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Think about your New Freetime</h5>
             </div>
@@ -276,7 +276,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_safe.png" width="100%" />
+            <img src="@/assets/badge_safe.avif" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Uses Google for Optimal Security</h5>
             </div>

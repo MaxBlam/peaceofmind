@@ -1,29 +1,22 @@
 <template>
-  <div>
-    <nav class="navbar bg-light container-fluid shadow-sm fixed-top">
-      <ul
-        class="
-          navbar-collapse navbar-nav
-          d-flex
-          flex-row
-          justify-content-center
-        "
-      >
-        <a class="navbar-brand nav-item" href="/" title="App">
-          <img src="@/assets/logo.svg" alt="" width="50" />
-        </a>
+  <nav class="navbar bg-light container-fluid shadow-sm fixed-top">
+    <ul
+      class="navbar-collapse navbar-nav d-flex flex-row justify-content-center"
+    >
+      <a class="navbar-brand nav-item" href="/" title="App">
+        <img src="@/assets/logo.svg" alt="" width="50" />
+      </a>
 
-        <button
-          class="navbar-toggler ms-auto"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar"
-          aria-controls="offcanvasNavbar"
-        >
-          <i class="bi bi-list h3" style="color: rgb(48, 11, 90)"></i>
-        </button>
-      </ul>
-    </nav>
+      <button
+        class="navbar-toggler ms-auto"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar"
+      >
+        <i class="bi bi-list h3" style="color: rgb(48, 11, 90)"></i>
+      </button>
+    </ul>
     <div
       class="offcanvas offcanvas-end"
       tabindex="-1"
@@ -101,5 +94,5 @@
         </ul>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
