@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar />
-    <nav class="navbar container" style="height: 60px; margin: 0.5rem">
+    <nav class="navbar container" style="height: 66px">
       Margin Control
     </nav>
     <router-view />
