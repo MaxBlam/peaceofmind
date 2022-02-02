@@ -2,13 +2,13 @@
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3 ">
           <li class="nav-item">
-            <router-link to="/imprint" class="nav-link px-2 text-muted"
+            <router-link to="/imprint" class="nav-link px-2 text-muted" title="Imprint"
               >Imprint</router-link
             >
           </li>
           <li class="nav-item">
             <a
-              href="https://www.instagram.com/pieceofmind.at/" target="_blank"
+              href="https://www.instagram.com/pieceofmind.at/" target="_blank" title="Instagram Profile"
               class="nav-link px-2 text-muted"
               >Instagram</a
             >
@@ -18,7 +18,7 @@
           </li>
           <li class="nav-item">
             <a
-              href="https://github.com/MaxBlam/peaceofmind" target="_blank"
+              href="https://github.com/MaxBlam/peaceofmind" target="_blank" title="Github Repository"
               class="nav-link px-2 text-muted"
               >Github</a
             >

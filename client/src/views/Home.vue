@@ -6,7 +6,7 @@
         d-flex
         justify-content-center
         align-content-center
-        flex-wrap
+        flex-wrap mt-3
       "
     >
       <Folder

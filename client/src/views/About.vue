@@ -1,6 +1,6 @@
 <template>
   <div class="bg-about">
-    <a class="fixed-nav m-1" href="#" type="button">
+    <a class="fixed-nav m-1" href="#" type="button" title="Scroll Up">
       <img src="@/assets/arrow.svg" id="arrow" alt="" />
     </a>
 
@@ -16,10 +16,14 @@
         text-light
       "
       id="parallax"
-      data-aos="fade-up"
-      data-aos-duration="1000"
     >
-      <h1 class="display-2 text-shadow text-center">Find your Inner Peace</h1>
+      <h1
+        class="display-2 text-shadow text-center"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
+        Find your Inner Peace
+      </h1>
       <i class="bi bi-caret-down-fill h3" id="scrollindi"></i>
     </div>
     <!-- End of Introduction -->
@@ -54,6 +58,7 @@
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
                 target="_blank"
                 class="btn btn-light d-block mt-auto transition-sm"
+                title="Visit LinkedIn"
                 >View LinkedIn Profile</a
               >
             </div>
@@ -81,6 +86,7 @@
                 href="https://www.linkedin.com/in/maximilian-blam"
                 target="_blank"
                 class="btn btn-light d-block mt-auto transition-sm"
+                title="Visit LinkedIn"
                 >View LinkedIn Profile</a
               >
             </div>
@@ -111,6 +117,7 @@
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
                 target="_blank"
                 class="btn btn-light d-block mt-auto transition-sm"
+                title="Visit LinkedIn"
                 >View LinkedIn Profile</a
               >
             </div>
@@ -134,7 +141,9 @@
       "
     >
       <div class="container text-center">
-        <h1 class="display-4">The Problem</h1>
+        <h1 class="display-4" data-aos="fade-up" data-aos-duration="1000">
+          The Problem
+        </h1>
         <p data-aos="fade-up" data-aos-duration="1000">
           You probably know the feeling. You just wrote down some important
           notes onto a piece of paper, but you have related notes on your pc or
@@ -302,6 +311,7 @@
               to="/"
               style="text-decoration: none"
               class="btn bg-identity text-light mb-4 transition-sm"
+              title="App"
             >
               Try it!
             </router-link></a
@@ -310,6 +320,7 @@
             href="https://github.com/MaxBlam/peaceofmind"
             target="_blank"
             class="btn bg-identity text-light ms-2 mb-4 transition-sm"
+            title="Github Repository"
             >Github</a
           >
         </div>
@@ -424,7 +435,7 @@
           <label class="form-label">Subject <span>*</span></label
           ><input
             type="text"
-            placeholder="..."
+            placeholder="General Inquiry"
             name="user_subject"
             v-model="subject"
             required="required"
@@ -442,11 +453,13 @@
             class="form-control"
           ></textarea>
         </div>
+        <p class="me-auto">*needs to be filled out</p>
         <button
           type="button"
           class="btn btn-outline-light me-auto"
           :disabled="subject == '' || message == ''"
           @click="sendMail"
+          title="Open Default Email Program"
         >
           Send!
         </button>
@@ -465,7 +478,7 @@ export default {
   methods: {
     sendMail() {
       window.open(
-        `mailto:pieceofmind@htlwienwest.at?subject=${this.subject}&body=${this.message}`
+        `mailto:pieceofmind@htlwienwest.at?subject=${this.subject}&body=${this.message}`,
       );
     },
   },
@@ -475,7 +488,6 @@ export default {
 <style>
 #parallax {
   background-image: url('../assets/ph.jpg');
-  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -9,7 +9,7 @@
           justify-content-center
         "
       >
-        <a class="navbar-brand nav-item" href="/#">
+        <a class="navbar-brand nav-item" href="/" title="App">
           <img src="@/assets/logo.svg" alt="" width="50" />
         </a>
 
@@ -49,6 +49,7 @@
               exact
               class="nav-link text-dark"
               active-class="fw-bold"
+              title="Go to App"
               >Home</router-link
             >
           </li>
@@ -57,6 +58,7 @@
               to="/about"
               class="nav-link text-dark"
               active-class="fw-bold"
+              title="About page"
               >About</router-link
             >
           </li>
@@ -65,6 +67,7 @@
               class="nav-link text-dark"
               href="https://github.com/MaxBlam/peaceofmind"
               target="_blank"
+              title="Github Repository"
               >Github</a
             >
           </li>
@@ -72,12 +75,18 @@
             <a
               class="nav-link text-dark"
               href="https://www.instagram.com/pieceofmind.at/"
+              title="Instagram Profile"
               >Instagram</a
             >
           </li>
 
           <li class="nav-item px-2">
-            <a class="nav-link text-dark" href="/about#contact">Contact</a>
+            <a
+              class="nav-link text-dark"
+              href="/about#contact"
+              title="Contact Us"
+              >Contact</a
+            >
           </li>
 
           <li class="nav-item px-2">
@@ -85,6 +94,7 @@
               to="/imprint#"
               class="nav-link text-dark"
               active-class="fw-bold"
+              title="Imprint"
               >Imprint</router-link
             >
           </li>
