@@ -42,7 +42,7 @@
             data-aos-duration="1000"
           >
             <img
-              src="@/assets/ahmedpb.jpg"
+              src="@/assets/ahmedpb.avif"
               alt="Developer"
               class="card-img-top rounded-4"
             />
@@ -71,7 +71,7 @@
             data-aos-duration="1000"
           >
             <img
-              src="@/assets/maxpb.jpg"
+              src="@/assets/maxpb.avif"
               alt="Developer"
               class="card-img-top rounded-4"
             />
@@ -101,7 +101,7 @@
             data-aos-duration="1000"
           >
             <img
-              src="@/assets/moritzpb.jpg"
+              src="@/assets/moritzpb.avif"
               class="card-img-top rounded-4"
               alt="Developer"
             />
