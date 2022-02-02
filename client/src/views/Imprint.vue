@@ -40,7 +40,7 @@
       <a
         href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&amp;lng=DE"
         target="_blank"
-        rel="noopener"
+        rel="noreferrer"
         >http://ec.europa.eu/odr?tid=121870266</a
       >
       zu richten. Die dafür notwendigen Kontaktdaten finden Sie oberhalb in
@@ -172,7 +172,7 @@
       <a
         href="https://eur-lex.europa.eu/legal-content/DE/ALL/?uri=celex%3A32016R0679&amp;tid=111870266"
         target="_blank"
-        rel="noopener"
+        rel="noreferrer"
         >Datenschutz-Grundverordnung (EU) 2016/679</a
       >
       und anwendbaren nationalen Gesetzen zu erklären, welche personenbezogenen
@@ -242,7 +242,7 @@
       <a
         href="https://eur-lex.europa.eu/legal-content/DE/ALL/?uri=celex%3A32016R0679&amp;tid=111870266"
         target="_blank"
-        rel="noopener"
+        rel="noreferrer"
         >https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=celex%3A32016R0679</a
       >
       nachlesen.
@@ -442,12 +442,12 @@
       <a
         href="https://www.dsb.gv.at/?tid=111870266"
         target="_blank"
-        rel="noopener"
+        rel="noreferrer"
         >https://www.dsb.gv.at/</a
       >
       finden. In Deutschland gibt es für jedes Bundesland einen
       Datenschutzbeauftragten. Für nähere Informationen können Sie sich an die
-      <a href="https://www.bfdi.bund.de" target="_blank" rel="noopener"
+      <a href="https://www.bfdi.bund.de" target="_blank" rel="noreferrer"
         >Bundesbeauftragte für den Datenschutz und die Informationsfreiheit
         (BfDI)</a
       >
@@ -466,14 +466,14 @@
         <br />
         E-Mail-Adresse:
       </strong>
-      <a href="mailto:dsb@dsb.gv.at" target="_blank" rel="noopener"
+      <a href="mailto:dsb@dsb.gv.at" target="_blank" rel="noreferrer"
         >dsb@dsb.gv.at</a
       >
       <strong>
         <br />
         Website:
       </strong>
-      <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener"
+      <a href="https://www.dsb.gv.at/" target="_blank" rel="noreferrer"
         >https://www.dsb.gv.at/</a
       >
     </p>
@@ -509,7 +509,7 @@
       <a
         href="https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016R0679&amp;from=DE&amp;tid=111870266"
         target="_blank"
-        rel="noopener"
+        rel="noreferrer"
         >Artikel 25 Absatz 1 DSGVO</a
       >). Durch den Einsatz von TLS (Transport Layer Security), einem
       Verschlüsselungsprotokoll zur sicheren Datenübertragung im Internet,
@@ -519,6 +519,7 @@
       <img
         role="img"
         src="https://www.adsimple.at/wp-content/uploads/2018/03/schlosssymbol-https.svg"
+        alt="Schlosssymbol"
         width="17"
         height="18"
       />

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-about">
     <a class="fixed-nav m-1" href="#" type="button" title="Scroll Up">
-      <img src="@/assets/arrow.svg" id="arrow" alt="" />
+      <img src="@/assets/arrow.svg" alt="Scroll Up Arrow" id="arrow" />
     </a>
 
     <!-- Start of Introduction -->
@@ -43,8 +43,8 @@
           >
             <img
               src="@/assets/ahmedpb.jpg"
+              alt="Developer"
               class="card-img-top rounded-4"
-              alt="..."
             />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Ahmed Hasanovic</h5>
@@ -57,6 +57,7 @@
               <a
                 href="https://www.linkedin.com/in/ahmed-hasanovic-07a215188/"
                 target="_blank"
+                rel="noreferrer"
                 class="btn btn-light d-block mt-auto transition-sm"
                 title="Visit LinkedIn"
                 >View LinkedIn Profile</a
@@ -71,8 +72,8 @@
           >
             <img
               src="@/assets/maxpb.jpg"
+              alt="Developer"
               class="card-img-top rounded-4"
-              alt="..."
             />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Maximilian Blam</h5>
@@ -85,6 +86,7 @@
               <a
                 href="https://www.linkedin.com/in/maximilian-blam"
                 target="_blank"
+                rel="noreferrer"
                 class="btn btn-light d-block mt-auto transition-sm"
                 title="Visit LinkedIn"
                 >View LinkedIn Profile</a
@@ -101,7 +103,7 @@
             <img
               src="@/assets/moritzpb.jpg"
               class="card-img-top rounded-4"
-              alt="..."
+              alt="Developer"
             />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Moritz Miedler</h5>
@@ -116,6 +118,7 @@
               <a
                 href="https://www.linkedin.com/in/moritz-miedler-bb6107189/"
                 target="_blank"
+                rel="noreferrer"
                 class="btn btn-light d-block mt-auto transition-sm"
                 title="Visit LinkedIn"
                 >View LinkedIn Profile</a
@@ -165,7 +168,11 @@
         data-aos="fade-left"
         data-aos-duration="1000"
       >
-        <img class="rounded-4 col-12 col-md-5" src="@/assets/logo.svg" />
+        <img
+          class="rounded-4 col-12 col-md-5"
+          alt="Logo"
+          src="@/assets/logo.svg"
+        />
 
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4 mt-2">The Solution</h1>
@@ -210,7 +217,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_pc.avif" width="100%" />
+            <img src="@/assets/badge_pc.avif" alt="Easy Access" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Easy Access</h5>
             </div>
@@ -221,7 +228,11 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_leaning.avif" width="100%" />
+            <img
+              src="@/assets/badge_leaning.avif"
+              alt="Organized"
+              width="100%"
+            />
             <div class="card-body">
               <h5 class="card-title">Organized with Colorful Folders</h5>
             </div>
@@ -232,7 +243,11 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_mobile.avif" width="100%" />
+            <img
+              src="@/assets/badge_mobile.avif"
+              alt="Accessibility"
+              width="100%"
+            />
             <div class="card-body">
               <h5 class="card-title">View Everywhere</h5>
             </div>
@@ -254,7 +269,11 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_timeline.avif" width="100%" />
+            <img
+              src="@/assets/badge_timeline.avif"
+              alt="Timeline"
+              width="100%"
+            />
             <div class="card-body">
               <h5 class="card-title">Better Organization with Timelines</h5>
             </div>
@@ -265,7 +284,11 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_easy.avif" width="100%" />
+            <img
+              src="@/assets/badge_easy.avif"
+              alt="Easy to Use"
+              width="100%"
+            />
             <div class="card-body">
               <h5 class="card-title">Think about your New Freetime</h5>
             </div>
@@ -276,7 +299,7 @@
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <img src="@/assets/badge_safe.avif" width="100%" />
+            <img src="@/assets/badge_safe.avif" alt="Secure" width="100%" />
             <div class="card-body">
               <h5 class="card-title">Uses Google for Optimal Security</h5>
             </div>
@@ -306,19 +329,18 @@
             folder or subject. Keeping your notes organized has never been
             easier.
           </p>
-          <a
-            ><router-link
-              to="/"
-              style="text-decoration: none"
-              class="btn bg-identity text-light mb-4 transition-sm"
-              title="App"
-            >
-              Try it!
-            </router-link></a
+          <router-link
+            to="/"
+            style="text-decoration: none"
+            class="btn bg-identity text-light mb-4 transition-sm"
+            title="App"
           >
+            Try it!
+          </router-link>
           <a
             href="https://github.com/MaxBlam/peaceofmind"
             target="_blank"
+            rel="noreferrer"
             class="btn bg-identity text-light ms-2 mb-4 transition-sm"
             title="Github Repository"
             >Github</a
@@ -327,6 +349,7 @@
         <img
           class="img-fluid rounded-4 shadow col-12 col-md-5"
           src="@/assets/ph.jpg"
+          alt="App"
         />
       </div>
     </div>
@@ -345,6 +368,7 @@
                 data-bs-target="#collapseOne"
                 aria-expanded="false"
                 aria-controls="collapseOne"
+                aria-label="Open"
               >
                 What is PieceOfMind?
               </button>
@@ -370,6 +394,7 @@
                 data-bs-target="#collapseTwo"
                 aria-expanded="false"
                 aria-controls="collapseTwo"
+                aria-label="Open"
               >
                 Is PieceOfMind free to use?
               </button>
@@ -395,6 +420,7 @@
                 data-bs-target="#collapseThree"
                 aria-expanded="false"
                 aria-controls="collapseThree"
+                aria-label="Open"
               >
                 How did you come up with your idea?
               </button>
@@ -460,6 +486,7 @@
           :disabled="subject == '' || message == ''"
           @click="sendMail"
           title="Open Default Email Program"
+          aria-label="Send Email"
         >
           Send!
         </button>

@@ -2,8 +2,7 @@
   <div class="d-flex justify-center flex-column text-center">
     <div class="text-h1">Home Page</div>
     <div class="pa-3" style="width: 100%">
-      <button v-if="!isLoggedIn" @click="login()">Log In</button>
-      <button v-if="!isLoggedIn" @click="register()">Register</button>
+      <button v-if="!isLoggedIn" @click="login()" aria-label="Log In">Log In</button>
       <button v-if="isLoggedIn" class="purple white--text my-5" @click="logout()">Log Out</button>
     </div>
     <hr />

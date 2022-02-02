@@ -25,6 +25,7 @@
           </div>
           <button
             type="button"
+            aria-label="Add Note"
             data-micromodal-close
             class="btn bg-identity text-light"
             @click="addNote"

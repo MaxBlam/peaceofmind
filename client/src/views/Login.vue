@@ -13,7 +13,13 @@
     "
   >
     <legend class="mb-3">Login</legend>
-    <button class="btn bg-identity text-light" @click="login()"> Sign In with Google</button>
+    <button
+      class="btn bg-identity text-light"
+      @click="login()"
+      aria-label="Sign In"
+    >
+      Sign In with Google
+    </button>
   </fieldset>
 </template>
 

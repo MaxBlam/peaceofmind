@@ -4,9 +4,9 @@
       <div class="d-flex justify-content-between align-items-center">
         <img
           src="@/assets/folder.svg"
+          alt="Folder SVG"
           class="text-primary"
           style="width: 15%; cursor: pointer"
-          alt=""
           @click="$router.push(`/folder/${folder.id}`)"
         />
         <h5
@@ -22,10 +22,12 @@
           @click="openNoteModal"
         ></i>
       </div>
-      <h6 class="card-subtitle mb-2 text-muted">Teacher: {{ folder.teacher }}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">
+        Teacher: {{ folder.teacher }}
+      </h6>
       <h6 class="card-subtitle mb-2 text-muted">Grade: {{ folder.grade }}</h6>
       <p class="card-text">
-        {{folder.desc}}
+        {{ folder.desc }}
       </p>
     </div>
   </div>

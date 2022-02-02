@@ -3,19 +3,24 @@
     <ul
       class="navbar-collapse navbar-nav d-flex flex-row justify-content-center"
     >
-      <a class="navbar-brand nav-item" href="/" title="App">
-        <img src="@/assets/logo.svg" alt="" width="50" />
-      </a>
+      <li>
+        <a class="navbar-brand nav-item" href="/" title="App">
+          <img src="@/assets/logo.svg" alt="Logo" width="50" />
+        </a>
+      </li>
 
-      <button
-        class="navbar-toggler ms-auto"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar"
-      >
-        <i class="bi bi-list h3" style="color: rgb(48, 11, 90)"></i>
-      </button>
+      <li class="ms-auto">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Navbar Toggler"
+        >
+          <i class="bi bi-list h3" style="color: rgb(48, 11, 90)"></i>
+        </button>
+      </li>
     </ul>
     <div
       class="offcanvas offcanvas-end"
@@ -29,7 +34,7 @@
           type="button"
           class="btn text-reset navbar-toggler"
           data-bs-dismiss="offcanvas"
-          aria-label="Close"
+          aria-label="Navbar Close"
         >
           <i class="bi bi-x-lg"></i>
         </button>
@@ -60,6 +65,7 @@
               class="nav-link text-dark"
               href="https://github.com/MaxBlam/peaceofmind"
               target="_blank"
+              rel="noreferrer"
               title="Github Repository"
               >Github</a
             >
