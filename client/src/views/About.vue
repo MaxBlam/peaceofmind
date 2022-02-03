@@ -348,7 +348,7 @@
         </div>
         <img
           class="img-fluid rounded-4 shadow col-12 col-md-5"
-          src="@/assets/ph.jpg"
+          src="@/assets/aboutbg.avif"
           alt="App"
         />
       </div>
@@ -514,7 +514,7 @@ export default {
 
 <style>
 #parallax {
-  background-image: url('../assets/ph.jpg');
+  background-image: url('../assets/aboutbg.avif');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
