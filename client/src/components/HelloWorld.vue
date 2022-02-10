@@ -31,6 +31,10 @@
       <input type="text" v-model="grade" placeholder="Grade" />
       <button class="orange darken-2 white--text my-5" @click="createFolder()">Create Folder</button>
     </div>
+    <div>
+      <button class="orange darken-2 white--text my-5" @click="getClassrooms()">Get Classrooms</button>
+    </div>
+
     <hr />
     <div>
       {{ response }}
@@ -62,7 +66,7 @@ export default {
     async login() {
       const googleUser = await this.$gAuth.signIn();
       const goaRes = await googleUser.grantOfflineAccess({
-        scope: 'https://www.googleapis.com/auth/drive.file',
+        scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/classroom.courses',
       });
       const res = await axios({
         url: 'http://localhost:3000/login',
@@ -80,6 +84,13 @@ export default {
       const code = localStorage.getItem('userHash');
       if (code) this.isLoggedIn = true;
       else this.isLoggedIn = false;
+    },
+    async getClassrooms() {
+      const res = await axios({
+        url: 'http://localhost:3000/classrooms',
+        method: 'GET',
+      });
+      this.response = res.data;
     },
     async getData() {
       const res = await axios({
@@ -129,7 +140,7 @@ export default {
       });
       alert('Done', res);
     },
-     async deleteFolder() {
+    async deleteFolder() {
       const res = await axios({
         method: 'Delete',
         url: 'http://localhost:3000/folder',

@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { client, google } = require('./users');
+const { client, google } = require('./apisetup');
 const model = require('../model/users');
 const modelDrive = require('../model/drive');
 
@@ -13,6 +13,19 @@ const testDrive = asyncHandler(async (req, res) => {
   res.status(200).json({
     driveRes,
   });
+});
+
+const createRootFolder = asyncHandler(async () => {
+  const fileMetadata = {
+    name: 'Piece of Mind',
+    mimeType: 'application/vnd.google-apps.folder',
+  };
+  const driveRes = await drive.files.create({
+    resource: fileMetadata,
+    fields: 'id',
+  });
+
+  return driveRes.data.id;
 });
 
 const createNote = asyncHandler(async (req, res) => {
@@ -129,13 +142,7 @@ const createFolder = asyncHandler(async (req, res) => {
     fields: 'id',
   });
 
-  const dataBaseRes = await modelDrive.createFolder(
-    userDBdata[0].acc_id,
-    folderName,
-    driveRes.data.id,
-    teacherName,
-    grade,
-  );
+  const dataBaseRes = await modelDrive.createFolder(userDBdata[0].acc_id, folderName, driveRes.data.id, teacherName, grade);
   res.status(200).json(dataBaseRes);
 });
 
@@ -147,4 +154,5 @@ module.exports = {
   deleteFolder,
   createFolder,
   getNotesFromFolder,
+  createRootFolder,
 };
