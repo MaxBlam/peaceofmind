@@ -11,6 +11,16 @@
 
       <li class="ms-auto">
         <button
+          v-if="$route.name != 'About'"
+          class="btn"
+          aria-label="Upload"
+          @click="uploadFile"
+        >
+          <i class="bi bi-upload h3" style="color: rgb(48, 11, 90)"></i>
+        </button>
+      </li>
+      <li>
+        <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="offcanvas"
@@ -102,3 +112,13 @@
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  methods: {
+    uploadFile() {
+      this.$emit('uploadFile');
+    },
+  },
+};
+</script>

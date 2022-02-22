@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <NavBar />
-    <nav class="navbar container" style="height: 66px">
-      Margin Control
-    </nav>
+    <NavBar @uploadFile="uploadFile" />
+    <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <router-view />
     <Footer />
+    <UploadFile id="uploadFile" aria-hidden="true"/>
   </div>
 </template>
 
 <script>
 // import HelloWorld from '@/components/HelloWorld.vue';
+import UploadFile from '@/components/UploadFile.vue';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
 import MicroModal from 'micromodal';
@@ -19,9 +19,15 @@ export default {
     // HelloWorld,
     NavBar,
     Footer,
+    UploadFile,
   },
   mounted() {
     MicroModal.init({ debugMode: true });
+  },
+  methods: {
+    uploadFile() {
+      MicroModal.show('uploadFile');
+    },
   },
 };
 </script>
