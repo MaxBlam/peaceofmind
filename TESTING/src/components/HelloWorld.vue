@@ -69,18 +69,19 @@ export default {
       this.loggedIn = false;
     },
     async alltests() {
+      const userhash = localStorage.getItem('userHash');
+
       //TEST 1
       const res1 = await axios({ url: 'http://localhost:3000/welcome', method: 'get' });
       console.log(`Testergebnis 1: ${res1.data}`);
 
       //TEST 4 ALLE ORDNER
-      const res2 = await axios({ url: 'http://localhost:3000/testdrive', method: 'get' });
-      console.log(`Testergebnis 2: ${JSON.stringify(res2.data.driveRes.data.files)}`);
+      const res4 = await axios({ url: 'http://localhost:3000/testdrive', method: 'get' });
+      console.log(`Testergebnis 4: ${JSON.stringify(res4.data.driveRes.data.files)}`);
 
       //TEST 6 DOKUMENT ERSTELLEN
       //   const folderID = '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo';
       //   const docname = 'Testdokument';
-      //   const userhash = localStorage.getItem('userHash');
       //   const createNoteObject = { userhash: userhash, noteName: docname, folderId: folderID };
       //   const res3 = await axios({
       //     url: 'http://localhost:3000/note',
@@ -91,11 +92,16 @@ export default {
       //   // const test3res = '';
       //   console.log(res3.data);
 
-      //TEST 8 DOKUMENT ERSTELLEN lEERER NAME
+      //TEST 8 DOKUMENT ERSTELLEN lEERER NAME //ALLE ZEICHEN ZULÄSSIG -> KEINE FALSCHEN EINGABEN VON NAMEN
 
       //TEST 9 FOLDER FÜR BESTIMMTEN USER
+      const res9 = await axios({
+        url: `http://localhost:3000/folder/${userhash}`,
+        method: 'GET',
+      });
+      console.log(res9.data);
 
-      //TEST 10
+      //TEST 10 
     },
   },
 };
