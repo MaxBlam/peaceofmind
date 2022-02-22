@@ -20,6 +20,7 @@ const createNote = asyncHandler(async (req, res) => {
   const noteName = req.body.noteName;
   const folderId = req.body.folderId;
   const userDBdata = await model.getUser(userHash);
+  console.log('test1');
   const fileMetadata = {
     name: noteName,
     parents: [folderId],
@@ -34,7 +35,11 @@ const createNote = asyncHandler(async (req, res) => {
     fields: 'id',
   });
   const folderDbData = await modelDrive.getFolder(folderId);
-  const dbRes = await modelDrive.createNote(userDBdata[0].acc_id, driveRes.data.id, folderDbData[0].f_id);
+  const dbRes = await modelDrive.createNote(
+    userDBdata[0].acc_id,
+    driveRes.data.id,
+    folderDbData[0].f_id,
+  );
   res.status(200).json(dbRes);
 });
 

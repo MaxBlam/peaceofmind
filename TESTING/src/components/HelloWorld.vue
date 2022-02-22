@@ -69,58 +69,33 @@ export default {
       this.loggedIn = false;
     },
     async alltests() {
+      //TEST 1
       const res1 = await axios({ url: 'http://localhost:3000/welcome', method: 'get' });
       console.log(`Testergebnis 1: ${res1.data}`);
-      // const test1res = 'Willkommen beim Piece of Mind!';
-      // if (res1.data == test1res) {
-      //   this.tests.push({ id: '1', outcome: true });
-      //   console.log(`Test 1 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`);
-      // } else {
-      //   this.tests.push({ id: '1', outcome: false });
-      //   console.log(
-      //     `Test 1 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`,
-      //   );
-      // }
 
+      //TEST 4 ALLE ORDNER
       const res2 = await axios({ url: 'http://localhost:3000/testdrive', method: 'get' });
       console.log(`Testergebnis 2: ${JSON.stringify(res2.data.driveRes.data.files)}`);
-      // const test2res = [
-      //   {
-      //     id: '1BfHK_zg_ojeqHuvMctur29lGSkqkJhIg',
-      //     name: 'Ordner 4',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      //   {
-      //     id: '18jkkhMGc3CvO_cg7PjdoLCDNYmF-miXw',
-      //     name: 'Ordner 3',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      //   {
-      //     id: '15fnUR09fxNoXy4i7FYK9Xy69TROxyOSE',
-      //     name: 'Ordner 2',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      //   {
-      //     id: '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo',
-      //     name: 'Ordner 1',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      // ];
 
-      // if (res2.data.driveRes.data.files == test2res) {
-      //   this.tests.push({ id: '2', outcome: true });
+      //TEST 6 DOKUMENT ERSTELLEN
+      //   const folderID = '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo';
+      //   const docname = 'Testdokument';
+      //   const userhash = localStorage.getItem('userHash');
+      //   const createNoteObject = { userhash: userhash, noteName: docname, folderId: folderID };
+      //   const res3 = await axios({
+      //     url: 'http://localhost:3000/note',
+      //     method: 'POST',
+      //     'content-type': 'application/json',
+      //     data: createNoteObject,
+      //   });
+      //   // const test3res = '';
+      //   console.log(res3.data);
 
-      //   console.log(`Test 2 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`);
-      // } else {
-      //   this.tests.push({ id: '2', outcome: false });
-      //   console.log(
-      //     `Test 2 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`,
-      //   );
-      // }
+      //TEST 8 DOKUMENT ERSTELLEN lEERER NAME
 
-      const res3 = await axios({ url: 'http://localhost:3000/note', method: 'post', data: '' });
-      // const test3res = '';
-      console.log(res3.data);
+      //TEST 9 FOLDER FÜR BESTIMMTEN USER
+
+      //TEST 10
     },
   },
 };
