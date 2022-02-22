@@ -2,9 +2,9 @@
   <div id="app">
     <NavBar @uploadFile="uploadFile" />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
-    <router-view />
+    <router-view :folders="folders" />
     <Footer />
-    <UploadFile id="uploadFile" aria-hidden="true"/>
+    <UploadFile id="uploadFile" aria-hidden="true" :folders="folders" />
   </div>
 </template>
 
@@ -24,6 +24,31 @@ export default {
   mounted() {
     MicroModal.init({ debugMode: true });
   },
+  data: () => ({
+    folders: [
+      {
+        id: 1,
+        name: 'Chemistry',
+        teacher: 'Mr Robert Baumgartner',
+        grade: 2,
+        desc: 'lorem ipsum',
+      },
+      {
+        id: 2,
+        name: 'Maths',
+        teacher: 'Mr Ich',
+        grade: 1,
+        desc: 'lorem ipsum',
+      },
+      {
+        id: 3,
+        name: 'SEW',
+        teacher: 'Mr Robert Baumgartner',
+        grade: 2,
+        desc: 'lorem ipsum',
+      },
+    ],
+  }),
   methods: {
     uploadFile() {
       MicroModal.show('uploadFile');

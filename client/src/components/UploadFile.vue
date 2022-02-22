@@ -14,10 +14,22 @@
           </button>
         </div>
         <div class="modal-body">
-
-          <div class=" mb-3">
+          <div class="mb-3">
             <label class="form-label">Choose File</label>
-            <input type="file" class="form-control" />
+            <input
+              type="file"
+              class="form-control"
+              accept="image/*"
+              @change="processFile($event)"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Choose Folder</label>
+            <select class="form-select" v-model="folder">
+              <option v-for="f of folders" :key="f.id" :value="f.id">
+                {{ f.name }}
+              </option>
+            </select>
           </div>
 
           <button
@@ -27,7 +39,7 @@
             class="btn bg-identity text-light"
             @click="addNote"
           >
-            Add Note to {{ folder }}
+            Add Note
           </button>
         </div>
       </div>
@@ -36,20 +48,28 @@
 </template>
 
 <script>
+import Tesseract from 'tesseract.js';
 export default {
   data: () => ({
-    noteName: '',
+    file: '',
+    folder: {},
+    someData:[],
   }),
   props: {
-    folder: Object,
+    folders: Array,
   },
   methods: {
     addNote() {
-      this.$emit('createNote', this.noteName);
-      this.noteName = '';
+      //
+    },
+    processFile(input) {
+      this.someData = input.target.files[0]; // Get inputs 
+      console.log(this.someData) // Process Inputs
+      // Convert to Image
+    },
+    async convertImgToText() {
+      this.file = Tesseract.recognize(this.file);
     },
   },
 };
 </script>
-
-<style scoped></style>
