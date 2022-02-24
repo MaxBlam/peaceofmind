@@ -104,7 +104,7 @@ export default {
         url: 'http://localhost:3000/folder/' + localStorage.getItem('userHash'),
         method: 'GET',
       });
-      this.response = res.data.data.files;
+      this.response = res.data;
     },
     async logout() {
       await axios({

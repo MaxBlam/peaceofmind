@@ -5,7 +5,7 @@ const { testDrive, createNote, getFolders, deleteNote, createFolder, getNotesFro
 
 const router = express.Router();
 
-router.get('/welcome', (req, res) => res.send('Willkommen beim Piece of Mind!'));
+router.get('/welcome', (req, res) => res.send('Willkommen bei Piece of Mind!'));
 router.post('/login', login);
 router.get('/testdrive', testDrive);
 router.get('/logout', logout);
