@@ -6,7 +6,8 @@
         d-flex
         justify-content-center
         align-content-center
-        flex-wrap mt-3
+        flex-wrap
+        mt-3
       "
     >
       <Folder
@@ -51,32 +52,14 @@ export default {
     CreateFolder,
     CreateNote,
   },
-
+  props: {
+    folders: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data: () => {
     return {
-      folders: [
-        {
-          id: 1,
-          name: 'Chemistry',
-          teacher: 'Mr Robert Baumgartner',
-          grade: 2,
-          desc: 'lorem ipsum',
-        },
-        {
-          id: 2,
-          name: 'Maths',
-          teacher: 'Mr Ich',
-          grade: 1,
-          desc: 'lorem ipsum',
-        },
-        {
-          id: 3,
-          name: 'SEW',
-          teacher: 'Mr Robert Baumgartner',
-          grade: 2,
-          desc: 'lorem ipsum',
-        },
-      ],
       response: [],
       isLoggedIn: false,
       noteName: '',

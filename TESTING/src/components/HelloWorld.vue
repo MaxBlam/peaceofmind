@@ -69,58 +69,72 @@ export default {
       this.loggedIn = false;
     },
     async alltests() {
+      const userhash = localStorage.getItem('userHash');
+
+      //TEST 1
       const res1 = await axios({ url: 'http://localhost:3000/welcome', method: 'get' });
       console.log(`Testergebnis 1: ${res1.data}`);
-      // const test1res = 'Willkommen beim Piece of Mind!';
-      // if (res1.data == test1res) {
-      //   this.tests.push({ id: '1', outcome: true });
-      //   console.log(`Test 1 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`);
-      // } else {
-      //   this.tests.push({ id: '1', outcome: false });
-      //   console.log(
-      //     `Test 1 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 1))}`,
-      //   );
-      // }
 
-      const res2 = await axios({ url: 'http://localhost:3000/testdrive', method: 'get' });
-      console.log(`Testergebnis 2: ${JSON.stringify(res2.data.driveRes.data.files)}`);
-      // const test2res = [
-      //   {
-      //     id: '1BfHK_zg_ojeqHuvMctur29lGSkqkJhIg',
-      //     name: 'Ordner 4',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      //   {
-      //     id: '18jkkhMGc3CvO_cg7PjdoLCDNYmF-miXw',
-      //     name: 'Ordner 3',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      //   {
-      //     id: '15fnUR09fxNoXy4i7FYK9Xy69TROxyOSE',
-      //     name: 'Ordner 2',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      //   {
-      //     id: '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo',
-      //     name: 'Ordner 1',
-      //     mimeType: 'application/vnd.google-apps.folder',
-      //   },
-      // ];
+      //TEST 4 ALLE ORDNER
+      const res4 = await axios({ url: 'http://localhost:3000/testdrive', method: 'get' });
+      console.log(`Testergebnis 4: ${JSON.stringify(res4.data.driveRes.data.files)}`);
 
-      // if (res2.data.driveRes.data.files == test2res) {
-      //   this.tests.push({ id: '2', outcome: true });
+      //TEST 6 DOKUMENT ERSTELLEN
+      //   const folderID = '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo';
+      //   const docname = 'Testdokument';
+      //   const createNoteObject = { userhash: userhash, noteName: docname, folderId: folderID };
+      //   const res6 = await axios({
+      //     url: 'http://localhost:3000/note',
+      //     method: 'POST',
+      //     'content-type': 'application/json',
+      //     data: createNoteObject,
+      //   });
+      //   console.log(res6.data);
 
-      //   console.log(`Test 2 Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`);
-      // } else {
-      //   this.tests.push({ id: '2', outcome: false });
-      //   console.log(
-      //     `Test 2 Nicht Erfolgreich: ${JSON.stringify(this.tests.find((el) => el.id == 2))}`,
-      //   );
-      // }
+      //TEST 7 DOKUMENT ERSTELLEN MIT LEEREM NAMEN
 
-      const res3 = await axios({ url: 'http://localhost:3000/note', method: 'post', data: '' });
-      // const test3res = '';
-      console.log(res3.data);
+      //TEST 8 FOLDER FÜR BESTIMMTEN USER
+      const res8 = await axios({
+        url: `http://localhost:3000/folder/${userhash}`,
+        method: 'GET',
+      });
+      console.log(res8.data);
+
+      //TEST 9 ERSTELLEN VON FOLDER
+      const folder9 = {
+        userhash: userhash,
+        folderName: 'TESTORDNER',
+        teacherName: 'Bobert Raumgartner',
+        grade: 4,
+      };
+      const res9 = await axios({
+        url: 'http://localhost:3000/folder',
+        method: 'POST',
+        'content-type': 'application/json',
+        data: folder9,
+      });
+      console.log(res9.data);
+      //TEST 10 ERSTELLEN VON FOLDER OHNE NAMEN
+      try {
+        const folder10 = {
+          userhash: userhash,
+          folderName: '',
+          teacherName: 'Bobert Raumgartner',
+          grade: 4,
+        };
+        const res10 = await axios({
+          url: 'http://localhost:3000/folder',
+          method: 'POST',
+          'content-type': 'application/json',
+          data: folder10,
+        });
+        console.log(res10.data);
+      } catch (error) {
+        console.log(error);
+      }
+      //TEST 11 ERSTELLEN VON FOLDER LEHRERNAME LEER ODER SONDERZEICHEN
+
+      //TEST 12 ERSTELLEN VON FOLDER NOTE LEER, BUCHSTABE ODER SONDERZEICHEN
     },
   },
 };

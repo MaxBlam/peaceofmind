@@ -1,28 +1,62 @@
 <template>
   <div id="app">
     <HelloWorld></HelloWorld>>
-    <!-- <NavBar />
+    <!--    
+      <NavBar @uploadFile="uploadFile" />
     <nav class="navbar container" style="height: 66px">
       Margin Control
     </nav>
-    <router-view />
-    <Footer /> -->
+   <router-view :folders="folders" />
+    <Footer /> 
+    <UploadFile id="uploadFile" aria-hidden="true" :folders="folders" />-->
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
-// import NavBar from '@/components/NavBar.vue';
-// import Footer from '@/components/Footer.vue';
+// import HelloWorld from '@/components/HelloWorld.vue';
+import UploadFile from '@/components/UploadFile.vue';
+import NavBar from '@/components/NavBar.vue';
+import Footer from '@/components/Footer.vue';
 import MicroModal from 'micromodal';
 export default {
   components: {
-    HelloWorld,
-    //NavBar,
-    //Footer,
+    // HelloWorld,
+    NavBar,
+    Footer,
+    UploadFile,
   },
   mounted() {
     MicroModal.init({ debugMode: true });
+  },
+  data: () => ({
+    folders: [
+      {
+        id: 1,
+        name: 'Chemistry',
+        teacher: 'Mr Robert Baumgartner',
+        grade: 2,
+        desc: 'lorem ipsum',
+      },
+      {
+        id: 2,
+        name: 'Maths',
+        teacher: 'Mr Ich',
+        grade: 1,
+        desc: 'lorem ipsum',
+      },
+      {
+        id: 3,
+        name: 'SEW',
+        teacher: 'Mr Robert Baumgartner',
+        grade: 2,
+        desc: 'lorem ipsum',
+      },
+    ],
+  }),
+  methods: {
+    uploadFile() {
+      MicroModal.show('uploadFile');
+    },
   },
 };
 </script>
