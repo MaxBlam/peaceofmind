@@ -83,25 +83,42 @@ export default {
       //   const folderID = '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo';
       //   const docname = 'Testdokument';
       //   const createNoteObject = { userhash: userhash, noteName: docname, folderId: folderID };
-      //   const res3 = await axios({
+      //   const res6 = await axios({
       //     url: 'http://localhost:3000/note',
       //     method: 'POST',
       //     'content-type': 'application/json',
       //     data: createNoteObject,
       //   });
-      //   // const test3res = '';
-      //   console.log(res3.data);
+      //   console.log(res6.data);
 
-      //TEST 8 DOKUMENT ERSTELLEN lEERER NAME //ALLE ZEICHEN ZULÄSSIG -> KEINE FALSCHEN EINGABEN VON NAMEN
+      //TEST 7 DOKUMENT ERSTELLEN MIT LEEREM NAMEN
 
-      //TEST 9 FOLDER FÜR BESTIMMTEN USER
-      const res9 = await axios({
+      //TEST 8 FOLDER FÜR BESTIMMTEN USER
+      const res8 = await axios({
         url: `http://localhost:3000/folder/${userhash}`,
         method: 'GET',
       });
-      console.log(res9.data);
+      console.log(res8.data);
 
-      //TEST 10 
+      //TEST 9 ERSTELLEN VON FOLDER
+      const folder9 = {
+        userhash: userhash,
+        folderName: 'TESTORDNER',
+        teacherName: 'Bobert Raumgartner',
+        grade: 4,
+      };
+      const res9 = await axios({
+        url: 'http://localhost:3000/folder',
+        method: 'POST',
+        'content-type': 'application/json',
+        data: folder9,
+      });
+      console.log(res9.data);
+      //TEST 10 ERSTELLEN VON FOLDER OHNE NAMEN
+
+      //TEST 11 ERSTELLEN VON FOLDER LEHRERNAME LEER ODER SONDERZEICHEN
+
+      //TEST 12 ERSTELLEN VON FOLDER NOTE LEER, BUCHSTABE ODER SONDERZEICHEN
     },
   },
 };
