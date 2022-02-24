@@ -29,9 +29,7 @@ const createRootFolder = asyncHandler(async () => {
 });
 
 const createNote = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const noteName = req.body.noteName;
-  const folderId = req.body.folderId;
+  const { userHash, noteName, folderId } = req.body;
   const userDBdata = await model.getUser(userHash);
   const fileMetadata = {
     name: noteName,
@@ -76,8 +74,7 @@ const getNotesFromFolder = asyncHandler(async (req, res) => {
 });
 
 const deleteNote = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const noteId = req.body.noteId;
+  const { userHash, noteId } = req.body;
   const userDBdata = await model.getUser(userHash);
 
   const noteDbData = await modelDrive.getNote(noteId);
@@ -100,8 +97,7 @@ const deleteNote = asyncHandler(async (req, res) => {
 });
 
 const deleteFolder = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const folderId = req.body.folderId;
+  const { userHash, folderId } = req.body;
   const userDBdata = await model.getUser(userHash);
 
   const folderDbData = await modelDrive.getFolder(folderId);
@@ -124,14 +120,15 @@ const deleteFolder = asyncHandler(async (req, res) => {
 });
 
 const createFolder = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const folderName = req.body.folderName;
-  const teacherName = req.body.teacherName;
-  const grade = req.body.grade;
+  const { userHash, folderName, teacherName, grade } = req.body;
   const userDBdata = await model.getUser(userHash);
   const rootId = userDBdata[0].root_folder;
-  if (folderName == '') {
+  if (folderName === '') {
     res.status(500).send('Folder needs a name');
+    return;
+  }
+  if (teacherName === '') {
+    res.status(500).send('Teacher needs a name');
     return;
   }
   const fileMetadata = {
