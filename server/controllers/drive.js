@@ -130,6 +130,10 @@ const createFolder = asyncHandler(async (req, res) => {
   const grade = req.body.grade;
   const userDBdata = await model.getUser(userHash);
   const rootId = userDBdata[0].root_folder;
+  if (folderName == '') {
+    res.status(500).send('Folder needs a name');
+    return;
+  }
   const fileMetadata = {
     name: folderName,
     parents: [rootId],
