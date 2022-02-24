@@ -115,7 +115,23 @@ export default {
       });
       console.log(res9.data);
       //TEST 10 ERSTELLEN VON FOLDER OHNE NAMEN
-
+      try {
+        const folder10 = {
+          userhash: userhash,
+          folderName: '',
+          teacherName: 'Bobert Raumgartner',
+          grade: 4,
+        };
+        const res10 = await axios({
+          url: 'http://localhost:3000/folder',
+          method: 'POST',
+          'content-type': 'application/json',
+          data: folder10,
+        });
+        console.log(res10.data);
+      } catch (error) {
+        console.log(error);
+      }
       //TEST 11 ERSTELLEN VON FOLDER LEHRERNAME LEER ODER SONDERZEICHEN
 
       //TEST 12 ERSTELLEN VON FOLDER NOTE LEER, BUCHSTABE ODER SONDERZEICHEN
