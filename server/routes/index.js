@@ -15,6 +15,6 @@ router.delete('/note', deleteNote);
 router.post('/folder', createFolder);
 router.delete('/folder', deleteFolder);
 router.get('/notes/:folderid', getNotesFromFolder);
-router.get('/classrooms', synchClassrooms);
+router.get('/classrooms/:id', synchClassrooms);
 
 module.exports = router;

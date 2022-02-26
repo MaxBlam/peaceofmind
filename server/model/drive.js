@@ -1,19 +1,23 @@
 const db = require('../db/connect');
 
 async function createNote(userId, docId, folderId) {
-  const { rows } = await db.query(
-    'Insert into documents(doc_id,fk_acc_id,fk_folder_id) values ($1,$2,$3) returning *;',
-    [docId, userId, folderId],
-  );
+  const { rows } = await db.query('Insert into documents(doc_id,fk_acc_id,fk_folder_id) values ($1,$2,$3) returning *;', [
+    docId,
+    userId,
+    folderId,
+  ]);
 
   return rows;
 }
 
 async function createFolder(userId, name, folderId, teacherName, grade) {
-  const { rows } = await db.query(
-    'Insert into folders(name,teacher_name,grade,fk_acc_id,folder_id) values ($1,$2,$3,$4,$5) returning *;',
-    [name, teacherName, grade, userId, folderId],
-  );
+  const { rows } = await db.query('Insert into folders(name,teacher_name,grade,fk_acc_id,folder_id) values ($1,$2,$3,$4,$5) returning *;', [
+    name,
+    teacherName,
+    grade,
+    userId,
+    folderId,
+  ]);
 
   return rows;
 }

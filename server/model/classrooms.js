@@ -5,4 +5,13 @@ async function getAllClassrooms(userId) {
   return rows;
 }
 
-module.exports = { getAllClassrooms };
+async function createClassroom(classroomId, name, userId) {
+  const { rows } = await db.query('Insert into classrooms(classroom_id,name,user_id) values($1,$2,$3) returning *', [
+    classroomId,
+    name,
+    userId,
+  ]);
+  return rows;
+}
+
+module.exports = { getAllClassrooms, createClassroom };

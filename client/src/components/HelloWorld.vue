@@ -76,7 +76,7 @@ export default {
           code: goaRes.code,
         },
       });
-      if (res.data.code !== 401) localStorage.setItem('userHash', res.data.data);
+      if (res.data.code !== 401) localStorage.setItem('userHash', res.data.data.userHash);
       else alert(res.data.data);
       this.isLoggedInF();
     },
@@ -87,7 +87,7 @@ export default {
     },
     async getClassrooms() {
       const res = await axios({
-        url: 'http://localhost:3000/classrooms',
+        url: `http://localhost:3000/classrooms/${localStorage.getItem('userHash')}`,
         method: 'GET',
       });
       this.response = res.data;
