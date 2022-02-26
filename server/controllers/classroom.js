@@ -7,14 +7,17 @@ const modelClassroom = require('../model/classrooms');
 const classroom = google.classroom({ version: 'v1', auth: client });
 
 const synchClassrooms = asyncHandler(async (req, res) => {
-  console.log(req);
+  const userHash = req.params.id;
+  const userId = await model.getUser(req.sessionID);
+  console.log(userId);
 
-  const userId = await model.getUser(req.session.userHash);
-  const apiRes = (await classroom.courses.list({})).data.courses.map((el) => ({ id: el.id, name: el.name, user_id: user.id }));
+  const apiRes = await classroom.courses.list({});
+  const mappedRes = apiRes.data.courses.map((el) => ({ id: el.id, name: el.name, user_id: userId }));
   const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
   console.log(dbClassrooms);
 
   res.status(200).json(apiRes.data.courses);
+  console.log('END');
 });
 
 module.exports = { synchClassrooms };
