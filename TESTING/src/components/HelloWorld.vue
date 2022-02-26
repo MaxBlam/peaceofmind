@@ -20,6 +20,7 @@ export default {
     return {
       loggedIn: false,
       tests: [],
+      userHash: '',
     };
   },
   methods: {
@@ -69,40 +70,84 @@ export default {
       this.loggedIn = false;
     },
     async alltests() {
-      const userhash = localStorage.getItem('userHash');
+      //TEST 1: WELCOME ROUTE
+      this.test1();
 
+      //TEST 2-3: LOGIN UND REGISTER
+
+      //TEST 4: GIBT ALLE FOLDER IM ROOT-FOLDER DES USERS ZURÜCK
+      // this.test4();
+      //TEST 5: LOGOUT FUNKTION
+
+      //TEST 6: ERSTELLT EINE NOTIZ
+
+      //TEST 7: ERSTELLT EINE NOTIZ MIT LEEREM NAMEN --SOLLTE EINEN FEHLER AUSGEBEN--
+
+      //TEST 8: ALLE FOLDER IM PIECEOFMIND-FOLDER ANZEIGEN LASSEN
+      this.test8();
+      //TEST 9: EINEN FOLDER ERSTELLEN
+
+      //TEST 10: EINEN FOLDER MIT LEEREM NAMEN ERSTELLEN --SOLLTE EINEN FEHLER AUSGEBEN--
+
+      //TEST 11: EINEN FOLDER MIT SONDERZEICHEN IM NAMEN ERSTELLEN
+
+      //TEST 12: EINEN FOLDER MIT LEEREM LEHRERNAMEN ERSTELLEN --SOLLTE EINEN FEHLER AUSGEBEN--
+
+      //TEST 13: EINEN FOLDER MIT SONDERZEICHEN IM NAMEN ERSTELLLEN AUßER . und - --SOLLTE EINEN FEHLER AUSGEBEN--
+
+      //TEST 14: EINEN FOLDER MIT BUCHSTABEN ALS NOTE --SOLLTE EINEN FEHLER AUSGEBEN--
+
+      //TEST 15: EINEN FOLDER MIT SONDERZEICHEN ALS NOTE ERSTELLEN --SOLLTE EINEN FEHLER AUSGEBEN--
+
+      //TEST 16: EINEN FOLDER MIT LEERER NOTE ERSTELLEN --SOLLTE EINEN FEHLER AUSGEBEN--
+    },
+    async test1() {
       //TEST 1
       const res1 = await axios({ url: 'http://localhost:3000/welcome', method: 'get' });
       console.log(`Testergebnis 1: ${res1.data}`);
-
-      //TEST 4 ALLE ORDNER
+    },
+    async test2() {
+      // TESTPLAN => LOGIN FUNCTION
+    },
+    async test3() {
+      // TESTPLAN => REGISTER FUNCTION
+    },
+    async test4() {
+      // TEST 4
       const res4 = await axios({ url: 'http://localhost:3000/testdrive', method: 'get' });
       console.log(`Testergebnis 4: ${JSON.stringify(res4.data.driveRes.data.files)}`);
-
-      //TEST 6 DOKUMENT ERSTELLEN
-      //   const folderID = '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo';
-      //   const docname = 'Testdokument';
-      //   const createNoteObject = { userhash: userhash, noteName: docname, folderId: folderID };
-      //   const res6 = await axios({
-      //     url: 'http://localhost:3000/note',
-      //     method: 'POST',
-      //     'content-type': 'application/json',
-      //     data: createNoteObject,
-      //   });
-      //   console.log(res6.data);
-
-      //TEST 7 DOKUMENT ERSTELLEN MIT LEEREM NAMEN
-
-      //TEST 8 FOLDER FÜR BESTIMMTEN USER
+    },
+    async test5() {
+      // TESTPLAN => LOGOUT FUNCTION
+    },
+    async test6() {
+      //TEST 6
+      const folderID = '1s15MYPUMzHz1IgXnwa1dgBhBn1Mfaipo';
+      const docname = 'Testdokument';
+      const createNoteObject = { userHash: this.userHash, noteName: docname, folderId: folderID };
+      const res6 = await axios({
+        url: 'http://localhost:3000/note',
+        method: 'POST',
+        'content-type': 'application/json',
+        data: createNoteObject,
+      });
+      console.log(res6.data);
+    },
+    async test7() {
+      //TEST 7 FEHLT NOCH
+    },
+    async test8() {
+      //TEST 8
       const res8 = await axios({
-        url: `http://localhost:3000/folder/${userhash}`,
+        url: `http://localhost:3000/folder/${this.userHash}`,
         method: 'GET',
       });
       console.log(res8.data);
-
-      //TEST 9 ERSTELLEN VON FOLDER
+    },
+    async test9() {
+      //TEST 9
       const folder9 = {
-        userHash: userhash,
+        userHash: this.userHash,
         folderName: 'TESTORDNER',
         teacherName: 'Bobert Raumgartner',
         grade: 4,
@@ -114,47 +159,77 @@ export default {
         data: folder9,
       });
       console.log(res9.data);
-      //TEST 10 ERSTELLEN VON FOLDER OHNE NAMEN
-      try {
-        const folder10 = {
-          userHash: userhash,
-          folderName: '',
-          teacherName: 'Bobert Raumgartner',
-          grade: 4,
-        };
-        const res10 = await axios({
-          url: 'http://localhost:3000/folder',
-          method: 'POST',
-          'content-type': 'application/json',
-          data: folder10,
-        });
-        console.log(res10.data);
-      } catch (error) {
-        console.log(error);
-      }
-
-      //TEST 11 ERSTELLEN VON FOLDER MIT SONDERZEICHEN
-      try {
-        const folder10 = {
-          userHash: userhash,
-          folderName: '°^"²³§$%&/(()=?\\}][{`´*+#_-:.;,<>|',
-          teacherName: 'Bobert Raumgartner',
-          grade: 4,
-        };
-        const res10 = await axios({
-          url: 'http://localhost:3000/folder',
-          method: 'POST',
-          'content-type': 'application/json',
-          data: folder10,
-        });
-        console.log(res10.data);
-      } catch (error) {
-        console.log(error);
-      }
-      //TEST 12 ERSTELLEN VON FOLDER LEHRERNAME LEER ODER SONDERZEICHEN
-
-      //TEST 13 ERSTELLEN VON FOLDER NOTE LEER, BUCHSTABE ODER SONDERZEICHEN
     },
+    async test10() {
+      //TEST 10
+      const folder10 = {
+        userHash: this.userHash,
+        folderName: '',
+        teacherName: 'Bobert Raumgartner',
+        grade: 4,
+      };
+      const res10 = await axios({
+        url: 'http://localhost:3000/folder',
+        method: 'POST',
+        'content-type': 'application/json',
+        data: folder10,
+      });
+      console.log(res10.data);
+    },
+    async test11() {
+      //TEST 11
+      const folder11 = {
+        userHash: this.userHash,
+        folderName: '°^"²³§$%&/(()=?\\}][{`´*+#_-:.;,<>|',
+        teacherName: 'Bobert Raumgartner',
+        grade: 4,
+      };
+      const res11 = await axios({
+        url: 'http://localhost:3000/folder',
+        method: 'POST',
+        'content-type': 'application/json',
+        data: folder11,
+      });
+      console.log(res11.data);
+    },
+    async test12() {
+      //TEST 12
+      const folder12a = {
+        userHash: this.userHash,
+        folderName: 'Folder12',
+        teacherName: '',
+        grade: 4,
+      };
+      const folder12b = {
+        userHash: this.userHash,
+        folderName: 'Folder12',
+        teacherName: '°^"²³§$%&/(()=?\\}][{`´*+#_-:.;,<>|',
+        grade: 4,
+      };
+      const res12a = await axios({
+        url: 'http://localhost:3000/folder',
+        method: 'POST',
+        'content-type': 'application/json',
+        data: folder12a,
+      });
+      const res12b = await axios({
+        url: 'http://localhost:3000/folder',
+        method: 'POST',
+        'content-type': 'application/json',
+        data: folder12b,
+      });
+      console.log(res12a.data);
+      console.log(res12b.data);
+    },
+    async test13() {},
+    async test14() {},
+    async test15() {},
+    async test16() {},
+    async test17() {},
+    async test18() {},
+  },
+  created() {
+    this.userHash = localStorage.getItem('userHash');
   },
 };
 </script>
