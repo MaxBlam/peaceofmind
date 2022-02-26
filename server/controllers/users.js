@@ -26,7 +26,7 @@ const login = asyncHandler(async (req, res) => {
     req.session.userHash = UserData.getPayload().sub;
     res.status(200).json({
       code: 200,
-      data: UserData.getPayload().sub,
+      data: { userHash: UserData.getPayload().sub, picture: UserData.getPayload().picture },
     });
   } else {
     res.status(200).json({
