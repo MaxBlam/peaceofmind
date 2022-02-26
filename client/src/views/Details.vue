@@ -36,7 +36,7 @@ export default {
         url: 'http://localhost:3000/notes/' + this.id,
         method: 'GET',
       });
-      this.notes = data.data;
+      this.notes = data.data.files;
     },
   },
 };

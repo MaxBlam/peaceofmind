@@ -42,7 +42,7 @@ export default {
           },
         });
         if (res.data.code !== 401)
-          localStorage.setItem('userHash', res.data.data);
+          localStorage.setItem('userHash', res.data.data.userHash);
         else alert(res.data.data);
         this.$router.push('/');
       } catch (error) {
