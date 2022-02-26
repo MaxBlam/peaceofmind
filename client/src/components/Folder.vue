@@ -7,11 +7,11 @@
           alt="Folder SVG"
           class="text-primary"
           style="width: 15%; cursor: pointer"
-          @click="$router.push(`/folder/${folder.id}`)"
+          @click="$router.push(`/folder/${folder.folder_id}`)"
         />
         <h5
           class="ms-2 me-auto card-title d-inline"
-          @click="$router.push(`/folder/${folder.id}`)"
+          @click="$router.push(`/folder/${folder.folder_id}`)"
           style="cursor: pointer"
         >
           {{ folder.name }}

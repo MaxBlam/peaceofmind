@@ -10,6 +10,7 @@
 
 <script>
 // import HelloWorld from '@/components/HelloWorld.vue';
+import axios from 'axios';
 import UploadFile from '@/components/UploadFile.vue';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
@@ -25,31 +26,36 @@ export default {
     MicroModal.init({ debugMode: true });
   },
   data: () => ({
-    folders: [
-      {
-        id: 1,
-        name: 'Chemistry',
-        teacher: 'Mr Robert Baumgartner',
-        grade: 2,
-        desc: 'lorem ipsum',
-      },
-      {
-        id: 2,
-        name: 'Maths',
-        teacher: 'Mr Ich',
-        grade: 1,
-        desc: 'lorem ipsum',
-      },
-      {
-        id: 3,
-        name: 'SEW',
-        teacher: 'Mr Robert Baumgartner',
-        grade: 2,
-        desc: 'lorem ipsum',
-      },
-    ],
+    folders: [],
+    isLoggedIn: false,
   }),
+  created() {
+    this.isLoggedInF();
+  },
   methods: {
+    isLoggedInF() {
+      const code = localStorage.getItem('userHash');
+      if (code) {
+        this.isLoggedIn = true;
+        this.getFolders();
+      } else this.$router.push('/login');
+    },
+    async logout() {
+      await axios({
+        method: 'GET',
+        url: 'http://localhost:3000/logout',
+      });
+      localStorage.clear();
+      this.isLoggedInF();
+      this.folders = [];
+    },
+    async getFolders() {
+      const { data } = await axios({
+        url: 'http://localhost:3000/folder/' + localStorage.getItem('userHash'),
+        method: 'GET',
+      });
+      this.folders = data;
+    },
     uploadFile() {
       MicroModal.show('uploadFile');
     },

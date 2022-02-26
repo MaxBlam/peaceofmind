@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
+    <img src="../assets/timeline.png" alt=""/>
+  </div>
+  <!-- <div>
     <ul class="timeline">
       <li
         data-year="2017"
@@ -22,7 +25,7 @@
         data-text="Lorem ipsum dolor sit amet, consectetur."
       ></li>
     </ul>
-  </div>
+  </div> -->
 </template>
 
 <script>
