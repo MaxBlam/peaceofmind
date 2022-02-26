@@ -30,6 +30,12 @@ async function getFolder(folderId) {
   return rows;
 }
 
+async function getAllUserFolders(userId) {
+  const { rows } = await db.query('Select * from folders where fk_acc_id =$1', [userId]);
+
+  return rows;
+}
+
 async function deleteNote(docId) {
   const { rows } = await db.query('Delete from documents where doc_id =$1 returning *;', [docId]);
 
@@ -42,4 +48,4 @@ async function deleteFolder(folderId) {
   return rows;
 }
 
-module.exports = { createNote, getNote, deleteNote, createFolder, getFolder, deleteFolder };
+module.exports = { createNote, getNote, deleteNote, createFolder, getFolder, deleteFolder, getAllUserFolders };

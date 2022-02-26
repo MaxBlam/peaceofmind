@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { client, google } = require('./users');
+const { client, google } = require('./apisetup');
 const model = require('../model/users');
 const modelDrive = require('../model/drive');
 
@@ -15,10 +15,21 @@ const testDrive = asyncHandler(async (req, res) => {
   });
 });
 
+const createRootFolder = asyncHandler(async () => {
+  const fileMetadata = {
+    name: 'Piece of Mind',
+    mimeType: 'application/vnd.google-apps.folder',
+  };
+  const driveRes = await drive.files.create({
+    resource: fileMetadata,
+    fields: 'id',
+  });
+
+  return driveRes.data.id;
+});
+
 const createNote = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const noteName = req.body.noteName;
-  const folderId = req.body.folderId;
+  const { userHash, noteName, folderId } = req.body;
   const userDBdata = await model.getUser(userHash);
   console.log('test1');
   const fileMetadata = {
@@ -52,7 +63,8 @@ const getFolders = asyncHandler(async (req, res) => {
     fields: 'nextPageToken, files(id, name,mimeType)',
     q: `'${rootId}' in parents`,
   });
-  res.status(200).json(driveRes);
+  const dbFolderData = (await modelDrive.getAllUserFolders(userDBdata[0].acc_id)).map((el) => el.folder_id);
+  res.status(200).json(driveRes.data.files.filter((el) => dbFolderData.includes(el.id)));
 });
 
 const getNotesFromFolder = asyncHandler(async (req, res) => {
@@ -66,8 +78,7 @@ const getNotesFromFolder = asyncHandler(async (req, res) => {
 });
 
 const deleteNote = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const noteId = req.body.noteId;
+  const { userHash, noteId } = req.body;
   const userDBdata = await model.getUser(userHash);
 
   const noteDbData = await modelDrive.getNote(noteId);
@@ -90,8 +101,7 @@ const deleteNote = asyncHandler(async (req, res) => {
 });
 
 const deleteFolder = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const folderId = req.body.folderId;
+  const { userHash, folderId } = req.body;
   const userDBdata = await model.getUser(userHash);
 
   const folderDbData = await modelDrive.getFolder(folderId);
@@ -114,12 +124,17 @@ const deleteFolder = asyncHandler(async (req, res) => {
 });
 
 const createFolder = asyncHandler(async (req, res) => {
-  const userHash = req.body.userHash;
-  const folderName = req.body.folderName;
-  const teacherName = req.body.teacherName;
-  const grade = req.body.grade;
+  const { userHash, folderName, teacherName, grade } = req.body;
   const userDBdata = await model.getUser(userHash);
   const rootId = userDBdata[0].root_folder;
+  if (folderName === '') {
+    res.status(500).send('Folder needs a name');
+    return;
+  }
+  if (teacherName === '') {
+    res.status(500).send('Teacher needs a name');
+    return;
+  }
   const fileMetadata = {
     name: folderName,
     parents: [rootId],
@@ -134,13 +149,7 @@ const createFolder = asyncHandler(async (req, res) => {
     fields: 'id',
   });
 
-  const dataBaseRes = await modelDrive.createFolder(
-    userDBdata[0].acc_id,
-    folderName,
-    driveRes.data.id,
-    teacherName,
-    grade,
-  );
+  const dataBaseRes = await modelDrive.createFolder(userDBdata[0].acc_id, folderName, driveRes.data.id, teacherName, grade);
   res.status(200).json(dataBaseRes);
 });
 
@@ -152,4 +161,5 @@ module.exports = {
   deleteFolder,
   createFolder,
   getNotesFromFolder,
+  createRootFolder,
 };
