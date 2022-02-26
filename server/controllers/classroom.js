@@ -8,10 +8,11 @@ const classroom = google.classroom({ version: 'v1', auth: client });
 
 const getAllClassrooms = asyncHandler(async (req, res) => {
   const apiRes = await classroom.courses.list({
-    pageSize: 10,
   });
   const userId = await model.getUser(req.session.userHash);
   const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
+  console.log(dbClassrooms);
+
   res.status(200).json(apiRes.data.courses);
 });
 
