@@ -30,7 +30,7 @@
             class="btn bg-identity text-light"
             @click="addNote"
           >
-            Add Note to {{ folder }}
+            Add Note to {{ currentFolder.name }}
           </button>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default {
     noteName: '',
   }),
   props: {
-    folder: Object,
+    currentFolder: Object,
   },
   methods: {
     addNote() {

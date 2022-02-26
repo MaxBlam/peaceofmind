@@ -36,7 +36,12 @@
       aria-hidden="true"
       @createFolder="createFolder"
     />
-    <CreateNote id="createNote" aria-hidden="true" @createNote="createNote" />
+    <CreateNote
+      id="createNote"
+      aria-hidden="true"
+      @createNote="createNote"
+      :currentFolder="currentFolder"
+    />
   </div>
 </template>
 
@@ -60,59 +65,19 @@ export default {
   },
   data: () => {
     return {
-      response: [],
-      isLoggedIn: false,
-      noteName: '',
-      tabId: '',
-      folderName: '',
-      teacher: '',
-      grade: '',
-      folderId: '',
-      folderId2: '',
-      folderId3: '',
+      currentFolder: {},
     };
   },
-  created() {
-    this.isLoggedInF();
-  },
   methods: {
-    isLoggedInF() {
-      const code = localStorage.getItem('userHash');
-      if (code) this.isLoggedIn = true;
-      //else this.$router.push("/login")
-    },
-    async getData() {
-      const res = await axios({
-        url: 'http://localhost:3000/notes/' + this.folderId2,
-        method: 'GET',
-      });
-      this.response = res.data.data.files;
-    },
-    async getData2() {
-      const res = await axios({
-        url: 'http://localhost:3000/folder/' + localStorage.getItem('userHash'),
-        method: 'GET',
-      });
-      this.folders = res.data.data.files;
-    },
-    async logout() {
-      await axios({
-        method: 'GET',
-        url: 'http://localhost:3000/logout',
-      });
-      localStorage.clear();
-      this.isLoggedInF();
-      this.response = [];
-    },
-    async createNote() {
+    async createNote(noteName) {
       const res = await axios({
         method: 'POST',
         url: 'http://localhost:3000/note',
         'Content-Type': 'application/json',
         data: {
-          noteName: this.noteName,
+          noteName: noteName,
           userHash: localStorage.getItem('userHash'),
-          folderId: this.folderId,
+          folderId: this.currentFolder.folder_id,
         },
       });
       alert('Done', res);
@@ -141,23 +106,23 @@ export default {
       });
       alert('Done', res);
     },*/
-    async createFolder() {
+    async createFolder(object) {
       const res = await axios({
         method: 'POST',
         url: 'http://localhost:3000/folder',
         'Content-Type': 'application/json',
         data: {
           userHash: localStorage.getItem('userHash'),
-          folderName: this.folderName,
-          teacherName: this.teacher,
-          grade: this.grade,
+          folderName: object.folderName,
+          teacherName: object.teacher,
+          grade: object.grade,
         },
       });
       alert('Done', res);
     },
     openNoteModal(folder) {
-      console.log(folder.id);
-      MicroModal.show('createNote'); // [1]
+      this.currentFolder = folder;
+      MicroModal.show('createNote');
     },
   },
   computed: {
