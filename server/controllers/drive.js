@@ -46,11 +46,7 @@ const createNote = asyncHandler(async (req, res) => {
     fields: 'id',
   });
   const folderDbData = await modelDrive.getFolder(folderId);
-  const dbRes = await modelDrive.createNote(
-    userDBdata[0].acc_id,
-    driveRes.data.id,
-    folderDbData[0].f_id,
-  );
+  const dbRes = await modelDrive.createNote(userDBdata[0].acc_id, driveRes.data.id, folderDbData[0].f_id);
   res.status(200).json(dbRes);
 });
 
@@ -63,8 +59,9 @@ const getFolders = asyncHandler(async (req, res) => {
     fields: 'nextPageToken, files(id, name,mimeType)',
     q: `'${rootId}' in parents`,
   });
-  const dbFolderData = (await modelDrive.getAllUserFolders(userDBdata[0].acc_id)).map((el) => el.folder_id);
-  res.status(200).json(driveRes.data.files.filter((el) => dbFolderData.includes(el.id)));
+  const dbFolderData = await modelDrive.getAllUserFolders(userDBdata[0].acc_id);
+  const filteredData1 = driveRes.data.files.filter((el) => dbFolderData.map((ell) => ell.folder_id).includes(el.id));
+  res.status(200).json(dbFolderData);
 });
 
 const getNotesFromFolder = asyncHandler(async (req, res) => {
