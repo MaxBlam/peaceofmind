@@ -6,6 +6,32 @@ const modelClassroom = require('../model/classrooms');
 
 const classroom = google.classroom({ version: 'v1', auth: client });
 
+async function getOverallStudentGrade(classroomId) {
+  const apiCourseWorkIds = await classroom.courses.courseWork.list({
+    courseId: classroomId,
+  });
+  const filteredRes = apiCourseWorkIds.data.courseWork ? apiCourseWorkIds.data.courseWork.map((el) => el.id) : [];
+  const maxPoints = [];
+  const userGrades = [];
+  await filteredRes.forEach(async (courseWork) => {
+    const studentSubmissions = await classroom.courses.courseWork.studentSubmissions.list({
+      courseId: classroomId,
+      courseWorkId: courseWork,
+    });
+    const filteredSubmissions = studentSubmissions.data.studentSubmissions.filter((el) => el.assignedGrade);
+    if (filteredSubmissions.map((el) => el.assignedGrade).length > 0) {
+      const temp = filteredSubmissions.map((ell) => ell.courseWorkId);
+      const maxPoint = apiCourseWorkIds.data.courseWork.filter((el) => temp.includes(el.id)).map((el) => el.maxPoints);
+      userGrades.push(filteredSubmissions.map((el) => el.assignedGrade)[0]);
+      maxPoints.push(maxPoint);
+    }
+  });
+  return {
+    grades: userGrades,
+    maxPoints: maxPoints,
+  };
+}
+
 const synchClassrooms = asyncHandler(async (req, res) => {
   console.log('START');
 
@@ -22,6 +48,35 @@ const synchClassrooms = asyncHandler(async (req, res) => {
     if (!mappedDbClassrooms.includes(classr.id)) {
       modelClassroom.createClassroom(classr.id, classr.name, classr.user_id);
     }
+  });
+
+  const secondDbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
+  const dbFolderClassrooms = await modelClassroom.getClassroomFolders(userId.acc_id);
+  const mappedFolderClassrooms = dbFolderClassrooms.map((el) => el.classroom_id);
+  const filteredSecondDbClassrooms = secondDbClassrooms.filter((el) => !mappedFolderClassrooms.includes(el.classroom_id));
+
+  filteredSecondDbClassrooms.forEach(async (classr) => {
+    const teachers = await classroom.courses.teachers.list({
+      courseId: classr.classroom_id,
+    });
+    const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
+    setTimeout(() => {
+      let sumGrades = 0;
+      let sumMaxPoints = 0;
+      grades.forEach((el) => {
+        sumGrades += Number(el);
+      });
+      maxPoints.forEach((el) => {
+        sumMaxPoints += Number(el);
+      });
+
+      const overallGrade = Math.round((sumGrades / sumMaxPoints) * 100) || 0;
+      console.log(overallGrade);
+
+      console.log(teachers.data.teachers[0].profile.name.fullName);
+      console.log(classr.name);
+      console.log('#######');
+    }, 3400);
   });
 
   res.status(200).json(mappedRes);

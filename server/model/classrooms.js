@@ -14,4 +14,10 @@ async function createClassroom(classroomId, name, userId) {
   return rows;
 }
 
-module.exports = { getAllClassrooms, createClassroom };
+async function getClassroomFolders(userId) {
+  const { rows } = await db.query('Select * from folders_classrooms where user_id = $1', [userId]);
+
+  return rows;
+}
+
+module.exports = { getAllClassrooms, createClassroom, getClassroomFolders };

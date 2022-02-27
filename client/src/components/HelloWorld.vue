@@ -66,7 +66,7 @@ export default {
     async login() {
       const googleUser = await this.$gAuth.signIn();
       const goaRes = await googleUser.grantOfflineAccess({
-        scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/classroom.courses',
+        scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
       });
       const res = await axios({
         url: 'http://localhost:3000/login',
