@@ -20,4 +20,14 @@ async function getClassroomFolders(userId) {
   return rows;
 }
 
-module.exports = { getAllClassrooms, createClassroom, getClassroomFolders };
+async function createClassroomFolder(folderId, classroomId, userId) {
+  const { rows } = await db.query('Insert into folders_classrooms(f_id,classroom_id,user_id) values ($1,$2,$3) returning *;', [
+    folderId,
+    classroomId,
+    userId,
+  ]);
+
+  return rows;
+}
+
+module.exports = { getAllClassrooms, createClassroom, getClassroomFolders, createClassroomFolder };

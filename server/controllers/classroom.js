@@ -3,6 +3,7 @@ const { client, google } = require('./apisetup');
 const model = require('../model/users');
 const modelDrive = require('../model/drive');
 const modelClassroom = require('../model/classrooms');
+const { createFolderServerside } = require('./drive');
 
 const classroom = google.classroom({ version: 'v1', auth: client });
 
@@ -60,7 +61,8 @@ const synchClassrooms = asyncHandler(async (req, res) => {
       courseId: classr.classroom_id,
     });
     const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
-    setTimeout(() => {
+    const teacherName = teachers.data.teachers[0].profile.name.fullName;
+    setTimeout(async () => {
       let sumGrades = 0;
       let sumMaxPoints = 0;
       grades.forEach((el) => {
@@ -71,11 +73,11 @@ const synchClassrooms = asyncHandler(async (req, res) => {
       });
 
       const overallGrade = Math.round((sumGrades / sumMaxPoints) * 100) || 0;
-      console.log(overallGrade);
 
-      console.log(teachers.data.teachers[0].profile.name.fullName);
-      console.log(classr.name);
-      console.log('#######');
+      const apiNewFolder = await createFolderServerside(classr.name, userId.root_folder);
+      const newFolder = await modelDrive.createFolder(userId.acc_id, classr.name, apiNewFolder.data.id, teacherName, overallGrade);
+      const classFolder = await modelClassroom.createClassroomFolder(newFolder[0].f_id, classr.classroom_id, userId.acc_id);
+      console.log(classFolder);
     }, 3400);
   });
 

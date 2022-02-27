@@ -150,6 +150,19 @@ const createFolder = asyncHandler(async (req, res) => {
   res.status(200).json(dataBaseRes);
 });
 
+async function createFolderServerside(folderName, rootId) {
+  const fileMetadata = {
+    name: folderName,
+    parents: [rootId],
+    mimeType: 'application/vnd.google-apps.folder',
+  };
+  const driveRes = await drive.files.create({
+    resource: fileMetadata,
+    fields: 'id',
+  });
+  return driveRes;
+}
+
 module.exports = {
   testDrive,
   createNote,
@@ -159,4 +172,5 @@ module.exports = {
   createFolder,
   getNotesFromFolder,
   createRootFolder,
+  createFolderServerside,
 };
