@@ -86,7 +86,7 @@ export default {
       //TEST 8: ALLE FOLDER IM PIECEOFMIND-FOLDER ANZEIGEN LASSEN
       this.test8();
       //TEST 9: EINEN FOLDER ERSTELLEN
-
+      // this.test9();
       //TEST 10: EINEN FOLDER MIT LEEREM NAMEN ERSTELLEN --SOLLTE EINEN FEHLER AUSGEBEN--
 
       //TEST 11: EINEN FOLDER MIT SONDERZEICHEN IM NAMEN ERSTELLEN
@@ -100,6 +100,9 @@ export default {
       //TEST 15: EINEN FOLDER MIT SONDERZEICHEN ALS NOTE ERSTELLEN --SOLLTE EINEN FEHLER AUSGEBEN--
 
       //TEST 16: EINEN FOLDER MIT LEERER NOTE ERSTELLEN --SOLLTE EINEN FEHLER AUSGEBEN--
+
+      //TEST 17: FOLDER LÖSCHEN
+      // this.test17();
     },
     async test1() {
       //TEST 1
@@ -142,6 +145,7 @@ export default {
         url: `http://localhost:3000/folder/${this.userHash}`,
         method: 'GET',
       });
+      console.log('Testergebnis 8:');
       console.log(res8.data);
     },
     async test9() {
@@ -158,6 +162,7 @@ export default {
         'content-type': 'application/json',
         data: folder9,
       });
+      console.log('Testergebnis 9:');
       console.log(res9.data);
     },
     async test10() {
@@ -174,6 +179,7 @@ export default {
         'content-type': 'application/json',
         data: folder10,
       });
+      console.log('Testergebnis 10:');
       console.log(res10.data);
     },
     async test11() {
@@ -190,6 +196,7 @@ export default {
         'content-type': 'application/json',
         data: folder11,
       });
+      console.log('Testergebnis 10:');
       console.log(res11.data);
     },
     async test12() {
@@ -218,14 +225,27 @@ export default {
         'content-type': 'application/json',
         data: folder12b,
       });
+      console.log('Testergebnis 12a:');
       console.log(res12a.data);
+
+      console.log('Testergebnis 12b:');
       console.log(res12b.data);
     },
     async test13() {},
     async test14() {},
     async test15() {},
     async test16() {},
-    async test17() {},
+    async test17() {
+      const data17 = { userHash: this.userHash, folderId: '15Hui-_Eb2Es-PqLzunxvmiImiYHPfovB' };
+      const res17 = await axios({
+        method: 'delete',
+        url: `http://localhost:3000/folder`,
+        'content-type': 'application/json',
+        data: data17,
+      });
+      console.log('Testergebnis 17 gelöscht:');
+      console.log(res17.data);
+    },
     async test18() {},
   },
   created() {

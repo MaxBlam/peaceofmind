@@ -65,7 +65,9 @@ const getFolders = asyncHandler(async (req, res) => {
     fields: 'nextPageToken, files(id, name,mimeType)',
     q: `'${rootId}' in parents`,
   });
-  const dbFolderData = (await modelDrive.getAllUserFolders(userDBdata[0].acc_id)).map((el) => el.folder_id);
+  const dbFolderData = (await modelDrive.getAllUserFolders(userDBdata[0].acc_id)).map(
+    (el) => el.folder_id,
+  );
   res.status(200).json(driveRes.data.files.filter((el) => dbFolderData.includes(el.id)));
 });
 
@@ -148,7 +150,13 @@ const createFolder = asyncHandler(async (req, res) => {
     fields: 'id',
   });
 
-  const dataBaseRes = await modelDrive.createFolder(userDBdata[0].acc_id, folderName, driveRes.data.id, teacherName, grade);
+  const dataBaseRes = await modelDrive.createFolder(
+    userDBdata[0].acc_id,
+    folderName,
+    driveRes.data.id,
+    teacherName,
+    grade,
+  );
   res.status(200).json(dataBaseRes);
 });
 
