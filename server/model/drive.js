@@ -52,4 +52,12 @@ async function deleteFolder(folderId) {
   return rows;
 }
 
-module.exports = { createNote, getNote, deleteNote, createFolder, getFolder, deleteFolder, getAllUserFolders };
+module.exports = {
+  createNote,
+  getNote,
+  deleteNote,
+  createFolder,
+  getFolder,
+  deleteFolder,
+  getAllUserFolders,
+};

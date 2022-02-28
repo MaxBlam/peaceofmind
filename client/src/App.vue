@@ -5,7 +5,7 @@
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <router-view :folders="folders" />
     <Footer />
-    <UploadFile id="uploadFile" aria-hidden="true" :folders="folders" /> 
+    <UploadFile id="uploadFile" aria-hidden="true" :folders="folders" />
   </div>
 </template>
 
