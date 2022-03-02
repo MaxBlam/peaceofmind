@@ -8,6 +8,7 @@
 
 // /* eslint-disable import/no-extraneous-dependencies, global-require */
 // const webpack = require('@cypress/webpack-preprocessor')
+const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = (on, config) => {

@@ -2,7 +2,7 @@
 
 describe('Google', function () {
   beforeEach(function () {
-    cy.task('db:seed');
+    // cy.task('db:seed');
     cy.loginByGoogleApi();
   });
 
