@@ -23,6 +23,22 @@
               @change="processFile($event)"
             />
           </div>
+          <div class="progress">
+            <div
+              class="
+                progress-bar
+                bg-identity
+                progress-bar-striped progress-bar-animated
+              "
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              :style="`width: ${progress}%`"
+            >
+              {{ progress }}%
+            </div>
+          </div>
+          <p class="mb-3">{{ status }}</p>
           <div class="mb-3">
             <label class="form-label">Choose Folder</label>
             <select class="form-select" v-model="folder">
@@ -38,6 +54,7 @@
             data-micromodal-close
             class="btn bg-identity text-light"
             @click="addNote"
+            :disabled="file == '' || folder == {}"
           >
             Add Note
           </button>
@@ -53,7 +70,10 @@ export default {
   data: () => ({
     file: '',
     folder: {},
-    someData:[],
+    someData: {},
+    language: 'eng',
+    progress: 0,
+    status: '',
   }),
   props: {
     folders: Array,
@@ -63,12 +83,19 @@ export default {
       //
     },
     processFile(input) {
-      this.someData = input.target.files[0]; // Get inputs 
-      console.log(this.someData) // Process Inputs
-      // Convert to Image
+      this.someData = input.target.files[0]; // Get inputs
+      this.convertImgToText();
     },
     async convertImgToText() {
-      this.file = Tesseract.recognize(this.file);
+      Tesseract.recognize(this.someData, this.language, {
+        logger: (m) => {
+          this.progress = m.progress * 100;
+          this.status = m.status;
+        },
+      }).then(({ data: { text } }) => {
+        this.file = text;
+        this.status = 'Done!';
+      });
     },
   },
 };
