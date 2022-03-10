@@ -23,7 +23,7 @@
         ></i>
       </div>
       <h6 class="card-subtitle mb-2 text-muted">
-        Teacher: {{ folder.teacher }}
+        Teacher: {{ folder.teacher_name }}
       </h6>
       <h6 class="card-subtitle mb-2 text-muted">Grade: {{ folder.grade }}</h6>
       <p class="card-text">

@@ -20,7 +20,7 @@
               type="file"
               class="form-control"
               accept="image/*"
-              @change="processFile($event)"
+              @change="convertImgToText($event)"
             />
           </div>
           <div class="progress">
@@ -38,11 +38,11 @@
               {{ progress }}%
             </div>
           </div>
-          <p class="mb-3">{{ status }}</p>
+          <p class="mb-3">{{ status }}...</p>
           <div class="mb-3">
             <label class="form-label">Choose Folder</label>
             <select class="form-select" v-model="folder">
-              <option v-for="f of folders" :key="f.id" :value="f.id">
+              <option v-for="f of folders" :value="f.f_id" :key="f.f_id">
                 {{ f.name }}
               </option>
             </select>
@@ -54,7 +54,7 @@
             data-micromodal-close
             class="btn bg-identity text-light"
             @click="addNote"
-            :disabled="file == '' || folder == {}"
+            :disabled="file == '' || !folder"
           >
             Add Note
           </button>
@@ -69,7 +69,7 @@ import Tesseract from 'tesseract.js';
 export default {
   data: () => ({
     file: '',
-    folder: {},
+    folder: null,
     someData: {},
     language: 'eng',
     progress: 0,
@@ -80,15 +80,12 @@ export default {
   },
   methods: {
     addNote() {
-      //
+      this.$emit('addNote', { text: this.file, folderId: this.folder });
     },
-    processFile(input) {
+    async convertImgToText(input) {
       this.someData = input.target.files[0]; // Get inputs
-      this.convertImgToText();
-    },
-    async convertImgToText() {
       Tesseract.recognize(this.someData, this.language, {
-        logger: (m) => {
+        logger: m => {
           this.progress = m.progress * 100;
           this.status = m.status;
         },

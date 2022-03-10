@@ -1,30 +1,42 @@
 <template>
   <div id="app">
     <!-- <HelloWorld />-->
-    <NavBar @uploadFile="uploadFile" />
+    <NavBar
+      @uploadFile="uploadFile"
+      :isLoggedIn="isLoggedIn"
+      @openSettings="openSettings"
+    />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
-    <router-view :folders="folders" />
+    <router-view :folders="folders" @getFolders="getFolders" />
     <Footer />
-    <UploadFile id="uploadFile" aria-hidden="true" :folders="folders" />
+    <UploadFile
+      id="uploadFile"
+      @addNote="addNote"
+      aria-hidden="true"
+      :folders="folders"
+    />
+    <Settings id="settings" />
   </div>
 </template>
 
 <script>
 //import HelloWorld from '@/components/HelloWorld.vue';
 import axios from 'axios';
+import MicroModal from 'micromodal';
 import UploadFile from '@/components/UploadFile.vue';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
-import MicroModal from 'micromodal';
+import Settings from '@/components/Settings.vue';
 export default {
   components: {
     //HelloWorld,
     NavBar,
     Footer,
     UploadFile,
+    Settings,
   },
   mounted() {
-    MicroModal.init({ debugMode: true });
+    MicroModal.init();
   },
   data: () => ({
     folders: [],
@@ -57,8 +69,19 @@ export default {
       });
       this.folders = data;
     },
+    async addNote(object) {
+      await axios({
+        url: 'http://localhost:3000/note/ocr',
+        method: 'POST',
+        contentType: 'application/json',
+        data: object,
+      });
+    },
     uploadFile() {
       MicroModal.show('uploadFile');
+    },
+    openSettings() {
+      MicroModal.show('settings');
     },
   },
 };

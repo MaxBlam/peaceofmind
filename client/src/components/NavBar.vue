@@ -10,13 +10,17 @@
       </li>
 
       <li class="ms-auto">
-        <button
-          v-if="$route.name != 'About'"
-          class="btn"
-          aria-label="Upload"
-          @click="uploadFile"
-        >
+        <button class="btn" aria-label="Upload" @click="uploadFile">
           <i class="bi bi-upload h3" style="color: rgb(48, 11, 90)"></i>
+        </button>
+      </li>
+      <li>
+        <button
+          class="btn"
+          aria-label="Settings"
+          @click="$emit('openSettings')"
+        >
+          <i class="bi bi-gear h3" style="color: rgb(48, 11, 90)"></i>
         </button>
       </li>
       <li>
@@ -115,6 +119,9 @@
 
 <script>
 export default {
+  props: {
+    isLoggedIn: Boolean,
+  },
   methods: {
     uploadFile() {
       this.$emit('uploadFile');
