@@ -15,13 +15,13 @@
         </button>
       </li>
       <li>
-        <button
+        <router-link
           class="btn"
           aria-label="Settings"
-          @click="$emit('openSettings')"
+          to="/settings"
         >
           <i class="bi bi-gear h3" style="color: rgb(48, 11, 90)"></i>
-        </button>
+        </router-link>
       </li>
       <li>
         <button

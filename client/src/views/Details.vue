@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <TimeLine />
     <div class="container" v-if="notes.length > 0">
-      <h1 class="my-4">Notes</h1>
+      <h3 class="my-4">Notes</h3>
       <Note
         v-for="(note, i) of notes"
         :key="i"

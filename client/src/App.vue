@@ -4,9 +4,8 @@
     <NavBar
       @uploadFile="uploadFile"
       :isLoggedIn="isLoggedIn"
-      @openSettings="openSettings"
     />
-    <nav class="navbar container" style="height: 66px">Margin Control</nav>
+    <nav class="navbar container mb-3" style="height: 66px">Margin Control</nav>
     <router-view :folders="folders" @getFolders="getFolders" />
     <Footer />
     <UploadFile
@@ -15,7 +14,6 @@
       aria-hidden="true"
       :folders="folders"
     />
-    <Settings id="settings" />
   </div>
 </template>
 
@@ -26,14 +24,12 @@ import MicroModal from 'micromodal';
 import UploadFile from '@/components/UploadFile.vue';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
-import Settings from '@/components/Settings.vue';
 export default {
   components: {
     //HelloWorld,
     NavBar,
     Footer,
     UploadFile,
-    Settings,
   },
   mounted() {
     MicroModal.init();
@@ -43,7 +39,7 @@ export default {
     isLoggedIn: false,
   }),
   created() {
-    this.isLoggedInF();
+    //this.isLoggedInF();
   },
   methods: {
     isLoggedInF() {
@@ -79,9 +75,6 @@ export default {
     },
     uploadFile() {
       MicroModal.show('uploadFile');
-    },
-    openSettings() {
-      MicroModal.show('settings');
     },
   },
 };

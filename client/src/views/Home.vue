@@ -7,7 +7,6 @@
         justify-content-center
         align-content-center
         flex-wrap
-        mt-3
       "
     >
       <Folder
@@ -111,7 +110,7 @@ export default {
       //     userHash: localStorage.getItem('userHash'),
       //   },
       // });
-      alert('Done', res);
+      // alert('Done', res);
     },
     async createFolder(object) {
       await axios({
