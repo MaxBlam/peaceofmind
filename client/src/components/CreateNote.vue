@@ -27,7 +27,7 @@
             type="button"
             aria-label="Add Note"
             data-micromodal-close
-            class="btn bg-identity text-light"
+            class="btn btn-identity"
             @click="addNote"
           >
             Add Note to {{ currentFolder.name }}

@@ -14,7 +14,7 @@
   >
     <legend class="mb-3">Login</legend>
     <button
-      class="btn bg-identity text-light"
+      class="btn btn-identity"
       @click="login()"
       aria-label="Sign In"
     >

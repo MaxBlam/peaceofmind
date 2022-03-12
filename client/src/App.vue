@@ -1,11 +1,8 @@
 <template>
   <div id="app">
     <!-- <HelloWorld />-->
-    <NavBar
-      @uploadFile="uploadFile"
-      :isLoggedIn="isLoggedIn"
-    />
-    <nav class="navbar container mb-3" style="height: 66px">Margin Control</nav>
+    <NavBar @uploadFile="uploadFile" :isLoggedIn="isLoggedIn" />
+    <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <router-view :folders="folders" @getFolders="getFolders" />
     <Footer />
     <UploadFile
@@ -100,6 +97,14 @@ html {
 }
 .bg-identity {
   background-color: #b46cc0 !important;
+}
+.btn-identity {
+  background-color: #C664BA !important;
+  color: white !important;
+}
+.btn-identity:hover {
+  background-color: #B46CC0 !important;
+  color: white !important;
 }
 .modal__overlay {
   position: fixed;

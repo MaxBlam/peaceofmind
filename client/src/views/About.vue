@@ -332,7 +332,7 @@
           <router-link
             to="/"
             style="text-decoration: none"
-            class="btn bg-identity text-light mb-4 transition-sm"
+            class="btn btn-identity mb-4 transition-sm"
             title="App"
           >
             Try it!
@@ -341,7 +341,7 @@
             href="https://github.com/MaxBlam/peaceofmind"
             target="_blank"
             rel="noreferrer"
-            class="btn bg-identity text-light ms-2 mb-4 transition-sm"
+            class="btn btn-identity ms-2 mb-4 transition-sm"
             title="Github Repository"
             >Github</a
           >
