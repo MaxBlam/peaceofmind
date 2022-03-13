@@ -1,9 +1,17 @@
 <template>
   <div class="container-fluid">
     <TimeLine />
-    <div class="container" v-if="notes.length > 0">
+    <div class="container">
       <h3 class="my-4">Notes</h3>
-      <Note v-for="(note, i) of notes" :key="i" :note="note" />
+      <div class="text-center i-identity" v-if="notes===null">
+        <p>Loading...</p>
+        <div class="spinner-grow" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div v-else>
+        <Note v-for="(note, i) of notes" :key="i" :note="note" />
+      </div>
     </div>
   </div>
 </template>
@@ -18,12 +26,10 @@ export default {
   },
   props: {
     id: String,
+    notes: Array,
   },
-  data: () => ({
-    notes: [],
-  }),
   created() {
-    this.getData();
+    this.getNotes();
   },
   methods: {
     getNotes() {

@@ -14,14 +14,29 @@
           </button>
         </div>
         <div class="modal-body">
+          <div class="mb-3">
+            <div class="alert alert-danger" role="alert">
+              <h6>Are you absolutely sure?</h6>
+              Unexpected bad things will happen if you don't read this! <br />
+              This action cannot be undone. This will permanently delete the
+              {{ currentFolder.name }} folder and documents
+            </div>
+            <label class="form-label"
+              >Please type
+              <span class="fw-bold">{{ currentFolder.name }}</span> to
+              confirm.</label
+            >
+            <input type="text" class="form-control" v-model="input" />
+          </div>
           <button
             type="button"
             aria-label="Add Note"
             data-micromodal-close
-            class="btn btn-identity transition-sm"
+            class="btn btn-danger"
+            :disabled="input!=currentFolder.name"
             @click="deleteFolder"
           >
-            Save
+            I understand the consequences, delete this folder
           </button>
         </div>
       </div>
@@ -31,10 +46,15 @@
 
 <script>
 export default {
-  props: { folder: Object },
+  props: {
+    currentFolder: Object,
+  },
+  data: () => ({
+    input: '',
+  }),
   methods: {
     deleteFolder() {
-      this.$emit('deleteFolder', this.folder.id);
+      this.$emit('deleteFolder', this.currentFolder.f_id);
     },
   },
 };

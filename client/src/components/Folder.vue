@@ -17,9 +17,14 @@
           {{ folder.name }}
         </h5>
         <i
-          class="bi bi-plus h3"
+          class="bi bi-plus h3 i-identity"
           style="cursor: pointer"
           @click="openNoteModal"
+        ></i>
+        <i
+          class="bi bi-x-square-fill h4 mx-2 i-identity"
+          style="cursor: pointer"
+          @click="delFolderModal"
         ></i>
       </div>
       <h6 class="card-subtitle mb-2 text-muted">
@@ -44,6 +49,9 @@ export default {
   methods: {
     openNoteModal() {
       this.$emit('openNoteModal', this.folder);
+    },
+    delFolderModal() {
+      this.$emit('delFolderModal', this.folder);
     },
   },
 };
