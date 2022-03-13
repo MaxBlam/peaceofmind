@@ -198,7 +198,7 @@ export default {
   },
   watch: {
     $route(to) {
-      if (to.name !== 'About' && to.name !== 'Login') {
+      if (to.name !== 'About' && to.name !== 'Login' && to.name !== 'Imprint') {
         this.isLoggedInF();
       }
       if (to.name === 'Details') {
