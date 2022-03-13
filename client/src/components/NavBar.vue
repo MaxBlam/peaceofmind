@@ -54,7 +54,7 @@
         </button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" data-bs-dismiss="offcanvas">
           <li class="nav-item px-2">
             <router-link
               to="/"

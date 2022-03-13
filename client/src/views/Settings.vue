@@ -18,7 +18,7 @@
           pattern="[A-Za-z0-9]"
         />
         <button
-          class="input-group-text btn btn-identity col-2"
+          class="input-group-text btn btn-identity transition-sm col-2"
           type="button"
           @click="pColor = ''"
         >
@@ -26,7 +26,9 @@
         </button>
       </div>
       <div class="input-group flex-nowrap mb-3">
-        <span class="input-group-text col-2" id="liColor-wrapping">List Color</span>
+        <span class="input-group-text col-2" id="liColor-wrapping"
+          >List Color</span
+        >
         <input
           type="text"
           v-model="liColor"
@@ -38,7 +40,7 @@
           pattern="[A-Za-z0-9]"
         />
         <button
-          class="input-group-text btn btn-identity col-2"
+          class="input-group-text btn btn-identity transition-sm col-2"
           type="button"
           @click="liColor = ''"
         >
@@ -46,7 +48,9 @@
         </button>
       </div>
       <div class="input-group flex-nowrap mb-3">
-        <span class="input-group-text col-2" id="hColor-wrapping">Heading Color</span>
+        <span class="input-group-text col-2" id="hColor-wrapping"
+          >Heading Color</span
+        >
         <input
           type="text"
           v-model="hColor"
@@ -58,14 +62,14 @@
           pattern="[A-Za-z0-9]"
         />
         <button
-          class="input-group-text btn btn-identity col-2"
+          class="input-group-text btn btn-identity transition-sm col-2"
           type="button"
           @click="hColor = ''"
         >
           Reset
         </button>
       </div>
-      <button type="submit" class="btn btn-identity col-2">Save</button>
+      <button type="submit" class="btn btn-identity transition-sm col-2">Save</button>
     </form>
   </div>
 </template>
@@ -77,6 +81,15 @@ export default {
     hColor: '',
     liColor: '',
   }),
+  methods: {
+    saveSettings() {
+      this.$emit('saveSettings', {
+        pColor: this.pColor,
+        hColor: this.hColor,
+        liColor: this.liColor,
+      });
+    },
+  },
 };
 </script>
 

@@ -18,8 +18,8 @@
             type="button"
             aria-label="Add Note"
             data-micromodal-close
-            class="btn btn-identity"
-            @click="saveSettings"
+            class="btn btn-identity transition-sm"
+            @click="deleteFolder"
           >
             Save
           </button>
@@ -32,5 +32,10 @@
 <script>
 export default {
   props: { folder: Object },
+  methods: {
+    deleteFolder() {
+      this.$emit('deleteFolder', this.folder.id);
+    },
+  },
 };
 </script>

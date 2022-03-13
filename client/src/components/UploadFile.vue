@@ -52,7 +52,7 @@
             type="button"
             aria-label="Add Note"
             data-micromodal-close
-            class="btn btn-identity"
+            class="btn btn-identity transition-sm"
             @click="addNote"
             :disabled="file == '' || !folder"
           >

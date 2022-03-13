@@ -3,17 +3,12 @@
     <TimeLine />
     <div class="container" v-if="notes.length > 0">
       <h3 class="my-4">Notes</h3>
-      <Note
-        v-for="(note, i) of notes"
-        :key="i"
-        :note="note"
-      />
+      <Note v-for="(note, i) of notes" :key="i" :note="note" />
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 import Note from '@/components/Note.vue';
 import TimeLine from '@/components/TimeLine.vue';
 export default {
@@ -31,12 +26,8 @@ export default {
     this.getData();
   },
   methods: {
-    async getData() {
-      const { data } = await axios({
-        url: 'http://localhost:3000/notes/' + this.id,
-        method: 'GET',
-      });
-      this.notes = data.data.files;
+    getNotes() {
+      this.$emit('getNotes', this.id);
     },
   },
 };

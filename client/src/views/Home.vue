@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import MicroModal from 'micromodal';
 import Folder from '@/components/Folder.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
@@ -76,17 +75,17 @@ export default {
     };
   },
   methods: {
-    async createNote(noteName) {
-      await axios({
-        method: 'POST',
-        url: 'http://localhost:3000/note',
-        'Content-Type': 'application/json',
-        data: {
-          noteName: noteName,
-          userHash: localStorage.getItem('userHash'),
-          folderId: this.currentFolder.folder_id,
-        },
+    createNote(noteName) {
+      this.$emit('createNote', {
+        noteName: noteName,
+        id: this.currentFolder.id,
       });
+    },
+    deleteFolder(id) {
+      this.$emit('deleteFolder', id);
+    },
+    createFolder(object) {
+      this.$emit('createFolder', object);
     },
     /*async deleteTab() {
       const res = await axios({
@@ -100,32 +99,6 @@ export default {
       });
       alert('Done', res);
     },*/
-    async deleteFolder() {
-      // const res = await axios({
-      //   method: 'Delete',
-      //   url: 'http://localhost:3000/folder',
-      //   'Content-Type': 'application/json',
-      //   data: {
-      //     folderId: this.folderId3,
-      //     userHash: localStorage.getItem('userHash'),
-      //   },
-      // });
-      // alert('Done', res);
-    },
-    async createFolder(object) {
-      await axios({
-        method: 'POST',
-        url: 'http://localhost:3000/folder',
-        'Content-Type': 'application/json',
-        data: {
-          userHash: localStorage.getItem('userHash'),
-          folderName: object.folderName,
-          teacherName: object.teacher,
-          grade: object.grade,
-        },
-      });
-      this.$emit('getFolders');
-    },
     openNoteModal(folder) {
       this.currentFolder = folder;
       MicroModal.show('createNote');

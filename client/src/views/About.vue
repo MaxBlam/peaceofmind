@@ -22,7 +22,7 @@
         data-aos="fade-up"
         data-aos-duration="1000"
       >
-        Find your Inner Peace
+        Find Your Inner Peace
       </h1>
       <i class="bi bi-caret-down-fill h3" id="scrollindi"></i>
     </div>
@@ -505,7 +505,7 @@ export default {
   methods: {
     sendMail() {
       window.open(
-        `mailto:pieceofmind@htlwienwest.at?subject=${this.subject}&body=${this.message}`,
+        `mailto:pieceofmind@htlwienwest.at?subject=${this.subject}&body=${this.message}`
       );
     },
   },
@@ -517,6 +517,7 @@ export default {
   background-image: url('../assets/aboutbg.avif');
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   height: 100vh;
 }
@@ -540,9 +541,6 @@ html {
 }
 .btn-light:hover {
   background-color: transparent !important;
-}
-.transition-sm {
-  transition: 0.5s !important;
 }
 .no-border {
   border: 0px !important;

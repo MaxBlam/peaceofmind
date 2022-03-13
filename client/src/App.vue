@@ -3,7 +3,15 @@
     <!-- <HelloWorld />-->
     <NavBar @uploadFile="uploadFile" :isLoggedIn="isLoggedIn" />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
-    <router-view :folders="folders" @getFolders="getFolders" />
+    <router-view
+      :folders="folders"
+      @getFolders="getFolders"
+      @saveSettings="saveSettings"
+      @createNote="createNote"
+      @deleteFolder="deleteFolder"
+      @createFolder="createFolder"
+      @getNotes="getNotes"
+    />
     <Footer />
     <UploadFile
       id="uploadFile"
@@ -34,6 +42,7 @@ export default {
   data: () => ({
     folders: [],
     isLoggedIn: false,
+    serverAddress: process.env.VUE_APP_SERVER,
   }),
   created() {
     //this.isLoggedInF();
@@ -46,29 +55,134 @@ export default {
         this.getFolders();
       } else this.$router.push('/login');
     },
+    async login() {
+      try {
+        const googleUser = await this.$gAuth.signIn();
+        const goaRes = await googleUser.grantOfflineAccess({
+          scope: 'https://www.googleapis.com/auth/drive.file',
+        });
+        const res = await axios({
+          url: this.serverAddress + '/login',
+          method: 'POST',
+          'Content-Type': 'application/json',
+          data: {
+            code: goaRes.code,
+          },
+        });
+        if (res.data.code !== 401)
+          localStorage.setItem('userHash', res.data.data.userHash);
+        this.$router.push('/');
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async logout() {
-      await axios({
-        method: 'GET',
-        url: 'http://localhost:3000/logout',
-      });
-      localStorage.clear();
-      this.isLoggedInF();
-      this.folders = [];
+      try {
+        await axios({
+          method: 'GET',
+          url: this.serverAddress + '/logout',
+        });
+        localStorage.clear();
+        this.isLoggedInF();
+        this.folders = [];
+      } catch (error) {
+        console.error(error);
+      }
     },
     async getFolders() {
-      const { data } = await axios({
-        url: 'http://localhost:3000/folder/' + localStorage.getItem('userHash'),
-        method: 'GET',
-      });
-      this.folders = data;
+      try {
+        const { data } = await axios({
+          url:
+            this.serverAddress + '/folder/' + localStorage.getItem('userHash'),
+          method: 'GET',
+        });
+        this.folders = data;
+      } catch (error) {
+        console.error(error);
+      }
     },
     async addNote(object) {
-      await axios({
-        url: 'http://localhost:3000/note/ocr',
-        method: 'POST',
-        contentType: 'application/json',
-        data: object,
-      });
+      try {
+        await axios({
+          url: this.serverAddress + '/note/ocr',
+          method: 'POST',
+          contentType: 'application/json',
+          data: object,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async saveSettings(settings) {
+      try {
+        await axios({
+          url: this.serverAddress + '/settings',
+          method: 'POST',
+          contentType: 'application/json',
+          data: settings,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async createNote(object) {
+      try {
+        const { noteName, id } = object;
+        await axios({
+          method: 'POST',
+          url: this.serverAddress + '/note',
+          'Content-Type': 'application/json',
+          data: {
+            noteName: noteName,
+            userHash: localStorage.getItem('userHash'),
+            folderId: id,
+          },
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteFolder(id) {
+      console.log(id);
+      // const res = await axios({
+      //   method: 'Delete',
+      //   url: this.serverAddress + '/folder',
+      //   'Content-Type': 'application/json',
+      //   data: {
+      //     folderId: this.folderId3,
+      //     userHash: localStorage.getItem('userHash'),
+      //   },
+      // });
+      // alert('Done', res);
+    },
+    async createFolder(object) {
+      try {
+        await axios({
+          method: 'POST',
+          url: this.serverAddress + '/folder',
+          'Content-Type': 'application/json',
+          data: {
+            userHash: localStorage.getItem('userHash'),
+            folderName: object.folderName,
+            teacherName: object.teacher,
+            grade: object.grade,
+          },
+        });
+      } catch (error) {
+        console.error(error);
+      }
+      this.getFolders();
+    },
+    async getNotes(id) {
+      try {
+        const { data } = await axios({
+          url: this.serverAddress + '/notes/' + id,
+          method: 'GET',
+        });
+        this.notes = data.data.files;
+      } catch (error) {
+        console.error(error);
+      }
     },
     uploadFile() {
       MicroModal.show('uploadFile');
@@ -99,12 +213,15 @@ html {
   background-color: #b46cc0 !important;
 }
 .btn-identity {
-  background-color: #C664BA !important;
+  background-color: #c664ba !important;
   color: white !important;
 }
 .btn-identity:hover {
-  background-color: #B46CC0 !important;
+  background-color: #b46cc0 !important;
   color: white !important;
+}
+.transition-sm {
+  transition: 0.5s !important;
 }
 .modal__overlay {
   position: fixed;
