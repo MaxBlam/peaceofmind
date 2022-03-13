@@ -10,17 +10,23 @@
       </li>
 
       <li class="ms-auto">
-        <button class="btn" aria-label="Upload" @click="uploadFile">
-          <i class="bi bi-upload h3" style="color: rgb(48, 11, 90)"></i>
+        <button
+          class="btn"
+          aria-label="Upload"
+          @click="uploadFile"
+          v-if="isLoggedIn"
+        >
+          <i class="bi bi-upload h3 i-identity"></i>
         </button>
       </li>
       <li>
         <router-link
+          v-if="isLoggedIn"
           class="btn"
           aria-label="Settings"
           to="/settings"
         >
-          <i class="bi bi-gear h3" style="color: rgb(48, 11, 90)"></i>
+          <i class="bi bi-gear h3 i-identity"></i>
         </router-link>
       </li>
       <li>
@@ -32,7 +38,7 @@
           aria-controls="offcanvasNavbar"
           aria-label="Navbar Toggler"
         >
-          <i class="bi bi-list h3" style="color: rgb(48, 11, 90)"></i>
+          <i class="bi bi-list h3 i-identity"></i>
         </button>
       </li>
     </ul>
@@ -54,7 +60,10 @@
         </button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" data-bs-dismiss="offcanvas">
+        <ul
+          class="navbar-nav justify-content-end flex-grow-1 pe-3"
+          data-bs-dismiss="offcanvas"
+        >
           <li class="nav-item px-2">
             <router-link
               to="/"
@@ -63,6 +72,26 @@
               active-class="fw-bold"
               title="Go to App"
               >Home</router-link
+            >
+          </li>
+          <li class="nav-item px-2" v-if="!isLoggedIn">
+            <router-link
+              to="/login"
+              exact
+              class="nav-link text-dark"
+              active-class="fw-bold"
+              title="Go to App"
+              >Login</router-link
+            >
+          </li>
+          <li class="nav-item px-2" v-else>
+            <router-link
+              to="/logout"
+              exact
+              class="nav-link text-dark"
+              active-class="fw-bold"
+              title="Go to App"
+              >Log Out</router-link
             >
           </li>
           <li class="nav-item px-2">

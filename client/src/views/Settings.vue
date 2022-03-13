@@ -69,7 +69,9 @@
           Reset
         </button>
       </div>
-      <button type="submit" class="btn btn-identity transition-sm col-2">Save</button>
+      <button type="submit" class="btn btn-identity transition-sm col-2">
+        Save
+      </button>
     </form>
   </div>
 </template>

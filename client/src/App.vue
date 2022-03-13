@@ -5,12 +5,15 @@
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <router-view
       :folders="folders"
+      :notes="notes"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
       @createNote="createNote"
       @deleteFolder="deleteFolder"
       @createFolder="createFolder"
       @getNotes="getNotes"
+      @login="login"
+      @logout="logout"
     />
     <Footer />
     <UploadFile
@@ -41,16 +44,18 @@ export default {
   },
   data: () => ({
     folders: [],
+    notes: null,
     isLoggedIn: false,
     serverAddress: process.env.VUE_APP_SERVER,
+    userHash: null,
   }),
   created() {
-    //this.isLoggedInF();
+    this.isLoggedInF();
   },
   methods: {
     isLoggedInF() {
-      const code = localStorage.getItem('userHash');
-      if (code) {
+      this.userHash = localStorage.getItem('userHash');
+      if (this.userHash) {
         this.isLoggedIn = true;
         this.getFolders();
       } else this.$router.push('/login');
@@ -83,17 +88,17 @@ export default {
           url: this.serverAddress + '/logout',
         });
         localStorage.clear();
-        this.isLoggedInF();
         this.folders = [];
+        this.notes = null;
       } catch (error) {
         console.error(error);
       }
+      this.isLoggedInF();
     },
     async getFolders() {
       try {
         const { data } = await axios({
-          url:
-            this.serverAddress + '/folder/' + localStorage.getItem('userHash'),
+          url: this.serverAddress + '/folder/' + this.userHash,
           method: 'GET',
         });
         this.folders = data;
@@ -127,15 +132,15 @@ export default {
     },
     async createNote(object) {
       try {
-        const { noteName, id } = object;
+        const { noteName, f_id } = object;
         await axios({
           method: 'POST',
           url: this.serverAddress + '/note',
           'Content-Type': 'application/json',
           data: {
             noteName: noteName,
-            userHash: localStorage.getItem('userHash'),
-            folderId: id,
+            userHash: this.userHash,
+            folderId: f_id,
           },
         });
       } catch (error) {
@@ -143,17 +148,20 @@ export default {
       }
     },
     async deleteFolder(id) {
-      console.log(id);
-      // const res = await axios({
-      //   method: 'Delete',
-      //   url: this.serverAddress + '/folder',
-      //   'Content-Type': 'application/json',
-      //   data: {
-      //     folderId: this.folderId3,
-      //     userHash: localStorage.getItem('userHash'),
-      //   },
-      // });
-      // alert('Done', res);
+      try {
+        await axios({
+          method: 'Delete',
+          url: this.serverAddress + '/folder',
+          'Content-Type': 'application/json',
+          data: {
+            folderId: id,
+            userHash: this.userHash,
+          },
+        });
+      } catch (error) {
+        console.error(error);
+      }
+      this.getFolders();
     },
     async createFolder(object) {
       try {
@@ -162,7 +170,7 @@ export default {
           url: this.serverAddress + '/folder',
           'Content-Type': 'application/json',
           data: {
-            userHash: localStorage.getItem('userHash'),
+            userHash: this.userHash,
             folderName: object.folderName,
             teacherName: object.teacher,
             grade: object.grade,
@@ -186,6 +194,16 @@ export default {
     },
     uploadFile() {
       MicroModal.show('uploadFile');
+    },
+  },
+  watch: {
+    $route(to) {
+      if (to.name !== 'About' && to.name !== 'Login') {
+        this.isLoggedInF();
+      }
+      if (to.name === 'Details') {
+        this.notes = null;
+      }
     },
   },
 };
@@ -220,6 +238,9 @@ html {
   background-color: #b46cc0 !important;
   color: white !important;
 }
+.i-identity {
+  color: rgb(48, 11, 90);
+}
 .transition-sm {
   transition: 0.5s !important;
 }
@@ -237,7 +258,6 @@ html {
 .modal {
   display: none;
 }
-
 .modal.is-open {
   display: block;
 }

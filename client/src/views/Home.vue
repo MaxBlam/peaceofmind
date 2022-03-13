@@ -15,14 +15,14 @@
         :to="`/folder/${folder.id}`"
         :folder="folder"
         @openNoteModal="openNoteModal"
-        @delete="delFolderModal"
+        @delFolderModal="delFolderModal"
       />
       <div
         class="m-3 d-flex justify-content-center align-items-center"
         style="align-self: stretch; width: 27rem; cursor: pointer"
-        data-micromodal-trigger="createFolder"
+        @click="createFolderModal"
       >
-        <i class="bi bi-folder-plus display-5"></i>
+        <i class="bi bi-folder-plus display-5 i-identity"></i>
       </div>
       <div
         class="m-3"
@@ -78,11 +78,11 @@ export default {
     createNote(noteName) {
       this.$emit('createNote', {
         noteName: noteName,
-        id: this.currentFolder.id,
+        f_id: this.currentFolder.f_id,
       });
     },
-    deleteFolder(id) {
-      this.$emit('deleteFolder', id);
+    deleteFolder(f_id) {
+      this.$emit('deleteFolder', f_id);
     },
     createFolder(object) {
       this.$emit('createFolder', object);
@@ -106,6 +106,9 @@ export default {
     delFolderModal(folder) {
       this.currentFolder = folder;
       MicroModal.show('deleteFolder');
+    },
+    createFolderModal() {
+      MicroModal.show('createFolder');
     },
   },
   computed: {
