@@ -3,7 +3,7 @@
     <TimeLine />
     <div class="container">
       <h3 class="my-4">Notes</h3>
-      <div class="text-center i-identity" v-if="notes===null">
+      <div class="text-center i-identity" v-if="notes === null">
         <p>Loading...</p>
         <div class="spinner-grow" role="status">
           <span class="visually-hidden">Loading...</span>

@@ -78,7 +78,7 @@ export default {
     createNote(noteName) {
       this.$emit('createNote', {
         noteName: noteName,
-        f_id: this.currentFolder.f_id,
+        f_id: this.currentFolder.folder_id,
       });
     },
     deleteFolder(f_id) {
