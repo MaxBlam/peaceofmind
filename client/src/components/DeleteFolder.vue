@@ -54,7 +54,7 @@ export default {
   }),
   methods: {
     deleteFolder() {
-      this.$emit('deleteFolder', this.currentFolder.f_id);
+      this.$emit('deleteFolder', this.currentFolder.folder_id);
     },
   },
 };
