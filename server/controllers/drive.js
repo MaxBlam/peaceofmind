@@ -46,7 +46,11 @@ const createNote = asyncHandler(async (req, res) => {
     fields: 'id',
   });
   const folderDbData = await modelDrive.getFolder(folderId);
-  const dbRes = await modelDrive.createNote(userDBdata[0].acc_id, driveRes.data.id, folderDbData[0].f_id);
+  const dbRes = await modelDrive.createNote(
+    userDBdata[0].acc_id,
+    driveRes.data.id,
+    folderDbData[0].f_id,
+  );
   res.status(200).json(dbRes);
 });
 
@@ -60,7 +64,9 @@ const getFolders = asyncHandler(async (req, res) => {
     q: `'${rootId}' in parents`,
   });
   const dbFolderData = await modelDrive.getAllUserFolders(userDBdata[0].acc_id);
-  const filteredData1 = driveRes.data.files.filter((el) => dbFolderData.map((ell) => ell.folder_id).includes(el.id));
+  const filteredData1 = driveRes.data.files.filter((el) =>
+    dbFolderData.map((ell) => ell.folder_id).includes(el.id),
+  );
   res.status(200).json(dbFolderData);
 });
 
@@ -146,7 +152,13 @@ const createFolder = asyncHandler(async (req, res) => {
     fields: 'id',
   });
 
-  const dataBaseRes = await modelDrive.createFolder(userDBdata[0].acc_id, folderName, driveRes.data.id, teacherName, grade);
+  const dataBaseRes = await modelDrive.createFolder(
+    userDBdata[0].acc_id,
+    folderName,
+    driveRes.data.id,
+    teacherName,
+    grade,
+  );
   res.status(200).json(dataBaseRes);
 });
 
@@ -163,6 +175,10 @@ async function createFolderServerside(folderName, rootId) {
   return driveRes;
 }
 
+async function createClassroomsDocuments() {
+  console.log('nice');
+}
+
 module.exports = {
   testDrive,
   createNote,
@@ -173,4 +189,5 @@ module.exports = {
   getNotesFromFolder,
   createRootFolder,
   createFolderServerside,
+  createClassroomsDocuments,
 };
