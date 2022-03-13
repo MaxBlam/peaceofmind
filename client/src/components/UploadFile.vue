@@ -20,13 +20,29 @@
               type="file"
               class="form-control"
               accept="image/*"
-              @change="processFile($event)"
+              @change="convertImgToText($event)"
             />
           </div>
+          <div class="progress">
+            <div
+              class="
+                progress-bar
+                bg-identity
+                progress-bar-striped progress-bar-animated
+              "
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              :style="`width: ${progress}%`"
+            >
+              {{ progress }}%
+            </div>
+          </div>
+          <p class="mb-3">{{ status }}...</p>
           <div class="mb-3">
             <label class="form-label">Choose Folder</label>
             <select class="form-select" v-model="folder">
-              <option v-for="f of folders" :key="f.id" :value="f.id">
+              <option v-for="f of folders" :value="f.f_id" :key="f.f_id">
                 {{ f.name }}
               </option>
             </select>
@@ -36,8 +52,9 @@
             type="button"
             aria-label="Add Note"
             data-micromodal-close
-            class="btn bg-identity text-light"
+            class="btn btn-identity transition-sm"
             @click="addNote"
+            :disabled="file == '' || !folder"
           >
             Add Note
           </button>
@@ -52,23 +69,30 @@ import Tesseract from 'tesseract.js';
 export default {
   data: () => ({
     file: '',
-    folder: {},
-    someData:[],
+    folder: null,
+    someData: {},
+    language: 'eng',
+    progress: 0,
+    status: '',
   }),
   props: {
     folders: Array,
   },
   methods: {
     addNote() {
-      //
+      this.$emit('addNote', { text: this.file, folderId: this.folder });
     },
-    processFile(input) {
-      this.someData = input.target.files[0]; // Get inputs 
-      console.log(this.someData) // Process Inputs
-      // Convert to Image
-    },
-    async convertImgToText() {
-      this.file = Tesseract.recognize(this.file);
+    async convertImgToText(input) {
+      this.someData = input.target.files[0]; // Get inputs
+      Tesseract.recognize(this.someData, this.language, {
+        logger: m => {
+          this.progress = m.progress * 100;
+          this.status = m.status;
+        },
+      }).then(({ data: { text } }) => {
+        this.file = text;
+        this.status = 'Done!';
+      });
     },
   },
 };

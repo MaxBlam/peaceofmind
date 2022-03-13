@@ -45,7 +45,7 @@
             type="button"
             aria-label="Create Folder"
             data-micromodal-close
-            class="btn bg-identity text-light"
+            class="btn btn-identity transition-sm"
             @click="$emit('createFolder', folder)"
           >
             Add Folder

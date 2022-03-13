@@ -10,14 +10,18 @@
       </li>
 
       <li class="ms-auto">
-        <button
-          v-if="$route.name != 'About'"
-          class="btn"
-          aria-label="Upload"
-          @click="uploadFile"
-        >
+        <button class="btn" aria-label="Upload" @click="uploadFile">
           <i class="bi bi-upload h3" style="color: rgb(48, 11, 90)"></i>
         </button>
+      </li>
+      <li>
+        <router-link
+          class="btn"
+          aria-label="Settings"
+          to="/settings"
+        >
+          <i class="bi bi-gear h3" style="color: rgb(48, 11, 90)"></i>
+        </router-link>
       </li>
       <li>
         <button
@@ -50,7 +54,7 @@
         </button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" data-bs-dismiss="offcanvas">
           <li class="nav-item px-2">
             <router-link
               to="/"
@@ -115,6 +119,9 @@
 
 <script>
 export default {
+  props: {
+    isLoggedIn: Boolean,
+  },
   methods: {
     uploadFile() {
       this.$emit('uploadFile');

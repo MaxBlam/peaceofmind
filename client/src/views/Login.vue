@@ -14,41 +14,11 @@
   >
     <legend class="mb-3">Login</legend>
     <button
-      class="btn bg-identity text-light"
-      @click="login()"
+      class="btn btn-identity transition-sm"
+      @click="$emit('login')"
       aria-label="Sign In"
     >
       Sign In with Google
     </button>
   </fieldset>
 </template>
-
-<script>
-import axios from 'axios';
-export default {
-  methods: {
-    async login() {
-      try {
-        const googleUser = await this.$gAuth.signIn();
-        const goaRes = await googleUser.grantOfflineAccess({
-          scope: 'https://www.googleapis.com/auth/drive.file',
-        });
-        const res = await axios({
-          url: 'http://localhost:3000/login',
-          method: 'POST',
-          'Content-Type': 'application/json',
-          data: {
-            code: goaRes.code,
-          },
-        });
-        if (res.data.code !== 401)
-          localStorage.setItem('userHash', res.data.data.userHash);
-        else alert(res.data.data);
-        this.$router.push('/');
-      } catch (error) {
-        console.error(error);
-      }
-    },
-  },
-};
-</script>

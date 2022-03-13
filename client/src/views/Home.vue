@@ -7,7 +7,6 @@
         justify-content-center
         align-content-center
         flex-wrap
-        mt-3
       "
     >
       <Folder
@@ -16,6 +15,7 @@
         :to="`/folder/${folder.id}`"
         :folder="folder"
         @openNoteModal="openNoteModal"
+        @delete="delFolderModal"
       />
       <div
         class="m-3 d-flex justify-content-center align-items-center"
@@ -42,20 +42,26 @@
       @createNote="createNote"
       :currentFolder="currentFolder"
     />
+    <DeleteFolder
+      @deleteFolder="deleteFolder"
+      :currentFolder="currentFolder"
+      id="deleteFolder"
+    />
   </div>
 </template>
 
 <script>
+import MicroModal from 'micromodal';
 import Folder from '@/components/Folder.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
 import CreateNote from '@/components/CreateNote.vue';
-import axios from 'axios';
-import MicroModal from 'micromodal';
+import DeleteFolder from '@/components/DeleteFolder.vue';
 export default {
   components: {
     Folder,
     CreateFolder,
     CreateNote,
+    DeleteFolder,
   },
   props: {
     folders: {
@@ -69,18 +75,17 @@ export default {
     };
   },
   methods: {
-    async createNote(noteName) {
-      const res = await axios({
-        method: 'POST',
-        url: 'http://localhost:3000/note',
-        'Content-Type': 'application/json',
-        data: {
-          noteName: noteName,
-          userHash: localStorage.getItem('userHash'),
-          folderId: this.currentFolder.folder_id,
-        },
+    createNote(noteName) {
+      this.$emit('createNote', {
+        noteName: noteName,
+        id: this.currentFolder.id,
       });
-      alert('Done', res);
+    },
+    deleteFolder(id) {
+      this.$emit('deleteFolder', id);
+    },
+    createFolder(object) {
+      this.$emit('createFolder', object);
     },
     /*async deleteTab() {
       const res = await axios({
@@ -93,36 +98,14 @@ export default {
         },
       });
       alert('Done', res);
-    },
-    async deleteFolder() {
-      const res = await axios({
-        method: 'Delete',
-        url: 'http://localhost:3000/folder',
-        'Content-Type': 'application/json',
-        data: {
-          folderId: this.folderId3,
-          userHash: localStorage.getItem('userHash'),
-        },
-      });
-      alert('Done', res);
     },*/
-    async createFolder(object) {
-      const res = await axios({
-        method: 'POST',
-        url: 'http://localhost:3000/folder',
-        'Content-Type': 'application/json',
-        data: {
-          userHash: localStorage.getItem('userHash'),
-          folderName: object.folderName,
-          teacherName: object.teacher,
-          grade: object.grade,
-        },
-      });
-      alert('Done', res);
-    },
     openNoteModal(folder) {
       this.currentFolder = folder;
       MicroModal.show('createNote');
+    },
+    delFolderModal(folder) {
+      this.currentFolder = folder;
+      MicroModal.show('deleteFolder');
     },
   },
   computed: {

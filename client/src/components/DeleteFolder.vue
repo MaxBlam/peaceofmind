@@ -3,7 +3,7 @@
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div class="modal-content container" role="dialog" aria-modal="true">
         <div class="modal-header">
-          <h5 class="modal-title">Create New Note</h5>
+          <h5 class="modal-title">Delete Folder</h5>
           <button
             type="button"
             class="btn"
@@ -14,23 +14,14 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Note Name</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Name_Chemistry.docx"
-              v-model="noteName"
-            />
-          </div>
           <button
             type="button"
             aria-label="Add Note"
             data-micromodal-close
             class="btn btn-identity transition-sm"
-            @click="addNote"
+            @click="deleteFolder"
           >
-            Add Note to {{ currentFolder.name }}
+            Save
           </button>
         </div>
       </div>
@@ -40,19 +31,11 @@
 
 <script>
 export default {
-  data: () => ({
-    noteName: '',
-  }),
-  props: {
-    currentFolder: Object,
-  },
+  props: { folder: Object },
   methods: {
-    addNote() {
-      this.$emit('createNote', this.noteName);
-      this.noteName = '';
+    deleteFolder() {
+      this.$emit('deleteFolder', this.folder.id);
     },
   },
 };
 </script>
-
-<style scoped></style>

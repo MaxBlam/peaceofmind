@@ -1,7 +1,15 @@
 const express = require('express');
 const { login, logout } = require('../controllers/users');
 const { synchClassrooms } = require('../controllers/classroom');
-const { testDrive, createNote, getFolders, deleteNote, createFolder, getNotesFromFolder, deleteFolder } = require('../controllers/drive');
+const {
+  testDrive,
+  createNote,
+  getFolders,
+  deleteNote,
+  createFolder,
+  getNotesFromFolder,
+  deleteFolder,
+} = require('../controllers/drive');
 
 const router = express.Router();
 
