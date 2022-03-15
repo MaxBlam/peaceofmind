@@ -3,7 +3,7 @@ const { client, google } = require('./apisetup');
 const model = require('../model/users');
 const modelDrive = require('../model/drive');
 const modelClassroom = require('../model/classrooms');
-const { createFolderServerside } = require('./drive');
+const { createFolderServerside, copyFiles } = require('./drive');
 
 const classroom = google.classroom({ version: 'v1', auth: client });
 
@@ -11,7 +11,9 @@ async function getOverallStudentGrade(classroomId) {
   const apiCourseWorkIds = await classroom.courses.courseWork.list({
     courseId: classroomId,
   });
-  const filteredRes = apiCourseWorkIds.data.courseWork ? apiCourseWorkIds.data.courseWork.map((el) => el.id) : [];
+  const filteredRes = apiCourseWorkIds.data.courseWork
+    ? apiCourseWorkIds.data.courseWork.map((el) => el.id)
+    : [];
   const maxPoints = [];
   const userGrades = [];
   await filteredRes.forEach(async (courseWork) => {
@@ -19,10 +21,14 @@ async function getOverallStudentGrade(classroomId) {
       courseId: classroomId,
       courseWorkId: courseWork,
     });
-    const filteredSubmissions = studentSubmissions.data.studentSubmissions.filter((el) => el.assignedGrade);
+    const filteredSubmissions = studentSubmissions.data.studentSubmissions.filter(
+      (el) => el.assignedGrade,
+    );
     if (filteredSubmissions.map((el) => el.assignedGrade).length > 0) {
       const temp = filteredSubmissions.map((ell) => ell.courseWorkId);
-      const maxPoint = apiCourseWorkIds.data.courseWork.filter((el) => temp.includes(el.id)).map((el) => el.maxPoints);
+      const maxPoint = apiCourseWorkIds.data.courseWork
+        .filter((el) => temp.includes(el.id))
+        .map((el) => el.maxPoints);
       userGrades.push(filteredSubmissions.map((el) => el.assignedGrade)[0]);
       maxPoints.push(maxPoint);
     }
@@ -42,7 +48,11 @@ const synchClassrooms = asyncHandler(async (req, res) => {
   const apiRes = await classroom.courses.list({
     courseStates: ['ACTIVE'],
   });
-  const mappedRes = apiRes.data.courses.map((el) => ({ id: el.id, name: el.name, user_id: userId.acc_id }));
+  const mappedRes = apiRes.data.courses.map((el) => ({
+    id: el.id,
+    name: el.name,
+    user_id: userId.acc_id,
+  }));
   const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
   const mappedDbClassrooms = dbClassrooms.map((el) => el.classroom_id);
   mappedRes.forEach((classr) => {
@@ -54,35 +64,86 @@ const synchClassrooms = asyncHandler(async (req, res) => {
   const secondDbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
   const dbFolderClassrooms = await modelClassroom.getClassroomFolders(userId.acc_id);
   const mappedFolderClassrooms = dbFolderClassrooms.map((el) => el.classroom_id);
-  const filteredSecondDbClassrooms = secondDbClassrooms.filter((el) => !mappedFolderClassrooms.includes(el.classroom_id));
+  const filteredSecondDbClassrooms = secondDbClassrooms.filter(
+    (el) => !mappedFolderClassrooms.includes(el.classroom_id),
+  );
+  if (filteredSecondDbClassrooms.length > 0) {
+    filteredSecondDbClassrooms.forEach(async (classr) => {
+      const teachers = await classroom.courses.teachers.list({
+        courseId: classr.classroom_id,
+      });
+      const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
+      const teacherName = teachers.data.teachers[0].profile.name.fullName;
+      setTimeout(async () => {
+        let sumGrades = 0;
+        let sumMaxPoints = 0;
+        grades.forEach((el) => {
+          sumGrades += Number(el);
+        });
+        maxPoints.forEach((el) => {
+          sumMaxPoints += Number(el);
+        });
 
-  filteredSecondDbClassrooms.forEach(async (classr) => {
-    const teachers = await classroom.courses.teachers.list({
-      courseId: classr.classroom_id,
+        const overallGrade = Math.round((sumGrades / sumMaxPoints) * 100) || 0;
+
+        const apiNewFolder = await createFolderServerside(classr.name, userId.root_folder);
+        const newFolder = await modelDrive.createFolder(
+          userId.acc_id,
+          classr.name,
+          apiNewFolder.data.id,
+          teacherName,
+          overallGrade,
+        );
+        const classFolder = await modelClassroom.createClassroomFolder(
+          newFolder[0].f_id,
+          classr.classroom_id,
+          userId.acc_id,
+        );
+        console.log(classFolder);
+        res.status(200).json(mappedRes);
+        console.log('END');
+      }, 3400);
     });
-    const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
-    const teacherName = teachers.data.teachers[0].profile.name.fullName;
-    setTimeout(async () => {
-      let sumGrades = 0;
-      let sumMaxPoints = 0;
-      grades.forEach((el) => {
-        sumGrades += Number(el);
-      });
-      maxPoints.forEach((el) => {
-        sumMaxPoints += Number(el);
-      });
-
-      const overallGrade = Math.round((sumGrades / sumMaxPoints) * 100) || 0;
-
-      const apiNewFolder = await createFolderServerside(classr.name, userId.root_folder);
-      const newFolder = await modelDrive.createFolder(userId.acc_id, classr.name, apiNewFolder.data.id, teacherName, overallGrade);
-      const classFolder = await modelClassroom.createClassroomFolder(newFolder[0].f_id, classr.classroom_id, userId.acc_id);
-      console.log(classFolder);
-    }, 3400);
-  });
-
-  res.status(200).json(mappedRes);
-  console.log('END');
+  } else res.status(200).json({ data: [] });
 });
 
-module.exports = { synchClassrooms };
+const syncClassroomFiles = asyncHandler(async (req, res) => {
+  const userHash = req.params.id;
+  const userId = (await model.getUser(userHash))[0];
+  // WICHTIG - FALLS CLASSROOM SYNC PER CLASSROOM AUSSCHALTBAR IST, MUSS HIER DAS GANZE ETWAS ANGEPASST WERDEN
+
+  const classRooms = await modelClassroom.getAllClassrooms(userId.acc_id);
+  const classroomFolders = await modelClassroom.getClassroomFolders(userId.acc_id);
+
+  classRooms.forEach(async (classr) => {
+    const courseWork = await classroom.courses.courseWork.list({
+      courseId: classr.classroom_id,
+    });
+    const unfilteredMaterials = courseWork.data.courseWork
+      ? courseWork.data.courseWork.map((el) => el.materials).filter((el) => el)
+      : [];
+    console.log('Classroom: ', classr.classroom_id);
+    const filteredMaterials = [];
+    unfilteredMaterials.forEach((material) => {
+      material.forEach((el) => {
+        if (el.driveFile) filteredMaterials.push(el.driveFile.driveFile);
+      });
+    });
+    // REMOVE ANYTHING THAT ISNT A PDF OR DOCS
+    const substring1 = '.pdf';
+    const substring2 = '.docx';
+    const filterOnPdfMaterials = filteredMaterials.filter(
+      (el) => el.title.includes(substring1) || el.title.includes(substring2),
+    );
+    filterOnPdfMaterials.forEach((pdf) => {
+      console.log('CLASSROOM Folder and Note');
+
+      console.log(pdf.id);
+      console.log(classroomFolders.filter((el) => el.classroom_id === classr.classroom_id));
+      copyFiles();
+    });
+  });
+  res.status(200).json(classRooms);
+});
+
+module.exports = { synchClassrooms, syncClassroomFiles };

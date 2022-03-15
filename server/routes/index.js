@@ -1,6 +1,6 @@
 const express = require('express');
 const { login, logout } = require('../controllers/users');
-const { synchClassrooms } = require('../controllers/classroom');
+const { synchClassrooms, syncClassroomFiles } = require('../controllers/classroom');
 const {
   testDrive,
   createNote,
@@ -24,5 +24,6 @@ router.post('/folder', createFolder);
 router.delete('/folder', deleteFolder);
 router.get('/notes/:folderid', getNotesFromFolder);
 router.get('/classrooms/:id', synchClassrooms);
+router.get('/classroomfiles/:id', syncClassroomFiles);
 
 module.exports = router;

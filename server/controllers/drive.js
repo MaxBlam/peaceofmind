@@ -170,9 +170,10 @@ async function createFolderServerside(folderName, rootId) {
   });
   return driveRes;
 }
-
-async function createClassroomsDocuments() {
-  console.log('nice');
+let counter = 0;
+async function copyFiles() {
+  counter += 1;
+  console.log('Counter: ', counter);
 }
 
 module.exports = {
@@ -185,5 +186,5 @@ module.exports = {
   getNotesFromFolder,
   createRootFolder,
   createFolderServerside,
-  createClassroomsDocuments,
+  copyFiles,
 };

@@ -7,7 +7,10 @@ const login = asyncHandler(async (req, res) => {
   const userCode = req.body.code;
   const r = await client.getToken(userCode);
 
-  const UserData = await client.verifyIdToken({ idToken: r.tokens.id_token, audience: keys.web.client_id });
+  const UserData = await client.verifyIdToken({
+    idToken: r.tokens.id_token,
+    audience: keys.web.client_id,
+  });
   const userHash = UserData.getPayload().sub;
 
   const result = await model.getUser(userHash);
@@ -36,14 +39,15 @@ const login = asyncHandler(async (req, res) => {
   }
 });
 
-const logout = asyncHandler(async (req, res) => {
+const logout = async (req, res) => {
   // model.deleteUserSession(req.session.sid);
   console.log(req.session);
 
   req.session.destroy();
   res.clearCookie(process.env.SESSION_NAME);
-  if (client.credentials.access_token) client.revokeCredentials();
-  res.status(200).send('Logged out');
-});
+  if (client.credentials) client.revokeCredentials(() => console.log('Credentials cleared'));
+
+  res.status(200).send('nice');
+};
 
 module.exports = { login, logout };
