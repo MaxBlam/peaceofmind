@@ -97,15 +97,16 @@ export default {
         const goaRes = await googleUser.grantOfflineAccess({
           scope: 'https://www.googleapis.com/auth/drive.file',
         });
+        console.log(this.serverAddress);
         const res = await axios({
           url: this.serverAddress + '/login',
           method: 'POST',
-          'Content-Type': 'application/json',
+          contentType: 'application/json',
           data: {
             code: goaRes.code,
           },
         });
-        if (res.data.code !== 401)
+        if (res.data.code === 200)
           localStorage.setItem('userHash', res.data.data.userHash);
         this.$router.push('/');
       } catch (error) {
