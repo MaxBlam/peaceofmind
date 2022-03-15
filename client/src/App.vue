@@ -3,13 +3,29 @@
     <!-- <HelloWorld />-->
     <NavBar @uploadFile="uploadFile" :isLoggedIn="isLoggedIn" />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
+    <div
+      class="alert alert-danger mb-0 rounded-0 rounded-bottom"
+      role="alert"
+      v-if="updateAlert"
+    >
+      <i class="bi bi-exclamation-triangle-fill"></i> Update Available, please
+      refresh!
+    </div>
+    <div
+      class="alert alert-primary mb-0 rounded-0 rounded-bottom"
+      role="alert"
+      v-if="offline"
+    >
+      <i class="bi bi-info-circle-fill"></i> No internet connection found. App
+      is running in offline mode.
+    </div>
     <router-view
       :folders="folders"
       :notes="notes"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
       @createNote="createNote"
-      @deleteFolder="deleteFolder"
+      @delFolderModal="delFolderModal"
       @createFolder="createFolder"
       @getNotes="getNotes"
       @login="login"
@@ -22,6 +38,11 @@
       aria-hidden="true"
       :folders="folders"
     />
+    <DeleteFolder
+      @deleteFolder="deleteFolder"
+      :currentFolder="currentFolder"
+      id="deleteFolder"
+    />
   </div>
 </template>
 
@@ -32,25 +53,35 @@ import MicroModal from 'micromodal';
 import UploadFile from '@/components/UploadFile.vue';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
+import DeleteFolder from '@/components/DeleteFolder.vue';
 export default {
   components: {
     //HelloWorld,
     NavBar,
     Footer,
     UploadFile,
+    DeleteFolder,
   },
   mounted() {
     MicroModal.init();
   },
   data: () => ({
-    folders: [],
+    folders: null,
     notes: null,
     isLoggedIn: false,
     serverAddress: process.env.VUE_APP_SERVER,
     userHash: null,
+    offline: false,
+    updateAlert: false,
+    currentFolder: {},
   }),
   created() {
     this.isLoggedInF();
+    window.addEventListener('swUpdated', this.updateAvailable, {
+      once: true,
+    });
+    window.addEventListener('offline', () => (this.offline = true));
+    window.addEventListener('online', () => (this.offline = false));
   },
   methods: {
     isLoggedInF() {
@@ -66,15 +97,16 @@ export default {
         const goaRes = await googleUser.grantOfflineAccess({
           scope: 'https://www.googleapis.com/auth/drive.file',
         });
+        console.log(this.serverAddress);
         const res = await axios({
           url: this.serverAddress + '/login',
           method: 'POST',
-          'Content-Type': 'application/json',
+          contentType: 'application/json',
           data: {
             code: goaRes.code,
           },
         });
-        if (res.data.code !== 401)
+        if (res.data.code === 200)
           localStorage.setItem('userHash', res.data.data.userHash);
         this.$router.push('/');
       } catch (error) {
@@ -195,10 +227,17 @@ export default {
     uploadFile() {
       MicroModal.show('uploadFile');
     },
+    delFolderModal(id) {
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      MicroModal.show('deleteFolder');
+    },
+    updateAvailable() {
+      this.updateAlert = true;
+    },
   },
   watch: {
     $route(to) {
-      if (to.name !== 'About' && to.name !== 'Login') {
+      if (to.name !== 'About' && to.name !== 'Login' && to.name !== 'Imprint') {
         this.isLoggedInF();
       }
       if (to.name === 'Details') {

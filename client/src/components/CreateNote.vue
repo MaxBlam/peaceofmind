@@ -20,7 +20,7 @@
               type="text"
               class="form-control"
               placeholder="Name_Chemistry.docx"
-              v-model="noteName"
+              v-model="noteName" @keyup.enter="addNote"
             />
           </div>
           <button

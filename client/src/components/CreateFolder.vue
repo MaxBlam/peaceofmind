@@ -32,14 +32,26 @@
               v-model="teacher"
             />
           </div>
-          <div class="mb-3">
+          <div class="input-group mb-3">
             <label class="form-label">Grade</label>
-            <select class="form-select" v-model="grade">
-              <option selected value=""></option>
-              <option :value="o" v-for="(o, i) of 6" :key="i">
-                {{ o }}
-              </option>
-            </select>
+            <input
+              v-model="grade"
+              type="range"
+              class="form-range"
+              min="0"
+              max="100"
+              step="5"
+              id="customRange3"
+            />
+            <input
+              v-model="grade"
+              type="number"
+              min="0"
+              max="100"
+              class="form-control"
+              placeholder="Number in percent"
+              aria-label="Grade"
+            />
           </div>
           <button
             type="button"
@@ -47,6 +59,7 @@
             data-micromodal-close
             class="btn btn-identity transition-sm"
             @click="$emit('createFolder', folder)"
+            :disabled="folderName === ''"
           >
             Add Folder
           </button>

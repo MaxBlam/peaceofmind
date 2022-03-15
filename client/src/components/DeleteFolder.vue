@@ -33,7 +33,7 @@
             aria-label="Add Note"
             data-micromodal-close
             class="btn btn-danger"
-            :disabled="input!=currentFolder.name"
+            :disabled="input != currentFolder.name"
             @click="deleteFolder"
           >
             I understand the consequences, delete this folder
@@ -55,6 +55,7 @@ export default {
   methods: {
     deleteFolder() {
       this.$emit('deleteFolder', this.currentFolder.folder_id);
+      this.input = '';
     },
   },
 };
