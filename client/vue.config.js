@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   configureWebpack: {
     module: {
@@ -10,4 +12,12 @@ module.exports = {
       ],
     },
   },
+  pwa: {
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'public/service-worker.js',
+    },
+  },
+  outputDir: path.resolve(__dirname, '../server/public'),
+  productionSourceMap: false,
 };
