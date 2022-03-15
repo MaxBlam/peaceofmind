@@ -3,8 +3,12 @@
     <TimeLine />
     <div class="container">
       <div class="d-grid gap-2 my-3">
-        <button class="btn btn-identity" type="button"><i class="bi bi-plus-lg"></i> Create Document</button>
-        <button class="btn btn-danger" type="button" @click="delFolderModal"><i class="bi bi-exclamation-circle-fill"></i> Delete Folder</button>
+        <button class="btn btn-identity" type="button" @click="createNoteModal">
+          <i class="bi bi-plus-lg"></i> Create Document
+        </button>
+        <button class="btn btn-danger" type="button" @click="delFolderModal">
+          <i class="bi bi-exclamation-circle-fill"></i> Delete Folder
+        </button>
       </div>
       <h3 class="my-4">Notes</h3>
       <div class="text-center i-identity" v-if="notes === null">
@@ -39,10 +43,13 @@ export default {
     getNotes() {
       this.$emit('getNotes', this.id);
     },
-    delFolderModal(){
-      this.$router.push("/");
+    delFolderModal() {
+      this.$router.push('/');
       this.$emit('delFolderModal', this.id);
-    }
+    },
+    createNoteModal() {
+      this.$emit('createNoteModal', this.id);
+    },
   },
 };
 </script>

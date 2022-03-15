@@ -8,14 +8,20 @@
     </div>
     <div
       v-else
-      class="container-fluid d-flex justify-content-center align-content-center flex-wrap"
+      class="
+        container-fluid
+        d-flex
+        justify-content-center
+        align-content-center
+        flex-wrap
+      "
     >
       <Folder
         v-for="folder in folders"
         :key="folder.id"
         :to="`/folder/${folder.id}`"
         :folder="folder"
-        @openNoteModal="openNoteModal"
+        @createNoteModal="createNoteModal"
         @delFolderModal="delFolderModal"
       />
       <div
@@ -25,33 +31,29 @@
       >
         <i class="bi bi-folder-plus display-5 i-identity"></i>
       </div>
-      <div class="m-3" style="width: 27rem" v-for="(spacer, i) in spacer" :key="i"></div>
+      <div
+        class="m-3"
+        style="width: 27rem"
+        v-for="(spacer, i) in spacer"
+        :key="i"
+      ></div>
     </div>
-    <CreateFolder id="createFolder" aria-hidden="true" @createFolder="createFolder" />
-    <CreateNote
-      id="createNote"
+    <CreateFolder
+      id="createFolder"
       aria-hidden="true"
-      @createNote="createNote"
-      :currentFolder="currentFolder"
+      @createFolder="createFolder"
     />
-    <DeleteFolder @deleteFolder="deleteFolder" :currentFolder="currentFolder" id="deleteFolder" />
-    <button @click="classrooms">Classrooms</button>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 import MicroModal from 'micromodal';
 import Folder from '@/components/Folder.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
-import CreateNote from '@/components/CreateNote.vue';
-import DeleteFolder from '@/components/DeleteFolder.vue';
 export default {
   components: {
     Folder,
     CreateFolder,
-    CreateNote,
-    DeleteFolder
   },
   props: {
     folders: {
@@ -65,13 +67,6 @@ export default {
     };
   },
   methods: {
-    async classrooms() {
-      const res = await axios({
-        method: 'get',
-        url: `http://localhost:3000/classroomfiles/${localStorage.getItem('userHash')}`,
-      });
-      console.log(res);
-    },
     createNote(noteName) {
       this.$emit('createNote', {
         noteName: noteName,
@@ -96,12 +91,11 @@ export default {
       });
       alert('Done', res);
     },*/
-    openNoteModal(folder) {
-      this.currentFolder = folder;
-      MicroModal.show('createNote');
+    createNoteModal(id) {
+      this.$emit('createNoteModal', id);
     },
-    delFolderModal(folder) {
-      this.$emit('delFolderModal', folder);
+    delFolderModal(id) {
+      this.$emit('delFolderModal', id);
     },
     createFolderModal() {
       MicroModal.show('createFolder');

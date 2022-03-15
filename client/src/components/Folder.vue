@@ -19,7 +19,7 @@
         <i
           class="bi bi-plus h3 i-identity"
           style="cursor: pointer"
-          @click="openNoteModal"
+          @click="createNoteModal"
         ></i>
         <i
           class="bi bi-x-square-fill h4 mx-2 i-identity"
@@ -47,8 +47,8 @@ export default {
     },
   },
   methods: {
-    openNoteModal() {
-      this.$emit('openNoteModal', this.folder);
+    createNoteModal() {
+      this.$emit('createNoteModal', this.folder.folder_id);
     },
     delFolderModal() {
       this.$emit('delFolderModal', this.folder.folder_id);

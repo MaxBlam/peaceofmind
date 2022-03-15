@@ -26,6 +26,7 @@
       @saveSettings="saveSettings"
       @createNote="createNote"
       @delFolderModal="delFolderModal"
+      @createNoteModal="createNoteModal"
       @createFolder="createFolder"
       @getNotes="getNotes"
       @login="login"
@@ -43,6 +44,12 @@
       :currentFolder="currentFolder"
       id="deleteFolder"
     />
+    <CreateNote
+      id="createNote"
+      aria-hidden="true"
+      @createNote="createNote"
+      :currentFolder="currentFolder"
+    />
   </div>
 </template>
 
@@ -54,6 +61,7 @@ import UploadFile from '@/components/UploadFile.vue';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
 import DeleteFolder from '@/components/DeleteFolder.vue';
+import CreateNote from '@/components/CreateNote.vue';
 export default {
   components: {
     //HelloWorld,
@@ -61,6 +69,7 @@ export default {
     Footer,
     UploadFile,
     DeleteFolder,
+    CreateNote,
   },
   mounted() {
     MicroModal.init();
@@ -95,9 +104,9 @@ export default {
       try {
         const googleUser = await this.$gAuth.signIn();
         const goaRes = await googleUser.grantOfflineAccess({
-          scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
+          scope:
+            'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
         });
-        console.log(this.serverAddress);
         const res = await axios({
           url: this.serverAddress + '/login',
           method: 'POST',
@@ -138,6 +147,15 @@ export default {
         console.error(error);
       }
     },
+    async classrooms() {
+      const res = await axios({
+        method: 'get',
+        url: `http://localhost:3000/classroomfiles/${localStorage.getItem(
+          'userHash'
+        )}`,
+      });
+      console.log(res);
+    },
     async addNote(object) {
       try {
         await axios({
@@ -162,19 +180,19 @@ export default {
         console.error(error);
       }
     },
-    async createNote(object) {
+    async createNote(noteName) {
       try {
-        const { noteName, f_id } = object;
         await axios({
           method: 'POST',
           url: this.serverAddress + '/note',
           'Content-Type': 'application/json',
           data: {
-            noteName: noteName,
+            noteName,
             userHash: this.userHash,
-            folderId: f_id,
+            folderId: this.currentFolder.folder_id,
           },
         });
+        window.location.reload();
       } catch (error) {
         console.error(error);
       }
@@ -228,8 +246,12 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('deleteFolder');
+    },
+    createNoteModal(id) {
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      MicroModal.show('createNote');
     },
     updateAvailable() {
       this.updateAlert = true;
