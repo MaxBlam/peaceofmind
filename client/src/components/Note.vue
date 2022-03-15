@@ -2,7 +2,7 @@
   <div class="container">
     <p class="h4">{{ note.name }}</p>
     <div class="container-fluid shadow rounded-4 blur">
-      <h3>Lorem ipsum</h3>
+      <h3>{{note.name}}</h3>
       <ol class="list-group list-group-numbered">
         <li
           class="

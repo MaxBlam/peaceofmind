@@ -128,10 +128,6 @@ const createFolder = asyncHandler(async (req, res) => {
     res.status(500).send('Folder needs a name');
     return;
   }
-  if (teacherName === '') {
-    res.status(500).send('Teacher needs a name');
-    return;
-  }
   const fileMetadata = {
     name: folderName,
     parents: [rootId],

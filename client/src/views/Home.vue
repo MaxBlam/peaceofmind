@@ -1,6 +1,13 @@
 <template>
-  <div>
+  <div class="mt-4">
+    <div class="text-center i-identity" v-if="folders === null">
+      <p>Loading...</p>
+      <div class="spinner-grow" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <div
+      v-else
       class="
         container-fluid
         d-flex
@@ -42,11 +49,6 @@
       @createNote="createNote"
       :currentFolder="currentFolder"
     />
-    <DeleteFolder
-      @deleteFolder="deleteFolder"
-      :currentFolder="currentFolder"
-      id="deleteFolder"
-    />
   </div>
 </template>
 
@@ -55,13 +57,11 @@ import MicroModal from 'micromodal';
 import Folder from '@/components/Folder.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
 import CreateNote from '@/components/CreateNote.vue';
-import DeleteFolder from '@/components/DeleteFolder.vue';
 export default {
   components: {
     Folder,
     CreateFolder,
     CreateNote,
-    DeleteFolder,
   },
   props: {
     folders: {
@@ -104,8 +104,7 @@ export default {
       MicroModal.show('createNote');
     },
     delFolderModal(folder) {
-      this.currentFolder = folder;
-      MicroModal.show('deleteFolder');
+      this.$emit('delFolderModal', folder);
     },
     createFolderModal() {
       MicroModal.show('createFolder');

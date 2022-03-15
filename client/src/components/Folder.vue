@@ -51,7 +51,7 @@ export default {
       this.$emit('openNoteModal', this.folder);
     },
     delFolderModal() {
-      this.$emit('delFolderModal', this.folder);
+      this.$emit('delFolderModal', this.folder.folder_id);
     },
   },
 };
