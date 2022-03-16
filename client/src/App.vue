@@ -29,6 +29,7 @@
       @createNoteModal="createNoteModal"
       @createFolder="createFolder"
       @getNotes="getNotes"
+      @deleteNote="deleteNote"
       @login="login"
       @logout="logout"
     />
@@ -214,6 +215,18 @@ export default {
       }
       this.getFolders();
     },
+    async deleteNote(id) {
+      await axios({
+        method: 'Delete',
+        url: 'http://localhost:3000/note',
+        'Content-Type': 'application/json',
+        data: {
+          noteId: id,
+          userHash: this.userHash,
+        },
+      });
+      window.location.reload();
+    },
     async createFolder(object) {
       try {
         await axios({
@@ -297,7 +310,15 @@ html {
   color: white !important;
 }
 .btn-identity:hover {
-  background-color: #b46cc0 !important;
+  background-color: #90509b !important;
+  color: white !important;
+}
+.btn-i-danger {
+  background-color: #651585 !important;
+  color: white !important;
+}
+.btn-i-danger:hover {
+  background-color: rgb(48, 11, 90) !important;
   color: white !important;
 }
 .i-identity {

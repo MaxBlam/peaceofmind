@@ -79,18 +79,6 @@ export default {
     createFolder(object) {
       this.$emit('createFolder', object);
     },
-    /*async deleteTab() {
-      const res = await axios({
-        method: 'Delete',
-        url: 'http://localhost:3000/note',
-        'Content-Type': 'application/json',
-        data: {
-          noteId: this.tabId,
-          userHash: localStorage.getItem('userHash'),
-        },
-      });
-      alert('Done', res);
-    },*/
     createNoteModal(id) {
       this.$emit('createNoteModal', id);
     },

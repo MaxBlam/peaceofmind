@@ -6,7 +6,7 @@
         <button class="btn btn-identity" type="button" @click="createNoteModal">
           <i class="bi bi-plus-lg"></i> Create Document
         </button>
-        <button class="btn btn-danger" type="button" @click="delFolderModal">
+        <button class="btn btn-i-danger" type="button" @click="delFolderModal">
           <i class="bi bi-exclamation-circle-fill"></i> Delete Folder
         </button>
       </div>
@@ -18,7 +18,12 @@
         </div>
       </div>
       <div v-else>
-        <Note v-for="(note, i) of notes" :key="i" :note="note" />
+        <Note
+          v-for="(note, i) of notes"
+          :key="i"
+          :note="note"
+          @deleteNote="deleteNote"
+        />
       </div>
     </div>
   </div>
@@ -49,6 +54,9 @@ export default {
     },
     createNoteModal() {
       this.$emit('createNoteModal', this.id);
+    },
+    deleteNote(id) {
+      this.$emit('deleteNote', id);
     },
   },
 };
