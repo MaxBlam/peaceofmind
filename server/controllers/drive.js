@@ -49,6 +49,7 @@ const createNote = asyncHandler(async (req, res) => {
     userDBdata[0].acc_id,
     driveRes.data.id,
     folderDbData[0].f_id,
+    null,
   );
   res.status(200).json(dbRes);
 });
@@ -170,9 +171,27 @@ async function createFolderServerside(folderName, rootId) {
   return driveRes;
 }
 let counter = 0;
-async function copyFiles() {
-  counter += 1;
-  console.log('Counter: ', counter);
+
+async function copyFiles(docId, folderId, userId) {
+  const fid = await modelDrive.getFolderFid(folderId);
+  if (fid.length > 0) {
+    try {
+      console.log(`Doc: ${docId} | User: ${userId}`);
+      const tempFolder = fid[0].folder_id;
+      const fileMetaData = {
+        parents: [tempFolder],
+      };
+      // const driveRes = await drive.files.copy({
+      //   resource: fileMetaData,
+      //   fileId: docId,
+      //   fields: 'id',
+      // });
+      // modelDrive.createNote(userId, driveRes.data.id, folderId, docId);
+    } catch (ex) {
+      counter += 1;
+      console.log(ex.message, '||||', counter);
+    }
+  }
 }
 
 module.exports = {
