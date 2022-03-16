@@ -200,7 +200,7 @@
           align-items-center
         "
       >
-        <h1 class="display-4">Find your Peace of Mind</h1>
+        <h1 class="display-4">Find your Piece of Mind</h1>
         <div
           class="
             container
@@ -322,7 +322,7 @@
         data-aos-duration="1000"
       >
         <div class="text-dark col-12 col-md-5">
-          <h1 class="display-4">Peace of Mind</h1>
+          <h1 class="display-4">Piece of Mind</h1>
           <p>
             PieceOfMind is an Web App available on mobile and pc to make your
             life easier. Just scan your handwritten notes and add them to a
@@ -505,7 +505,7 @@ export default {
   methods: {
     sendMail() {
       window.open(
-        `mailto:pieceofmind@htlwienwest.at?subject=${this.subject}&body=${this.message}`
+        `mailto:pieceofmind@htlwienwest.at?subject=${this.subject}&body=${this.message}`,
       );
     },
   },

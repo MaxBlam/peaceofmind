@@ -6,18 +6,22 @@ const cors = require('cors');
 const session = require('express-session');
 const PgSession = require('connect-pg-simple')(session);
 const routes = require('./routes');
+const compression = require('compression');
 
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 require('colors');
 require('dotenv').config();
 
-const { NODE_ENV, SESSION_LIFETIME, SESSION_NAME, SESSION_SECRET } = process.env;
+const { NODE_ENV, SESSION_LIFETIME, SESSION_NAME, SESSION_SECRET } =
+  process.env;
 
 const app = express();
 
+app.use(compression());
 app.use(morgan('dev'));
 app.use(cors());
+
 app.use(
   session({
     store: new PgSession({
