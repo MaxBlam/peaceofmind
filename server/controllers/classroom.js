@@ -135,12 +135,14 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
     const filterOnPdfMaterials = filteredMaterials.filter(
       (el) => el.title.includes(substring1) || el.title.includes(substring2),
     );
-    filterOnPdfMaterials.forEach((pdf) => {
-      console.log('CLASSROOM Folder and Note');
+    filterOnPdfMaterials.forEach(async (pdf) => {
+      const copyOfDoc = await modelDrive.getCopysOfDocument(pdf.id);
 
-      console.log(pdf.id);
-      console.log(classroomFolders.filter((el) => el.classroom_id === classr.classroom_id));
-      copyFiles();
+      if (copyOfDoc.length === 0) {
+        console.log(pdf.id);
+        const folderId = classroomFolders.filter((el) => el.classroom_id === classr.classroom_id);
+        copyFiles(pdf.id, folderId[0].f_id, userId.acc_id);
+      }
     });
   });
   res.status(200).json(classRooms);
