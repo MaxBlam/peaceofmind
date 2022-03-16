@@ -1,5 +1,10 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    v-bind:class="{
+      'text-light': darkTheme,
+    }"
+  >
     <h3 class="my-4">Settings</h3>
     <form class="form">
       <p>In-Document Styling Preferences</p>
@@ -72,17 +77,38 @@
       <button type="submit" class="btn btn-identity transition-sm col-2">
         Save
       </button>
+      <p class="mt-3">Website Settings</p>
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          v-model="themeSwitch"
+          @change="themeChange"
+        />
+        <label class="form-check-label">Dark Theme</label>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 export default {
+  created() {
+    this.themeSwitch = this.darkTheme;
+  },
   data: () => ({
     pColor: '',
     hColor: '',
     liColor: '',
+    themeSwitch: false,
   }),
+  props: {
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
   methods: {
     saveSettings() {
       this.$emit('saveSettings', {
@@ -90,6 +116,9 @@ export default {
         hColor: this.hColor,
         liColor: this.liColor,
       });
+    },
+    themeChange() {
+      this.$emit('themeChange', this.themeSwitch);
     },
   },
 };

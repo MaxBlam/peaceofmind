@@ -10,8 +10,12 @@
           <i class="bi bi-exclamation-circle-fill"></i> Delete Folder
         </button>
       </div>
-      <h3 class="my-4">Notes</h3>
-      <div class="text-center i-identity" v-if="notes === null">
+      <h3 class="my-4" v-bind:class="{ 'text-light': darkTheme }">Notes</h3>
+      <div
+        class="text-center"
+        v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
+        v-if="notes === null"
+      >
         <p>Loading...</p>
         <div class="spinner-grow" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -22,6 +26,7 @@
           v-for="(note, i) of notes"
           :key="i"
           :note="note"
+          :darkTheme="darkTheme"
           @deleteNote="deleteNote"
         />
       </div>
@@ -39,7 +44,11 @@ export default {
   },
   props: {
     id: String,
-    notes: Array,
+    notes: { type: Array, default: () => [] },
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   created() {
     this.getNotes();

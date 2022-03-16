@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <p class="h4">{{ note.name }}</p>
+    <p class="h4" v-bind:class="{ 'text-light': darkTheme }">{{ note.name }}</p>
     <div class="container-fluid pb-2">
       <div class="row shadow rounded-3 overflow-hidden">
-        <div class="col-md-8 col-sm-12 col-lg-10 blur">
+        <div class="col-md-8 col-sm-12 bg-light col-lg-10 blur">
           <h3>{{ note.name }}</h3>
           <ol class="list-group list-group-numbered">
             <li
@@ -67,6 +67,10 @@ export default {
   props: {
     note: {
       type: Object,
+    },
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
     },
   },
   methods: {

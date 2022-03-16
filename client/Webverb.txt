@@ -1,6 +1,3 @@
 About:
-Bilder füllen
-Badges einzeln animieren (Fade in)
-Routen umstellen (/app statt / und /about auf /)
 https://web.dev/font-display/?utm_source=lighthouse&utm_medium=devtools für Schriftarten
-Nav Items sollen Nav schließen
+Details -> Open soll mit Mime-Type übereinstimmen

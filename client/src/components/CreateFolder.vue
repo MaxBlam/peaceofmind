@@ -1,7 +1,16 @@
 <template>
   <div class="modal">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
-      <div class="modal-content container" role="dialog" aria-modal="true">
+      <div
+        class="rounded-3 container"
+        role="dialog"
+        aria-modal="true"
+        v-bind:class="{
+          'bg-dark': darkTheme,
+          'modal-content': !darkTheme,
+          'text-light': darkTheme,
+        }"
+      >
         <div class="modal-header">
           <h5 class="modal-title">New Folder</h5>
           <button
@@ -10,7 +19,10 @@
             aria-label="Close modal"
             data-micromodal-close
           >
-            <i class="bi bi-x-lg"></i>
+            <i
+              class="bi bi-x-lg"
+              v-bind:class="{ 'text-light': darkTheme }"
+            ></i>
           </button>
         </div>
         <div class="modal-body">
@@ -76,6 +88,12 @@ export default {
     teacher: '',
     folderName: '',
   }),
+  props: {
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
   computed: {
     folder: function () {
       return {

@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:class="{ 'bg-dark': darkTheme }">
     <!-- <HelloWorld />-->
-    <NavBar @uploadFile="uploadFile" :isLoggedIn="isLoggedIn" />
+    <NavBar
+      @uploadFile="uploadFile"
+      :isLoggedIn="isLoggedIn"
+      :darkTheme="darkTheme"
+    />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <div
       class="alert alert-danger mb-0 rounded-0 rounded-bottom"
@@ -22,6 +26,7 @@
     <router-view
       :folders="folders"
       :notes="notes"
+      :darkTheme="darkTheme"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
       @createNote="createNote"
@@ -32,6 +37,7 @@
       @deleteNote="deleteNote"
       @login="login"
       @logout="logout"
+      @themeChange="themeChange"
     />
     <Footer />
     <UploadFile
@@ -39,17 +45,26 @@
       @addNote="addNote"
       aria-hidden="true"
       :folders="folders"
+      :darkTheme="darkTheme"
     />
     <DeleteFolder
       @deleteFolder="deleteFolder"
       :currentFolder="currentFolder"
       id="deleteFolder"
+      :darkTheme="darkTheme"
     />
     <CreateNote
       id="createNote"
       aria-hidden="true"
       @createNote="createNote"
       :currentFolder="currentFolder"
+      :darkTheme="darkTheme"
+    />
+    <CreateFolder
+      id="createFolder"
+      aria-hidden="true"
+      @createFolder="createFolder"
+      :darkTheme="darkTheme"
     />
   </div>
 </template>
@@ -63,6 +78,7 @@ import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
 import DeleteFolder from '@/components/DeleteFolder.vue';
 import CreateNote from '@/components/CreateNote.vue';
+import CreateFolder from '@/components/CreateFolder.vue';
 export default {
   components: {
     //HelloWorld,
@@ -71,6 +87,7 @@ export default {
     UploadFile,
     DeleteFolder,
     CreateNote,
+    CreateFolder,
   },
   mounted() {
     MicroModal.init();
@@ -84,9 +101,11 @@ export default {
     offline: false,
     updateAlert: false,
     currentFolder: {},
+    darkTheme: false,
   }),
   created() {
     this.isLoggedInF();
+    this.darkTheme = localStorage.getItem('theme');
     window.addEventListener('swUpdated', this.updateAvailable, {
       once: true,
     });
@@ -152,7 +171,7 @@ export default {
       const res = await axios({
         method: 'get',
         url: `http://localhost:3000/classroomfiles/${localStorage.getItem(
-          'userHash',
+          'userHash'
         )}`,
       });
       console.log(res);
@@ -260,15 +279,19 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
       this.updateAlert = true;
+    },
+    themeChange(theme) {
+      this.darkTheme = theme;
+      localStorage.setItem('darkTheme', theme);
     },
   },
   watch: {
