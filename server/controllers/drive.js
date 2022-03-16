@@ -31,7 +31,6 @@ const createRootFolder = asyncHandler(async () => {
 const createNote = asyncHandler(async (req, res) => {
   const { userHash, noteName, folderId } = req.body;
   const userDBdata = await model.getUser(userHash);
-  console.log('test1');
   const fileMetadata = {
     name: noteName,
     parents: [folderId],

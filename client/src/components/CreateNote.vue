@@ -26,7 +26,6 @@
           <button
             type="button"
             aria-label="Add Note"
-            data-micromodal-close
             class="btn btn-identity transition-sm"
             @click="addNote"
           >

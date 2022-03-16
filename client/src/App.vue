@@ -151,7 +151,7 @@ export default {
       const res = await axios({
         method: 'get',
         url: `http://localhost:3000/classroomfiles/${localStorage.getItem(
-          'userHash'
+          'userHash',
         )}`,
       });
       console.log(res);
@@ -181,6 +181,7 @@ export default {
       }
     },
     async createNote(noteName) {
+      MicroModal.close('createNote');
       try {
         await axios({
           method: 'POST',
@@ -246,11 +247,11 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
