@@ -105,7 +105,7 @@ export default {
   }),
   created() {
     this.isLoggedInF();
-    this.darkTheme = localStorage.getItem('theme');
+    this.themeStorage();
     window.addEventListener('swUpdated', this.updateAvailable, {
       once: true,
     });
@@ -142,100 +142,107 @@ export default {
         console.error(error);
       }
     },
-    async logout() {
-      try {
-        await axios({
-          method: 'GET',
-          url: this.serverAddress + '/logout',
+    logout() {
+      axios({
+        method: 'GET',
+        url: this.serverAddress + '/logout',
+      })
+        .then(() => {
+          localStorage.clear();
+          this.folders = [];
+          this.notes = null;
+          this.isLoggedInF();
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        localStorage.clear();
-        this.folders = [];
-        this.notes = null;
-      } catch (error) {
-        console.error(error);
-      }
-      this.isLoggedInF();
     },
-    async getFolders() {
-      try {
-        const { data } = await axios({
-          url: this.serverAddress + '/folder/' + this.userHash,
-          method: 'GET',
+    getFolders() {
+      axios({
+        url: this.serverAddress + '/folder/' + this.userHash,
+        method: 'GET',
+      })
+        .then((res) => {
+          this.folders = res.data;
+        })
+        .catch(() => {
+          this.$router.push('logout');
         });
-        this.folders = data;
-      } catch (error) {
-        console.error(error);
-      }
     },
-    async classrooms() {
-      const res = await axios({
+    classrooms() {
+      axios({
         method: 'get',
         url: `http://localhost:3000/classroomfiles/${localStorage.getItem(
           'userHash'
         )}`,
-      });
-      console.log(res);
-    },
-    async addNote(object) {
-      try {
-        await axios({
-          url: this.serverAddress + '/note/ocr',
-          method: 'POST',
-          contentType: 'application/json',
-          data: object,
+      })
+        .then(() => {})
+        .catch((error) => {
+          console.log(error);
         });
-      } catch (error) {
-        console.error(error);
-      }
     },
-    async saveSettings(settings) {
-      try {
-        await axios({
-          url: this.serverAddress + '/settings',
-          method: 'POST',
-          contentType: 'application/json',
-          data: settings,
+    addNote(object) {
+      axios({
+        url: this.serverAddress + '/note/ocr',
+        method: 'POST',
+        contentType: 'application/json',
+        data: object,
+      })
+        .then(() => {})
+        .catch((error) => {
+          console.log(error);
         });
-      } catch (error) {
-        console.error(error);
-      }
     },
-    async createNote(noteName) {
+    saveSettings(settings) {
+      axios({
+        url: this.serverAddress + '/settings',
+        method: 'POST',
+        contentType: 'application/json',
+        data: settings,
+      })
+        .then(() => {})
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    createNote(noteName) {
       MicroModal.close('createNote');
-      try {
-        await axios({
-          method: 'POST',
-          url: this.serverAddress + '/note',
-          'Content-Type': 'application/json',
-          data: {
-            noteName,
-            userHash: this.userHash,
-            folderId: this.currentFolder.folder_id,
-          },
+      axios({
+        method: 'POST',
+        url: this.serverAddress + '/note',
+        'Content-Type': 'application/json',
+        data: {
+          noteName,
+          userHash: this.userHash,
+          folderId: this.currentFolder.folder_id,
+        },
+      })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        window.location.reload();
-      } catch (error) {
-        console.error(error);
-      }
     },
-    async deleteFolder(id) {
-      try {
-        await axios({
-          method: 'Delete',
-          url: this.serverAddress + '/folder',
-          'Content-Type': 'application/json',
-          data: {
-            folderId: id,
-            userHash: this.userHash,
-          },
+    deleteFolder(id) {
+      axios({
+        method: 'Delete',
+        url: this.serverAddress + '/folder',
+        'Content-Type': 'application/json',
+        data: {
+          folderId: id,
+          userHash: this.userHash,
+        },
+      })
+        .then(() => {
+          this.getFolders();
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      } catch (error) {
-        console.error(error);
-      }
-      this.getFolders();
     },
-    async deleteNote(id) {
-      await axios({
+    deleteNote(id) {
+      axios({
         method: 'Delete',
         url: 'http://localhost:3000/note',
         'Content-Type': 'application/json',
@@ -243,37 +250,44 @@ export default {
           noteId: id,
           userHash: this.userHash,
         },
-      });
-      window.location.reload();
-    },
-    async createFolder(object) {
-      try {
-        await axios({
-          method: 'POST',
-          url: this.serverAddress + '/folder',
-          'Content-Type': 'application/json',
-          data: {
-            userHash: this.userHash,
-            folderName: object.folderName,
-            teacherName: object.teacher,
-            grade: object.grade,
-          },
+      })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      } catch (error) {
-        console.error(error);
-      }
-      this.getFolders();
     },
-    async getNotes(id) {
-      try {
-        const { data } = await axios({
-          url: this.serverAddress + '/notes/' + id,
-          method: 'GET',
+    createFolder(object) {
+      axios({
+        method: 'POST',
+        url: this.serverAddress + '/folder',
+        'Content-Type': 'application/json',
+        data: {
+          userHash: this.userHash,
+          folderName: object.folderName,
+          teacherName: object.teacher,
+          grade: object.grade,
+        },
+      })
+        .then(() => {
+          this.getFolders();
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        this.notes = data.data.files;
-      } catch (error) {
-        console.error(error);
-      }
+    },
+    getNotes(id) {
+      axios({
+        url: this.serverAddress + '/notes/' + id,
+        method: 'GET',
+      })
+        .then((res) => {
+          this.notes = res.data.data.files;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     uploadFile() {
       MicroModal.show('uploadFile');
@@ -292,6 +306,12 @@ export default {
     themeChange(theme) {
       this.darkTheme = theme;
       localStorage.setItem('darkTheme', theme);
+    },
+    themeStorage() {
+      const res = localStorage.getItem('darkTheme');
+      if (res) {
+        this.darkTheme = JSON.parse(res);
+      }
     },
   },
   watch: {
