@@ -11,6 +11,11 @@
       rounded
       text-center
     "
+    v-bind:class="{
+      'bg-dark': darkTheme,
+      'modal-content': !darkTheme,
+      'text-light': darkTheme,
+    }"
   >
     <legend class="mb-3">Login</legend>
     <button
@@ -22,3 +27,14 @@
     </button>
   </fieldset>
 </template>
+
+<script>
+export default {
+  props: {
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+};
+</script>

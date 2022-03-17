@@ -1,5 +1,13 @@
 <template>
-  <div class="card m-3 rounded-3" style="width: 27rem">
+  <div
+    class="m-3 card rounded-3"
+    v-bind:class="{
+      'bg-dark': darkTheme,
+      'shadow-lg': darkTheme,
+      'text-light': darkTheme,
+    }"
+    style="width: 27rem"
+  >
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center">
         <img
@@ -17,12 +25,14 @@
           {{ folder.name }}
         </h5>
         <i
-          class="bi bi-plus h3 i-identity"
+          class="bi bi-plus h3"
+          v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
           style="cursor: pointer"
           @click="createNoteModal"
         ></i>
         <i
-          class="bi bi-x-square-fill h4 mx-2 i-identity"
+          class="bi bi-x-square-fill h4 mx-2"
+          v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
           style="cursor: pointer"
           @click="delFolderModal"
         ></i>
@@ -44,6 +54,10 @@ export default {
     folder: {
       type: Object,
       default: () => ({}),
+    },
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
     },
   },
   methods: {

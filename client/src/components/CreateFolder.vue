@@ -1,7 +1,16 @@
 <template>
   <div class="modal">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
-      <div class="modal-content container" role="dialog" aria-modal="true">
+      <div
+        class="rounded-3 container"
+        role="dialog"
+        aria-modal="true"
+        v-bind:class="{
+          'bg-dark': darkTheme,
+          'modal-content': !darkTheme,
+          'text-light': darkTheme,
+        }"
+      >
         <div class="modal-header">
           <h5 class="modal-title">New Folder</h5>
           <button
@@ -10,24 +19,27 @@
             aria-label="Close modal"
             data-micromodal-close
           >
-            <i class="bi bi-x-lg"></i>
+            <i
+              class="bi bi-x-lg"
+              v-bind:class="{ 'text-light': darkTheme }"
+            ></i>
           </button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label">Subject</label>
+            <label class="form-label" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }">Subject</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Chemistry"
               v-model="folderName"
             />
           </div>
           <div class="mb-3">
-            <label class="form-label">Teacher</label>
+            <label class="form-label" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }">Teacher</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Mr Bobert Raumgartner"
               v-model="teacher"
             />
@@ -48,7 +60,7 @@
               type="number"
               min="0"
               max="100"
-              class="form-control"
+              class="form-control rounded-3" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Number in percent"
               aria-label="Grade"
             />
@@ -76,6 +88,12 @@ export default {
     teacher: '',
     folderName: '',
   }),
+  props: {
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
   computed: {
     folder: function () {
       return {

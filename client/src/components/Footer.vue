@@ -33,6 +33,6 @@
         >
       </li>
     </ul>
-    <p class="text-center text-muted">© 2021 Piece of Mind</p>
+    <p class="text-center text-muted">© 2022 Piece of Mind</p>
   </footer>
 </template>

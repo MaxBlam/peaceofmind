@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <div class="mt-4" v-bind:class="{ 'bg-dark': darkTheme }">
     <div class="text-center i-identity" v-if="folders === null">
       <p>Loading...</p>
       <div class="spinner-grow" role="status">
@@ -21,6 +21,7 @@
         :key="folder.id"
         :to="`/folder/${folder.id}`"
         :folder="folder"
+        :darkTheme="darkTheme"
         @createNoteModal="createNoteModal"
         @delFolderModal="delFolderModal"
       />
@@ -29,7 +30,10 @@
         style="align-self: stretch; width: 27rem; cursor: pointer"
         @click="createFolderModal"
       >
-        <i class="bi bi-folder-plus display-5 i-identity"></i>
+        <i
+          class="bi bi-folder-plus display-5"
+          v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
+        ></i>
       </div>
       <div
         class="m-3"
@@ -38,27 +42,24 @@
         :key="i"
       ></div>
     </div>
-    <CreateFolder
-      id="createFolder"
-      aria-hidden="true"
-      @createFolder="createFolder"
-    />
   </div>
 </template>
 
 <script>
 import MicroModal from 'micromodal';
 import Folder from '@/components/Folder.vue';
-import CreateFolder from '@/components/CreateFolder.vue';
 export default {
   components: {
     Folder,
-    CreateFolder,
   },
   props: {
     folders: {
       type: Array,
       default: () => [],
+    },
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
     },
   },
   data: () => {
@@ -75,9 +76,6 @@ export default {
     },
     deleteFolder(f_id) {
       this.$emit('deleteFolder', f_id);
-    },
-    createFolder(object) {
-      this.$emit('createFolder', object);
     },
     createNoteModal(id) {
       this.$emit('createNoteModal', id);
