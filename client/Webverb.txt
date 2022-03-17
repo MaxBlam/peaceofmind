@@ -1,4 +1,4 @@
 About:
 https://web.dev/font-display/?utm_source=lighthouse&utm_medium=devtools für Schriftarten
 Details -> Open soll mit Mime-Type übereinstimmen
-Get Folders Response Status Bug
+Details Suche

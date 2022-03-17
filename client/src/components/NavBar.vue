@@ -34,7 +34,6 @@
       </li>
       <li>
         <router-link
-          v-if="isLoggedIn"
           class="btn"
           aria-label="Settings"
           to="/settings"

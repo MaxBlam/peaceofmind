@@ -31,6 +31,7 @@
             <input
               type="text"
               class="form-control"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Name_Chemistry.docx"
               v-model="noteName"
               @keyup.enter="addNote"

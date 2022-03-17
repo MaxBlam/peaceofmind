@@ -38,7 +38,12 @@
               <span class="fw-bold">{{ currentFolder.name }}</span> to
               confirm.</label
             >
-            <input type="text" class="form-control" v-model="input" />
+            <input
+              type="text"
+              class="form-control"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              v-model="input"
+            />
           </div>
           <button
             type="button"

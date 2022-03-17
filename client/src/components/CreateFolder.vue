@@ -27,19 +27,19 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label">Subject</label>
+            <label class="form-label" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }">Subject</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Chemistry"
               v-model="folderName"
             />
           </div>
           <div class="mb-3">
-            <label class="form-label">Teacher</label>
+            <label class="form-label" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }">Teacher</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Mr Bobert Raumgartner"
               v-model="teacher"
             />
@@ -60,7 +60,7 @@
               type="number"
               min="0"
               max="100"
-              class="form-control"
+              class="form-control rounded-3" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Number in percent"
               aria-label="Grade"
             />
