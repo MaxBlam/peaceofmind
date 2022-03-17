@@ -153,7 +153,7 @@ export default {
           this.notes = null;
           this.isLoggedInF();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -162,7 +162,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then((res) => {
+        .then(res => {
           this.folders = res.data;
         })
         .catch(() => {
@@ -173,11 +173,11 @@ export default {
       axios({
         method: 'get',
         url: `http://localhost:3000/classroomfiles/${localStorage.getItem(
-          'userHash'
+          'userHash',
         )}`,
       })
         .then(() => {})
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -189,7 +189,7 @@ export default {
         data: object,
       })
         .then(() => {})
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -201,7 +201,7 @@ export default {
         data: settings,
       })
         .then(() => {})
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -220,7 +220,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -237,7 +237,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -254,7 +254,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -273,7 +273,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -282,10 +282,10 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then((res) => {
+        .then(res => {
           this.notes = res.data.data.files;
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -293,11 +293,11 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
@@ -316,7 +316,12 @@ export default {
   },
   watch: {
     $route(to) {
-      if (to.name !== 'About' && to.name !== 'Login' && to.name !== 'Imprint') {
+      if (
+        to.name !== 'About' &&
+        to.name !== 'Login' &&
+        to.name !== 'Imprint' &&
+        to.name !== 'Settings'
+      ) {
         this.isLoggedInF();
       }
       if (to.name === 'Details') {
