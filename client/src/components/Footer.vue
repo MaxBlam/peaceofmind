@@ -2,11 +2,21 @@
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item">
-        <router-link
-          to="/imprint"
+        <a
+          href="https://pieceofmind.at"
+          rel="noreferrer"
+          class="nav-link px-2 text-muted"
+          title="About"
+          >About</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          href="https://pieceofmind.at/imprint"
+          rel="noreferrer"
           class="nav-link px-2 text-muted"
           title="Imprint"
-          >Imprint</router-link
+          >Imprint</a
         >
       </li>
       <li class="nav-item">
