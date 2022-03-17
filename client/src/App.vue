@@ -27,6 +27,7 @@
       :folders="folders"
       :notes="notes"
       :darkTheme="darkTheme"
+      :isLoggedIn="isLoggedIn"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
       @createNote="createNote"
@@ -117,8 +118,11 @@ export default {
       this.userHash = localStorage.getItem('userHash');
       if (this.userHash) {
         this.isLoggedIn = true;
-        this.getFolders();
-      } else this.$router.push('/login');
+        this.getClassrooms();
+      } else {
+        this.$router.push('/login');
+        this.isLoggedIn = false;
+      }
     },
     async login() {
       try {
@@ -169,14 +173,14 @@ export default {
           this.$router.push('logout');
         });
     },
-    classrooms() {
+    getClassrooms() {
       axios({
         method: 'get',
-        url: `http://localhost:3000/classroomfiles/${localStorage.getItem(
-          'userHash',
-        )}`,
+        url: this.serverAddress + '/classroomfiles/' + this.userHash,
       })
-        .then(() => {})
+        .then(() => {
+          this.getFolders();
+        })
         .catch(error => {
           console.log(error);
         });
@@ -316,12 +320,7 @@ export default {
   },
   watch: {
     $route(to) {
-      if (
-        to.name !== 'About' &&
-        to.name !== 'Login' &&
-        to.name !== 'Imprint' &&
-        to.name !== 'Settings'
-      ) {
+      if (to.name !== 'Login' && to.name !== 'Settings') {
         this.isLoggedInF();
       }
       if (to.name === 'Details') {

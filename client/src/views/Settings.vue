@@ -7,7 +7,7 @@
   >
     <h3 class="my-4">Settings</h3>
     <form class="form">
-      <div v-if="!isLoggedIn">
+      <div v-if="isLoggedIn">
         <p>In-Document Styling Preferences</p>
         <div class="input-group flex-nowrap mb-3">
           <span

@@ -97,7 +97,7 @@
           class="navbar-nav justify-content-end flex-grow-1 pe-3"
           data-bs-dismiss="offcanvas"
         >
-          <li class="nav-item px-2">
+          <li class="nav-item px-2" v-if="isLoggedIn">
             <router-link
               to="/"
               exact
@@ -140,16 +140,16 @@
             >
           </li>
           <li class="nav-item px-2">
-            <router-link
-              to="/about"
+            <a
+            href="https://pieceofmind.at"
+          rel="noreferrer"
               class="nav-link"
               v-bind:class="{
                 'text-light': darkTheme,
                 'text-dark': !darkTheme,
               }"
-              active-class="fw-bold"
               title="About page"
-              >About</router-link
+              >About</a
             >
           </li>
           <li class="nav-item px-2">
@@ -186,23 +186,23 @@
                 'text-light': darkTheme,
                 'text-dark': !darkTheme,
               }"
-              href="/about#contact"
+              href="https://pieceofmind.at/#contact"
               title="Contact Us"
               >Contact</a
             >
           </li>
 
           <li class="nav-item px-2">
-            <router-link
-              to="/imprint#"
+            <a
+            href="https://pieceofmind.at/imprint"
+          rel="noreferrer"
               class="nav-link"
               v-bind:class="{
                 'text-light': darkTheme,
                 'text-dark': !darkTheme,
               }"
-              active-class="fw-bold"
               title="Imprint"
-              >Imprint</router-link
+              >Imprint</a
             >
           </li>
         </ul>
