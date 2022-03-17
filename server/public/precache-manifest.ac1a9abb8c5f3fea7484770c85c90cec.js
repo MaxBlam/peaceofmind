@@ -1,45 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "url": "/22a275dfb86f08a3dd4c81f667ea2f22.avif"
+    "revision": "314df33e5cb93e8d7259",
+    "url": "/css/about.6f07423c.css"
   },
   {
-    "url": "/314b476dfbf8762a1f32331cdcf3473c.avif"
-  },
-  {
-    "url": "/3fd69d9beda483c1fc1e81486382ba84.avif"
-  },
-  {
-    "url": "/40f87cc4c693544f7e44d9e20fc5ea0c.avif"
-  },
-  {
-    "url": "/590fa1a48f26abb100793895cc83b27e.avif"
-  },
-  {
-    "url": "/712dd08721043ce2c5124ead91908571.avif"
-  },
-  {
-    "url": "/bcdf97751e5dd740df328b4abfeb410b.avif"
-  },
-  {
-    "revision": "0b7d7802d7872d93728e",
-    "url": "/css/about.3143c0d3.css"
-  },
-  {
-    "revision": "404a18eab860aa8b3aa7",
+    "revision": "9a962432f81e67fe40ee",
     "url": "/css/app.55b17bdb.css"
   },
   {
     "revision": "73c5ecffa36a81f31bed",
     "url": "/css/chunk-vendors.1a551c8c.css"
-  },
-  {
-    "url": "/ef262fdd0ea0433def12a6e8673d537e.avif"
-  },
-  {
-    "url": "/f200766172efbc9e90063837b4788055.avif"
-  },
-  {
-    "url": "/faea78fbe1a435c7d3f45dc805db0f13.avif"
   },
   {
     "revision": "b0dc21936e27b98d6c65bd72dd705c65",
@@ -48,10 +18,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c5787b4ab55835580294696c3cbcc521",
     "url": "/fonts/bootstrap-icons.c5787b4a.woff2"
-  },
-  {
-    "revision": "4e273b302eac160161b0e9bc720fedfb",
-    "url": "/img/arrow.4e273b30.svg"
   },
   {
     "revision": "385970b78d8a58d02d396d42ed8b3425",
@@ -66,16 +32,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/timeline.6a83101a.png"
   },
   {
-    "revision": "cf13f598c2e4dae6e017282f20339c5b",
+    "revision": "fb6388e687df1ab1357144b654d8623b",
     "url": "/index.html"
   },
   {
-    "revision": "0b7d7802d7872d93728e",
-    "url": "/js/about.3277f92c.js"
+    "revision": "314df33e5cb93e8d7259",
+    "url": "/js/about.c14cfd00.js"
   },
   {
-    "revision": "404a18eab860aa8b3aa7",
-    "url": "/js/app.dd9ff5d1.js"
+    "revision": "9a962432f81e67fe40ee",
+    "url": "/js/app.c909287a.js"
   },
   {
     "revision": "73c5ecffa36a81f31bed",

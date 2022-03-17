@@ -7,6 +7,7 @@ const session = require('express-session');
 const PgSession = require('connect-pg-simple')(session);
 const routes = require('./routes');
 const compression = require('compression');
+const history = require('connect-history-api-fallback');
 
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
@@ -19,6 +20,7 @@ const { NODE_ENV, SESSION_LIFETIME, SESSION_NAME, SESSION_SECRET } =
 const app = express();
 
 app.use(compression());
+app.use(history());
 app.use(morgan('dev'));
 app.use(cors());
 
