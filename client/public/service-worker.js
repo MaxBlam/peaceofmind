@@ -7,7 +7,19 @@ if (workbox) {
   workbox.routing.registerRoute(
     new RegExp('/folders'),
     new workbox.strategies.StaleWhileRevalidate({
-      cacheName: 'PieceofMind-FolderCache',
+      cacheName: 'PieceofMind-Folders',
+    }),
+  );
+  workbox.routing.registerRoute(
+    new RegExp('/js'),
+    new workbox.strategies.NetworkFirst({
+      cacheName: 'PieceofMind-Javascript',
+    }),
+  );
+  workbox.routing.registerRoute(
+    new RegExp('/fonts'),
+    new workbox.strategies.StaleWhileRevalidate({
+      cacheName: 'PieceofMind-Fonts',
     }),
   );
   self.addEventListener('push', event => {
