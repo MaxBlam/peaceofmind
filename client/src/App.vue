@@ -181,8 +181,8 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          this.$router.push('logout');
         });
     },
     addNote(object) {
@@ -289,8 +289,8 @@ export default {
         .then(res => {
           this.notes = res.data.data.files;
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          this.$router.push('logout');
         });
     },
     uploadFile() {
