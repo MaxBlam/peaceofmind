@@ -1,6 +1,9 @@
 <template>
   <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <ul
+      class="nav justify-content-center pb-3 mb-3"
+      v-bind:class="{ 'border-bottom': !darkTheme }"
+    >
       <li class="nav-item">
         <a
           href="https://pieceofmind.at"
@@ -46,3 +49,13 @@
     <p class="text-center text-muted">© 2022 Piece of Mind</p>
   </footer>
 </template>
+<script>
+export default {
+  props: {
+    darkTheme: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+};
+</script>

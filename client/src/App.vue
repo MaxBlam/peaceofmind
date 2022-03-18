@@ -40,7 +40,7 @@
       @logout="logout"
       @themeChange="themeChange"
     />
-    <Footer />
+    <Footer :darkTheme="darkTheme" />
     <UploadFile
       id="uploadFile"
       @addNote="addNote"
@@ -332,6 +332,9 @@ export default {
 </script>
 
 <style>
+#app {
+  height: 100vh;
+}
 p {
   font-family: 'Abel', sans-serif;
 }
