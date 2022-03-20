@@ -33,16 +33,17 @@
         </button>
       </li>
       <li>
-        <router-link
+        <button
+          type="button"
           class="btn"
           aria-label="Settings"
-          to="/settings"
+          @click="settings"
         >
           <i
             class="bi bi-gear h3"
             v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
           ></i>
-        </router-link>
+        </button>
       </li>
       <li>
         <button
@@ -141,8 +142,8 @@
           </li>
           <li class="nav-item px-2">
             <a
-            href="https://pieceofmind.at"
-          rel="noreferrer"
+              href="https://pieceofmind.at"
+              rel="noreferrer"
               class="nav-link"
               v-bind:class="{
                 'text-light': darkTheme,
@@ -194,8 +195,8 @@
 
           <li class="nav-item px-2">
             <a
-            href="https://pieceofmind.at/imprint"
-          rel="noreferrer"
+              href="https://pieceofmind.at/imprint"
+              rel="noreferrer"
               class="nav-link"
               v-bind:class="{
                 'text-light': darkTheme,
@@ -226,6 +227,13 @@ export default {
   methods: {
     uploadFile() {
       this.$emit('uploadFile');
+    },
+    settings() {
+      if (this.$router.currentRoute.path !== '/settings') {
+        this.$router.push('/settings');
+      } else {
+        history.back();
+      }
     },
   },
 };
