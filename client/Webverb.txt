@@ -5,4 +5,3 @@ Lighthouse optimisieren (CSP https://web.dev/csp-xss/?utm_source=lighthouse&utm_
 Workbox für Bootstrap usw
 Settings Button nicht auf Settings View (leitet zur vorherigen View)
 Details View erhält Namen des Ordners (Breadcrumbs)
-Use Systemtheme

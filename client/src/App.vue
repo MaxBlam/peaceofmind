@@ -106,6 +106,7 @@ export default {
     darkTheme: false,
   }),
   created() {
+    this.darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
     this.isLoggedInF();
     this.themeStorage();
     window.addEventListener('swUpdated', this.updateAvailable, {
