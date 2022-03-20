@@ -25,6 +25,7 @@
     </div>
     <router-view
       :folders="folders"
+      :currentFolder="currentFolder"
       :notes="notes"
       :darkTheme="darkTheme"
       :isLoggedIn="isLoggedIn"
@@ -157,7 +158,7 @@ export default {
           this.notes = null;
           this.isLoggedInF();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -166,7 +167,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then(res => {
+        .then((res) => {
           this.folders = res.data;
         })
         .catch(() => {
@@ -193,7 +194,7 @@ export default {
         data: object,
       })
         .then(() => {})
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -205,7 +206,7 @@ export default {
         data: settings,
       })
         .then(() => {})
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -224,7 +225,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -241,7 +242,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -258,7 +259,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -277,7 +278,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -286,22 +287,23 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then(res => {
+        .then((res) => {
+          this.currentFolder = this.folders.find((f) => f.folder_id === id);
           this.notes = res.data.data.files;
         })
         .catch(() => {
-          this.$router.push('logout');
+          this.$router.push('/logout');
         });
     },
     uploadFile() {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {

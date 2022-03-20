@@ -3,3 +3,6 @@ https://web.dev/render-blocking-resources/?utm_source=lighthouse&utm_medium=devt
 Details -> Open soll mit Mime-Type übereinstimmen
 Lighthouse optimisieren (CSP https://web.dev/csp-xss/?utm_source=lighthouse&utm_medium=devtools)
 Workbox für Bootstrap usw
+Settings Button nicht auf Settings View (leitet zur vorherigen View)
+Details View erhält Namen des Ordners (Breadcrumbs)
+Use Systemtheme

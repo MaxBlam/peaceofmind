@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <TimeLine :notes="notes"/>
+    <TimeLine :notes="notes" />
     <div class="container">
       <div class="d-grid gap-2 my-3">
         <button class="btn btn-identity" type="button" @click="createNoteModal">
@@ -69,6 +69,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    currentFolder: {
+      type: Object,
+      default: () => {},
+    },
   },
   created() {
     this.getNotes();
@@ -90,8 +94,8 @@ export default {
   },
   computed: {
     filteredNotes() {
-      return this.notes.filter(el =>
-        el.name.toLowerCase().includes(this.search.toLowerCase()),
+      return this.notes.filter((el) =>
+        el.name.toLowerCase().includes(this.search.toLowerCase())
       );
     },
   },
