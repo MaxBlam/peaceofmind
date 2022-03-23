@@ -1,3 +1,7 @@
 Details -> Open soll mit Mime-Type übereinstimmen
 Lighthouse optimisieren
 Details View erhält Namen des Ordners (Breadcrumbs)
+about: 
+- PieceOfMind is a web application available on mobile and pc to make your life easier. Just scan your notes and add them to a folder. Keeping your notes organized has never been easier.
+- the problem doppelpunkt statt Punkt erster Satz
+- the solution You want your notes to be organized into timelines and folders? You want to simply scan your analog notes and add them to your digital ones? PieceOfMind is the solution! No more unorganized notes lying around on your desktop! 
