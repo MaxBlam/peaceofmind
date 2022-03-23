@@ -1,6 +1,13 @@
 <template>
   <div class="mt-4" v-bind:class="{ 'bg-dark': darkTheme }">
-    <div class="text-center i-identity" v-if="loader">
+    <div
+      class="text-center"
+      v-if="loader"
+      v-bind:class="{
+        'i-identity': !darkTheme,
+        'text-light': darkTheme,
+      }"
+    >
       <p>Loading...</p>
       <div class="spinner-grow" role="status">
         <span class="visually-hidden">Loading...</span>

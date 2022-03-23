@@ -3,7 +3,7 @@
     <!-- <HelloWorld />-->
     <NavBar
       @uploadFile="uploadFile"
-      :isLoggedIn="isLoggedIn"
+      :userHash="userHash"
       :darkTheme="darkTheme"
     />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
@@ -28,7 +28,7 @@
       :currentFolder="currentFolder"
       :notes="notes"
       :darkTheme="darkTheme"
-      :isLoggedIn="isLoggedIn"
+      :userHash="userHash"
       :loader="loader"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
@@ -98,7 +98,6 @@ export default {
   data: () => ({
     folders: [],
     notes: [],
-    isLoggedIn: false,
     serverAddress: process.env.VUE_APP_SERVER,
     userHash: null,
     offline: false,
@@ -116,11 +115,9 @@ export default {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       if (this.userHash) {
-        this.isLoggedIn = true;
         this.getFolders();
       } else {
         this.$router.push('/login');
-        this.isLoggedIn = false;
       }
     },
     async login() {

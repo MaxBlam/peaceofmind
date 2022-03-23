@@ -1,4 +1,3 @@
 Details -> Open soll mit Mime-Type übereinstimmen
 Lighthouse optimisieren
-Workbox für Bootstrap usw
 Details View erhält Namen des Ordners (Breadcrumbs)
