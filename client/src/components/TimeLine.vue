@@ -20,9 +20,6 @@ export default {
       default: () => [],
     },
   },
-  created() {
-    this.notes = this.notes.reverse().slice(0, 2);
-  },
   computed: {
     trimmedNotes: function () {
       return [...this.notes].reverse().slice(0, 3);

@@ -31,7 +31,7 @@
       <div
         class="text-center"
         v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
-        v-if="notes === null"
+        v-if="loader"
       >
         <p>Loading...</p>
         <div class="spinner-grow" role="status">
@@ -64,7 +64,10 @@ export default {
   }),
   props: {
     id: String,
-    notes: { type: Array, default: () => [] },
+    notes: {
+      type: Array,
+      default: () => [],
+    },
     darkTheme: {
       type: Boolean,
       default: () => false,
@@ -72,6 +75,10 @@ export default {
     currentFolder: {
       type: Object,
       default: () => {},
+    },
+    loader: {
+      type: Boolean,
+      default: () => true,
     },
   },
   created() {
@@ -94,8 +101,8 @@ export default {
   },
   computed: {
     filteredNotes() {
-      return this.notes.filter((el) =>
-        el.name.toLowerCase().includes(this.search.toLowerCase())
+      return this.notes.filter(el =>
+        el.name.toLowerCase().includes(this.search.toLowerCase()),
       );
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="mt-4" v-bind:class="{ 'bg-dark': darkTheme }">
-    <div class="text-center i-identity" v-if="folders === null">
+    <div class="text-center i-identity" v-if="loader">
       <p>Loading...</p>
       <div class="spinner-grow" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -60,6 +60,10 @@ export default {
     darkTheme: {
       type: Boolean,
       default: () => false,
+    },
+    loader: {
+      type: Boolean,
+      default: () => true,
     },
   },
   data: () => {

@@ -29,6 +29,7 @@
       :notes="notes"
       :darkTheme="darkTheme"
       :isLoggedIn="isLoggedIn"
+      :loader="loader"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
       @createNote="createNote"
@@ -95,8 +96,8 @@ export default {
     MicroModal.init();
   },
   data: () => ({
-    folders: null,
-    notes: null,
+    folders: [],
+    notes: [],
     isLoggedIn: false,
     serverAddress: process.env.VUE_APP_SERVER,
     userHash: null,
@@ -104,23 +105,19 @@ export default {
     updateAlert: false,
     currentFolder: {},
     darkTheme: false,
+    loader: false,
   }),
   created() {
-    this.darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
     this.isLoggedInF();
     this.themeStorage();
-    window.addEventListener('swUpdated', this.updateAvailable, {
-      once: true,
-    });
-    window.addEventListener('offline', () => (this.offline = true));
-    window.addEventListener('online', () => (this.offline = false));
+    this.buildEventListeners();
   },
   methods: {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       if (this.userHash) {
         this.isLoggedIn = true;
-        this.getClassrooms();
+        this.getFolders();
       } else {
         this.$router.push('/login');
         this.isLoggedIn = false;
@@ -156,26 +153,40 @@ export default {
         .then(() => {
           localStorage.clear();
           this.folders = [];
-          this.notes = null;
+          this.notes = [];
           this.isLoggedInF();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
     getFolders() {
+      this.loader = true;
       axios({
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then((res) => {
+        .then(res => {
           this.folders = res.data;
+          this.loader = false;
         })
         .catch(() => {
           this.$router.push('logout');
         });
     },
-    getClassrooms() {
+    /*getClassrooms() {
+      axios({
+        method: 'get',
+        url: this.serverAddress + '/classrooms/' + this.userHash,
+      })
+        .then(() => {
+          this.getClassroomFiles();
+        })
+        .catch(() => {
+          this.getFolders();
+        });
+    },*/
+    getClassroomFiles() {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
@@ -183,8 +194,8 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(() => {
-          this.$router.push('logout');
+        .catch(error => {
+          console.log(error);
         });
     },
     addNote(object) {
@@ -195,7 +206,7 @@ export default {
         data: object,
       })
         .then(() => {})
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -207,7 +218,7 @@ export default {
         data: settings,
       })
         .then(() => {})
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -226,7 +237,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -243,7 +254,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -260,7 +271,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -279,18 +290,20 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
     getNotes(id) {
+      this.loader = true;
       axios({
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then((res) => {
-          this.currentFolder = this.folders.find((f) => f.folder_id === id);
+        .then(res => {
+          this.currentFolder = this.folders.find(f => f.folder_id === id);
           this.notes = res.data.data.files;
+          this.loader = false;
         })
         .catch(() => {
           this.$router.push('/logout');
@@ -300,11 +313,11 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
@@ -315,10 +328,20 @@ export default {
       localStorage.setItem('darkTheme', theme);
     },
     themeStorage() {
+      this.darkTheme = window.matchMedia(
+        '(prefers-color-scheme: dark)',
+      ).matches;
       const res = localStorage.getItem('darkTheme');
       if (res) {
         this.darkTheme = JSON.parse(res);
       }
+    },
+    buildEventListeners() {
+      window.addEventListener('swUpdated', this.updateAvailable, {
+        once: true,
+      });
+      window.addEventListener('offline', () => (this.offline = true));
+      window.addEventListener('online', () => (this.offline = false));
     },
   },
   watch: {
@@ -327,7 +350,7 @@ export default {
         this.isLoggedInF();
       }
       if (to.name === 'Details') {
-        this.notes = null;
+        this.notes = [];
       }
     },
   },
@@ -336,7 +359,7 @@ export default {
 
 <style>
 #app {
-  height: 100vh;
+  height: 100%;
 }
 p {
   font-family: 'Abel', sans-serif;
@@ -354,6 +377,12 @@ html::-webkit-scrollbar-thumb {
 html {
   scrollbar-width: thin;
   scrollbar-color: rgb(48, 11, 90) rgb(250, 250, 250);
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 .bg-identity {
   background-color: #b46cc0 !important;

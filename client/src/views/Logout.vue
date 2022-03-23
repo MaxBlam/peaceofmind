@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-center"
+    class="text-center mt-5"
     v-bind:class="{
       'text-light': darkTheme,
     }"
