@@ -5,7 +5,12 @@ async function createNote(userId, docId, folderId, copyOf) {
     'insert into documents(doc_id, fk_acc_id, fk_folder_id, copy_of) VALUES ($1,$2,$3,$4)',
     [docId, userId, folderId, copyOf],
   );
+  console.log(userId);
 
+  await db.query(
+    `INSERT INTO action_logger(action,"user",time) values ('INSERT Document',$1,now())`,
+    [userId],
+  );
   return rows;
 }
 
@@ -14,7 +19,10 @@ async function createFolder(userId, name, folderId, teacherName, grade) {
     'Insert into folders(name,teacher_name,grade,fk_acc_id,folder_id) values ($1,$2,$3,$4,$5) returning *;',
     [name, teacherName, grade, userId, folderId],
   );
-
+  await db.query(
+    `INSERT INTO action_logger(action,"user",time) values ('INSERT Folder',$1,now())`,
+    [userId],
+  );
   return rows;
 }
 
@@ -42,14 +50,21 @@ async function getAllUserFolders(userId) {
   return rows;
 }
 
-async function deleteNote(docId) {
+async function deleteNote(docId, userId) {
   const { rows } = await db.query('Delete from documents where doc_id =$1 returning *;', [docId]);
-
+  await db.query(
+    `INSERT INTO action_logger(action,"user",time) values ('DELETE Document',$1,now())`,
+    [userId],
+  );
   return rows;
 }
 
-async function deleteFolder(folderId) {
+async function deleteFolder(folderId, userId) {
   const { rows } = await db.query('Delete from folders where f_id =$1 returning *;', [folderId]);
+  await db.query(
+    `INSERT INTO action_logger(action,"user",time) values ('DELETE Folder',$1,now())`,
+    [userId],
+  );
 
   return rows;
 }

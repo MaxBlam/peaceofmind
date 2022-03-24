@@ -74,7 +74,7 @@ const getNotesFromFolder = asyncHandler(async (req, res) => {
   const folderId = req.params.folderid;
   const driveRes = await drive.files.list({
     pageSize: 20,
-    fields: 'nextPageToken, files(id, name,mimeType)',
+    fields: 'nextPageToken, files(id, name,mimeType,description)',
     q: `'${folderId}' in parents`,
   });
   res.status(200).json(driveRes);
@@ -98,7 +98,7 @@ const deleteNote = asyncHandler(async (req, res) => {
     fileId: noteId,
   });
 
-  const dbRes = await modelDrive.deleteNote(noteId);
+  const dbRes = await modelDrive.deleteNote(noteId, userDBdata[0].acc_id);
 
   res.status(200).json(dbRes);
 });
@@ -121,7 +121,7 @@ const deleteFolder = asyncHandler(async (req, res) => {
     fileId: folderId,
   });
 
-  const dbRes = await modelDrive.deleteFolder(folderDbData[0].f_id);
+  const dbRes = await modelDrive.deleteFolder(folderDbData[0].f_id, userDBdata[0].acc_id);
 
   res.status(200).json(dbRes);
 });
@@ -176,17 +176,16 @@ async function copyFiles(docId, folderId, userId) {
   const fid = await modelDrive.getFolderFid(folderId);
   if (fid.length > 0) {
     try {
-      console.log(`Doc: ${docId} | User: ${userId}`);
       const tempFolder = fid[0].folder_id;
       const fileMetaData = {
         parents: [tempFolder],
       };
-      // const driveRes = await drive.files.copy({
-      //   resource: fileMetaData,
-      //   fileId: docId,
-      //   fields: 'id',
-      // });
-      // modelDrive.createNote(userId, driveRes.data.id, folderId, docId);
+      const driveRes = await drive.files.copy({
+        resource: fileMetaData,
+        fileId: docId,
+        fields: 'id',
+      });
+      modelDrive.createNote(userId, driveRes.data.id, folderId, docId);
     } catch (ex) {
       counter += 1;
       console.log(ex.message, '||||', counter);
