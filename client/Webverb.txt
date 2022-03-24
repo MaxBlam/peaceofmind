@@ -1,6 +1,7 @@
 Details -> Open soll mit Mime-Type übereinstimmen
 Lighthouse optimisieren
 Details View erhält Namen des Ordners (Breadcrumbs)
+Scrollbar schöner machen
 about: 
 - PieceOfMind is a web application available on mobile and pc to make your life easier. Just scan your notes and add them to a folder. Keeping your notes organized has never been easier.
 - the problem doppelpunkt statt Punkt erster Satz

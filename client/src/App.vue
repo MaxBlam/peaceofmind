@@ -115,7 +115,7 @@ export default {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       if (this.userHash) {
-        this.getFolders();
+        this.getClassrooms();
       } else {
         this.$router.push('/login');
       }
@@ -171,26 +171,24 @@ export default {
           this.$router.push('logout');
         });
     },
-    /*getClassrooms() {
+    getClassrooms() {
       axios({
         method: 'get',
         url: this.serverAddress + '/classrooms/' + this.userHash,
       })
         .then(() => {
           this.getClassroomFiles();
+          this.getFolders();
         })
         .catch(() => {
           this.getFolders();
         });
-    },*/
+    },
     getClassroomFiles() {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
       })
-        .then(() => {
-          this.getFolders();
-        })
         .catch(error => {
           console.log(error);
         });
