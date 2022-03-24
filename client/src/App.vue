@@ -112,7 +112,8 @@ export default {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       if (this.userHash) {
-        this.getClassrooms();
+        //this.getClassrooms();
+        this.getFolders();
       } else {
         this.$router.push('/login');
       }
@@ -150,7 +151,7 @@ export default {
           this.notes = [];
           this.isLoggedInF();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -160,7 +161,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then(res => {
+        .then((res) => {
           this.folders = res.data;
           this.loader = false;
         })
@@ -185,10 +186,9 @@ export default {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
-      })
-        .catch(error => {
-          console.log(error);
-        });
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     addNote(object) {
       axios({
@@ -196,10 +196,9 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: object,
-      })
-        .catch(error => {
-          console.log(error);
-        });
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     saveSettings(settings) {
       axios({
@@ -207,10 +206,9 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: settings,
-      })
-        .catch(error => {
-          console.log(error);
-        });
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     createNote(noteName) {
       MicroModal.close('createNote');
@@ -227,7 +225,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -244,7 +242,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -261,7 +259,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -280,7 +278,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -290,8 +288,8 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then(res => {
-          this.currentFolder = this.folders.find(f => f.folder_id === id);
+        .then((res) => {
+          this.currentFolder = this.folders.find((f) => f.folder_id === id);
           this.notes = res.data.data.files;
           this.loader = false;
         })
@@ -303,11 +301,11 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
@@ -319,7 +317,7 @@ export default {
     },
     themeStorage() {
       this.darkTheme = window.matchMedia(
-        '(prefers-color-scheme: dark)',
+        '(prefers-color-scheme: dark)'
       ).matches;
       const res = localStorage.getItem('darkTheme');
       if (res) {
