@@ -10,9 +10,7 @@ const testDrive = asyncHandler(async (req, res) => {
     pageSize: 20,
     fields: 'nextPageToken, files(id, name,mimeType)',
   });
-  res.status(200).json({
-    driveRes,
-  });
+  res.status(200).json(driveRes);
 });
 
 const createRootFolder = asyncHandler(async () => {
@@ -64,10 +62,10 @@ const getFolders = asyncHandler(async (req, res) => {
     q: `'${rootId}' in parents`,
   });
   const dbFolderData = await modelDrive.getAllUserFolders(userDBdata[0].acc_id);
-  const filteredData1 = driveRes.data.files.filter((el) =>
-    dbFolderData.map((ell) => ell.folder_id).includes(el.id),
+  const filteredData = driveRes.data.files.filter((el) =>
+    dbFolderData.map((ell) => ell.folder_id).includes(el.id)
   );
-  res.status(200).json(dbFolderData);
+  res.status(200).json(filteredData);
 });
 
 const getNotesFromFolder = asyncHandler(async (req, res) => {
@@ -87,11 +85,11 @@ const deleteNote = asyncHandler(async (req, res) => {
   const noteDbData = await modelDrive.getNote(noteId);
 
   if (noteDbData.length === 0) {
-    res.status(400).send('File doesnt exist');
+    res.status(404).send('File doesnt exist');
     return;
   }
   if (noteDbData.fk_acc_id !== userDBdata.acc_id) {
-    res.status(500).send('This file doesnt belong to you!');
+    res.status(401).send('This file doesnt belong to you!');
     return;
   }
   await drive.files.delete({
@@ -110,18 +108,21 @@ const deleteFolder = asyncHandler(async (req, res) => {
   const folderDbData = await modelDrive.getFolder(folderId);
 
   if (folderDbData.length === 0) {
-    res.status(400).send('Folder doesnt exist');
+    res.status(404).send('Folder doesnt exist');
     return;
   }
   if (folderDbData.fk_acc_id !== userDBdata.acc_id) {
-    res.status(500).send('This folder doesnt belong to you!');
+    res.status(401).send('This folder doesnt belong to you!');
     return;
   }
   await drive.files.delete({
     fileId: folderId,
   });
 
-  const dbRes = await modelDrive.deleteFolder(folderDbData[0].f_id, userDBdata[0].acc_id);
+  const dbRes = await modelDrive.deleteFolder(
+    folderDbData[0].f_id,
+    userDBdata[0].acc_id
+  );
 
   res.status(200).json(dbRes);
 });
@@ -131,7 +132,7 @@ const createFolder = asyncHandler(async (req, res) => {
   const userDBdata = await model.getUser(userHash);
   const rootId = userDBdata[0].root_folder;
   if (folderName === '') {
-    res.status(500).send('Folder needs a name');
+    res.status(400).send('Folder needs a name');
     return;
   }
   const fileMetadata = {
@@ -140,7 +141,7 @@ const createFolder = asyncHandler(async (req, res) => {
     mimeType: 'application/vnd.google-apps.folder',
   };
   if (userDBdata.length === 0) {
-    res.status(400).send('User Not Found');
+    res.status(404).send('User Not Found');
     return;
   }
   const driveRes = await drive.files.create({
@@ -153,7 +154,7 @@ const createFolder = asyncHandler(async (req, res) => {
     folderName,
     driveRes.data.id,
     teacherName,
-    grade,
+    grade
   );
   res.status(200).json(dataBaseRes);
 });

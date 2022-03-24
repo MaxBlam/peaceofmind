@@ -1,6 +1,5 @@
 <template>
   <div id="app" v-bind:class="{ 'bg-dark': darkTheme }">
-    <!-- <HelloWorld />-->
     <NavBar
       @uploadFile="uploadFile"
       :userHash="userHash"
@@ -73,7 +72,6 @@
 </template>
 
 <script>
-//import HelloWorld from '@/components/HelloWorld.vue';
 import axios from 'axios';
 import MicroModal from 'micromodal';
 import UploadFile from '@/components/UploadFile.vue';
@@ -84,7 +82,6 @@ import CreateNote from '@/components/CreateNote.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
 export default {
   components: {
-    //HelloWorld,
     NavBar,
     Footer,
     UploadFile,
@@ -200,7 +197,6 @@ export default {
         contentType: 'application/json',
         data: object,
       })
-        .then(() => {})
         .catch(error => {
           console.log(error);
         });
@@ -212,7 +208,6 @@ export default {
         contentType: 'application/json',
         data: settings,
       })
-        .then(() => {})
         .catch(error => {
           console.log(error);
         });
