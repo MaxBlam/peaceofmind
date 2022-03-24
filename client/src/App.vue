@@ -72,6 +72,21 @@
 </template>
 
 <script>
+function initialState() {
+  return {
+    folders: [],
+    notes: [],
+    serverAddress: process.env.VUE_APP_SERVER,
+    userHash: null,
+    offline: false,
+    updateAlert: false,
+    currentFolder: {},
+    darkTheme: window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches,
+    loader: false,
+  };
+}
 import axios from 'axios';
 import MicroModal from 'micromodal';
 import UploadFile from '@/components/UploadFile.vue';
@@ -92,17 +107,7 @@ export default {
   mounted() {
     MicroModal.init();
   },
-  data: () => ({
-    folders: [],
-    notes: [],
-    serverAddress: process.env.VUE_APP_SERVER,
-    userHash: null,
-    offline: false,
-    updateAlert: false,
-    currentFolder: {},
-    darkTheme: false,
-    loader: false,
-  }),
+  data: () => initialState(),
   created() {
     this.isLoggedInF();
     this.themeStorage();
@@ -147,8 +152,7 @@ export default {
       })
         .then(() => {
           localStorage.clear();
-          this.folders = [];
-          this.notes = [];
+          this.resetWindow();
           this.isLoggedInF();
         })
         .catch((error) => {
@@ -316,9 +320,6 @@ export default {
       localStorage.setItem('darkTheme', theme);
     },
     themeStorage() {
-      this.darkTheme = window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      ).matches;
       const res = localStorage.getItem('darkTheme');
       if (res) {
         this.darkTheme = JSON.parse(res);
@@ -330,6 +331,9 @@ export default {
       });
       window.addEventListener('offline', () => (this.offline = true));
       window.addEventListener('online', () => (this.offline = false));
+    },
+    resetWindow: function () {
+      Object.assign(this.$data, initialState());
     },
   },
   watch: {
