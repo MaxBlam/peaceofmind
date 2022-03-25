@@ -41,13 +41,13 @@ const login = asyncHandler(async (req, res) => {
 
 const logout = async (req, res) => {
   // model.deleteUserSession(req.session.sid);
-  console.log(req.session);
+  //console.log(req.session);
 
   req.session.destroy();
   res.clearCookie(process.env.SESSION_NAME);
   if (client.credentials) client.revokeCredentials(() => console.log('Credentials cleared'));
 
-  res.status(200).send('nice');
+  res.status(200).end();
 };
 
 module.exports = { login, logout };

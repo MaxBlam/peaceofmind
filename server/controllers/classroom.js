@@ -17,13 +17,15 @@ async function getOverallStudentGrade(classroomId) {
   const maxPoints = [];
   const userGrades = [];
   await filteredRes.forEach(async (courseWork) => {
-    const studentSubmissions = await classroom.courses.courseWork.studentSubmissions.list({
-      courseId: classroomId,
-      courseWorkId: courseWork,
-    });
-    const filteredSubmissions = studentSubmissions.data.studentSubmissions.filter(
-      (el) => el.assignedGrade,
-    );
+    const studentSubmissions =
+      await classroom.courses.courseWork.studentSubmissions.list({
+        courseId: classroomId,
+        courseWorkId: courseWork,
+      });
+    const filteredSubmissions =
+      studentSubmissions.data.studentSubmissions.filter(
+        (el) => el.assignedGrade
+      );
     if (filteredSubmissions.map((el) => el.assignedGrade).length > 0) {
       const temp = filteredSubmissions.map((ell) => ell.courseWorkId);
       const maxPoint = apiCourseWorkIds.data.courseWork
@@ -39,72 +41,88 @@ async function getOverallStudentGrade(classroomId) {
   };
 }
 
-const synchClassrooms = asyncHandler(async (req, res) => {
-  console.log('START');
+const syncClassrooms = asyncHandler(async (req, res) => {
+  try {
+    console.log('START');
 
-  const userHash = req.params.id;
-  const userId = (await model.getUser(userHash))[0];
+    const userHash = req.params.id;
+    const userId = (await model.getUser(userHash))[0];
 
-  const apiRes = await classroom.courses.list({
-    courseStates: ['ACTIVE'],
-  });
-  const mappedRes = apiRes.data.courses.map((el) => ({
-    id: el.id,
-    name: el.name,
-    user_id: userId.acc_id,
-  }));
-  const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
-  const mappedDbClassrooms = dbClassrooms.map((el) => el.classroom_id);
-  mappedRes.forEach((classr) => {
-    if (!mappedDbClassrooms.includes(classr.id)) {
-      modelClassroom.createClassroom(classr.id, classr.name, classr.user_id);
-    }
-  });
-
-  const secondDbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
-  const dbFolderClassrooms = await modelClassroom.getClassroomFolders(userId.acc_id);
-  const mappedFolderClassrooms = dbFolderClassrooms.map((el) => el.classroom_id);
-  const filteredSecondDbClassrooms = secondDbClassrooms.filter(
-    (el) => !mappedFolderClassrooms.includes(el.classroom_id),
-  );
-  if (filteredSecondDbClassrooms.length > 0) {
-    filteredSecondDbClassrooms.forEach(async (classr) => {
-      const teachers = await classroom.courses.teachers.list({
-        courseId: classr.classroom_id,
-      });
-      const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
-      const teacherName = teachers.data.teachers[0].profile.name.fullName;
-      setTimeout(async () => {
-        let sumGrades = 0;
-        let sumMaxPoints = 0;
-        grades.forEach((el) => {
-          sumGrades += Number(el);
-        });
-        maxPoints.forEach((el) => {
-          sumMaxPoints += Number(el);
-        });
-
-        const overallGrade = Math.round((sumGrades / sumMaxPoints) * 100) || 0;
-
-        const apiNewFolder = await createFolderServerside(classr.name, userId.root_folder);
-        const newFolder = await modelDrive.createFolder(
-          userId.acc_id,
-          classr.name,
-          apiNewFolder.data.id,
-          teacherName,
-          overallGrade,
-        );
-        const classFolder = await modelClassroom.createClassroomFolder(
-          newFolder[0].f_id,
-          classr.classroom_id,
-          userId.acc_id,
-        );
-        console.log(classFolder);
-        res.status(200).json(mappedRes);
-        console.log('END');
-      }, 3400);
+    const apiRes = await classroom.courses.list({
+      courseStates: ['ACTIVE'],
     });
-  } else res.status(200).json({ data: [] });
+    const mappedRes = apiRes.data.courses.map((el) => ({
+      id: el.id,
+      name: el.name,
+      user_id: userId.acc_id,
+    }));
+    const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
+    const mappedDbClassrooms = dbClassrooms.map((el) => el.classroom_id);
+    mappedRes.forEach((classr) => {
+      if (!mappedDbClassrooms.includes(classr.id)) {
+        modelClassroom.createClassroom(classr.id, classr.name, classr.user_id);
+      }
+    });
+
+    const secondDbClassrooms = await modelClassroom.getAllClassrooms(
+      userId.acc_id
+    );
+    const dbFolderClassrooms = await modelClassroom.getClassroomFolders(
+      userId.acc_id
+    );
+    const mappedFolderClassrooms = dbFolderClassrooms.map(
+      (el) => el.classroom_id
+    );
+    const filteredSecondDbClassrooms = secondDbClassrooms.filter(
+      (el) => !mappedFolderClassrooms.includes(el.classroom_id)
+    );
+    if (filteredSecondDbClassrooms.length > 0) {
+      filteredSecondDbClassrooms.forEach(async (classr) => {
+        const teachers = await classroom.courses.teachers.list({
+          courseId: classr.classroom_id,
+        });
+        const { grades, maxPoints } = await getOverallStudentGrade(
+          classr.classroom_id
+        );
+        const teacherName = teachers.data.teachers[0].profile.name.fullName;
+        setTimeout(async () => {
+          let sumGrades = 0;
+          let sumMaxPoints = 0;
+          grades.forEach((el) => {
+            sumGrades += Number(el);
+          });
+          maxPoints.forEach((el) => {
+            sumMaxPoints += Number(el);
+          });
+
+          const overallGrade =
+            Math.round((sumGrades / sumMaxPoints) * 100) || 0;
+
+          const apiNewFolder = await createFolderServerside(
+            classr.name,
+            userId.root_folder
+          );
+          const newFolder = await modelDrive.createFolder(
+            userId.acc_id,
+            classr.name,
+            apiNewFolder.data.id,
+            teacherName,
+            overallGrade
+          );
+          const classFolder = await modelClassroom.createClassroomFolder(
+            newFolder[0].f_id,
+            classr.classroom_id,
+            userId.acc_id
+          );
+          console.log(classFolder);
+          res.status(200).json(mappedRes);
+          console.log('END');
+        }, 3400);
+      });
+    } else res.status(200).json({ data: [] });
+  } catch (ex) {
+    res.status(400).send(ex.message);
+  }
 });
 
 const syncClassroomFiles = asyncHandler(async (req, res) => {
@@ -113,7 +131,9 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
   // WICHTIG - FALLS CLASSROOM SYNC PER CLASSROOM AUSSCHALTBAR IST, MUSS HIER DAS GANZE ETWAS ANGEPASST WERDEN
 
   const classRooms = await modelClassroom.getAllClassrooms(userId.acc_id);
-  const classroomFolders = await modelClassroom.getClassroomFolders(userId.acc_id);
+  const classroomFolders = await modelClassroom.getClassroomFolders(
+    userId.acc_id
+  );
 
   classRooms.forEach(async (classr) => {
     const courseWork = await classroom.courses.courseWork.list({
@@ -122,7 +142,7 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
     const unfilteredMaterials = courseWork.data.courseWork
       ? courseWork.data.courseWork.map((el) => el.materials).filter((el) => el)
       : [];
-    console.log('Classroom: ', classr.classroom_id);
+    // console.log('Classroom: ', classr.classroom_id);
     const filteredMaterials = [];
     unfilteredMaterials.forEach((material) => {
       material.forEach((el) => {
@@ -133,19 +153,25 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
     const substring1 = '.pdf';
     const substring2 = '.docx';
     const filterOnPdfMaterials = filteredMaterials.filter(
-      (el) => el.title.includes(substring1) || el.title.includes(substring2),
+      (el) => el.title.includes(substring1) || el.title.includes(substring2)
     );
+    let setOff = 0;
     filterOnPdfMaterials.forEach(async (pdf) => {
       const copyOfDoc = await modelDrive.getCopysOfDocument(pdf.id);
 
       if (copyOfDoc.length === 0) {
         console.log(pdf.id);
-        const folderId = classroomFolders.filter((el) => el.classroom_id === classr.classroom_id);
-        copyFiles(pdf.id, folderId[0].f_id, userId.acc_id);
+        const folderId = classroomFolders.filter(
+          (el) => el.classroom_id === classr.classroom_id
+        );
+        setTimeout(() => {
+          copyFiles(pdf.id, folderId[0].f_id, userId.acc_id);
+        }, setOff);
+        setOff += 200;
       }
     });
   });
-  res.status(200).json(classRooms);
+  res.status(200).send('Done');
 });
 
-module.exports = { synchClassrooms, syncClassroomFiles };
+module.exports = { syncClassrooms, syncClassroomFiles };

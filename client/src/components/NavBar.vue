@@ -21,7 +21,7 @@
           class="btn"
           aria-label="Upload"
           @click="uploadFile"
-          v-if="isLoggedIn"
+          v-if="userHash"
         >
           <i
             class="bi bi-upload h3"
@@ -98,7 +98,7 @@
           class="navbar-nav justify-content-end flex-grow-1 pe-3"
           data-bs-dismiss="offcanvas"
         >
-          <li class="nav-item px-2" v-if="isLoggedIn">
+          <li class="nav-item px-2" v-if="userHash">
             <router-link
               to="/"
               exact
@@ -112,7 +112,7 @@
               >Home</router-link
             >
           </li>
-          <li class="nav-item px-2" v-if="!isLoggedIn">
+          <li class="nav-item px-2" v-if="!userHash">
             <router-link
               to="/login"
               exact
@@ -215,9 +215,9 @@
 <script>
 export default {
   props: {
-    isLoggedIn: {
-      type: Boolean,
-      default: () => false,
+    userHash: {
+      type: String,
+      default: () => null,
     },
     darkTheme: {
       type: Boolean,

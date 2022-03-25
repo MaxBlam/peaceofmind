@@ -16,5 +16,6 @@ module.exports = {
     'function-paren-newline': 0,
     'max-len': 0,
     'no-restricted-syntax': 0,
+    'quotes': 0
   },
 };
