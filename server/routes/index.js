@@ -10,6 +10,7 @@ const {
   getNotesFromFolder,
   deleteFolder,
 } = require('../controllers/drive');
+const { testDocsAPI } = require('../controllers/docs');
 
 const router = express.Router();
 
@@ -25,5 +26,6 @@ router.delete('/folder', deleteFolder);
 router.get('/notes/:folderid', getNotesFromFolder);
 router.get('/classrooms/:id', synchClassrooms);
 router.get('/classroomfiles/:id', syncClassroomFiles);
+router.get('/docs/:id', testDocsAPI);
 
 module.exports = router;
