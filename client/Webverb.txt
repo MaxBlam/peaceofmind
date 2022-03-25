@@ -1,8 +1,6 @@
-Details -> Open soll mit Mime-Type übereinstimmen
 Lighthouse optimisieren
 Details View erhält Namen des Ordners (Breadcrumbs)
-Scrollbar schöner machen
-Inputcheck bei z.B createFolder
+Inputcheck bei z.B createFolder // vuelidate
 Inputs reset bei Add Folder z.B
 Modal close on clickup
 Avatar Image

@@ -4,6 +4,7 @@
       @uploadFile="uploadFile"
       :userHash="userHash"
       :darkTheme="darkTheme"
+      :avatar="avatar"
     />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <div
@@ -81,10 +82,9 @@ function initialState() {
     offline: false,
     updateAlert: false,
     currentFolder: {},
-    darkTheme: window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      ).matches,
+    darkTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
     loader: false,
+    avatar: '',
   };
 }
 import axios from 'axios';
@@ -116,6 +116,7 @@ export default {
   methods: {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
+      this.avatar = localStorage.getItem('avatar');
       if (this.userHash) {
         //this.getClassrooms();
         this.getFolders();
@@ -123,27 +124,36 @@ export default {
         this.$router.push('/login');
       }
     },
-    async login() {
-      try {
-        const googleUser = await this.$gAuth.signIn();
-        const goaRes = await googleUser.grantOfflineAccess({
-          scope:
-            'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
-        });
-        const res = await axios({
-          url: this.serverAddress + '/login',
-          method: 'POST',
-          contentType: 'application/json',
-          data: {
-            code: goaRes.code,
-          },
-        });
-        if (res.data.code === 200)
-          localStorage.setItem('userHash', res.data.data.userHash);
-        this.$router.push('/');
-      } catch (error) {
-        console.error(error);
-      }
+    login() {
+      this.$gAuth
+        .signIn()
+        .then(googleUser => {
+          googleUser
+            .grantOfflineAccess({
+              scope:
+                'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
+            })
+            .then(goaRes => {
+              axios({
+                url: this.serverAddress + '/login',
+                method: 'POST',
+                contentType: 'application/json',
+                data: {
+                  code: goaRes.code,
+                },
+              })
+                .then(res => {
+                  localStorage.setItem('userHash', res.data.userHash);
+                  localStorage.setItem('avatar', res.data.picture);
+                  this.$router.push('/');
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     },
     logout() {
       axios({
@@ -155,7 +165,7 @@ export default {
           this.resetWindow();
           this.isLoggedInF();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -165,7 +175,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then((res) => {
+        .then(res => {
           this.folders = res.data;
           this.loader = false;
         })
@@ -190,7 +200,7 @@ export default {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
-      }).catch((error) => {
+      }).catch(error => {
         console.log(error);
       });
     },
@@ -200,7 +210,7 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: object,
-      }).catch((error) => {
+      }).catch(error => {
         console.log(error);
       });
     },
@@ -210,7 +220,7 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: settings,
-      }).catch((error) => {
+      }).catch(error => {
         console.log(error);
       });
     },
@@ -229,7 +239,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -246,7 +256,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -263,7 +273,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -282,7 +292,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -292,8 +302,8 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then((res) => {
-          this.currentFolder = this.folders.find((f) => f.folder_id === id);
+        .then(res => {
+          this.currentFolder = this.folders.find(f => f.folder_id === id);
           this.notes = res.data.data.files;
           this.loader = false;
         })
@@ -305,11 +315,11 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
