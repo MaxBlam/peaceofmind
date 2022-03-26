@@ -73,7 +73,7 @@ function initialState() {
     offline: false,
     updateAlert: false,
     currentFolder: {},
-    darkTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
+    darkTheme: false,
     loader: false,
     avatar: '',
   };
@@ -96,7 +96,10 @@ export default {
     CreateFolder,
   },
   mounted() {
-    MicroModal.init();
+    MicroModal.init({
+      awaitCloseAnimation: true,
+      awaitOpenAnimation: true,
+    });
   },
   data: () => initialState(),
   created() {
@@ -115,26 +118,36 @@ export default {
         this.$router.push('/login');
       }
     },
-    async login() {
-      try {
-        const googleUser = await this.$gAuth.signIn();
-        const goaRes = await googleUser.grantOfflineAccess({
-          scope:
-            'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me https://www.googleapis.com/auth/classroom.coursework.students',
-        });
-        const res = await axios({
-          url: this.serverAddress + '/login',
-          method: 'POST',
-          contentType: 'application/json',
-          data: {
-            code: goaRes.code,
-          },
-        });
-        if (res.data.code === 200) localStorage.setItem('userHash', res.data.data.userHash);
-        this.$router.push('/');
-      } catch (error) {
-        console.error(error);
-      }
+    login() {
+      this.$gAuth
+        .signIn()
+        .then((googleUser) => {
+          googleUser
+            .grantOfflineAccess({
+              scope:
+                'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
+            })
+            .then((goaRes) => {
+              axios({
+                url: this.serverAddress + '/login',
+                method: 'POST',
+                contentType: 'application/json',
+                data: {
+                  code: goaRes.code,
+                },
+              })
+                .then((res) => {
+                  localStorage.setItem('userHash', res.data.userHash);
+                  localStorage.setItem('avatar', res.data.picture);
+                  this.$router.push('/');
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
     },
     logout() {
       axios({
@@ -181,7 +194,7 @@ export default {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
-      }).catch(error => {
+      }).catch((error) => {
         console.log(error);
       });
     },
@@ -191,7 +204,7 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: object,
-      }).catch(error => {
+      }).catch((error) => {
         console.log(error);
       });
     },
@@ -201,7 +214,7 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: settings,
-      }).catch(error => {
+      }).catch((error) => {
         console.log(error);
       });
     },
@@ -311,10 +324,13 @@ export default {
       localStorage.setItem('darkTheme', theme);
     },
     themeStorage() {
-      this.darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const res = localStorage.getItem('darkTheme');
-      if (res) {
-        this.darkTheme = JSON.parse(res);
+      const theme = localStorage.getItem('darkTheme');
+      if (theme) {
+        this.darkTheme = JSON.parse(theme);
+      } else {
+        this.darkTheme = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches;
       }
     },
     buildEventListeners() {
@@ -409,5 +425,32 @@ body {
 }
 .modal.is-open {
   display: block;
+}
+.micromodal-slide[aria-hidden='false'] .modal__container {
+  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+.micromodal-slide[aria-hidden='true'] .modal__container {
+  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
+}
+@keyframes mmslideIn {
+  from {
+    transform: translateY(16%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes mmslideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10%);
+  }
 }
 </style>

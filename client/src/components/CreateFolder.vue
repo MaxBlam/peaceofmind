@@ -1,8 +1,8 @@
 <template>
-  <div class="modal">
+  <div class="modal micromodal-slide">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div
-        class="rounded-3 container"
+        class="rounded-3 container modal__container"
         role="dialog"
         aria-modal="true"
         v-bind:class="{
@@ -27,19 +27,29 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }">Subject</label>
+            <label
+              class="form-label"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              >Subject</label
+            >
             <input
               type="text"
-              class="form-control" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              class="form-control"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Chemistry"
               v-model="folderName"
             />
           </div>
           <div class="mb-3">
-            <label class="form-label" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }">Teacher</label>
+            <label
+              class="form-label"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              >Teacher</label
+            >
             <input
               type="text"
-              class="form-control" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              class="form-control"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Mr Bobert Raumgartner"
               v-model="teacher"
             />
@@ -60,7 +70,8 @@
               type="number"
               min="0"
               max="100"
-              class="form-control rounded-3" v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              class="form-control rounded-3"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
               placeholder="Number in percent"
               aria-label="Grade"
             />
@@ -70,7 +81,7 @@
             aria-label="Create Folder"
             data-micromodal-close
             class="btn btn-identity transition-sm"
-            @click="$emit('createFolder', folder)"
+            @click="createFolder"
             :disabled="folderName === ''"
           >
             Add Folder
@@ -101,6 +112,14 @@ export default {
         teacher: this.teacher,
         folderName: this.folderName,
       };
+    },
+  },
+  methods: {
+    createFolder() {
+      this.$emit('createFolder', this.folder);
+      this.grade = '';
+      this.teacher = '';
+      this.folderName = '';
     },
   },
 };

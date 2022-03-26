@@ -148,7 +148,7 @@
           The Problem
         </h1>
         <p data-aos="fade-up" data-aos-duration="1000">
-          You probably know the feeling. You just wrote down some important
+          You probably know the feeling: You just wrote down some important
           notes onto a piece of paper, but you have related notes on your pc or
           tablet. What do you do now? Rewrite all the notes on your pc?
         </p>
@@ -177,10 +177,7 @@
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4 mt-2">The Solution</h1>
           <p>
-            You want your notes to be organized into timelines and folders? You
-            want to simply scan your handwritten notes and add them to your pc
-            written notes? PieceOfMind is the solution! No more unorganized
-            notes lying around on your desktop or your table! <br />
+            You want your notes to be organized into timelines and folders? You want to simply scan your analog notes and add them to your digital ones? PieceOfMind is the solution! No more unorganized notes lying around on your desktop!  <br />
             <span class="blockquote-footer"> Find your inner peace </span>
           </p>
         </div>
@@ -324,10 +321,7 @@
         <div class="text-dark col-12 col-md-5">
           <h1 class="display-4">Piece of Mind</h1>
           <p>
-            PieceOfMind is an Web App available on mobile and pc to make your
-            life easier. Just scan your handwritten notes and add them to a
-            folder or subject. Keeping your notes organized has never been
-            easier.
+            PieceOfMind is a web application available on mobile and pc to make your life easier. Just scan your notes and add them to a folder. Keeping your notes organized has never been easier.
           </p>
           <a
             href="https://pieceofmind-app.herokuapp.com/"

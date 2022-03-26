@@ -45,17 +45,9 @@
           ></i>
         </button>
       </li>
-      <li>
-        <button
-          type="button"
-          class="btn"
-          aria-label="Account"
-          v-if="userHash"
-          
-        >
-          <img :src="avatar" alt="">
-        </button>
-      </li>
+      <!-- <li>
+        <img :src="avatar" alt="Avatar" width="35" class="rounded-circle" />
+      </li> -->
       <li>
         <button
           class="navbar-toggler"
@@ -65,10 +57,11 @@
           aria-controls="offcanvasNavbar"
           aria-label="Navbar Toggler"
         >
-          <i
+          <!-- <i
             class="bi bi-list h3"
             v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
-          ></i>
+          ></i> -->
+          <img :src="avatar" alt="Avatar" width="35" class="rounded-circle" />
         </button>
       </li>
     </ul>
