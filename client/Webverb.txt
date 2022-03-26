@@ -1,4 +1,5 @@
 Lighthouse optimisieren
 Details View erhält Namen des Ordners (Breadcrumbs)
 Inputcheck bei z.B createFolder // vuelidate
+UploadFile Name Input fehlt
 Client refreshed currentfolder nicht, Push to logout buggy (Cant reproduce)
