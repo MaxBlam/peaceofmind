@@ -1,27 +1,14 @@
 <template>
   <div id="app" v-bind:class="{ 'bg-dark': darkTheme }">
     <!-- <HelloWorld />-->
-    <NavBar
-      @uploadFile="uploadFile"
-      :userHash="userHash"
-      :darkTheme="darkTheme"
-    />
+    <NavBar @uploadFile="uploadFile" :userHash="userHash" :darkTheme="darkTheme" />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
-    <div
-      class="alert alert-danger mb-0 rounded-0 rounded-bottom"
-      role="alert"
-      v-if="updateAlert"
-    >
-      <i class="bi bi-exclamation-triangle-fill"></i> Update Available, please
-      refresh!
+    <div class="alert alert-danger mb-0 rounded-0 rounded-bottom" role="alert" v-if="updateAlert">
+      <i class="bi bi-exclamation-triangle-fill"></i> Update Available, please refresh!
     </div>
-    <div
-      class="alert alert-primary mb-0 rounded-0 rounded-bottom"
-      role="alert"
-      v-if="offline"
-    >
-      <i class="bi bi-info-circle-fill"></i> No internet connection found. App
-      is running in offline mode.
+    <div class="alert alert-primary mb-0 rounded-0 rounded-bottom" role="alert" v-if="offline">
+      <i class="bi bi-info-circle-fill"></i> No internet connection found. App is running in offline
+      mode.
     </div>
     <router-view
       :folders="folders"
@@ -115,6 +102,7 @@ export default {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       if (this.userHash) {
+        this.getClassrooms();
         this.getFolders();
       } else {
         this.$router.push('/login');
@@ -125,7 +113,7 @@ export default {
         const googleUser = await this.$gAuth.signIn();
         const goaRes = await googleUser.grantOfflineAccess({
           scope:
-            'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
+            'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me https://www.googleapis.com/auth/classroom.coursework.students',
         });
         const res = await axios({
           url: this.serverAddress + '/login',
@@ -135,8 +123,7 @@ export default {
             code: goaRes.code,
           },
         });
-        if (res.data.code === 200)
-          localStorage.setItem('userHash', res.data.data.userHash);
+        if (res.data.code === 200) localStorage.setItem('userHash', res.data.data.userHash);
         this.$router.push('/');
       } catch (error) {
         console.error(error);
@@ -153,7 +140,7 @@ export default {
           this.notes = [];
           this.isLoggedInF();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -163,7 +150,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then(res => {
+        .then((res) => {
           this.folders = res.data;
           this.loader = false;
         })
@@ -171,7 +158,7 @@ export default {
           this.$router.push('logout');
         });
     },
-    /*getClassrooms() {
+    getClassrooms() {
       axios({
         method: 'get',
         url: this.serverAddress + '/classrooms/' + this.userHash,
@@ -182,7 +169,7 @@ export default {
         .catch(() => {
           this.getFolders();
         });
-    },*/
+    },
     getClassroomFiles() {
       axios({
         method: 'get',
@@ -191,7 +178,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -203,7 +190,7 @@ export default {
         data: object,
       })
         .then(() => {})
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -215,7 +202,7 @@ export default {
         data: settings,
       })
         .then(() => {})
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -234,7 +221,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -251,7 +238,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -268,7 +255,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -287,7 +274,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -297,8 +284,8 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then(res => {
-          this.currentFolder = this.folders.find(f => f.folder_id === id);
+        .then((res) => {
+          this.currentFolder = this.folders.find((f) => f.folder_id === id);
           this.notes = res.data.data.files;
           this.loader = false;
         })
@@ -310,11 +297,11 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
@@ -325,9 +312,7 @@ export default {
       localStorage.setItem('darkTheme', theme);
     },
     themeStorage() {
-      this.darkTheme = window.matchMedia(
-        '(prefers-color-scheme: dark)',
-      ).matches;
+      this.darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const res = localStorage.getItem('darkTheme');
       if (res) {
         this.darkTheme = JSON.parse(res);

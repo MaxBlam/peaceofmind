@@ -16,6 +16,8 @@ async function getOverallStudentGrade(classroomId) {
     : [];
   const maxPoints = [];
   const userGrades = [];
+  console.log('START 6');
+
   await filteredRes.forEach(async (courseWork) => {
     const studentSubmissions = await classroom.courses.courseWork.studentSubmissions.list({
       courseId: classroomId,
@@ -34,81 +36,86 @@ async function getOverallStudentGrade(classroomId) {
     }
   });
   return {
-    grades: userGrades,
-    maxPoints: maxPoints,
+    grades: userGrades ? userGrades : [],
+    maxPoints: maxPoints ? maxPoints : [],
   };
 }
 
 const synchClassrooms = asyncHandler(async (req, res) => {
-  try {
-    console.log('START');
+  console.log('START');
 
-    const userHash = req.params.id;
-    const userId = (await model.getUser(userHash))[0];
+  const userHash = req.params.id;
+  const userId = (await model.getUser(userHash))[0];
 
-    const apiRes = await classroom.courses.list({
-      courseStates: ['ACTIVE'],
-    });
-    const mappedRes = apiRes.data.courses.map((el) => ({
-      id: el.id,
-      name: el.name,
-      user_id: userId.acc_id,
-    }));
-    const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
-    const mappedDbClassrooms = dbClassrooms.map((el) => el.classroom_id);
-    mappedRes.forEach((classr) => {
-      if (!mappedDbClassrooms.includes(classr.id)) {
-        modelClassroom.createClassroom(classr.id, classr.name, classr.user_id);
-      }
-    });
+  const apiRes = await classroom.courses.list({
+    courseStates: ['ACTIVE'],
+  });
+  const mappedRes = apiRes.data.courses.map((el) => ({
+    id: el.id,
+    name: el.name,
+    user_id: userId.acc_id,
+  }));
+  console.log('START 2');
 
-    const secondDbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
-    const dbFolderClassrooms = await modelClassroom.getClassroomFolders(userId.acc_id);
-    const mappedFolderClassrooms = dbFolderClassrooms.map((el) => el.classroom_id);
-    const filteredSecondDbClassrooms = secondDbClassrooms.filter(
-      (el) => !mappedFolderClassrooms.includes(el.classroom_id),
-    );
-    if (filteredSecondDbClassrooms.length > 0) {
-      filteredSecondDbClassrooms.forEach(async (classr) => {
-        const teachers = await classroom.courses.teachers.list({
-          courseId: classr.classroom_id,
-        });
-        const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
-        const teacherName = teachers.data.teachers[0].profile.name.fullName;
-        setTimeout(async () => {
-          let sumGrades = 0;
-          let sumMaxPoints = 0;
-          grades.forEach((el) => {
-            sumGrades += Number(el);
-          });
-          maxPoints.forEach((el) => {
-            sumMaxPoints += Number(el);
-          });
+  const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
+  const mappedDbClassrooms = dbClassrooms.map((el) => el.classroom_id);
+  mappedRes.forEach((classr) => {
+    if (!mappedDbClassrooms.includes(classr.id)) {
+      modelClassroom.createClassroom(classr.id, classr.name, classr.user_id);
+    }
+  });
+  console.log('START 3');
 
-          const overallGrade = Math.round((sumGrades / sumMaxPoints) * 100) || 0;
+  const secondDbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
+  const dbFolderClassrooms = await modelClassroom.getClassroomFolders(userId.acc_id);
+  const mappedFolderClassrooms = dbFolderClassrooms.map((el) => el.classroom_id);
+  const filteredSecondDbClassrooms = secondDbClassrooms.filter(
+    (el) => !mappedFolderClassrooms.includes(el.classroom_id),
+  );
+  if (filteredSecondDbClassrooms.length > 0) {
+    filteredSecondDbClassrooms.forEach(async (classr) => {
+      console.log('START 4');
 
-          const apiNewFolder = await createFolderServerside(classr.name, userId.root_folder);
-          const newFolder = await modelDrive.createFolder(
-            userId.acc_id,
-            classr.name,
-            apiNewFolder.data.id,
-            teacherName,
-            overallGrade,
-          );
-          const classFolder = await modelClassroom.createClassroomFolder(
-            newFolder[0].f_id,
-            classr.classroom_id,
-            userId.acc_id,
-          );
-          console.log(classFolder);
-          res.status(200).json(mappedRes);
-          console.log('END');
-        }, 3400);
+      const teachers = await classroom.courses.teachers.list({
+        courseId: classr.classroom_id,
       });
-    } else res.status(200).json({ data: [] });
-  } catch (ex) {
-    res.status(400).send(ex.message);
-  }
+      const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
+
+      const teacherName = teachers.data.teachers[0].profile.name.fullName;
+
+      console.log('START 5');
+
+      setTimeout(async () => {
+        let sumGrades = 0;
+        let sumMaxPoints = 0;
+        grades.forEach((el) => {
+          sumGrades += Number(el);
+        });
+        maxPoints.forEach((el) => {
+          sumMaxPoints += Number(el);
+        });
+
+        const overallGrade = Math.round((sumGrades / sumMaxPoints) * 100) || 0;
+
+        const apiNewFolder = await createFolderServerside(classr.name, userId.root_folder);
+        const newFolder = await modelDrive.createFolder(
+          userId.acc_id,
+          classr.name,
+          apiNewFolder.data.id,
+          teacherName,
+          overallGrade,
+        );
+        const classFolder = await modelClassroom.createClassroomFolder(
+          newFolder[0].f_id,
+          classr.classroom_id,
+          userId.acc_id,
+        );
+        console.log(classFolder);
+        res.status(200).json(mappedRes);
+        console.log('END');
+      }, 3400);
+    });
+  } else res.status(200).json({ data: [] });
 });
 
 const syncClassroomFiles = asyncHandler(async (req, res) => {
