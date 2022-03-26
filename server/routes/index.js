@@ -1,9 +1,6 @@
 const express = require('express');
-const { login, logout } = require('../controllers/users');
-const {
-  syncClassrooms,
-  syncClassroomFiles,
-} = require('../controllers/classroom');
+const { login, logout, addSettings } = require('../controllers/users');
+const { syncClassrooms, syncClassroomFiles } = require('../controllers/classroom');
 const {
   testDrive,
   createNote,
@@ -13,7 +10,7 @@ const {
   getNotesFromFolder,
   deleteFolder,
 } = require('../controllers/drive');
-const { testDocsAPI } = require('../controllers/docs');
+const { testDocsAPI, addNoteText } = require('../controllers/docs');
 
 const router = express.Router();
 
@@ -30,5 +27,7 @@ router.get('/notes/:folderid', getNotesFromFolder);
 router.get('/classrooms/:id', syncClassrooms);
 router.get('/classroomfiles/:id', syncClassroomFiles);
 router.get('/docs/:id', testDocsAPI);
+router.post('/note/ocr', addNoteText);
+router.post('/settings/:id', addSettings);
 
 module.exports = router;

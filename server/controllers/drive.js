@@ -62,9 +62,9 @@ const getFolders = asyncHandler(async (req, res) => {
     q: `'${rootId}' in parents`,
   });
   const dbFolderData = await modelDrive.getAllUserFolders(userDBdata[0].acc_id);
-  /*const filteredData = driveRes.data.files.filter((el) =>
+  /* const filteredData = driveRes.data.files.filter((el) =>
     dbFolderData.map((ell) => ell.folder_id).includes(el.id)
-  );*/
+  ); */
   res.status(200).json(dbFolderData);
 });
 
@@ -119,10 +119,7 @@ const deleteFolder = asyncHandler(async (req, res) => {
     fileId: folderId,
   });
 
-  const dbRes = await modelDrive.deleteFolder(
-    folderDbData[0].f_id,
-    userDBdata[0].acc_id
-  );
+  const dbRes = await modelDrive.deleteFolder(folderDbData[0].f_id, userDBdata[0].acc_id);
 
   res.status(200).json(dbRes);
 });
@@ -154,7 +151,7 @@ const createFolder = asyncHandler(async (req, res) => {
     folderName,
     driveRes.data.id,
     teacherName,
-    grade
+    grade,
   );
   res.status(200).json(dataBaseRes);
 });
@@ -194,6 +191,31 @@ async function copyFiles(docId, folderId, userId) {
   }
 }
 
+async function createNoteServerside(inputBody) {
+  const { userHash, noteName, folderId } = inputBody;
+  const userDbData = await model.getUser(userHash);
+  const fileMetaData = {
+    name: noteName,
+    parents: [folderId],
+    mimeType: 'application/vnd.google-apps.document',
+  };
+  if (userDbData.length === 0) {
+    return 'No User';
+  }
+  const driveRes = await drive.files.create({
+    resource: fileMetaData,
+    fields: 'id',
+  });
+  const folderDbData = await modelDrive.getFolder(folderId);
+  const dbRes = await modelDrive.createNote(
+    userDbData[0].acc_id,
+    driveRes.data.id,
+    folderDbData[0].f_id,
+    null,
+  );
+  return dbRes;
+}
+
 module.exports = {
   testDrive,
   createNote,
@@ -205,4 +227,5 @@ module.exports = {
   createRootFolder,
   createFolderServerside,
   copyFiles,
+  createNoteServerside,
 };

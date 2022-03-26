@@ -21,7 +21,7 @@ const login = asyncHandler(async (req, res) => {
   if (result.length === 0) {
     client.setCredentials(r.tokens);
     const rootId = await createRootFolder();
-    /*const resultt = */await model.createUser(userHash, rootId);
+    /*const resultt = */ await model.createUser(userHash, rootId);
   }
   const userDataDB = await model.getUser(UserData.getPayload().sub);
 
@@ -43,10 +43,15 @@ const logout = async (req, res) => {
 
   req.session.destroy();
   res.clearCookie(process.env.SESSION_NAME);
-  if (client.credentials)
-    client.revokeCredentials(() => console.log('Credentials cleared'));
+  if (client.credentials) client.revokeCredentials(() => console.log('Credentials cleared'));
 
   res.status(200).end();
 };
 
-module.exports = { login, logout };
+const addSettings = asyncHandler(async (req, res) => {
+  const { userHash, settings } = req.body;
+
+  res.status(200).json(settings);
+});
+
+module.exports = { login, logout, addSettings };
