@@ -41,7 +41,7 @@ async function getOverallStudentGrade(classroomId) {
   };
 }
 
-const synchClassrooms = asyncHandler(async (req, res) => {
+const syncClassrooms = asyncHandler(async (req, res) => {
   console.log('START');
 
   const userHash = req.params.id;
@@ -163,4 +163,4 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
   res.status(200).send('Done');
 });
 
-module.exports = { synchClassrooms, syncClassroomFiles };
+module.exports = { syncClassrooms, syncClassroomFiles };

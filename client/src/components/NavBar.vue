@@ -47,6 +47,17 @@
       </li>
       <li>
         <button
+          type="button"
+          class="btn"
+          aria-label="Account"
+          v-if="userHash"
+          
+        >
+          <img :src="avatar" alt="">
+        </button>
+      </li>
+      <li>
+        <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="offcanvas"
@@ -222,6 +233,10 @@ export default {
     darkTheme: {
       type: Boolean,
       default: () => false,
+    },
+    avatar: {
+      type: String,
+      default: () => '',
     },
   },
   methods: {

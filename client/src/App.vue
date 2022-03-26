@@ -1,7 +1,11 @@
 <template>
   <div id="app" v-bind:class="{ 'bg-dark': darkTheme }">
-    <!-- <HelloWorld />-->
-    <NavBar @uploadFile="uploadFile" :userHash="userHash" :darkTheme="darkTheme" />
+    <NavBar
+      @uploadFile="uploadFile"
+      :userHash="userHash"
+      :darkTheme="darkTheme"
+      :avatar="avatar"
+    />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <div class="alert alert-danger mb-0 rounded-0 rounded-bottom" role="alert" v-if="updateAlert">
       <i class="bi bi-exclamation-triangle-fill"></i> Update Available, please refresh!
@@ -60,7 +64,20 @@
 </template>
 
 <script>
-//import HelloWorld from '@/components/HelloWorld.vue';
+function initialState() {
+  return {
+    folders: [],
+    notes: [],
+    serverAddress: process.env.VUE_APP_SERVER,
+    userHash: null,
+    offline: false,
+    updateAlert: false,
+    currentFolder: {},
+    darkTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
+    loader: false,
+    avatar: '',
+  };
+}
 import axios from 'axios';
 import MicroModal from 'micromodal';
 import UploadFile from '@/components/UploadFile.vue';
@@ -71,7 +88,6 @@ import CreateNote from '@/components/CreateNote.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
 export default {
   components: {
-    //HelloWorld,
     NavBar,
     Footer,
     UploadFile,
@@ -82,17 +98,7 @@ export default {
   mounted() {
     MicroModal.init();
   },
-  data: () => ({
-    folders: [],
-    notes: [],
-    serverAddress: process.env.VUE_APP_SERVER,
-    userHash: null,
-    offline: false,
-    updateAlert: false,
-    currentFolder: {},
-    darkTheme: false,
-    loader: false,
-  }),
+  data: () => initialState(),
   created() {
     this.isLoggedInF();
     this.themeStorage();
@@ -101,6 +107,7 @@ export default {
   methods: {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
+      this.avatar = localStorage.getItem('avatar');
       if (this.userHash) {
         this.getClassrooms();
         this.getFolders();
@@ -136,8 +143,7 @@ export default {
       })
         .then(() => {
           localStorage.clear();
-          this.folders = [];
-          this.notes = [];
+          this.resetWindow();
           this.isLoggedInF();
         })
         .catch((error) => {
@@ -165,6 +171,7 @@ export default {
       })
         .then(() => {
           this.getClassroomFiles();
+          this.getFolders();
         })
         .catch(() => {
           this.getFolders();
@@ -174,13 +181,9 @@ export default {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
-      })
-        .then(() => {
-          this.getFolders();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      }).catch(error => {
+        console.log(error);
+      });
     },
     addNote(object) {
       axios({
@@ -188,11 +191,9 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: object,
-      })
-        .then(() => {})
-        .catch((error) => {
-          console.log(error);
-        });
+      }).catch(error => {
+        console.log(error);
+      });
     },
     saveSettings(settings) {
       axios({
@@ -200,11 +201,9 @@ export default {
         method: 'POST',
         contentType: 'application/json',
         data: settings,
-      })
-        .then(() => {})
-        .catch((error) => {
-          console.log(error);
-        });
+      }).catch(error => {
+        console.log(error);
+      });
     },
     createNote(noteName) {
       MicroModal.close('createNote');
@@ -324,6 +323,9 @@ export default {
       });
       window.addEventListener('offline', () => (this.offline = true));
       window.addEventListener('online', () => (this.offline = false));
+    },
+    resetWindow: function () {
+      Object.assign(this.$data, initialState());
     },
   },
   watch: {

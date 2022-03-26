@@ -21,7 +21,7 @@ const login = asyncHandler(async (req, res) => {
   if (result.length === 0) {
     client.setCredentials(r.tokens);
     const rootId = await createRootFolder();
-    const resultt = await model.createUser(userHash, rootId);
+    /*const resultt = */await model.createUser(userHash, rootId);
   }
   const userDataDB = await model.getUser(UserData.getPayload().sub);
 
@@ -29,26 +29,24 @@ const login = asyncHandler(async (req, res) => {
     client.setCredentials(r.tokens);
     req.session.userHash = UserData.getPayload().sub;
     res.status(200).json({
-      code: 200,
-      data: { userHash: UserData.getPayload().sub, picture: UserData.getPayload().picture },
+      userHash: UserData.getPayload().sub,
+      picture: UserData.getPayload().picture,
     });
   } else {
-    res.status(200).json({
-      code: 500,
-      data: 'Login Failed',
-    });
+    res.status(500).send('Login failed!');
   }
 });
 
 const logout = async (req, res) => {
   // model.deleteUserSession(req.session.sid);
-  console.log(req.session);
+  //console.log(req.session);
 
   req.session.destroy();
   res.clearCookie(process.env.SESSION_NAME);
-  if (client.credentials) client.revokeCredentials(() => console.log('Credentials cleared'));
+  if (client.credentials)
+    client.revokeCredentials(() => console.log('Credentials cleared'));
 
-  res.status(200).send('nice');
+  res.status(200).end();
 };
 
 module.exports = { login, logout };
