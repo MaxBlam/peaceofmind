@@ -10,7 +10,7 @@ const {
   getNotesFromFolder,
   deleteFolder,
 } = require('../controllers/drive');
-const { testDocsAPI, addNoteText } = require('../controllers/docs');
+const { testDocsAPI, addNoteText, colorCodeDoc } = require('../controllers/docs');
 
 const router = express.Router();
 
@@ -29,5 +29,6 @@ router.get('/classroomfiles/:id', syncClassroomFiles);
 router.get('/docs/:id', testDocsAPI);
 router.post('/note/ocr', addNoteText);
 router.post('/settings/:id', addSettings);
+router.post('/colorcoding', colorCodeDoc);
 
 module.exports = router;

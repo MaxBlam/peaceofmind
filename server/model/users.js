@@ -7,7 +7,10 @@ async function getUser(hash) {
 }
 
 async function createUser(userHash, rootId) {
-  const res = await db.query('INSERT INTO users (hash,root_folder) VALUES ($1,$2) RETURNING *', [userHash, rootId]);
+  const res = await db.query('INSERT INTO users (hash,root_folder) VALUES ($1,$2) RETURNING *', [
+    userHash,
+    rootId,
+  ]);
 
   return res.rows;
 }
@@ -27,4 +30,17 @@ async function getUserSessions() {
   return res.rows;
 }
 
-module.exports = { getUser, createUser, deleteUserSession, getUserSessions, getUserSession };
+async function getUserSettings(userId) {
+  const { rows } = await db.query('SELECT * from user_settings where acc_id = $1', [userId]);
+
+  return rows;
+}
+
+module.exports = {
+  getUser,
+  createUser,
+  deleteUserSession,
+  getUserSessions,
+  getUserSession,
+  getUserSettings,
+};

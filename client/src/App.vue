@@ -10,6 +10,7 @@
       mode.
     </div>
     <button @click="docs()">DOCS</button>
+    <button @click="docsColor()">DOCS ColorCoding</button>
     <router-view
       :folders="folders"
       :currentFolder="currentFolder"
@@ -107,9 +108,21 @@ export default {
     async docs() {
       const res = await axios({
         url: 'http://localhost:3000/docs/1iwBuzEUYi35Ui0gchlFiBXNLqTZQV9nEOsid5OxMN2s',
-        method: 'GET',
+        method: 'Get',
       });
 
+      console.log(res);
+    },
+    async docsColor() {
+      const res = await axios({
+        url: 'http://localhost:3000/colorcoding',
+        method: 'POST',
+        contentType: 'application/json',
+        data: {
+          userHash: this.userHash,
+          docId: '1iwBuzEUYi35Ui0gchlFiBXNLqTZQV9nEOsid5OxMN2s'
+        },
+      });
       console.log(res);
     },
     isLoggedInF() {
@@ -222,7 +235,10 @@ export default {
         url: this.serverAddress + '/settings',
         method: 'POST',
         contentType: 'application/json',
-        data: settings,
+        data: {
+          userHash: this.userHash,
+          settings: settings,
+        },
       }).catch((error) => {
         console.log(error);
       });
