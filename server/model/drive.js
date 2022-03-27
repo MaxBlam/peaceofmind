@@ -2,7 +2,7 @@ const db = require('../db/connect');
 
 async function createNote(userId, docId, folderId, copyOf) {
   const { rows } = await db.query(
-    'insert into documents(doc_id, fk_acc_id, fk_folder_id, copy_of) VALUES ($1,$2,$3,$4)',
+    'insert into documents(doc_id, fk_acc_id, fk_folder_id, copy_of) VALUES ($1,$2,$3,$4) returning *;',
     [docId, userId, folderId, copyOf],
   );
   console.log(userId);

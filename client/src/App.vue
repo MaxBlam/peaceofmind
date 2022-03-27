@@ -1,11 +1,6 @@
 <template>
   <div id="app" v-bind:class="{ 'bg-dark': darkTheme }">
-    <NavBar
-      @uploadFile="uploadFile"
-      :userHash="userHash"
-      :darkTheme="darkTheme"
-      :avatar="avatar"
-    />
+    <NavBar @uploadFile="uploadFile" :userHash="userHash" :darkTheme="darkTheme" :avatar="avatar" />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <div class="alert alert-danger mb-0 rounded-0 rounded-bottom" role="alert" v-if="updateAlert">
       <i class="bi bi-exclamation-triangle-fill"></i> Update Available, please refresh!
@@ -14,6 +9,7 @@
       <i class="bi bi-info-circle-fill"></i> No internet connection found. App is running in offline
       mode.
     </div>
+    <button @click="docs()">DOCS</button>
     <router-view
       :folders="folders"
       :currentFolder="currentFolder"
@@ -108,6 +104,14 @@ export default {
     this.buildEventListeners();
   },
   methods: {
+    async docs() {
+      const res = await axios({
+        url: 'http://localhost:3000/docs/1iwBuzEUYi35Ui0gchlFiBXNLqTZQV9nEOsid5OxMN2s',
+        method: 'GET',
+      });
+
+      console.log(res);
+    },
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       this.avatar = localStorage.getItem('avatar');
@@ -203,7 +207,12 @@ export default {
         url: this.serverAddress + '/note/ocr',
         method: 'POST',
         contentType: 'application/json',
-        data: object,
+        data: {
+          userHash: this.userHash,
+          text: object.text,
+          folder: object.folderId,
+          docName: `test ${Date.now()}`,
+        },
       }).catch((error) => {
         console.log(error);
       });
@@ -328,9 +337,7 @@ export default {
       if (theme) {
         this.darkTheme = JSON.parse(theme);
       } else {
-        this.darkTheme = window.matchMedia(
-          '(prefers-color-scheme: dark)'
-        ).matches;
+        this.darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
       }
     },
     buildEventListeners() {

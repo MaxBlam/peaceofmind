@@ -193,6 +193,9 @@ async function copyFiles(docId, folderId, userId) {
 
 async function createNoteServerside(inputBody) {
   const { userHash, noteName, folderId } = inputBody;
+  console.log('TEST 3');
+  console.log(userHash);
+
   const userDbData = await model.getUser(userHash);
   const fileMetaData = {
     name: noteName,
