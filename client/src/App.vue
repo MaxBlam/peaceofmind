@@ -1,13 +1,27 @@
 <template>
   <div id="app" v-bind:class="{ 'bg-dark': darkTheme }">
-    <NavBar @uploadFile="uploadFile" :userHash="userHash" :darkTheme="darkTheme" :avatar="avatar" />
+    <NavBar
+      @uploadFile="uploadFile"
+      :userHash="userHash"
+      :darkTheme="darkTheme"
+      :avatar="avatar"
+    />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
-    <div class="alert alert-danger mb-0 rounded-0 rounded-bottom" role="alert" v-if="updateAlert">
-      <i class="bi bi-exclamation-triangle-fill"></i> Update Available, please refresh!
+    <div
+      class="alert alert-danger mb-0 rounded-0 rounded-bottom"
+      role="alert"
+      v-if="updateAlert"
+    >
+      <i class="bi bi-exclamation-triangle-fill"></i> Update Available, please
+      refresh!
     </div>
-    <div class="alert alert-primary mb-0 rounded-0 rounded-bottom" role="alert" v-if="offline">
-      <i class="bi bi-info-circle-fill"></i> No internet connection found. App is running in offline
-      mode.
+    <div
+      class="alert alert-primary mb-0 rounded-0 rounded-bottom"
+      role="alert"
+      v-if="offline"
+    >
+      <i class="bi bi-info-circle-fill"></i> No internet connection found. App
+      is running in offline mode.
     </div>
     <button @click="docs()">DOCS</button>
     <button @click="docsColor()">DOCS ColorCoding</button>
@@ -120,7 +134,7 @@ export default {
         contentType: 'application/json',
         data: {
           userHash: this.userHash,
-          docId: '1iwBuzEUYi35Ui0gchlFiBXNLqTZQV9nEOsid5OxMN2s'
+          docId: '1iwBuzEUYi35Ui0gchlFiBXNLqTZQV9nEOsid5OxMN2s',
         },
       });
       console.log(res);
@@ -138,13 +152,13 @@ export default {
     login() {
       this.$gAuth
         .signIn()
-        .then((googleUser) => {
+        .then(googleUser => {
           googleUser
             .grantOfflineAccess({
               scope:
                 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
             })
-            .then((goaRes) => {
+            .then(goaRes => {
               axios({
                 url: this.serverAddress + '/login',
                 method: 'POST',
@@ -153,18 +167,18 @@ export default {
                   code: goaRes.code,
                 },
               })
-                .then((res) => {
+                .then(res => {
                   localStorage.setItem('userHash', res.data.userHash);
                   localStorage.setItem('avatar', res.data.picture);
                   this.$router.push('/');
                 })
-                .catch((err) => {
+                .catch(err => {
                   console.log(err);
                 });
             })
-            .catch((err) => console.log(err));
+            .catch(err => console.log(err));
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     },
     logout() {
       axios({
@@ -174,9 +188,11 @@ export default {
         .then(() => {
           localStorage.clear();
           this.resetWindow();
-          this.isLoggedInF();
+          setTimeout(() => {
+            this.isLoggedInF();
+          }, 3000);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -186,7 +202,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then((res) => {
+        .then(res => {
           this.folders = res.data;
           this.loader = false;
         })
@@ -211,7 +227,7 @@ export default {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
-      }).catch((error) => {
+      }).catch(error => {
         console.log(error);
       });
     },
@@ -226,7 +242,7 @@ export default {
           folder: object.folderId,
           docName: `test ${Date.now()}`,
         },
-      }).catch((error) => {
+      }).catch(error => {
         console.log(error);
       });
     },
@@ -239,7 +255,7 @@ export default {
           userHash: this.userHash,
           settings: settings,
         },
-      }).catch((error) => {
+      }).catch(error => {
         console.log(error);
       });
     },
@@ -258,7 +274,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -275,7 +291,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -292,7 +308,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -311,7 +327,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -321,8 +337,8 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then((res) => {
-          this.currentFolder = this.folders.find((f) => f.folder_id === id);
+        .then(res => {
+          this.currentFolder = this.folders.find(f => f.folder_id === id);
           this.notes = res.data.data.files;
           this.loader = false;
         })
@@ -334,11 +350,11 @@ export default {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find((f) => f.folder_id === id);
+      this.currentFolder = this.folders.find(f => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
@@ -353,7 +369,9 @@ export default {
       if (theme) {
         this.darkTheme = JSON.parse(theme);
       } else {
-        this.darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        this.darkTheme = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
       }
     },
     buildEventListeners() {
