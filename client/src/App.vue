@@ -23,8 +23,8 @@
       <i class="bi bi-info-circle-fill"></i> No internet connection found. App
       is running in offline mode.
     </div>
-    <button @click="docs()">DOCS</button>
-    <button @click="docsColor()">DOCS ColorCoding</button>
+    <!-- <button @click="docs()">DOCS</button>
+    <button @click="docsColor()">DOCS ColorCoding</button> -->
     <router-view
       :folders="folders"
       :currentFolder="currentFolder"
