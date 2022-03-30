@@ -3,4 +3,6 @@ Details View erhält Namen des Ordners (Breadcrumbs)
 Inputcheck bei z.B createFolder // vuelidate
 UploadFile Name Input fehlt & Userhash muss mitgegeben werden
 Avatar in Nav
+@click color formatting on note open
+Settings fertig
 Client refreshed currentfolder nicht, Push to logout buggy (Cant reproduce)
