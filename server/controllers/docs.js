@@ -8,7 +8,7 @@ const docs = google.docs({ version: 'v1', auth: client });
 
 async function colorDoc(arr, docId, revisionId, colors) {
   let timeoutTimer = 0;
-  arr.forEach((heading) => {
+  arr.forEach(heading => {
     const fileMetadata = {
       requests: [
         {
@@ -59,28 +59,25 @@ const testDocsAPI = asyncHandler(async (req, res) => {
 });
 
 const addNoteText = asyncHandler(async (req, res) => {
-  const { userHash, text, folder, docName } = req.body;
+  const { userHash, text, folder, noteName } = req.body;
   const folderData = await driveModel.getFolderFid(folder);
   const folderId = folderData[0].folder_id;
   const driveRes = await createNoteServerside({
     userHash: userHash,
-    noteName: docName,
+    noteName: noteName,
     folderId: folderId,
   });
-  console.log('TEST 1', userHash);
 
   if (driveRes === 'No User') {
     res.status(400).send('User not found');
     return;
   }
-  console.log(driveRes);
 
   const newDocId = driveRes[0].doc_id;
 
   const getNewDoc = await docs.documents.get({
     documentId: newDocId,
   });
-  console.log('TEST 2');
 
   const revisionId = getNewDoc.data.revisionId;
   const fileMetadata = {
@@ -117,8 +114,10 @@ const colorCodeDoc = asyncHandler(async (req, res) => {
 
   // Extract from Document Tree - 1 - Headings
 
-  const headingParagraphs = data.body.content.filter((par) =>
-    par.paragraph ? par.paragraph.paragraphStyle.namedStyleType === 'SUBTITLE' : null,
+  const headingParagraphs = data.body.content.filter(par =>
+    par.paragraph
+      ? par.paragraph.paragraphStyle.namedStyleType === 'SUBTITLE'
+      : null,
   );
   const headingColors = {
     red: userSettings[0].heading_color.split(',')[0],
@@ -129,9 +128,10 @@ const colorCodeDoc = asyncHandler(async (req, res) => {
   await colorDoc(headingParagraphs, docId, revisionId, headingColors);
 
   // Extract from Document Tree - 2 - Paragraphs
-  const NormalTextParagraph = data.body.content.filter((par) =>
+  const NormalTextParagraph = data.body.content.filter(par =>
     par.paragraph
-      ? par.paragraph.paragraphStyle.namedStyleType === 'NORMAL_TEXT' && !par.paragraph.bullet
+      ? par.paragraph.paragraphStyle.namedStyleType === 'NORMAL_TEXT' &&
+        !par.paragraph.bullet
       : null,
   );
   const normalTextColors = {
@@ -143,7 +143,7 @@ const colorCodeDoc = asyncHandler(async (req, res) => {
   await colorDoc(NormalTextParagraph, docId, revisionId, normalTextColors);
 
   // Extract from Document Tree - 2 - Lists
-  const ListParagraph = data.body.content.filter((par) =>
+  const ListParagraph = data.body.content.filter(par =>
     par.paragraph ? par.paragraph.bullet : null,
   );
   const listColors = {

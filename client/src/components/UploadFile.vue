@@ -2,7 +2,7 @@
   <div class="modal micromodal-slide">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div
-        class="modal-content container  modal__container"
+        class="modal-content container modal__container"
         v-bind:class="{
           'bg-dark': darkTheme,
           'modal-content': !darkTheme,
@@ -59,14 +59,23 @@
               </option>
             </select>
           </div>
-
+          <div class="mb-3">
+            <label class="form-label">Note Name</label>
+            <input
+              type="text"
+              class="form-control"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              v-model="noteName"
+              :placeholder="`Name_${new Date().toJSON().slice(0, 10)}`"
+            />
+          </div>
           <button
             type="button"
             aria-label="Add Note"
             data-micromodal-close
             class="btn btn-identity transition-sm"
             @click="addNote"
-            :disabled="file == '' || !folderId"
+            :disabled="file == '' || folderId == '' || noteName == ''"
           >
             Add Note
           </button>
@@ -81,11 +90,12 @@ import Tesseract from 'tesseract.js';
 export default {
   data: () => ({
     file: '',
-    folderId: null,
+    folderId: '',
     someData: {},
     language: 'eng',
     progress: 0,
     status: '',
+    noteName: '',
   }),
   props: {
     folders: {
@@ -99,12 +109,16 @@ export default {
   },
   methods: {
     addNote() {
-      this.$emit('addNote', { text: this.file, folderId: this.folderId });
+      this.$emit('addNote', {
+        text: this.file,
+        folder: this.folderId,
+        noteName: this.noteName,
+      });
     },
     async convertImgToText(input) {
       this.someData = input.target.files[0]; // Get inputs
       Tesseract.recognize(this.someData, this.language, {
-        logger: (m) => {
+        logger: m => {
           this.progress = m.progress * 100;
           this.status = m.status;
         },

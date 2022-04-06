@@ -25,7 +25,6 @@
             aria-label="Paragraph Color"
             aria-describedby="pColor-wrapping"
             maxlength="6"
-            pattern="[A-Za-z0-9]"
           />
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
@@ -51,7 +50,6 @@
             aria-label="Paragraph Color"
             aria-describedby="liColor-wrapping"
             maxlength="6"
-            pattern="[A-Za-z0-9]"
           />
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
@@ -77,7 +75,6 @@
             aria-label="Paragraph Color"
             aria-describedby="hColor-wrapping"
             maxlength="6"
-            pattern="[A-Za-z0-9]"
           />
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
@@ -87,7 +84,11 @@
             Reset
           </button>
         </div>
-        <button type="submit" class="btn btn-identity transition-sm col-2">
+        <button
+          type="button"
+          class="btn btn-identity transition-sm col-2"
+          @click="saveSettings"
+        >
           Save
         </button>
       </div>
@@ -132,16 +133,24 @@ export default {
   methods: {
     saveSettings() {
       this.$emit('saveSettings', {
-        pColor: this.pColor,
-        hColor: this.hColor,
-        liColor: this.liColor,
+        pColor: this.hexToRgb(this.pColor),
+        hColor: this.hexToRgb(this.hColor),
+        liColor: this.hexToRgb(this.liColor),
       });
     },
     themeChange() {
       this.$emit('themeChange', this.themeSwitch);
     },
+    hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result
+        ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16),
+          }
+        : null;
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

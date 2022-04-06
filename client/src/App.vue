@@ -23,8 +23,6 @@
       <i class="bi bi-info-circle-fill"></i> No internet connection found. App
       is running in offline mode.
     </div>
-    <!-- <button @click="docs()">DOCS</button>
-    <button @click="docsColor()">DOCS ColorCoding</button> -->
     <router-view
       :folders="folders"
       :currentFolder="currentFolder"
@@ -43,6 +41,7 @@
       @login="login"
       @logout="logout"
       @themeChange="themeChange"
+      @docsColor="docsColor"
     />
     <Footer :darkTheme="darkTheme" />
     <UploadFile
@@ -119,31 +118,11 @@ export default {
     this.buildEventListeners();
   },
   methods: {
-    async docs() {
-      const res = await axios({
-        url: 'http://localhost:3000/docs/1iwBuzEUYi35Ui0gchlFiBXNLqTZQV9nEOsid5OxMN2s',
-        method: 'Get',
-      });
-
-      console.log(res);
-    },
-    async docsColor() {
-      const res = await axios({
-        url: 'http://localhost:3000/colorcoding',
-        method: 'POST',
-        contentType: 'application/json',
-        data: {
-          userHash: this.userHash,
-          docId: '1iwBuzEUYi35Ui0gchlFiBXNLqTZQV9nEOsid5OxMN2s',
-        },
-      });
-      console.log(res);
-    },
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       this.avatar = localStorage.getItem('avatar');
       if (this.userHash) {
-        this.getClassrooms();
+        //this.getClassrooms(); Not working
         this.getFolders();
       } else {
         this.$router.push('/login');
@@ -196,6 +175,19 @@ export default {
           console.log(error);
         });
     },
+    async docsColor(id) {
+      await axios({
+        url: 'http://localhost:3000/colorcoding',
+        method: 'POST',
+        contentType: 'application/json',
+        data: {
+          userHash: this.userHash,
+          docId: id,
+        },
+      }).catch(error => {
+        console.log(error);
+      });
+    },
     getFolders() {
       this.loader = true;
       axios({
@@ -239,8 +231,8 @@ export default {
         data: {
           userHash: this.userHash,
           text: object.text,
-          folder: object.folderId,
-          docName: `test ${Date.now()}`,
+          folder: object.folder,
+          noteName: object.noteName,
         },
       }).catch(error => {
         console.log(error);

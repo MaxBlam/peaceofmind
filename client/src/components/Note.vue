@@ -46,6 +46,7 @@
             justify-content-center
           "
           :href="`https://docs.google.com/${fileType}/d/${note.id}`"
+          @click="docsColor"
           target="_blank"
         >
           Open
@@ -76,6 +77,9 @@ export default {
   methods: {
     deleteNote() {
       this.$emit('deleteNote', this.note.id);
+    },
+    docsColor() {
+      this.$emit('docsColor', this.note.id);
     },
   },
   computed: {

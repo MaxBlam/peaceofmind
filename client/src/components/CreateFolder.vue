@@ -50,7 +50,7 @@
               type="text"
               class="form-control"
               v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
-              placeholder="Mr Bobert Raumgartner"
+              placeholder="Mr Walter White"
               v-model="teacher"
             />
           </div>

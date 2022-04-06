@@ -102,6 +102,13 @@
         </button>
       </div>
       <div class="offcanvas-body">
+        <img
+          :src="avatar"
+          alt="Avatar"
+          width="50"
+          class="rounded-circle"
+          v-if="userHash"
+        />
         <ul
           class="navbar-nav justify-content-end flex-grow-1 pe-3"
           data-bs-dismiss="offcanvas"

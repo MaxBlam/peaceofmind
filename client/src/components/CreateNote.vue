@@ -32,7 +32,7 @@
               type="text"
               class="form-control"
               v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
-              :placeholder="`Name_${currentFolder.name}_${new Date().toJSON().slice(0,10)}.docx`"
+              :placeholder="`Name_${currentFolder.name}_${new Date().toJSON().slice(0,10)}`"
               v-model="noteName"
               @keyup.enter="addNote"
             />
