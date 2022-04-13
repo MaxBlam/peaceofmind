@@ -44,7 +44,7 @@ async function colorDoc(arr, docId, revisionId, colors) {
         resource: fileMetadata,
       });
     }, timeoutTimer);
-    timeoutTimer += 20;
+    timeoutTimer += 100;
   });
 }
 

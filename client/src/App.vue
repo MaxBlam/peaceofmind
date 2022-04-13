@@ -23,6 +23,7 @@
       <i class="bi bi-info-circle-fill"></i> No internet connection found. App
       is running in offline mode.
     </div>
+    <button @click="getSettings()">GET SETTINGS</button>
     <router-view
       :folders="folders"
       :currentFolder="currentFolder"
@@ -118,6 +119,13 @@ export default {
     this.buildEventListeners();
   },
   methods: {
+    async getSettings() {
+      const res = await axios({
+        url: `http://localhost:3000/settings/${this.userHash}`,
+        method: 'GET',
+      });
+      console.log(res);
+    },
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       this.avatar = localStorage.getItem('avatar');
@@ -135,7 +143,7 @@ export default {
           googleUser
             .grantOfflineAccess({
               scope:
-                'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
+                'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
             })
             .then(goaRes => {
               axios({

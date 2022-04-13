@@ -27,8 +27,11 @@ const createRootFolder = asyncHandler(async () => {
 });
 
 const createNote = asyncHandler(async (req, res) => {
-  const { userHash, noteName, folderId } = req.body;
+  let { userHash, noteName, folderId } = req.body;
   const userDBdata = await model.getUser(userHash);
+  if (folderId.includes('.')) {
+    folderId = folderId.substring(0, folderId.length - 1);
+  }
   const fileMetadata = {
     name: noteName,
     parents: [folderId],
@@ -119,7 +122,10 @@ const deleteFolder = asyncHandler(async (req, res) => {
     fileId: folderId,
   });
 
-  const dbRes = await modelDrive.deleteFolder(folderDbData[0].f_id, userDBdata[0].acc_id);
+  const dbRes = await modelDrive.deleteFolder(
+    folderDbData[0].f_id,
+    userDBdata[0].acc_id,
+  );
 
   res.status(200).json(dbRes);
 });
