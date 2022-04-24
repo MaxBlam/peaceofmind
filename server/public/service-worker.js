@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.ac1a9abb8c5f3fea7484770c85c90cec.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.daeb7370be0c2fdb2e8f56507fdbb926.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 /* global workbox */
 if (workbox) {
@@ -9,7 +9,19 @@ if (workbox) {
   workbox.routing.registerRoute(
     new RegExp('/folders'),
     new workbox.strategies.StaleWhileRevalidate({
-      cacheName: 'PieceofMind-FolderCache',
+      cacheName: 'PieceofMind-Folders',
+    }),
+  );
+  workbox.routing.registerRoute(
+    new RegExp('/js'),
+    new workbox.strategies.NetworkFirst({
+      cacheName: 'PieceofMind-Javascript',
+    }),
+  );
+  workbox.routing.registerRoute(
+    new RegExp('/fonts'),
+    new workbox.strategies.StaleWhileRevalidate({
+      cacheName: 'PieceofMind-Fonts',
     }),
   );
   self.addEventListener('push', event => {
