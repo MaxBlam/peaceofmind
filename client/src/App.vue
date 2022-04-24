@@ -23,7 +23,6 @@
       <i class="bi bi-info-circle-fill"></i> No internet connection found. App
       is running in offline mode.
     </div>
-    <button @click="getSettings()">GET SETTINGS</button>
     <router-view
       :folders="folders"
       :currentFolder="currentFolder"
@@ -31,6 +30,7 @@
       :darkTheme="darkTheme"
       :userHash="userHash"
       :loader="loader"
+      :settings="settings"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
       @createNote="createNote"
@@ -87,6 +87,7 @@ function initialState() {
     darkTheme: false,
     loader: false,
     avatar: '',
+    settings: {},
   };
 }
 import axios from 'axios';
@@ -119,19 +120,13 @@ export default {
     this.buildEventListeners();
   },
   methods: {
-    async getSettings() {
-      const res = await axios({
-        url: `http://localhost:3000/settings/${this.userHash}`,
-        method: 'GET',
-      });
-      console.log(res);
-    },
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
       this.avatar = localStorage.getItem('avatar');
       if (this.userHash) {
         //this.getClassrooms(); Not working
         this.getFolders();
+        this.getSettings();
       } else {
         this.$router.push('/login');
       }
@@ -139,13 +134,13 @@ export default {
     login() {
       this.$gAuth
         .signIn()
-        .then(googleUser => {
+        .then((googleUser) => {
           googleUser
             .grantOfflineAccess({
               scope:
                 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
             })
-            .then(goaRes => {
+            .then((goaRes) => {
               axios({
                 url: this.serverAddress + '/login',
                 method: 'POST',
@@ -154,18 +149,18 @@ export default {
                   code: goaRes.code,
                 },
               })
-                .then(res => {
+                .then((res) => {
                   localStorage.setItem('userHash', res.data.userHash);
                   localStorage.setItem('avatar', res.data.picture);
                   this.$router.push('/');
                 })
-                .catch(err => {
+                .catch((err) => {
                   console.log(err);
                 });
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
     logout() {
       axios({
@@ -179,7 +174,7 @@ export default {
             this.isLoggedInF();
           }, 3000);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -192,7 +187,7 @@ export default {
           userHash: this.userHash,
           docId: id,
         },
-      }).catch(error => {
+      }).catch((error) => {
         console.log(error);
       });
     },
@@ -202,7 +197,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then(res => {
+        .then((res) => {
           this.folders = res.data;
           this.loader = false;
         })
@@ -227,7 +222,7 @@ export default {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
-      }).catch(error => {
+      }).catch((error) => {
         console.log(error);
       });
     },
@@ -242,9 +237,13 @@ export default {
           folder: object.folder,
           noteName: object.noteName,
         },
-      }).catch(error => {
-        console.log(error);
-      });
+      })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     saveSettings(settings) {
       axios({
@@ -255,7 +254,7 @@ export default {
           userHash: this.userHash,
           settings: settings,
         },
-      }).catch(error => {
+      }).catch((error) => {
         console.log(error);
       });
     },
@@ -274,7 +273,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -291,7 +290,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -308,7 +307,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -327,7 +326,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -337,8 +336,8 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then(res => {
-          this.currentFolder = this.folders.find(f => f.folder_id === id);
+        .then((res) => {
+          this.currentFolder = this.folders.find((f) => f.folder_id === id);
           this.notes = res.data.data.files;
           this.loader = false;
         })
@@ -346,15 +345,44 @@ export default {
           this.$router.push('/logout');
         });
     },
+    getSettings() {
+      axios({
+        url: this.serverAddress + '/settings/' + this.userHash,
+        method: 'GET',
+      })
+        .then((res) => {
+          const object = res.data;
+          this.settings = {
+            pColor: this.rgbToHex(
+              object.pColor.r,
+              object.pColor.g,
+              object.pColor.b
+            ),
+            liColor: this.rgbToHex(
+              object.liColor.r,
+              object.liColor.g,
+              object.liColor.b
+            ),
+            hColor: this.rgbToHex(
+              object.hColor.r,
+              object.hColor.g,
+              object.hColor.b
+            ),
+          };
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     uploadFile() {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
@@ -370,9 +398,21 @@ export default {
         this.darkTheme = JSON.parse(theme);
       } else {
         this.darkTheme = window.matchMedia(
-          '(prefers-color-scheme: dark)',
+          '(prefers-color-scheme: dark)'
         ).matches;
       }
+    },
+    componentToHex(c) {
+      var hex = c.toString(16);
+      return hex.length == 1 ? '0' + hex : hex;
+    },
+
+    rgbToHex(r, g, b) {
+      return (
+        this.componentToHex(r).toUpperCase() +
+        this.componentToHex(g).toUpperCase() +
+        this.componentToHex(b).toUpperCase()
+      );
     },
     buildEventListeners() {
       window.addEventListener('swUpdated', this.updateAvailable, {

@@ -18,7 +18,7 @@
           >
           <input
             type="text"
-            v-model="pColor"
+            v-model="settings.pColor"
             class="form-control"
             v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
             placeholder="Hex Code (e.g. #FFFFFF)"
@@ -29,7 +29,7 @@
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
             type="button"
-            @click="pColor = ''"
+            @click="settings.pColor = ''"
           >
             Reset
           </button>
@@ -43,7 +43,7 @@
           >
           <input
             type="text"
-            v-model="liColor"
+            v-model="settings.liColor"
             class="form-control"
             v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
             placeholder="Hex Code (e.g. #FFFFFF)"
@@ -54,7 +54,7 @@
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
             type="button"
-            @click="liColor = ''"
+            @click="settings.liColor = ''"
           >
             Reset
           </button>
@@ -68,7 +68,7 @@
           >
           <input
             type="text"
-            v-model="hColor"
+            v-model="settings.hColor"
             class="form-control"
             v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
             placeholder="Hex Code (e.g. #FFFFFF)"
@@ -79,7 +79,7 @@
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
             type="button"
-            @click="hColor = ''"
+            @click="settings.hColor = ''"
           >
             Reset
           </button>
@@ -115,9 +115,6 @@ export default {
     this.themeSwitch = this.darkTheme;
   },
   data: () => ({
-    pColor: '',
-    hColor: '',
-    liColor: '',
     themeSwitch: false,
   }),
   props: {
@@ -129,13 +126,17 @@ export default {
       type: String,
       default: () => null,
     },
+    settings: {
+      type: Object,
+      default: () => {},
+    },
   },
   methods: {
     saveSettings() {
       this.$emit('saveSettings', {
-        pColor: this.hexToRgb(this.pColor),
-        hColor: this.hexToRgb(this.hColor),
-        liColor: this.hexToRgb(this.liColor),
+        pColor: this.hexToRgb(this.settings.pColor),
+        hColor: this.hexToRgb(this.settings.hColor),
+        liColor: this.hexToRgb(this.settings.liColor),
       });
     },
     themeChange() {
