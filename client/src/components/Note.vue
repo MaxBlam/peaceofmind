@@ -45,7 +45,8 @@
             align-items-center
             justify-content-center
           "
-          :href="`https://docs.google.com/document/d/${note.id}`"
+          :href="`https://docs.google.com/${fileType}/d/${note.id}`"
+          @click="docsColor"
           target="_blank"
         >
           Open
@@ -76,6 +77,17 @@ export default {
   methods: {
     deleteNote() {
       this.$emit('deleteNote', this.note.id);
+    },
+    docsColor() {
+      this.$emit('docsColor', this.note.id);
+    },
+  },
+  computed: {
+    fileType: function () {
+      if (this.note.mimeType.includes('document')) {
+        return 'document';
+      }
+      return 'file';
     },
   },
 };

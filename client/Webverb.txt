@@ -1,3 +1,1 @@
-Details -> Open soll mit Mime-Type übereinstimmen
 Lighthouse optimisieren
-Details View erhält Namen des Ordners (Breadcrumbs)

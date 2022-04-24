@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-3 my-4">
+  <footer class="py-3 my-4" v-bind:class="{ 'bg-dark': darkTheme }">
     <ul
       class="nav justify-content-center pb-3 mb-3"
       v-bind:class="{ 'border-bottom': !darkTheme }"

@@ -1,10 +1,10 @@
 <template>
   <div id="app" v-bind:class="{ 'bg-dark': darkTheme }">
-    <!-- <HelloWorld />-->
     <NavBar
       @uploadFile="uploadFile"
       :userHash="userHash"
       :darkTheme="darkTheme"
+      :avatar="avatar"
     />
     <nav class="navbar container" style="height: 66px">Margin Control</nav>
     <div
@@ -30,6 +30,7 @@
       :darkTheme="darkTheme"
       :userHash="userHash"
       :loader="loader"
+      :settings="settings"
       @getFolders="getFolders"
       @saveSettings="saveSettings"
       @createNote="createNote"
@@ -41,6 +42,7 @@
       @login="login"
       @logout="logout"
       @themeChange="themeChange"
+      @docsColor="docsColor"
     />
     <Footer :darkTheme="darkTheme" />
     <UploadFile
@@ -73,7 +75,21 @@
 </template>
 
 <script>
-//import HelloWorld from '@/components/HelloWorld.vue';
+function initialState() {
+  return {
+    folders: [],
+    notes: [],
+    serverAddress: process.env.VUE_APP_SERVER,
+    userHash: null,
+    offline: false,
+    updateAlert: false,
+    currentFolder: {},
+    darkTheme: false,
+    loader: false,
+    avatar: '',
+    settings: {},
+  };
+}
 import axios from 'axios';
 import MicroModal from 'micromodal';
 import UploadFile from '@/components/UploadFile.vue';
@@ -84,7 +100,6 @@ import CreateNote from '@/components/CreateNote.vue';
 import CreateFolder from '@/components/CreateFolder.vue';
 export default {
   components: {
-    //HelloWorld,
     NavBar,
     Footer,
     UploadFile,
@@ -93,19 +108,12 @@ export default {
     CreateFolder,
   },
   mounted() {
-    MicroModal.init();
+    MicroModal.init({
+      awaitCloseAnimation: true,
+      awaitOpenAnimation: true,
+    });
   },
-  data: () => ({
-    folders: [],
-    notes: [],
-    serverAddress: process.env.VUE_APP_SERVER,
-    userHash: null,
-    offline: false,
-    updateAlert: false,
-    currentFolder: {},
-    darkTheme: false,
-    loader: false,
-  }),
+  data: () => initialState(),
   created() {
     this.isLoggedInF();
     this.themeStorage();
@@ -114,33 +122,45 @@ export default {
   methods: {
     isLoggedInF() {
       this.userHash = localStorage.getItem('userHash');
+      this.avatar = localStorage.getItem('avatar');
       if (this.userHash) {
+        //this.getClassrooms(); Not working
         this.getFolders();
+        this.getSettings();
       } else {
         this.$router.push('/login');
       }
     },
-    async login() {
-      try {
-        const googleUser = await this.$gAuth.signIn();
-        const goaRes = await googleUser.grantOfflineAccess({
-          scope:
-            'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
-        });
-        const res = await axios({
-          url: this.serverAddress + '/login',
-          method: 'POST',
-          contentType: 'application/json',
-          data: {
-            code: goaRes.code,
-          },
-        });
-        if (res.data.code === 200)
-          localStorage.setItem('userHash', res.data.data.userHash);
-        this.$router.push('/');
-      } catch (error) {
-        console.error(error);
-      }
+    login() {
+      this.$gAuth
+        .signIn()
+        .then((googleUser) => {
+          googleUser
+            .grantOfflineAccess({
+              scope:
+                'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.rosters https://www.googleapis.com/auth/classroom.coursework.me',
+            })
+            .then((goaRes) => {
+              axios({
+                url: this.serverAddress + '/login',
+                method: 'POST',
+                contentType: 'application/json',
+                data: {
+                  code: goaRes.code,
+                },
+              })
+                .then((res) => {
+                  localStorage.setItem('userHash', res.data.userHash);
+                  localStorage.setItem('avatar', res.data.picture);
+                  this.$router.push('/');
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
     },
     logout() {
       axios({
@@ -149,13 +169,27 @@ export default {
       })
         .then(() => {
           localStorage.clear();
-          this.folders = [];
-          this.notes = [];
-          this.isLoggedInF();
+          this.resetWindow();
+          setTimeout(() => {
+            this.isLoggedInF();
+          }, 3000);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
+    },
+    async docsColor(id) {
+      await axios({
+        url: 'http://localhost:3000/colorcoding',
+        method: 'POST',
+        contentType: 'application/json',
+        data: {
+          userHash: this.userHash,
+          docId: id,
+        },
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     getFolders() {
       this.loader = true;
@@ -163,7 +197,7 @@ export default {
         url: this.serverAddress + '/folder/' + this.userHash,
         method: 'GET',
       })
-        .then(res => {
+        .then((res) => {
           this.folders = res.data;
           this.loader = false;
         })
@@ -171,39 +205,43 @@ export default {
           this.$router.push('logout');
         });
     },
-    /*getClassrooms() {
+    getClassrooms() {
       axios({
         method: 'get',
         url: this.serverAddress + '/classrooms/' + this.userHash,
       })
         .then(() => {
           this.getClassroomFiles();
+          this.getFolders();
         })
         .catch(() => {
           this.getFolders();
         });
-    },*/
+    },
     getClassroomFiles() {
       axios({
         method: 'get',
         url: this.serverAddress + '/classroomfiles/' + this.userHash,
-      })
-        .then(() => {
-          this.getFolders();
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     addNote(object) {
       axios({
         url: this.serverAddress + '/note/ocr',
         method: 'POST',
         contentType: 'application/json',
-        data: object,
+        data: {
+          userHash: this.userHash,
+          text: object.text,
+          folder: object.folder,
+          noteName: object.noteName,
+        },
       })
-        .then(() => {})
-        .catch(error => {
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -212,12 +250,13 @@ export default {
         url: this.serverAddress + '/settings',
         method: 'POST',
         contentType: 'application/json',
-        data: settings,
-      })
-        .then(() => {})
-        .catch(error => {
-          console.log(error);
-        });
+        data: {
+          userHash: this.userHash,
+          settings: settings,
+        },
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     createNote(noteName) {
       MicroModal.close('createNote');
@@ -234,7 +273,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -251,7 +290,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -268,7 +307,7 @@ export default {
         .then(() => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -287,7 +326,7 @@ export default {
         .then(() => {
           this.getFolders();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -297,8 +336,8 @@ export default {
         url: this.serverAddress + '/notes/' + id,
         method: 'GET',
       })
-        .then(res => {
-          this.currentFolder = this.folders.find(f => f.folder_id === id);
+        .then((res) => {
+          this.currentFolder = this.folders.find((f) => f.folder_id === id);
           this.notes = res.data.data.files;
           this.loader = false;
         })
@@ -306,15 +345,44 @@ export default {
           this.$router.push('/logout');
         });
     },
+    getSettings() {
+      axios({
+        url: this.serverAddress + '/settings/' + this.userHash,
+        method: 'GET',
+      })
+        .then((res) => {
+          const object = res.data;
+          this.settings = {
+            pColor: this.rgbToHex(
+              object.pColor.r,
+              object.pColor.g,
+              object.pColor.b
+            ),
+            liColor: this.rgbToHex(
+              object.liColor.r,
+              object.liColor.g,
+              object.liColor.b
+            ),
+            hColor: this.rgbToHex(
+              object.hColor.r,
+              object.hColor.g,
+              object.hColor.b
+            ),
+          };
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     uploadFile() {
       MicroModal.show('uploadFile');
     },
     delFolderModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('deleteFolder');
     },
     createNoteModal(id) {
-      this.currentFolder = this.folders.find(f => f.folder_id === id);
+      this.currentFolder = this.folders.find((f) => f.folder_id === id);
       MicroModal.show('createNote');
     },
     updateAvailable() {
@@ -325,13 +393,26 @@ export default {
       localStorage.setItem('darkTheme', theme);
     },
     themeStorage() {
-      this.darkTheme = window.matchMedia(
-        '(prefers-color-scheme: dark)',
-      ).matches;
-      const res = localStorage.getItem('darkTheme');
-      if (res) {
-        this.darkTheme = JSON.parse(res);
+      const theme = localStorage.getItem('darkTheme');
+      if (theme) {
+        this.darkTheme = JSON.parse(theme);
+      } else {
+        this.darkTheme = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches;
       }
+    },
+    componentToHex(c) {
+      var hex = c.toString(16);
+      return hex.length == 1 ? '0' + hex : hex;
+    },
+
+    rgbToHex(r, g, b) {
+      return (
+        this.componentToHex(r).toUpperCase() +
+        this.componentToHex(g).toUpperCase() +
+        this.componentToHex(b).toUpperCase()
+      );
     },
     buildEventListeners() {
       window.addEventListener('swUpdated', this.updateAvailable, {
@@ -339,6 +420,9 @@ export default {
       });
       window.addEventListener('offline', () => (this.offline = true));
       window.addEventListener('online', () => (this.offline = false));
+    },
+    resetWindow: function () {
+      Object.assign(this.$data, initialState());
     },
   },
   watch: {
@@ -422,5 +506,32 @@ body {
 }
 .modal.is-open {
   display: block;
+}
+.micromodal-slide[aria-hidden='false'] .modal__container {
+  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+.micromodal-slide[aria-hidden='true'] .modal__container {
+  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
+}
+@keyframes mmslideIn {
+  from {
+    transform: translateY(16%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes mmslideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10%);
+  }
 }
 </style>

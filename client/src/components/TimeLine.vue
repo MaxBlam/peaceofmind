@@ -6,7 +6,7 @@
         <p class="card-text text-truncate">No content provided</p>
       </div>
       <div class="card-footer">
-        <small class="text-muted">Last updated ? mins ago</small>
+        <small class="text-muted">Last updated on {{new Date(n.modifiedTime).toLocaleDateString("en-DE")}}</small>
       </div>
     </div>
   </div>

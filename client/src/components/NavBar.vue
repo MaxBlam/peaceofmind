@@ -54,8 +54,16 @@
           aria-controls="offcanvasNavbar"
           aria-label="Navbar Toggler"
         >
+          <img
+            :src="avatar"
+            alt="Avatar"
+            width="35"
+            class="rounded-circle"
+            v-if="userHash"
+          />
           <i
             class="bi bi-list h3"
+            v-else
             v-bind:class="{ 'i-identity': !darkTheme, 'text-light': darkTheme }"
           ></i>
         </button>
@@ -94,6 +102,13 @@
         </button>
       </div>
       <div class="offcanvas-body">
+        <img
+          :src="avatar"
+          alt="Avatar"
+          width="50"
+          class="rounded-circle"
+          v-if="userHash"
+        />
         <ul
           class="navbar-nav justify-content-end flex-grow-1 pe-3"
           data-bs-dismiss="offcanvas"
@@ -222,6 +237,10 @@ export default {
     darkTheme: {
       type: Boolean,
       default: () => false,
+    },
+    avatar: {
+      type: String,
+      default: () => '',
     },
   },
   methods: {

@@ -18,19 +18,18 @@
           >
           <input
             type="text"
-            v-model="pColor"
+            v-model="settings.pColor"
             class="form-control"
             v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
             placeholder="Hex Code (e.g. #FFFFFF)"
             aria-label="Paragraph Color"
             aria-describedby="pColor-wrapping"
             maxlength="6"
-            pattern="[A-Za-z0-9]"
           />
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
             type="button"
-            @click="pColor = ''"
+            @click="settings.pColor = ''"
           >
             Reset
           </button>
@@ -44,19 +43,18 @@
           >
           <input
             type="text"
-            v-model="liColor"
+            v-model="settings.liColor"
             class="form-control"
             v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
             placeholder="Hex Code (e.g. #FFFFFF)"
             aria-label="Paragraph Color"
             aria-describedby="liColor-wrapping"
             maxlength="6"
-            pattern="[A-Za-z0-9]"
           />
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
             type="button"
-            @click="liColor = ''"
+            @click="settings.liColor = ''"
           >
             Reset
           </button>
@@ -70,24 +68,27 @@
           >
           <input
             type="text"
-            v-model="hColor"
+            v-model="settings.hColor"
             class="form-control"
             v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
             placeholder="Hex Code (e.g. #FFFFFF)"
             aria-label="Paragraph Color"
             aria-describedby="hColor-wrapping"
             maxlength="6"
-            pattern="[A-Za-z0-9]"
           />
           <button
             class="input-group-text btn btn-identity transition-sm col-2"
             type="button"
-            @click="hColor = ''"
+            @click="settings.hColor = ''"
           >
             Reset
           </button>
         </div>
-        <button type="submit" class="btn btn-identity transition-sm col-2">
+        <button
+          type="button"
+          class="btn btn-identity transition-sm col-2"
+          @click="saveSettings"
+        >
           Save
         </button>
       </div>
@@ -114,9 +115,6 @@ export default {
     this.themeSwitch = this.darkTheme;
   },
   data: () => ({
-    pColor: '',
-    hColor: '',
-    liColor: '',
     themeSwitch: false,
   }),
   props: {
@@ -128,20 +126,32 @@ export default {
       type: String,
       default: () => null,
     },
+    settings: {
+      type: Object,
+      default: () => {},
+    },
   },
   methods: {
     saveSettings() {
       this.$emit('saveSettings', {
-        pColor: this.pColor,
-        hColor: this.hColor,
-        liColor: this.liColor,
+        pColor: this.hexToRgb(this.settings.pColor),
+        hColor: this.hexToRgb(this.settings.hColor),
+        liColor: this.hexToRgb(this.settings.liColor),
       });
     },
     themeChange() {
       this.$emit('themeChange', this.themeSwitch);
     },
+    hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result
+        ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16),
+          }
+        : null;
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

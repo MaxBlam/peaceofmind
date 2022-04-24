@@ -16,6 +16,8 @@ async function getOverallStudentGrade(classroomId) {
     : [];
   const maxPoints = [];
   const userGrades = [];
+  console.log('START 6');
+
   await filteredRes.forEach(async (courseWork) => {
     const studentSubmissions = await classroom.courses.courseWork.studentSubmissions.list({
       courseId: classroomId,
@@ -34,12 +36,12 @@ async function getOverallStudentGrade(classroomId) {
     }
   });
   return {
-    grades: userGrades,
-    maxPoints: maxPoints,
+    grades: userGrades ? userGrades : [],
+    maxPoints: maxPoints ? maxPoints : [],
   };
 }
 
-const synchClassrooms = asyncHandler(async (req, res) => {
+const syncClassrooms = asyncHandler(async (req, res) => {
   console.log('START');
 
   const userHash = req.params.id;
@@ -53,6 +55,8 @@ const synchClassrooms = asyncHandler(async (req, res) => {
     name: el.name,
     user_id: userId.acc_id,
   }));
+  console.log('START 2');
+
   const dbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
   const mappedDbClassrooms = dbClassrooms.map((el) => el.classroom_id);
   mappedRes.forEach((classr) => {
@@ -60,6 +64,7 @@ const synchClassrooms = asyncHandler(async (req, res) => {
       modelClassroom.createClassroom(classr.id, classr.name, classr.user_id);
     }
   });
+  console.log('START 3');
 
   const secondDbClassrooms = await modelClassroom.getAllClassrooms(userId.acc_id);
   const dbFolderClassrooms = await modelClassroom.getClassroomFolders(userId.acc_id);
@@ -69,11 +74,17 @@ const synchClassrooms = asyncHandler(async (req, res) => {
   );
   if (filteredSecondDbClassrooms.length > 0) {
     filteredSecondDbClassrooms.forEach(async (classr) => {
+      console.log('START 4');
+
       const teachers = await classroom.courses.teachers.list({
         courseId: classr.classroom_id,
       });
       const { grades, maxPoints } = await getOverallStudentGrade(classr.classroom_id);
+
       const teacherName = teachers.data.teachers[0].profile.name.fullName;
+
+      console.log('START 5');
+
       setTimeout(async () => {
         let sumGrades = 0;
         let sumMaxPoints = 0;
@@ -122,7 +133,7 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
     const unfilteredMaterials = courseWork.data.courseWork
       ? courseWork.data.courseWork.map((el) => el.materials).filter((el) => el)
       : [];
-    console.log('Classroom: ', classr.classroom_id);
+    // console.log('Classroom: ', classr.classroom_id);
     const filteredMaterials = [];
     unfilteredMaterials.forEach((material) => {
       material.forEach((el) => {
@@ -135,17 +146,21 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
     const filterOnPdfMaterials = filteredMaterials.filter(
       (el) => el.title.includes(substring1) || el.title.includes(substring2),
     );
+    let setOff = 0;
     filterOnPdfMaterials.forEach(async (pdf) => {
       const copyOfDoc = await modelDrive.getCopysOfDocument(pdf.id);
 
       if (copyOfDoc.length === 0) {
         console.log(pdf.id);
         const folderId = classroomFolders.filter((el) => el.classroom_id === classr.classroom_id);
-        copyFiles(pdf.id, folderId[0].f_id, userId.acc_id);
+        setTimeout(() => {
+          copyFiles(pdf.id, folderId[0].f_id, userId.acc_id);
+        }, setOff);
+        setOff += 200;
       }
     });
   });
-  res.status(200).json(classRooms);
+  res.status(200).send('Done');
 });
 
-module.exports = { synchClassrooms, syncClassroomFiles };
+module.exports = { syncClassrooms, syncClassroomFiles };

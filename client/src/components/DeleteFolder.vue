@@ -1,8 +1,8 @@
 <template>
-  <div class="modal">
+  <div class="modal micromodal-slide">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div
-        class="container rounded-3"
+        class="container rounded-3  modal__container"
         role="dialog"
         aria-modal="true"
         v-bind:class="{

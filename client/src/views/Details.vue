@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <h1 class="text-center mt-5">{{currentFolder.name}}</h1>
     <TimeLine :notes="notes" />
     <div class="container">
       <div class="d-grid gap-2 my-3">
@@ -45,6 +46,7 @@
           :note="note"
           :darkTheme="darkTheme"
           @deleteNote="deleteNote"
+          @docsColor="docsColor"
         />
       </div>
     </div>
@@ -97,6 +99,9 @@ export default {
     },
     deleteNote(id) {
       this.$emit('deleteNote', id);
+    },
+    docsColor(id) {
+      this.$emit('docsColor', id);
     },
   },
   computed: {

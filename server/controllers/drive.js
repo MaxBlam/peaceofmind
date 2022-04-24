@@ -10,9 +10,7 @@ const testDrive = asyncHandler(async (req, res) => {
     pageSize: 20,
     fields: 'nextPageToken, files(id, name,mimeType)',
   });
-  res.status(200).json({
-    driveRes,
-  });
+  res.status(200).json(driveRes);
 });
 
 const createRootFolder = asyncHandler(async () => {
@@ -29,8 +27,11 @@ const createRootFolder = asyncHandler(async () => {
 });
 
 const createNote = asyncHandler(async (req, res) => {
-  const { userHash, noteName, folderId } = req.body;
+  let { userHash, noteName, folderId } = req.body;
   const userDBdata = await model.getUser(userHash);
+  if (folderId.includes('.')) {
+    folderId = folderId.substring(0, folderId.length - 1);
+  }
   const fileMetadata = {
     name: noteName,
     parents: [folderId],
@@ -60,13 +61,13 @@ const getFolders = asyncHandler(async (req, res) => {
   const rootId = userDBdata[0].root_folder;
   const driveRes = await drive.files.list({
     pageSize: 20,
-    fields: 'nextPageToken, files(id, name,mimeType)',
+    fields: 'nextPageToken, files(id, name,mimeType,modifiedTime)',
     q: `'${rootId}' in parents`,
   });
   const dbFolderData = await modelDrive.getAllUserFolders(userDBdata[0].acc_id);
-  const filteredData1 = driveRes.data.files.filter((el) =>
-    dbFolderData.map((ell) => ell.folder_id).includes(el.id),
-  );
+  /* const filteredData = driveRes.data.files.filter((el) =>
+    dbFolderData.map((ell) => ell.folder_id).includes(el.id)
+  ); */
   res.status(200).json(dbFolderData);
 });
 
@@ -74,7 +75,7 @@ const getNotesFromFolder = asyncHandler(async (req, res) => {
   const folderId = req.params.folderid;
   const driveRes = await drive.files.list({
     pageSize: 20,
-    fields: 'nextPageToken, files(id, name,mimeType)',
+    fields: 'nextPageToken, files(id, name,mimeType,description,modifiedTime)',
     q: `'${folderId}' in parents`,
   });
   res.status(200).json(driveRes);
@@ -87,18 +88,18 @@ const deleteNote = asyncHandler(async (req, res) => {
   const noteDbData = await modelDrive.getNote(noteId);
 
   if (noteDbData.length === 0) {
-    res.status(400).send('File doesnt exist');
+    res.status(404).send('File doesnt exist');
     return;
   }
   if (noteDbData.fk_acc_id !== userDBdata.acc_id) {
-    res.status(500).send('This file doesnt belong to you!');
+    res.status(401).send('This file doesnt belong to you!');
     return;
   }
   await drive.files.delete({
     fileId: noteId,
   });
 
-  const dbRes = await modelDrive.deleteNote(noteId);
+  const dbRes = await modelDrive.deleteNote(noteId, userDBdata[0].acc_id);
 
   res.status(200).json(dbRes);
 });
@@ -110,18 +111,21 @@ const deleteFolder = asyncHandler(async (req, res) => {
   const folderDbData = await modelDrive.getFolder(folderId);
 
   if (folderDbData.length === 0) {
-    res.status(400).send('Folder doesnt exist');
+    res.status(404).send('Folder doesnt exist');
     return;
   }
   if (folderDbData.fk_acc_id !== userDBdata.acc_id) {
-    res.status(500).send('This folder doesnt belong to you!');
+    res.status(401).send('This folder doesnt belong to you!');
     return;
   }
   await drive.files.delete({
     fileId: folderId,
   });
 
-  const dbRes = await modelDrive.deleteFolder(folderDbData[0].f_id);
+  const dbRes = await modelDrive.deleteFolder(
+    folderDbData[0].f_id,
+    userDBdata[0].acc_id,
+  );
 
   res.status(200).json(dbRes);
 });
@@ -131,7 +135,7 @@ const createFolder = asyncHandler(async (req, res) => {
   const userDBdata = await model.getUser(userHash);
   const rootId = userDBdata[0].root_folder;
   if (folderName === '') {
-    res.status(500).send('Folder needs a name');
+    res.status(400).send('Folder needs a name');
     return;
   }
   const fileMetadata = {
@@ -140,7 +144,7 @@ const createFolder = asyncHandler(async (req, res) => {
     mimeType: 'application/vnd.google-apps.folder',
   };
   if (userDBdata.length === 0) {
-    res.status(400).send('User Not Found');
+    res.status(404).send('User Not Found');
     return;
   }
   const driveRes = await drive.files.create({
@@ -176,22 +180,49 @@ async function copyFiles(docId, folderId, userId) {
   const fid = await modelDrive.getFolderFid(folderId);
   if (fid.length > 0) {
     try {
-      console.log(`Doc: ${docId} | User: ${userId}`);
       const tempFolder = fid[0].folder_id;
       const fileMetaData = {
         parents: [tempFolder],
       };
-      // const driveRes = await drive.files.copy({
-      //   resource: fileMetaData,
-      //   fileId: docId,
-      //   fields: 'id',
-      // });
-      // modelDrive.createNote(userId, driveRes.data.id, folderId, docId);
+      const driveRes = await drive.files.copy({
+        resource: fileMetaData,
+        fileId: docId,
+        fields: 'id',
+      });
+      modelDrive.createNote(userId, driveRes.data.id, folderId, docId);
     } catch (ex) {
       counter += 1;
       console.log(ex.message, '||||', counter);
     }
   }
+}
+
+async function createNoteServerside(inputBody) {
+  const { userHash, noteName, folderId } = inputBody;
+  console.log('TEST 3');
+  console.log(userHash);
+
+  const userDbData = await model.getUser(userHash);
+  const fileMetaData = {
+    name: noteName,
+    parents: [folderId],
+    mimeType: 'application/vnd.google-apps.document',
+  };
+  if (userDbData.length === 0) {
+    return 'No User';
+  }
+  const driveRes = await drive.files.create({
+    resource: fileMetaData,
+    fields: 'id',
+  });
+  const folderDbData = await modelDrive.getFolder(folderId);
+  const dbRes = await modelDrive.createNote(
+    userDbData[0].acc_id,
+    driveRes.data.id,
+    folderDbData[0].f_id,
+    null,
+  );
+  return dbRes;
 }
 
 module.exports = {
@@ -205,4 +236,5 @@ module.exports = {
   createRootFolder,
   createFolderServerside,
   copyFiles,
+  createNoteServerside,
 };

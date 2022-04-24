@@ -1,8 +1,8 @@
 <template>
-  <div class="modal">
+  <div class="modal micromodal-slide">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div
-        class="modal-content container"
+        class="modal-content container modal__container"
         v-bind:class="{
           'bg-dark': darkTheme,
           'modal-content': !darkTheme,
@@ -46,27 +46,36 @@
                 aria-valuemax="100"
                 :style="`width: ${progress}%`"
               >
-                {{ progress }}%
+                {{ Math.floor(progress) }}%
               </div>
             </div>
             <p class="mb-3">{{ status }}...</p>
           </div>
           <div class="mb-3">
             <label class="form-label">Choose Folder</label>
-            <select class="form-select" v-model="folder">
+            <select class="form-select" v-model="folderId">
               <option v-for="f of folders" :value="f.f_id" :key="f.f_id">
                 {{ f.name }}
               </option>
             </select>
           </div>
-
+          <div class="mb-3">
+            <label class="form-label">Note Name</label>
+            <input
+              type="text"
+              class="form-control"
+              v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
+              v-model="noteName"
+              :placeholder="`Name_${new Date().toJSON().slice(0, 10)}`"
+            />
+          </div>
           <button
             type="button"
             aria-label="Add Note"
             data-micromodal-close
             class="btn btn-identity transition-sm"
             @click="addNote"
-            :disabled="file == '' || !folder"
+            :disabled="file == '' || folderId == '' || noteName == ''"
           >
             Add Note
           </button>
@@ -81,11 +90,12 @@ import Tesseract from 'tesseract.js';
 export default {
   data: () => ({
     file: '',
-    folder: null,
+    folderId: '',
     someData: {},
     language: 'eng',
     progress: 0,
     status: '',
+    noteName: '',
   }),
   props: {
     folders: {
@@ -99,12 +109,16 @@ export default {
   },
   methods: {
     addNote() {
-      this.$emit('addNote', { text: this.file, folderId: this.folder });
+      this.$emit('addNote', {
+        text: this.file,
+        folder: this.folderId,
+        noteName: this.noteName,
+      });
     },
     async convertImgToText(input) {
       this.someData = input.target.files[0]; // Get inputs
       Tesseract.recognize(this.someData, this.language, {
-        logger: (m) => {
+        logger: m => {
           this.progress = m.progress * 100;
           this.status = m.status;
         },

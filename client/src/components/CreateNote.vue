@@ -1,8 +1,8 @@
 <template>
-  <div class="modal">
+  <div class="modal micromodal-slide">
     <div tabindex="-1" data-micromodal-close class="modal__overlay">
       <div
-        class="container rounded-3"
+        class="container rounded-3  modal__container"
         role="dialog"
         aria-modal="true"
         v-bind:class="{
@@ -32,7 +32,7 @@
               type="text"
               class="form-control"
               v-bind:class="{ 'bg-dark': darkTheme, 'text-light': darkTheme }"
-              placeholder="Name_Chemistry.docx"
+              :placeholder="`Name_${currentFolder.name}_${new Date().toJSON().slice(0,10)}`"
               v-model="noteName"
               @keyup.enter="addNote"
             />

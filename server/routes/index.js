@@ -1,6 +1,14 @@
 const express = require('express');
-const { login, logout } = require('../controllers/users');
-const { synchClassrooms, syncClassroomFiles } = require('../controllers/classroom');
+const {
+  login,
+  logout,
+  addSettings,
+  getSettings,
+} = require('../controllers/users');
+const {
+  syncClassrooms,
+  syncClassroomFiles,
+} = require('../controllers/classroom');
 const {
   testDrive,
   createNote,
@@ -10,6 +18,11 @@ const {
   getNotesFromFolder,
   deleteFolder,
 } = require('../controllers/drive');
+const {
+  testDocsAPI,
+  addNoteText,
+  colorCodeDoc,
+} = require('../controllers/docs');
 
 const router = express.Router();
 
@@ -23,7 +36,12 @@ router.delete('/note', deleteNote);
 router.post('/folder', createFolder);
 router.delete('/folder', deleteFolder);
 router.get('/notes/:folderid', getNotesFromFolder);
-router.get('/classrooms/:id', synchClassrooms);
+router.get('/classrooms/:id', syncClassrooms);
 router.get('/classroomfiles/:id', syncClassroomFiles);
+router.get('/docs/:id', testDocsAPI);
+router.post('/note/ocr', addNoteText);
+router.post('/settings', addSettings);
+router.get('/settings/:user', getSettings);
+router.post('/colorcoding', colorCodeDoc);
 
 module.exports = router;
