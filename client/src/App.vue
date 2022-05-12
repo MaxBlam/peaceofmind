@@ -124,7 +124,7 @@ export default {
       this.userHash = localStorage.getItem('userHash');
       this.avatar = localStorage.getItem('avatar');
       if (this.userHash) {
-        //this.getClassrooms(); Not working
+        this.getClassrooms(); 
         this.getFolders();
         this.getSettings();
       } else {
