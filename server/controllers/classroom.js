@@ -170,11 +170,9 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
       .catch(err => {
         console.log(err.message);
       });
-    if (courseWork === undefined) return;
     const unfilteredMaterials = courseWork.data.courseWork
       ? courseWork.data.courseWork.map(el => el.materials).filter(el => el)
       : [];
-    // console.log('Classroom: ', classr.classroom_id);
     const filteredMaterials = [];
     unfilteredMaterials.forEach(material => {
       material.forEach(el => {
@@ -187,6 +185,9 @@ const syncClassroomFiles = asyncHandler(async (req, res) => {
     const filterOnPdfMaterials = filteredMaterials.filter(
       el => el.title.includes(substring1) || el.title.includes(substring2),
     );
+    console.log('Classroom: ', classr.name);
+    console.log(filteredMaterials);
+
     let setOff = 0;
     filterOnPdfMaterials.forEach(async pdf => {
       const copyOfDoc = await modelDrive.getCopysOfDocument(pdf.id);

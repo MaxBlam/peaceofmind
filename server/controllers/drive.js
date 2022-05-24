@@ -65,10 +65,10 @@ const getFolders = asyncHandler(async (req, res) => {
     q: `'${rootId}' in parents`,
   });
   const dbFolderData = await modelDrive.getAllUserFolders(userDBdata[0].acc_id);
-  /* const filteredData = driveRes.data.files.filter((el) =>
-    dbFolderData.map((ell) => ell.folder_id).includes(el.id)
-  ); */
-  res.status(200).json(dbFolderData);
+  const filteredData = dbFolderData.filter(el =>
+    driveRes.data.files.map(ell => ell.id).includes(el.folder_id),
+  );
+  res.status(200).json(filteredData);
 });
 
 const getNotesFromFolder = asyncHandler(async (req, res) => {

@@ -5,7 +5,6 @@ const model = require('../model/users');
 
 const login = asyncHandler(async (req, res) => {
   const userCode = req.body.code;
-
   const r = await client.getToken(userCode);
 
   const UserData = await client.verifyIdToken({
@@ -13,14 +12,12 @@ const login = asyncHandler(async (req, res) => {
     audience: keys.web.client_id,
   });
   const userHash = UserData.getPayload().sub;
-
   const result = await model.getUser(userHash);
-
 
   if (result.length === 0) {
     client.setCredentials(r.tokens);
     const rootId = await createRootFolder();
-    /*const resultt = */ await model.createUser(userHash, rootId);
+    await model.createUser(userHash, rootId);
   }
   const userDataDB = await model.getUser(UserData.getPayload().sub);
 
